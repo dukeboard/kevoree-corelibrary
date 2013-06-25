@@ -12,6 +12,11 @@ import org.kevoree.library.sky.api.nodeType.CloudNode;
 import org.kevoree.library.sky.api.nodeType.KevoreeNodeRunnerFactory;
 import org.kevoree.log.Log;
 
+import java.lang.management.ManagementFactory;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created with IntelliJ IDEA.
  * User: jed
@@ -36,25 +41,32 @@ public class LxcHostNode extends JavaSENode implements CloudNode {
     public static final long REMOVE_TIMEOUT = 180000l;
     private boolean done = false;
     private LxcManager lxcManager = new LxcManager();
-
+    private  WatchContainers watchContainers;
     private KevoreeNodeManager nodeManager;
+    private ScheduledThreadPoolExecutor executor = null;
 
 
     @Start
     @Override
     public void startNode() {
         super.startNode();
+        watchContainers = new WatchContainers(this);
         nodeManager = new KevoreeNodeManager(new LXCNodeRunnerFactory());
         kompareBean = new PlanningManager(this);
         mapper = new CommandMapper(nodeManager);
         mapper.setNodeType(this);
 
+        executor = new ScheduledThreadPoolExecutor(ManagementFactory.getOperatingSystemMXBean().getAvailableProcessors());
+        executor.scheduleAtFixedRate(watchContainers,10,15,TimeUnit.SECONDS);
+
         getModelService().registerModelListener(new LXCModelListener());
+
     }
 
     @Stop
     @Override
     public void stopNode() {
+        executor.shutdownNow();
         nodeManager.stop();
         super.stopNode();
     }
@@ -112,6 +124,7 @@ public class LxcHostNode extends JavaSENode implements CloudNode {
 
                         getModelService().unregisterModelListener(this);
                         getModelService().atomicUpdateModel(target);
+                        getModelService().registerModelListener(this);
                     } catch (Exception e) {
                         Log.error("Getting Current LXC State", e);
                     }

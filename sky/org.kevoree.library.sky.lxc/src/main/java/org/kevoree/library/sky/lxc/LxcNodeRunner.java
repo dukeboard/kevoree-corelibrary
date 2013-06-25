@@ -29,8 +29,7 @@ public class LxcNodeRunner extends KevoreeNodeRunner {
     public boolean addNode(ContainerRoot iaasModel, ContainerRoot childBootStrapModel) {
         Log.debug("addNode " + nodeName + "  parent = " + iaasNode.getNodeName());
         ContainerNode node =    iaasModel.findByPath("nodes[" + iaasNode.getName() + "]/hosts[" + nodeName + "]", ContainerNode.class);
-        String id_clone = KevoreePropertyHelper.instance$.getProperty(node, "idclone", false, "") ;
-        return    lxcManager.create_container(nodeName,id_clone,iaasNode,iaasModel);
+        return    lxcManager.create_container(nodeName,iaasNode,iaasModel);
     }
 
     @Override

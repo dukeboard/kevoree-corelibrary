@@ -39,60 +39,33 @@ public class LxcManager {
     private final String lxccreate = "lxc-create";
 
 
-    public boolean create_container(String id, String id_clone, LxcHostNode service, ContainerRoot iaasModel) {
+    public boolean create_container(String id, LxcHostNode service, ContainerRoot iaasModel) {
         try {
-            Log.debug("LxcManager : " + id + " clone =>" + id_clone);
+            Log.debug("LxcManager : " + id + " clone =>" + clone_id);
 
             if (!getContainers().contains(id)) {
-                Log.debug("Creating container " + id + " OS " + id_clone);
-                Process processcreate = new ProcessBuilder(lxcclone, "-o", id_clone, "-n", id).redirectErrorStream(true).start();
+                Log.debug("Creating container " + id + " OS " + clone_id);
+                Process processcreate = new ProcessBuilder(lxcclone, "-o", clone_id, "-n", id).redirectErrorStream(true).start();
                 FileManager.display_message_process(processcreate.getInputStream());
                 processcreate.waitFor();
             } else {
                 Log.warn("Container {} already exist", iaasModel);
             }
         } catch (Exception e) {
-            Log.error("create_container", e);
+            Log.error("create_container {} clone =>{}",id,clone_id, e);
             return false;
         }
         return true;
     }
 
     public boolean start_container(String id, LxcHostNode service, ContainerRoot iaasModel) {
-
         try {
-            UUIDModel uuidModel = service.getModelService().getLastUUIDModel();
             lxc_start_container(id);
-
-            String ip = null;
-            int c = 0;
-            do {
-                ip = getIP(id);
-                Thread.sleep(500);
-                c++;
-            } while (ip == null && c < timeout);
-
-            if (ip == null) {
-                Log.error("When all attempts to get the address IP have failed");
-                return false;
-            } else {
-
-                Log.debug("Container is ready on " + ip);
-
-                ModelCloner cloner = new ModelCloner();
-                ContainerRoot readWriteModel = cloner.clone(iaasModel);
-                updateNetworkProperties(readWriteModel, id, ip);
-
-                service.getModelService().compareAndSwapModel(uuidModel, readWriteModel);
-                return true;
-            }
-        } catch (InterruptedException e) {
-            Log.error("start_container", e);
-            return false;
-        } catch (IOException e) {
-            Log.error("start_container", e);
-            return false;
+        } catch (Exception e) {
+        Log.error("start_container",e);
+            return  false;
         }
+        return true;
     }
 
 
@@ -135,8 +108,7 @@ public class LxcManager {
 
             for (String node_child_id : getContainers()) {
                 if (!node_child_id.equals(clone_id)) {
-                    engine.append("addNode " + node_child_id + ":LxcHostNode");
-                    engine.append("updateDictionary " + node_child_id + "{log_folder=\"/tmp\",role=\"host\"}");
+                    engine.append("addNode " + node_child_id + ":PJavaSENode");
                     engine.append("addChild " + node_child_id + "@" + nodename);
                 }
                 //    String ip = LxcManager.getIP(node_child_id);
@@ -149,7 +121,7 @@ public class LxcManager {
         return defaultKevoreeFactory.createContainerRoot();
     }
 
-    public static String getIP(String id) {
+    public synchronized static String getIP(String id) {
         String line;
         try {
             Process processcreate = new ProcessBuilder("/bin/lxc-ip", "-n", id).redirectErrorStream(true).start();
@@ -208,10 +180,6 @@ public class LxcManager {
     }
 
 
-    private void updateNetworkProperties(ContainerRoot model, String remoteNodeName, String address) {
-        Log.debug("set " + remoteNodeName + " " + address);
-        KevoreePlatformHelper.instance$.updateNodeLinkProp(model, remoteNodeName, remoteNodeName, org.kevoree.framework.Constants.instance$.getKEVOREE_PLATFORM_REMOTE_NODE_IP(), address, "LAN", 100);
-    }
 
     public void copy(String file, String path) throws IOException {
         FileManager.copyFileFromStream(LxcManager.class.getClassLoader().getResourceAsStream(file), path, file, true);
