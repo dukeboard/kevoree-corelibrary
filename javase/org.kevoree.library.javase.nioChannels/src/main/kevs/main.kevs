@@ -1,0 +1,23 @@
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.camel/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.javaseNode/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.fakeDomo/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.defaultChannels/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.nioChannels/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.minicloud/{kevoree.version}"
+
+addNode node0 : MiniCloudNode
+
+addNode node1 : JavaSENode
+addComponent input@node1 : CamelTimer { period='2000' }
+addChannel logQueue : NioRoundRobin
+bind input.tick@node1 => logQueue
+
+addComponent console@node1 : FakeConsole
+addComponent console2@node1 : FakeConsole
+
+
+bind console.showText@node1 => logQueue
+bind console2.showText@node1 => logQueue
+
+
+addChild node1@node0

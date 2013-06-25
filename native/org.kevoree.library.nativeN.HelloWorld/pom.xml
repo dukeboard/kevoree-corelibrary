@@ -1,0 +1,84 @@
+<project>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.kevoree.library.nativeN</groupId>
+    <artifactId>org.kevoree.library.nativeN.HelloWorld</artifactId>
+    <version>1.8.9</version>
+    <name>Kevoree :: Native :: HelloWorld Root</name>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.kevoree.corelibrary.nativeN</groupId>
+        <artifactId>org.kevoree.library.nativeN.root</artifactId>
+        <version>1.8.9</version>
+        <relativePath>../org.kevoree.library.nativeN.root/pom.xml</relativePath>
+    </parent>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>org.kevoree.tools.nativeN.mavenplugin</artifactId>
+                <groupId>org.kevoree.tools</groupId>
+                <version>${kevoree.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <modules>
+        <module>modules/wrapper</module>
+    </modules>
+<profiles>
+        <profile>
+            <id>nix32</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                    <name>Linux</name>
+                    <arch>i386</arch>
+                </os>
+            </activation>
+            <modules>
+                <module>modules/nix32</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>nix64</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                    <name>Linux</name>
+                    <arch>x64</arch>
+                </os>
+            </activation>
+            <modules>
+                <module>modules/nix64</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>osx</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                </os>
+            </activation>
+
+            <modules>
+                <module>modules/osx</module>
+            </modules>
+        </profile>
+            <profile>
+                       <id>arm</id>
+                       <activation>
+                           <os>
+                               <family>unix</family>
+                               <name>Linux</name>
+                               <arch>arm</arch>
+                           </os>
+                       </activation>
+                       <modules>
+                           <module>modules/arm</module>
+                       </modules>
+                   </profile>
+    </profiles></project>

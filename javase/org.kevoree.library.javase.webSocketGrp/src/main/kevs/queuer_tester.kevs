@@ -1,0 +1,61 @@
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.minicloud/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.javaseNode/{kevoree.version}"
+merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.webSocketGrp/{kevoree.version}'
+merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.jexxus/{kevoree.version}'
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.provider.web/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.defaultChannels/{kevoree.version}"
+merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.fakeDomo/{kevoree.version}'
+
+addNode minicloud : MiniCloudNode {logLevel = "DEBUG"}
+addNode node0 : JavaSENode {logLevel = "DEBUG"}
+addNode node1 : JavaSENode {logLevel = "DEBUG"}
+addNode node2 : JavaSENode {logLevel = "DEBUG"}
+addNode node3 : JavaSENode {logLevel = "DEBUG"}
+addNode node4 : JavaSENode {logLevel = "DEBUG"}
+addNode node5 : JavaSENode {logLevel = "DEBUG"}
+addNode node6 : JavaSENode {logLevel = "DEBUG"}
+addNode node7 : JavaSENode {logLevel = "DEBUG"}
+addNode node8 : JavaSENode {logLevel = "DEBUG"}
+addNode node9 : JavaSENode {logLevel = "DEBUG"}
+
+addChild node0@minicloud
+addChild node1@minicloud
+addChild node2@minicloud
+addChild node3@minicloud
+addChild node4@minicloud
+addChild node5@minicloud
+addChild node6@minicloud
+addChild node7@minicloud
+addChild node8@minicloud
+addChild node9@minicloud
+
+addGroup webSocketGrp : WebSocketGroupQueuer
+addGroup sync : BasicGroup
+addToGroup sync minicloud
+addToGroup webSocketGrp minicloud
+addToGroup webSocketGrp node0
+addToGroup webSocketGrp node1
+addToGroup webSocketGrp node2
+addToGroup webSocketGrp node3
+addToGroup webSocketGrp node4
+addToGroup webSocketGrp node5
+addToGroup webSocketGrp node6
+addToGroup webSocketGrp node7
+addToGroup webSocketGrp node8
+addToGroup webSocketGrp node9
+
+addComponent webServer@minicloud : KTinyWebServer {port = "8080", timeout = "5000"}
+addComponent iaasPage@minicloud : IaaSKloudResourceManagerPage { urlpattern="/"}
+addChannel requestChannel : defMSG
+addChannel responseChannel : defMSG
+bind webServer.handler@minicloud => requestChannel
+bind iaasPage.request@minicloud => requestChannel
+bind webServer.response@minicloud => responseChannel
+bind iaasPage.content@minicloud => responseChannel
+
+addComponent FakeConso0@node0 : FakeConsole {}
+addComponent FakeConso1@node1 : FakeConsole {}
+
+updateDictionary sync {port="8000"}@minicloud
+updateDictionary webSocketGrp {port="8010"}@minicloud
+network minicloud => minicloud {"KEVOREE.remote.node.ip"="131.254.10.80"}

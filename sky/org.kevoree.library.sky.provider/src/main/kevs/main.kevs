@@ -1,0 +1,36 @@
+
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.minicloud/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.basicGossiper/{kevoree.version}"
+
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.defaultChannels/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.p2pSock/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.nioChannels/{kevoree.version}"
+
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.webserver.api/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.webserver.tjws/{kevoree.version}"
+
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.provider/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.provider.web/{kevoree.version}"
+
+
+addNode node0 : MiniCloudNode { coreLogLevel="WARN",logLevel="DEBUG"}
+addGroup sync : BasicGossiperGroup
+addToGroup sync node0
+
+addComponent LogBackConfigurator@node0 : LogBackConfigurator
+
+addComponent iaasManager@node0 : IaaSKloudManager
+addComponent paasManager@node0 : PaaSKloudManager
+
+addChannel iaasDelegateChannel : defSERVICE
+addChannel paasDelegateChannel : defSERVICE
+addChannel requestChannel : defMSG
+addChannel responseChannel : defMSG
+
+
+bind iaasManager.submit@node0 => iaasDelegateChannel
+bind iaasPage.delegate@node0 => iaasDelegateChannel
+
+
+bind paasManager.submit@node0 => paasDelegateChannel
+bind paasPage.delegate@node0 => paasDelegateChannel

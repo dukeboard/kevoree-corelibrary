@@ -1,0 +1,12 @@
+
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.minicloud/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.nanohttp/{kevoree.version}"
+
+addNode node0 : MiniCloudNode { coreLogLevel="DEBUG",logLevel="DEBUG", VMARGS = "-Xmx512m -XX:MaxPermSize=512m" }
+addGroup sync : NanoRestGroup
+addToGroup sync node0
+
+addComponent LogBackConfigurator@node0 : LogBackConfigurator { rootLevel = "DEBUG"}
+
+//addNode worker1 : JavaSENode
+//addChild worker1@node0
