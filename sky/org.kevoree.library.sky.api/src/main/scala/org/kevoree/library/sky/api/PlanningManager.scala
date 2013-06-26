@@ -74,6 +74,7 @@ class PlanningManager(skyNode: AbstractNodeType) extends KevoreeKompareBean {
                       adaptationModel.addAdaptations(command)
                       //                      step.setNextStep(subStep)
                       //                      step = subStep
+                      processStopInstance(subNode, adaptationModel, current, factory)
                     }
                     case subNode1: ContainerNode => {
                       if (subNode1.getStarted() != subNode.getStarted()) {
@@ -100,6 +101,7 @@ class PlanningManager(skyNode: AbstractNodeType) extends KevoreeKompareBean {
                   adaptationModel.addAdaptations(command)
                 //                  step.setNextStep(subStep)
                 //                  step = subStep
+                  processStopInstance(subNode, adaptationModel, current, factory)
               }
             }
           }
@@ -124,6 +126,7 @@ class PlanningManager(skyNode: AbstractNodeType) extends KevoreeKompareBean {
                       adaptationModel.addAdaptations(command)
                       //                      step.setNextStep(subStep)
                       //                      step = subStep
+                      processStartInstance(subNode, adaptationModel, current, factory)
                     }
                     case subNode1: ContainerNode => {
                       if (subNode1.getStarted() != subNode.getStarted()) {
@@ -150,6 +153,7 @@ class PlanningManager(skyNode: AbstractNodeType) extends KevoreeKompareBean {
                   adaptationModel.addAdaptations(command)
                 //                  step.setNextStep(subStep)
                 //                  step = subStep
+                  processStartInstance(subNode, adaptationModel, current, factory)
               }
             }
           }
