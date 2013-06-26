@@ -13,10 +13,6 @@
         <relativePath>../org.kevoree.library.javase.root/pom.xml</relativePath>
     </parent>
 
-    <properties>
-        <kevoree.exclude>ch.qos.logback:*</kevoree.exclude>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.kevoree</groupId>
@@ -45,12 +41,44 @@
                     <execution>
                         <id>compile</id>
                         <phase>process-sources</phase>
-                        <goals> <goal>compile</goal> </goals>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
                     </execution>
                     <execution>
                         <id>test-compile</id>
                         <phase>process-test-sources</phase>
-                        <goals> <goal>test-compile</goal> </goals>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>1.4</version>
+                <configuration>
+                    <verbose>false</verbose>
+                    <addSvnKeyWords>true</addSvnKeyWords>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>first</id>
+                        <goals>
+                            <goal>update-file-header</goal>
+                        </goals>
+                        <phase>process-sources</phase>
+                        <configuration>
+                            <licenseName>lgpl_v3</licenseName>
+                            <organizationName>org.kevoree</organizationName>
+                            <inceptionYear>2013</inceptionYear>
+                            <includes>
+                                <include>*.java</include>
+                                <include>*.kt</include>
+                                <include>*.scala</include>
+                            </includes>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

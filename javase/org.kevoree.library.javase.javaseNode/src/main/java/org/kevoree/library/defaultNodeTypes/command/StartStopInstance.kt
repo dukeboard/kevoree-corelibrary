@@ -4,6 +4,7 @@ import org.kevoree.ContainerRoot
 import org.kevoree.Instance
 import org.kevoree.framework.KInstance
 import org.kevoree.library.defaultNodeTypes.context.KevoreeDeployManager
+import org.kevoree.log.Log
 
 /**
  * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 3, 29 June 2007;
@@ -28,6 +29,7 @@ class StartStopInstance(c: Instance, nodeName: String, val start: Boolean): Life
     var tg : ThreadGroup? = null
 
     public override fun run() {
+
         Thread.currentThread().setContextClassLoader(iact.javaClass.getClassLoader())
         if(start){
             Thread.currentThread().setName("KevoreeStartInstance" + c.getName())
@@ -70,6 +72,7 @@ class StartStopInstance(c: Instance, nodeName: String, val start: Boolean): Life
             //call sub
             return resultAsync
         } else {
+            Log.error("issue while searching TG to stop thread")
             return false
         }
     }
