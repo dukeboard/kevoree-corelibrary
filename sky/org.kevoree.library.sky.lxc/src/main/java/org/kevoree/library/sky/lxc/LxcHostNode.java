@@ -25,11 +25,6 @@ import java.util.concurrent.TimeUnit;
  */
 
 @Library(name = "SKY")
-@DictionaryType({
-        @DictionaryAttribute(name = "timebeforeshutdown", defaultValue = "10", optional = false),
-        @DictionaryAttribute(name = "memorylimit", defaultValue = "1024", optional = false),
-        @DictionaryAttribute(name = "cpushares", defaultValue = "1024", optional = false)
-})
 @NodeType
 @PrimitiveCommands(value = {
         @PrimitiveCommand(name = CloudNode.ADD_NODE, maxTime = LxcHostNode.ADD_TIMEOUT),

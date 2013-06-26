@@ -47,26 +47,33 @@ public class WatchContainers implements Runnable {
 
             if(!containerNode.getName().equals(lxcHostNode.getNodeName())){
 
-                UUIDModel uuidModel = lxcHostNode.getModelService().getLastUUIDModel();
-                String ip =   LxcManager.getIP(containerNode.getName());
-                Log.info("IP Scanning {} {}",containerNode.getName(),ip);
 
-                if(ip != null){
 
-                    if(isIpFormat(ip)){
 
-                        ModelCloner cloner = new ModelCloner();
-                        ContainerRoot readWriteModel = cloner.clone(lxcHostNode.getModelService().getLastModel());
-                        updateNetworkProperties(readWriteModel, containerNode.getName(), ip);
+                if(LxcManager.isRunning(containerNode.getName())){
 
-                        lxcHostNode.getModelService().compareAndSwapModel(uuidModel, readWriteModel);
+                    String ip =   LxcManager.getIP(containerNode.getName());
+                    Log.info("IP Scanning {} {}",containerNode.getName(),ip);
+
+                    if(ip != null){
+
+                        if(isIpFormat(ip)){
+                            UUIDModel uuidModel = lxcHostNode.getModelService().getLastUUIDModel();
+                            ModelCloner cloner = new ModelCloner();
+                            ContainerRoot readWriteModel = cloner.clone(lxcHostNode.getModelService().getLastModel());
+                            updateNetworkProperties(readWriteModel, containerNode.getName(), ip);
+                            lxcHostNode.getModelService().compareAndSwapModel(uuidModel, readWriteModel);
+                        }
+                        else
+                        {
+                            Log.error("The format of the ip is wrong");
+                        }
                     }
-                    else
-                    {
-                        Log.error("The format of the ip is wrong");
-                    }
 
 
+                }    else {
+                    // todo check in model if running
+                    Log.info("The container {} is not running",containerNode.getName());
                 }
             }
 

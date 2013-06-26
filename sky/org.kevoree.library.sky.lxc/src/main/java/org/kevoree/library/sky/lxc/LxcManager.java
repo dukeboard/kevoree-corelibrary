@@ -1,5 +1,6 @@
 package org.kevoree.library.sky.lxc;
 
+import org.kevoree.ContainerNode;
 import org.kevoree.ContainerRoot;
 import org.kevoree.api.service.core.handler.UUIDModel;
 import org.kevoree.api.service.core.script.KevScriptEngine;
@@ -7,6 +8,7 @@ import org.kevoree.api.service.core.script.KevScriptEngineException;
 import org.kevoree.api.service.core.script.KevScriptEngineFactory;
 import org.kevoree.cloner.ModelCloner;
 import org.kevoree.framework.KevoreePlatformHelper;
+import org.kevoree.framework.KevoreePropertyHelper;
 import org.kevoree.impl.DefaultKevoreeFactory;
 import org.kevoree.library.sky.lxc.utils.FileManager;
 import org.kevoree.library.sky.lxc.utils.SystemHelper;
@@ -37,9 +39,65 @@ public class LxcManager {
     private final String lxcshutdown = "lxc-shutdown";
     private final String lxcclone = "lxc-clone";
     private final String lxccreate = "lxc-create";
+    private final String lxccgroup = "lxc-cgroup";
+    private final String lxcinfo = "lxc-info";
 
 
-    public boolean create_container(String id, LxcHostNode service, ContainerRoot iaasModel) {
+    /*
+          cgroup.procs,
+          cpuacct.stat ,
+          cpuacct.usage  ,
+          cpuacct.usage_percpu,
+          cpuset.cpu_exclusive,
+          cpuset.cpus         ,
+          cpuset.mem_exclusive
+          cpuset.mem_hardwall
+          cpuset.memory_migrate
+          cpuset.memory_pressure
+          cpuset.memory_spread_page
+          cpuset.memory_spread_slab
+          cpuset.mems
+          cpuset.sched_load_balance
+          cpuset.sched_relax_domain_level
+          cpu.shares
+          devices.allow
+          devices.deny
+          devices.list
+          freezer.state
+          memory.failcnt
+          memory.force_empty
+          memory.limit_in_bytes
+          memory.max_usage_in_bytes
+          memory.memsw.failcnt
+          memory.memsw.limit_in_bytes
+          memory.memsw.max_usage_in_bytes
+          memory.memsw.usage_in_bytes
+          memory.soft_limit_in_bytes
+          memory.stat
+          memory.swappiness
+          memory.usage_in_bytes
+          memory.use_hierarchy
+          net_cls.classid
+                  notify_on_release
+          tasks
+*/
+    public void setlimitMemory(String id,int limit_in_bytes) throws InterruptedException, IOException
+    {
+      //  lxc-cgroup -n node0 300000000           300M
+        Process processcreate = new ProcessBuilder(lxccgroup, "-n", id, "memory.limit_in_bytes", ""+limit_in_bytes).redirectErrorStream(true).start();
+        FileManager.display_message_process(processcreate.getInputStream());
+        processcreate.waitFor();
+    }
+
+    public void setlimitCPU(String id,int cpu_shares) throws InterruptedException, IOException
+    {
+        //  lxc-cgroup -n node0 300000000           300M
+        Process processcreate = new ProcessBuilder(lxccgroup, "-n", id, " cpu.shares", ""+cpu_shares).redirectErrorStream(true).start();
+        FileManager.display_message_process(processcreate.getInputStream());
+        processcreate.waitFor();
+    }
+
+    public boolean create_container(String id, LxcHostNode service,ContainerNode node, ContainerRoot iaasModel) {
         try {
             Log.debug("LxcManager : " + id + " clone =>" + clone_id);
 
@@ -51,6 +109,8 @@ public class LxcManager {
             } else {
                 Log.warn("Container {} already exist", iaasModel);
             }
+
+
         } catch (Exception e) {
             Log.error("create_container {} clone =>{}",id,clone_id, e);
             return false;
@@ -58,9 +118,32 @@ public class LxcManager {
         return true;
     }
 
-    public boolean start_container(String id, LxcHostNode service, ContainerRoot iaasModel) {
+    public boolean start_container(String id, LxcHostNode service,ContainerNode node, ContainerRoot iaasModel) {
         try {
-            lxc_start_container(id);
+            Integer ram= 0;
+            Integer cpu_core=0;
+            Log.debug("Starting container " + id);
+            Process lxcstartprocess = new ProcessBuilder(lxcstart, "-n", id, "-d").start();
+            FileManager.display_message_process(lxcstartprocess.getInputStream());
+            lxcstartprocess.waitFor();
+
+            try
+            {
+                ram = Integer.parseInt(KevoreePropertyHelper.instance$.getProperty(node, "RAM", false, ""));
+                setlimitMemory(id,ram);
+            }catch (Exception e){
+                Log.warn("parse RAM",e);
+            }
+
+            try
+            {
+                cpu_core = Integer.parseInt(KevoreePropertyHelper.instance$.getProperty(node, "CPU_CORE", false, ""));
+                setlimitCPU(id,cpu_core);
+            }catch (Exception e){
+                Log.warn("parse RAM",e);
+            }
+
+
         } catch (Exception e) {
         Log.error("start_container",e);
             return  false;
@@ -69,12 +152,7 @@ public class LxcManager {
     }
 
 
-    private void lxc_start_container(String id) throws InterruptedException, IOException {
-        Log.debug("Starting container " + id);
-        Process lxcstartprocess = new ProcessBuilder(lxcstart, "-n", id, "-d").start();
-        FileManager.display_message_process(lxcstartprocess.getInputStream());
-        lxcstartprocess.waitFor();
-    }
+
 
     public List<String> getContainers() {
         List<String> containers = new ArrayList<String>();
@@ -134,6 +212,26 @@ public class LxcManager {
         }
 
     }
+
+    public synchronized static boolean isRunning(String id) {
+        String line;
+        try {
+            Process processcreate = new ProcessBuilder("lxc-info", "-n", id).redirectErrorStream(true).start();
+            BufferedReader input = new BufferedReader(new InputStreamReader(processcreate.getInputStream()));
+            line = input.readLine();
+            input.close();
+            if(line.contains("RUNNING")){
+                return true;
+            }    else {
+                return false;
+            }
+
+        } catch (Exception e) {
+         return false;
+        }
+
+    }
+
 
     private boolean lxc_stop_container(String id, boolean destroy) {
         try {

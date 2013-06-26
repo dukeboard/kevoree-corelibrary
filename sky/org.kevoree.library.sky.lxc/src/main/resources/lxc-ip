@@ -101,7 +101,7 @@ get_ip()
 
 do_work()
 {
-    sudo lxc-wait -s RUNNING -n $LXC_NAME
+    #sudo lxc-wait -s RUNNING -n $LXC_NAME
     LXC_RUNNING=1
 
     # When lxc-attach support arrives in the kernel, we can switch to
