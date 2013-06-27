@@ -15,15 +15,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.kevoree.extra</groupId>
-            <artifactId>org.kevoree.extra.spray</artifactId>
-            <version>0.9.4</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>cc.spray.can</groupId>
+            <artifactId>spray-can_2.9.1</artifactId>
+            <version>0.9.0</version>
         </dependency>
         <dependency>
             <groupId>org.kevoree.corelibrary.javase</groupId>
@@ -31,9 +25,9 @@
             <version>${kevoree.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.5</version>
+            <groupId>se.scalablesolutions.akka</groupId>
+            <artifactId>akka-actor</artifactId>
+            <version>1.2</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

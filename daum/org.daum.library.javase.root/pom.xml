@@ -24,6 +24,10 @@
 
     <repositories>
         <repository>
+            <id>kevoree-libs-release</id>
+            <url>http://maven.kevoree.org/release</url>
+        </repository>
+        <repository>
             <id>kevoree-libs-release-local-daum</id>
             <url>http://maven.kevoree.org/daum/release</url>
         </repository>

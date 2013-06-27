@@ -13,6 +13,13 @@
         <relativePath>../org.kevoree.library.android.root/pom.xml</relativePath>
     </parent>
 
+    <repositories>
+        <repository>
+            <id>kevoree-libs-release</id>
+            <url>http://maven.kevoree.org/release</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <!-- To Change -->
         <dependency>

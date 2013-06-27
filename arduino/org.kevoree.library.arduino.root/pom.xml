@@ -20,6 +20,13 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
+    <repositories>
+        <repository>
+            <id>kevoree-libs-release</id>
+            <url>http://maven.kevoree.org/release</url>
+        </repository>
+    </repositories>
+
     <modules>
         <module>../org.kevoree.library.arduino.nodeType</module>
         <module>../org.kevoree.library.arduino.components</module>
