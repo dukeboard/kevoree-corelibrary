@@ -26,6 +26,13 @@
         </dependency>
     </dependencies>
 
+    <repositories>
+        <repository>
+            <id>kevoree-libs-release</id>
+            <url>http://maven.kevoree.org/release</url>
+        </repository>
+    </repositories>
+
     <properties>
         <kevoree.exclude>org.apache.xml*:*,com.jidesoft:*,commons-*:*</kevoree.exclude>
     </properties>

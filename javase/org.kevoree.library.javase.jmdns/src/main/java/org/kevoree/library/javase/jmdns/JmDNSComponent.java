@@ -7,8 +7,7 @@ import org.kevoree.cloner.ModelCloner;
 import org.kevoree.framework.AbstractGroupType;
 import org.kevoree.framework.KevoreePlatformHelper;
 import org.kevoree.impl.DefaultKevoreeFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.kevoree.log.Log;
 
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceEvent;
@@ -29,7 +28,6 @@ import java.util.*;
  * @version 1.0
  */
 public class JmDNSComponent {
-    private static Logger logger = LoggerFactory.getLogger(JmDNSComponent.class);
 
     ServiceListener serviceListener = null;
     List<JmDNS> jmdns = new ArrayList<JmDNS>();
@@ -58,7 +56,7 @@ public class JmDNSComponent {
     }
 
     public void start() throws IOException {
-        logger.debug("Starting JmDNS component for {}", group.getName());
+        Log.debug("Starting JmDNS component for {}", group.getName());
         initializeJmDNS();
 
         serviceListener = new ServiceListener() {
@@ -73,17 +71,17 @@ public class JmDNSComponent {
 
             public void serviceResolved(ServiceEvent p1) {
                 if (p1.getInfo().getSubtype().equals(group.getName()) && !p1.getInfo().getName().equals(group.getNodeName())) {
-                    logger.debug("Node discovered: {} port: {}", new String[]{p1.getInfo().getName(), Integer.toString(p1.getInfo().getPort())});
+                    Log.debug("Node discovered: {} port: {}", new String[]{p1.getInfo().getName(), Integer.toString(p1.getInfo().getPort())});
                     addNodeDiscovered(p1.getInfo());
                 } else {
-                    logger.debug("Local service resolved");
+                    Log.debug("Local service resolved");
                     nodeAlreadyDiscovered.add(p1.getInfo().getName());
                 }
             }
 
             public void serviceRemoved(ServiceEvent p1) {
                 if (p1.getInfo().getSubtype().equals(group.getName())) {
-                    logger.debug("Node disappeared ", p1.getInfo().getName());
+                    Log.debug("Node disappeared ", p1.getInfo().getName());
                     // REMOVE NODE FROM JMDNS GROUP INSTANCES SUBNODES
                     if (group.getName().equals(p1.getInfo().getSubtype()) && nodeAlreadyDiscovered.contains(p1.getInfo().getName())) {
                         nodeAlreadyDiscovered.remove(p1.getInfo().getName());
@@ -109,7 +107,7 @@ public class JmDNSComponent {
                         localServiceInfo.setText(props);
                         jmdnsElement.registerService(localServiceInfo);
                     } catch (IOException e) {
-                        logger.debug("Unable to register local service on jmDNS", e);
+                        Log.debug("Unable to register local service on jmDNS", e);
                     }
                 }
             }
@@ -144,16 +142,16 @@ public class JmDNSComponent {
                     while (addresses.hasMoreElements()) {
                         InetAddress inetAddress = addresses.nextElement();
                         if (!ipV4Only || inetAddress instanceof Inet4Address) {
-                            logger.debug("adding jmdns on {}", inetAddress.toString());
+                            Log.debug("adding jmdns on {}", inetAddress.toString());
                             jmdns.add(JmDNS.create(inetAddress, group.getNodeName() + "." + inetAddress.getHostAddress()));
-                            logger.debug("JmDNS listen on {}", inetAddress.getHostAddress());
+                            Log.debug("JmDNS listen on {}", inetAddress.getHostAddress());
                         }
                     }
                 }
             }
         } else {
             jmdns.add(JmDNS.create(InetAddress.getByName(inet), group.getNodeName() + "." + inet));
-            logger.debug("JmDNS listen on {}", inet);
+            Log.debug("JmDNS listen on {}", inet);
         }
     }
 
@@ -164,13 +162,13 @@ public class JmDNSComponent {
         if (groupName.equals(group.getName()) && groupTypeName.equals(group.getModelElement().getTypeDefinition().getName())) {
             updateGroup(model, nodeName, port);
         } else {
-            logger.debug("{} discovers a node using a group which have not the same type as the local one:{}.", new String[]{group.getName(), groupTypeName});
+            Log.debug("{} discovers a node using a group which have not the same type as the local one:{}.", new String[]{group.getName(), groupTypeName});
         }
         return model;
     }
 
     private synchronized void addNodeDiscovered(ServiceInfo p1) {
-        logger.debug("starting addNodeDiscovered");
+        Log.debug("starting addNodeDiscovered");
         if (p1.getInetAddresses().length > 0 && p1.getPort() != 0) {
             if (!nodeAlreadyDiscovered.contains(p1.getName())) {
                 /*String nodeType = p1.getPropertyString("nodeType");
@@ -192,26 +190,26 @@ public class JmDNSComponent {
                         for (String nodeName : nodeAlreadyDiscovered) {
                             builder.append(nodeName).append(", ");
                         }
-                        logger.debug("List of discovered nodes <{}>", builder.substring(0, builder.length() - 2));
+                        Log.debug("List of discovered nodes <{}>", builder.substring(0, builder.length() - 2));
                     } catch (Exception e) {
-                        logger.debug("Unable to compare and swap model. {}th tries", 20 - tries, e);
+                        Log.debug("Unable to compare and swap model. {}th tries", 20 - tries, e);
                     }
                     tries = tries - 1;
                 }
                 if (!modelUpdated) {
-                    logger.warn("unable to update the current configuration");
+                    Log.warn("unable to update the current configuration");
                 }
             } else {
-                logger.debug("node already known");
+                Log.debug("node already known");
             }
         } else {
             StringBuilder builder = new StringBuilder();
             for (InetAddress address : p1.getInetAddresses()) {
                 builder.append(address.toString()).append(", ");
             }
-            logger.warn("Unable to get address or port from {} and {}", builder.substring(0, builder.length() - 2), Integer.toString(p1.getPort()));
+            Log.warn("Unable to get address or port from {} and {}", builder.substring(0, builder.length() - 2), Integer.toString(p1.getPort()));
         }
-        logger.debug("ending addNodeDiscovered");
+        Log.debug("ending addNodeDiscovered");
     }
 
     private void updateGroup(ContainerRoot model, String remoteNodeName, int port) {
