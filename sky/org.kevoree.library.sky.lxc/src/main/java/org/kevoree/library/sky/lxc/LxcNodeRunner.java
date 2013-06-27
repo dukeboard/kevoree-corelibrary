@@ -37,7 +37,7 @@ public class LxcNodeRunner extends KevoreeNodeRunner {
     public boolean startNode(ContainerRoot iaasModel, ContainerRoot childBootStrapModel) {
         Log.debug("startNode " + nodeName + "  parent = " + iaasNode.getNodeName());
         ContainerNode node =    iaasModel.findByPath("nodes[" + iaasNode.getName() + "]/hosts[" + nodeName + "]", ContainerNode.class);
-        return    lxcManager.start_container(nodeName,iaasNode,node,iaasModel);
+        return    lxcManager.start_container(node);
     }
 
     @Override

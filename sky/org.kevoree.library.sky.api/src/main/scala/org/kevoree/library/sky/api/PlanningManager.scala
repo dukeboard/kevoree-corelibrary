@@ -216,7 +216,7 @@ class PlanningManager(skyNode: AbstractNodeType) extends KevoreeKompareBean {
 
       //PROCESS STOP
       scheduling.schedule(adaptationModel.getAdaptations.filter {
-        adapt => adapt.getPrimitiveType.getName == JavaSePrimitive.instance$.getStopInstance
+        adapt => adapt.getPrimitiveType.getName == JavaSePrimitive.instance$.getStopInstance  && !adapt.getRef.isInstanceOf[ContainerNode]
       }, false).foreach {
         p =>
           getStep.addAdaptations(p)

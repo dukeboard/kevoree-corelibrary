@@ -5,8 +5,14 @@ import org.kevoree.ContainerRoot;
 import org.kevoree.api.service.core.handler.UUIDModel;
 import org.kevoree.cloner.ModelCloner;
 import org.kevoree.framework.KevoreePlatformHelper;
+import org.kevoree.framework.KevoreePropertyHelper;
+import org.kevoree.library.sky.lxc.utils.IPAddressValidator;
 import org.kevoree.log.Log;
 
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,10 +26,12 @@ import java.util.regex.Pattern;
 public class WatchContainers implements Runnable {
 
     private LxcHostNode lxcHostNode;
+    private LxcManager lxcManager;
+    private IPAddressValidator ipvalidator = new IPAddressValidator();
 
-    public  WatchContainers(LxcHostNode node){
-
-        this.lxcHostNode = node;
+    public WatchContainers(LxcHostNode lxcHostNode, LxcManager lxcManager) {
+        this.lxcHostNode = lxcHostNode;
+        this.lxcManager = lxcManager;
     }
 
     private void updateNetworkProperties(ContainerRoot model, String remoteNodeName, String address) {
@@ -31,53 +39,53 @@ public class WatchContainers implements Runnable {
         KevoreePlatformHelper.instance$.updateNodeLinkProp(model, remoteNodeName, remoteNodeName, org.kevoree.framework.Constants.instance$.getKEVOREE_PLATFORM_REMOTE_NODE_IP(), address, "LAN", 100);
     }
 
-
-    public static boolean isIpFormat(String ip){
-        Pattern pattern;
-        Matcher matcher;
-        pattern= Pattern.compile("[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}");
-        matcher = pattern.matcher(ip);
-        return matcher.find();
+    public List<String> getIPModel(ContainerRoot model,String remoteNodeName)
+    {
+        return KevoreePropertyHelper.instance$.getNetworkProperties(model, remoteNodeName, org.kevoree.framework.Constants.instance$.getKEVOREE_PLATFORM_REMOTE_NODE_IP());
     }
+
 
     @Override
     public void run() {
 
-        for( ContainerNode containerNode : lxcHostNode.getModelService().getLastModel().getNodes()  ){
+        ContainerRoot model = lxcHostNode.getModelService().getLastModel();
+        Log.info("WatchContainers is Scanning and monitoring the containers");
+        for( ContainerNode containerNode : model.getNodes()  ){
 
             if(!containerNode.getName().equals(lxcHostNode.getNodeName())){
-
-
-
 
                 if(LxcManager.isRunning(containerNode.getName())){
 
                     String ip =   LxcManager.getIP(containerNode.getName());
-                    Log.info("IP Scanning {} {}",containerNode.getName(),ip);
-
                     if(ip != null){
 
-                        if(isIpFormat(ip)){
-                            UUIDModel uuidModel = lxcHostNode.getModelService().getLastUUIDModel();
-                            ModelCloner cloner = new ModelCloner();
-                            ContainerRoot readWriteModel = cloner.clone(lxcHostNode.getModelService().getLastModel());
-                            updateNetworkProperties(readWriteModel, containerNode.getName(), ip);
-                            lxcHostNode.getModelService().compareAndSwapModel(uuidModel, readWriteModel);
+                        if(ipvalidator.validate(ip)){
+                            if(!getIPModel(model,containerNode.getName()).contains(ip)){
+                                Log.info("The Container {} has the IP address => {}",containerNode.getName(),ip);
+                                UUIDModel uuidModel = lxcHostNode.getModelService().getLastUUIDModel();
+                                ModelCloner cloner = new ModelCloner();
+                                ContainerRoot readWriteModel = cloner.clone(lxcHostNode.getModelService().getLastModel());
+                                updateNetworkProperties(readWriteModel, containerNode.getName(), ip);
+                                lxcHostNode.getModelService().compareAndSwapModel(uuidModel, readWriteModel);
+                            }
                         }
                         else
                         {
-                            Log.error("The format of the ip is wrong");
+                            Log.error("The format of the ip is wrong or not define");
                         }
                     }
 
 
                 }    else {
-                    // todo check in model if running
-                    Log.info("The container {} is not running",containerNode.getName());
+
+                    if(containerNode.getStarted()){
+                        Log.warn("The container {} is not running", containerNode.getName());
+                        lxcManager.start_container(containerNode);
+                    }
+
                 }
             }
 
         }
-
     }
 }

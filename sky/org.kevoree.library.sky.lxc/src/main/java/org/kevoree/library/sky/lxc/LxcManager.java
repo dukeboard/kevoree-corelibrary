@@ -83,7 +83,7 @@ public class LxcManager {
 */
     public void setlimitMemory(String id,int limit_in_bytes) throws InterruptedException, IOException
     {
-      //  lxc-cgroup -n node0 300000000           300M
+        //  lxc-cgroup -n node0 300000000           300M
         Process processcreate = new ProcessBuilder(lxccgroup, "-n", id, "memory.limit_in_bytes", ""+limit_in_bytes).redirectErrorStream(true).start();
         FileManager.display_message_process(processcreate.getInputStream());
         processcreate.waitFor();
@@ -92,7 +92,7 @@ public class LxcManager {
     public void setlimitCPU(String id,int cpu_shares) throws InterruptedException, IOException
     {
         //  lxc-cgroup -n node0 300000000           300M
-        Process processcreate = new ProcessBuilder(lxccgroup, "-n", id, " cpu.shares", ""+cpu_shares).redirectErrorStream(true).start();
+        Process processcreate = new ProcessBuilder(lxccgroup, "-n", id, "cpu.shares", ""+cpu_shares).redirectErrorStream(true).start();
         FileManager.display_message_process(processcreate.getInputStream());
         processcreate.waitFor();
     }
@@ -118,34 +118,45 @@ public class LxcManager {
         return true;
     }
 
-    public boolean start_container(String id, LxcHostNode service,ContainerNode node, ContainerRoot iaasModel) {
+    public boolean start_container(ContainerNode node) {
         try {
             Integer ram= 0;
             Integer cpu_core=0;
-            Log.debug("Starting container " + id);
-            Process lxcstartprocess = new ProcessBuilder(lxcstart, "-n", id, "-d").start();
+            Log.debug("Starting container " + node.getName());
+            Process lxcstartprocess = new ProcessBuilder(lxcstart, "-n", node.getName(), "-d").start();
             FileManager.display_message_process(lxcstartprocess.getInputStream());
             lxcstartprocess.waitFor();
 
             try
             {
                 ram = Integer.parseInt(KevoreePropertyHelper.instance$.getProperty(node, "RAM", false, ""));
-                setlimitMemory(id,ram);
+                if(ram != null){
+                    setlimitMemory(node.getName(),ram);
+                }   else {
+                    Log.info("memory limit_in_bytes is not set for {}",node.getName());
+                }
+
             }catch (Exception e){
-                Log.warn("parse RAM",e);
+                Log.warn("Memory limit_in_bytes is not set for {}",node.getName());
             }
 
             try
             {
                 cpu_core = Integer.parseInt(KevoreePropertyHelper.instance$.getProperty(node, "CPU_CORE", false, ""));
-                setlimitCPU(id,cpu_core);
+                if(cpu_core != null){
+                    setlimitCPU(node.getName(),cpu_core);
+                } else
+                {
+                    Log.info("cpu shares is not set for {}",node.getName());
+                }
+
             }catch (Exception e){
-                Log.warn("parse RAM",e);
+                Log.warn("CPU Limit is not set for {} ",node.getName());
             }
 
 
         } catch (Exception e) {
-        Log.error("start_container",e);
+            Log.error("start_container",e);
             return  false;
         }
         return true;
@@ -227,7 +238,7 @@ public class LxcManager {
             }
 
         } catch (Exception e) {
-         return false;
+            return false;
         }
 
     }

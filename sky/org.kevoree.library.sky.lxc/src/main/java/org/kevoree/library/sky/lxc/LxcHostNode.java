@@ -45,7 +45,7 @@ public class LxcHostNode extends JavaSENode implements CloudNode {
     @Override
     public void startNode() {
         super.startNode();
-        watchContainers = new WatchContainers(this);
+        watchContainers = new WatchContainers(this,lxcManager);
         nodeManager = new KevoreeNodeManager(new LXCNodeRunnerFactory());
         kompareBean = new PlanningManager(this);
         mapper = new CommandMapper(nodeManager);

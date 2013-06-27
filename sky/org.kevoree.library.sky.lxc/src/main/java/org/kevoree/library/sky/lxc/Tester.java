@@ -23,7 +23,13 @@ import java.util.HashMap;
 public class Tester {
 
 
+
     public static void main(String argv[])  {
+
+        for (int i=0;i<50;i++){
+            System.out.println("addNode node"+i+":PJavaSENode") ;
+            System.out.println("addChild node"+i+"@luxfog3") ;
+        }
           /*
         LxcHostNode node = new LxcHostNode();
 
