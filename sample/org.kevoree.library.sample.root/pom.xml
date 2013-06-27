@@ -19,27 +19,4 @@
         <module>../org.kevoree.library.sample.javase.root</module>
     </modules>
 
-    <repositories>
-        <repository>
-            <id>kevoree-release</id>
-            <url>http://maven.kevoree.org/release</url>
-        </repository>
-        <repository>
-            <id>kevoree-snapshots</id>
-            <url>http://maven.kevoree.org/snapshots</url>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>plugin.kevoree-github</id>
-            <url>http://maven.kevoree.org/release</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>plugin.kevoree-snapshots</id>
-            <url>http://maven.kevoree.org/snapshots</url>
-        </pluginRepository>
-    </pluginRepositories>
-    
-
 </project>
