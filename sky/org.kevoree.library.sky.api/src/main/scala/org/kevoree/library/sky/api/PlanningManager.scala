@@ -9,6 +9,7 @@ import scala.collection.JavaConversions._
 import org.kevoree.kompare.{JavaSePrimitive, KevoreeKompareBean}
 import org.kevoree.kompare.scheduling.SchedulingWithTopologicalOrderAlgo
 import org.kevoree.framework.AbstractNodeType
+import scala.collection.mutable
 
 
 /**
@@ -28,139 +29,139 @@ class PlanningManager(skyNode: AbstractNodeType) extends KevoreeKompareBean {
     val adaptationModel: AdaptationModel = factory.createAdaptationModel
     //    var step: ParallelStep = factory.createParallelStep
     //    adaptationModel.setOrderedPrimitiveSet(step)
-//    if (skyNode.isHost) {
-      var removeNodeType: AdaptationPrimitiveType = null
-      var addNodeType: AdaptationPrimitiveType = null
-      current.getAdaptationPrimitiveTypes.foreach {
+    //    if (skyNode.isHost) {
+    var removeNodeType: AdaptationPrimitiveType = null
+    var addNodeType: AdaptationPrimitiveType = null
+    current.getAdaptationPrimitiveTypes.foreach {
+      primitiveType =>
+        if (primitiveType.getName == CloudNode.REMOVE_NODE) {
+          removeNodeType = primitiveType
+        } else if (primitiveType.getName == CloudNode.ADD_NODE) {
+          addNodeType = primitiveType
+        }
+    }
+    if (removeNodeType == null || addNodeType == null) {
+      target.getAdaptationPrimitiveTypes.foreach {
         primitiveType =>
           if (primitiveType.getName == CloudNode.REMOVE_NODE) {
             removeNodeType = primitiveType
-          } else if (primitiveType.getName == CloudNode.ADD_NODE) {
+          }
+          else if (primitiveType.getName == CloudNode.ADD_NODE) {
             addNodeType = primitiveType
           }
       }
-      if (removeNodeType == null || addNodeType == null) {
-        target.getAdaptationPrimitiveTypes.foreach {
-          primitiveType =>
-            if (primitiveType.getName == CloudNode.REMOVE_NODE) {
-              removeNodeType = primitiveType
-            }
-            else if (primitiveType.getName == CloudNode.ADD_NODE) {
-              addNodeType = primitiveType
-            }
-        }
-      }
-      if (removeNodeType == null) {
-        logger.warn("there is no adaptation primitive for {}", CloudNode.REMOVE_NODE)
-      }
-      if (addNodeType == null) {
-        logger.warn("there is no adaptation primitive for {}", CloudNode.ADD_NODE)
-      }
+    }
+    if (removeNodeType == null) {
+      logger.warn("there is no adaptation primitive for {}", CloudNode.REMOVE_NODE)
+    }
+    if (addNodeType == null) {
+      logger.warn("there is no adaptation primitive for {}", CloudNode.ADD_NODE)
+    }
 
-      current.findByPath("nodes[" + skyNode.getNodeName + "]", classOf[ContainerNode]) match {
-        case node: ContainerNode => {
-          target.findByPath("nodes[" + skyNode.getNodeName + "]", classOf[ContainerNode]) match {
-            case node1: ContainerNode => {
-              node.getHosts.foreach {
-                subNode =>
-                  node1.findByPath("hosts[" + subNode.getName + "]", classOf[ContainerNode]) match {
-                    case null => {
-                      logger.debug("add a {} adaptation primitive with {} as parameter", Array[String](CloudNode.REMOVE_NODE, subNode.getName))
-                      val command: AdaptationPrimitive = factory.createAdaptationPrimitive
-                      command.setPrimitiveType(removeNodeType)
-                      command.setRef(subNode)
-                      //                      val subStep: ParallelStep = factory.createParallelStep
-                      //                      subStep.addAdaptations(command)
-                      adaptationModel.addAdaptations(command)
-                      //                      step.setNextStep(subStep)
-                      //                      step = subStep
-                      processStopInstance(subNode, adaptationModel, current, factory)
-                    }
-                    case subNode1: ContainerNode => {
-                      if (subNode1.getStarted() != subNode.getStarted()) {
-                        if (subNode.getStarted()) {
-                          processStopInstance(subNode, adaptationModel, current, factory)
-                        } else {
-                          processStartInstance(subNode, adaptationModel, current, factory);
-                        }
+    current.findByPath("nodes[" + skyNode.getNodeName + "]", classOf[ContainerNode]) match {
+      case node: ContainerNode => {
+        target.findByPath("nodes[" + skyNode.getNodeName + "]", classOf[ContainerNode]) match {
+          case node1: ContainerNode => {
+            node.getHosts.foreach {
+              subNode =>
+                node1.findByPath("hosts[" + subNode.getName + "]", classOf[ContainerNode]) match {
+                  case null => {
+                    logger.debug("add a {} adaptation primitive with {} as parameter", Array[String](CloudNode.REMOVE_NODE, subNode.getName))
+                    val command: AdaptationPrimitive = factory.createAdaptationPrimitive
+                    command.setPrimitiveType(removeNodeType)
+                    command.setRef(subNode)
+                    //                      val subStep: ParallelStep = factory.createParallelStep
+                    //                      subStep.addAdaptations(command)
+                    adaptationModel.addAdaptations(command)
+                    //                      step.setNextStep(subStep)
+                    //                      step = subStep
+                    processStopInstance(subNode, adaptationModel, current, factory)
+                  }
+                  case subNode1: ContainerNode => {
+                    if (subNode1.getStarted() != subNode.getStarted()) {
+                      if (subNode.getStarted()) {
+                        processStopInstance(subNode, adaptationModel, current, factory)
+                      } else {
+                        processStartInstance(subNode, adaptationModel, current, factory);
                       }
                     }
                   }
-              }
+                }
             }
-            case null => {
-              logger.debug("Unable to find the current node on the target model, We remove all the hosted nodes from the current model")
-              node.getHosts.foreach {
-                subNode =>
-                  logger.debug("add a {} adaptation primitive with {} as parameter", Array[String](CloudNode.REMOVE_NODE, subNode.getName))
-                  val command: AdaptationPrimitive = factory.createAdaptationPrimitive
-                  command.setPrimitiveType(removeNodeType)
-                  command.setRef(subNode)
-                  //                  val subStep: ParallelStep = factory.createParallelStep
-                  //                  subStep.addAdaptations(command)
-                  adaptationModel.addAdaptations(command)
+          }
+          case null => {
+            logger.debug("Unable to find the current node on the target model, We remove all the hosted nodes from the current model")
+            node.getHosts.foreach {
+              subNode =>
+                logger.debug("add a {} adaptation primitive with {} as parameter", Array[String](CloudNode.REMOVE_NODE, subNode.getName))
+                val command: AdaptationPrimitive = factory.createAdaptationPrimitive
+                command.setPrimitiveType(removeNodeType)
+                command.setRef(subNode)
+                //                  val subStep: ParallelStep = factory.createParallelStep
+                //                  subStep.addAdaptations(command)
+                adaptationModel.addAdaptations(command)
                 //                  step.setNextStep(subStep)
                 //                  step = subStep
-                  processStopInstance(subNode, adaptationModel, current, factory)
-              }
+                processStopInstance(subNode, adaptationModel, current, factory)
             }
           }
         }
-        case null =>
       }
+      case null =>
+    }
 
-      target.findByPath("nodes[" + skyNode.getNodeName + "]", classOf[ContainerNode]) match {
-        case node: ContainerNode => {
-          current.findByPath("nodes[" + skyNode.getNodeName + "]", classOf[ContainerNode]) match {
-            case node1: ContainerNode => {
-              node.getHosts.foreach {
-                subNode =>
-                  node1.findByPath("hosts[" + subNode.getName + "]", classOf[ContainerNode]) match {
-                    case null => {
-                      logger.debug("add a {} adaptation primitive with {} as parameter", Array[String](CloudNode.ADD_NODE, subNode.getName))
-                      val command: AdaptationPrimitive = factory.createAdaptationPrimitive
-                      command.setPrimitiveType(addNodeType)
-                      command.setRef(subNode)
-                      //                      val subStep: ParallelStep = factory.createParallelStep
-                      //                      subStep.addAdaptations(command)
-                      adaptationModel.addAdaptations(command)
-                      //                      step.setNextStep(subStep)
-                      //                      step = subStep
-                      processStartInstance(subNode, adaptationModel, current, factory)
-                    }
-                    case subNode1: ContainerNode => {
-                      if (subNode1.getStarted() != subNode.getStarted()) {
-                        if (subNode.getStarted()) {
-                          processStopInstance(subNode, adaptationModel, current, factory)
-                        } else {
-                          processStartInstance(subNode, adaptationModel, current, factory)
-                        }
+    target.findByPath("nodes[" + skyNode.getNodeName + "]", classOf[ContainerNode]) match {
+      case node: ContainerNode => {
+        current.findByPath("nodes[" + skyNode.getNodeName + "]", classOf[ContainerNode]) match {
+          case node1: ContainerNode => {
+            node.getHosts.foreach {
+              subNode =>
+                node1.findByPath("hosts[" + subNode.getName + "]", classOf[ContainerNode]) match {
+                  case null => {
+                    logger.debug("add a {} adaptation primitive with {} as parameter", Array[String](CloudNode.ADD_NODE, subNode.getName))
+                    val command: AdaptationPrimitive = factory.createAdaptationPrimitive
+                    command.setPrimitiveType(addNodeType)
+                    command.setRef(subNode)
+                    //                      val subStep: ParallelStep = factory.createParallelStep
+                    //                      subStep.addAdaptations(command)
+                    adaptationModel.addAdaptations(command)
+                    //                      step.setNextStep(subStep)
+                    //                      step = subStep
+                    processStartInstance(subNode, adaptationModel, current, factory)
+                  }
+                  case subNode1: ContainerNode => {
+                    if (subNode1.getStarted() != subNode.getStarted()) {
+                      if (subNode.getStarted()) {
+                        processStopInstance(subNode, adaptationModel, current, factory)
+                      } else {
+                        processStartInstance(subNode, adaptationModel, current, factory)
                       }
                     }
                   }
-              }
+                }
             }
-            case null => {
-              logger.debug("Unable to find the current node on the current model, We add all the hosted nodes from the target model")
-              node.getHosts.foreach {
-                subNode =>
-                  logger.debug("add a {} adaptation primitive with {} as parameter", Array[String](CloudNode.ADD_NODE, subNode.getName))
-                  val command: AdaptationPrimitive = factory.createAdaptationPrimitive
-                  command.setPrimitiveType(addNodeType)
-                  command.setRef(subNode)
-                  //                  val subStep: ParallelStep = factory.createParallelStep
-                  //                  subStep.addAdaptations(command)
-                  adaptationModel.addAdaptations(command)
+          }
+          case null => {
+            logger.debug("Unable to find the current node on the current model, We add all the hosted nodes from the target model")
+            node.getHosts.foreach {
+              subNode =>
+                logger.debug("add a {} adaptation primitive with {} as parameter", Array[String](CloudNode.ADD_NODE, subNode.getName))
+                val command: AdaptationPrimitive = factory.createAdaptationPrimitive
+                command.setPrimitiveType(addNodeType)
+                command.setRef(subNode)
+                //                  val subStep: ParallelStep = factory.createParallelStep
+                //                  subStep.addAdaptations(command)
+                adaptationModel.addAdaptations(command)
                 //                  step.setNextStep(subStep)
                 //                  step = subStep
-                  processStartInstance(subNode, adaptationModel, current, factory)
-              }
+                processStartInstance(subNode, adaptationModel, current, factory)
             }
           }
         }
-        case null =>
       }
-//    }
+      case null =>
+    }
+    //    }
     logger.debug("Adaptation model contain {} Host node primitives", adaptationModel.getAdaptations.size)
     //    val superModel: AdaptationModel = skyNode.superKompare(current, target)
 
@@ -200,23 +201,18 @@ class PlanningManager(skyNode: AbstractNodeType) extends KevoreeKompareBean {
       adaptationModel.setOrderedPrimitiveSet(getCurrentStep)
 
       // STOP child nodes
-      getStep.addAllAdaptations(adaptationModel.getAdaptations.filter {
+      createNextStep(adaptationModel.getAdaptations.filter {
         adapt => adapt.getPrimitiveType.getName == JavaSePrimitive.instance$.getStopInstance && adapt.getRef.isInstanceOf[ContainerNode]
       })
 
-      nextStep()
-
-
       // REMOVE child nodes
-      getStep.addAllAdaptations(adaptationModel.getAdaptations.filter {
+      createNextStep(adaptationModel.getAdaptations.filter {
         adapt => adapt.getPrimitiveType.getName == CloudNode.REMOVE_NODE
       })
 
-      nextStep()
-
       //PROCESS STOP
       scheduling.schedule(adaptationModel.getAdaptations.filter {
-        adapt => adapt.getPrimitiveType.getName == JavaSePrimitive.instance$.getStopInstance  && !adapt.getRef.isInstanceOf[ContainerNode]
+        adapt => adapt.getPrimitiveType.getName == JavaSePrimitive.instance$.getStopInstance && !adapt.getRef.isInstanceOf[ContainerNode]
       }, false).foreach {
         p =>
           getStep.addAdaptations(p)
@@ -224,94 +220,66 @@ class PlanningManager(skyNode: AbstractNodeType) extends KevoreeKompareBean {
           getCurrentStep.setNextStep(getStep)
           setCurrentStep(getStep)
       }
+
       // REMOVE BINDINGS
-      getStep.addAllAdaptations(adaptationModel.getAdaptations.filter {
+      createNextStep(adaptationModel.getAdaptations.filter {
         adapt =>
           adapt.getPrimitiveType.getName == JavaSePrimitive.instance$.getRemoveBinding ||
             adapt.getPrimitiveType.getName == JavaSePrimitive.instance$.getRemoveFragmentBinding
       })
-      if (!getStep.getAdaptations.isEmpty) {
-        setStep(adaptationModelFactory.createParallelStep())
-        getCurrentStep.setNextStep(getStep)
-        setCurrentStep(getStep)
-      }
 
-      getStep.addAllAdaptations(adaptationModel.getAdaptations.filter {
+      createNextStep(adaptationModel.getAdaptations.filter {
         adapt => adapt.getPrimitiveType.getName == JavaSePrimitive.instance$.getRemoveInstance
       })
 
-      nextStep()
-
-      getStep.addAllAdaptations(adaptationModel.getAdaptations.filter {
+      createNextStep(adaptationModel.getAdaptations.filter {
         adapt => adapt.getPrimitiveType.getName == JavaSePrimitive.instance$.getRemoveType
       })
 
-      nextStep()
-
-      getStep.addAllAdaptations(adaptationModel.getAdaptations.filter {
+      createNextStep(adaptationModel.getAdaptations.filter {
         adapt => adapt.getPrimitiveType.getName == JavaSePrimitive.instance$.getRemoveDeployUnit
       })
 
-      nextStep()
-
-      getStep.addAllAdaptations(adaptationModel.getAdaptations.filter {
+      createNextStep(adaptationModel.getAdaptations.filter {
         adapt => adapt.getPrimitiveType.getName == JavaSePrimitive.instance$.getAddThirdParty
       })
 
-      nextStep()
-
-      getStep.addAllAdaptations(adaptationModel.getAdaptations.filter {
+      createNextStep(adaptationModel.getAdaptations.filter {
         adapt => adapt.getPrimitiveType.getName == JavaSePrimitive.instance$.getUpdateDeployUnit
       })
 
-      nextStep()
-
-      getStep.addAllAdaptations(adaptationModel.getAdaptations.filter {
+      createNextStep(adaptationModel.getAdaptations.filter {
         adapt => adapt.getPrimitiveType.getName == JavaSePrimitive.instance$.getAddDeployUnit
       })
 
-      nextStep()
-
-      getStep.addAllAdaptations(adaptationModel.getAdaptations.filter {
+      createNextStep(adaptationModel.getAdaptations.filter {
         adapt => adapt.getPrimitiveType.getName == JavaSePrimitive.instance$.getAddType
       })
 
-      nextStep()
-
-      getStep.addAllAdaptations(adaptationModel.getAdaptations.filter {
+      createNextStep(adaptationModel.getAdaptations.filter {
         adapt => adapt.getPrimitiveType.getName == JavaSePrimitive.instance$.getAddInstance
       })
 
-      nextStep()
-
-      getStep.addAllAdaptations(adaptationModel.getAdaptations.filter {
+      createNextStep(adaptationModel.getAdaptations.filter {
         adapt =>
           adapt.getPrimitiveType.getName == JavaSePrimitive.instance$.getAddBinding ||
             adapt.getPrimitiveType.getName == JavaSePrimitive.instance$.getAddFragmentBinding
       })
 
-      nextStep()
-
-      getStep.addAllAdaptations(adaptationModel.getAdaptations.filter {
+      createNextStep(adaptationModel.getAdaptations.filter {
         adapt => adapt.getPrimitiveType.getName == JavaSePrimitive.instance$.getUpdateDictionaryInstance
       })
 
-      nextStep()
-
 
       // ADD child nodes
-      getStep.addAllAdaptations(adaptationModel.getAdaptations.filter {
+      createNextStep(adaptationModel.getAdaptations.filter {
         adapt => adapt.getPrimitiveType.getName == CloudNode.ADD_NODE
       })
 
-      nextStep()
-
       // START child nodes
-      getStep.addAllAdaptations(adaptationModel.getAdaptations.filter {
+      createNextStep(adaptationModel.getAdaptations.filter {
         adapt => adapt.getPrimitiveType.getName == JavaSePrimitive.instance$.getStartInstance && adapt.getRef.isInstanceOf[ContainerNode]
       })
-
-      nextStep()
 
       var oldStep = getCurrentStep
       //PROCESS START
@@ -350,5 +318,11 @@ class PlanningManager(skyNode: AbstractNodeType) extends KevoreeKompareBean {
     } else {
       false
     }
+  }
+
+  protected def createNextStep(commands: java.util.List[AdaptationPrimitive]) {
+    getStep.addAllAdaptations(commands)
+
+    nextStep()
   }
 }

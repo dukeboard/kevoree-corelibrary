@@ -7,14 +7,12 @@ import org.kevoree.library.defaultNodeTypes.JavaSENode;
 import org.kevoree.library.sky.api.CommandMapper;
 import org.kevoree.library.sky.api.KevoreeNodeManager;
 import org.kevoree.library.sky.api.KevoreeNodeRunner;
-import org.kevoree.library.sky.api.PlanningManager;
 import org.kevoree.library.sky.api.nodeType.CloudNode;
 import org.kevoree.library.sky.api.nodeType.KevoreeNodeRunnerFactory;
 import org.kevoree.log.Log;
 
 import java.lang.management.ManagementFactory;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
