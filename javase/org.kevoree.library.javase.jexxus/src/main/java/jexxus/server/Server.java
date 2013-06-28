@@ -228,15 +228,17 @@ public class Server {
         listener.connectionBroken(conn, forced);
     }
 
-    void sendUDP(byte[] data, ServerConnection serverConnection) {
+    boolean sendUDP(byte[] data, ServerConnection serverConnection) {
         synchronized (outgoingPacket) {
             outgoingPacket.setData(data);
             outgoingPacket.setAddress(serverConnection.getAddress());
             outgoingPacket.setPort(serverConnection.getUDPPort());
             try {
                 udpSocket.send(outgoingPacket);
+                return true;
             } catch (IOException e) {
                 e.printStackTrace();
+                return false;
             }
         }
     }

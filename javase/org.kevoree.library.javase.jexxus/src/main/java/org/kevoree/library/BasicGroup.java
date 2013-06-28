@@ -138,7 +138,7 @@ public class BasicGroup extends AbstractGroupType implements ConnectionListener 
         pushInternal(model, targetNodeName, pushModel);
     }
 
-    public  void sendModel(String ip,int port,ByteArrayOutputStream output) throws IOException {
+    public boolean sendModel(String ip, int port, ByteArrayOutputStream output) throws IOException {
         final UniClientConnection[] conns = new UniClientConnection[1];
         conns[0] = new UniClientConnection(new ConnectionListener() {
             @Override
@@ -154,7 +154,7 @@ public class BasicGroup extends AbstractGroupType implements ConnectionListener 
             }
         }, ip, port, ssl);
         conns[0].connect(5000);
-        conns[0].send(output.toByteArray(), Delivery.RELIABLE);
+        return conns[0].send(output.toByteArray(), Delivery.RELIABLE);
     }
 
     public void pushInternal(ContainerRoot model, String targetNodeName, byte code) throws Exception {
@@ -170,35 +170,32 @@ public class BasicGroup extends AbstractGroupType implements ConnectionListener 
                 try {
                     PORT = Integer.parseInt(portOption);
                 } catch (NumberFormatException e) {
-                    Log.warn("Attribute \"port\" of {} must be an Integer. Default value ({}) is used", getName(), PORT+"");
+                    Log.warn("Attribute \"port\" of {} must be an Integer. Default value ({}) is used", getName(), PORT + "");
                 }
             }
         }
         List<String> ips = KevoreePropertyHelper.instance$.getNetworkProperties(model, targetNodeName, org.kevoree.framework.Constants.instance$.getKEVOREE_PLATFORM_REMOTE_NODE_IP());
         if (ips.size() > 0) {
-            boolean success = false;
-            int i=0;
+            boolean success;
+            int i = 0;
             do {
-                try
-                {
+                try {
                     Log.debug("Try to send the model using {} for {}", ips.get(i), targetNodeName);
-                    sendModel(ips.get(i),PORT,output);
-                    success = true;
-
+                    success = sendModel(ips.get(i), PORT, output);
                 } catch (IOException e) {
                     Log.debug("Unable to push model on {} using {}", targetNodeName, ips.get(i) + ":" + PORT);
-                    success= false;
+                    success = false;
                 }
                 i++;
-            }  while (success == false &&  i < ips.size());
+            } while (!success && i < ips.size());
 
 
         } else {
             Log.debug("Try to send the model using the localhost ip for {}", targetNodeName);
             try {
-                sendModel("127.0.0.1",PORT,output);
+                sendModel("127.0.0.1", PORT, output);
             } catch (IOException e) {
-                Log.debug("Unable to push model on {} using {}",e, targetNodeName, "127.0.0.1:" + PORT);
+                Log.debug("Unable to push model on {} using {}", e, targetNodeName, "127.0.0.1:" + PORT);
             }
         }
     }
@@ -214,24 +211,28 @@ public class BasicGroup extends AbstractGroupType implements ConnectionListener 
                 try {
                     PORT = Integer.parseInt(portOption);
                 } catch (NumberFormatException e) {
-                    Log.warn("Attribute \"port\" of {} must be an Integer. Default value ({}) is used", getName(), PORT+"");
+                    Log.warn("Attribute \"port\" of {} must be an Integer. Default value ({}) is used", getName(), PORT + "");
                 }
             }
         }
         List<String> ips = KevoreePropertyHelper.instance$.getNetworkProperties(model, targetNodeName, org.kevoree.framework.Constants.instance$.getKEVOREE_PLATFORM_REMOTE_NODE_IP());
         if (ips.size() > 0) {
-            for (String ip : ips) {
+            boolean success;
+            int i = 0;
+            do {
                 try {
-                    return requestModel(ip, PORT, targetNodeName);
-                } catch (Exception e) {
-                    Log.debug("Unable to request model on {} using {}",e, targetNodeName, ip + ":" + PORT);
+                    success = requestModel(ips.get(i), PORT, targetNodeName) != null;
+                } catch (IOException e) {
+                    Log.debug("Unable to request model on {} using {}", e, targetNodeName, ips.get(i) + ":" + PORT);
+                    success = false;
                 }
-            }
+                i++;
+            } while (!success && i < ips.size());
         } else {
             try {
                 return requestModel("127.0.0.1", PORT, targetNodeName);
             } catch (Exception e) {
-                Log.debug("Unable to request model on {} using {}",e, targetNodeName, "127.0.0.1:" + PORT);
+                Log.debug("Unable to request model on {} using {}", e, targetNodeName, "127.0.0.1:" + PORT);
             }
         }
         throw new Exception("Unable to pull model on " + targetNodeName);
@@ -332,5 +333,6 @@ public class BasicGroup extends AbstractGroupType implements ConnectionListener 
     public void clientConnected(ServerConnection conn) {
 
     }
+
 
 }

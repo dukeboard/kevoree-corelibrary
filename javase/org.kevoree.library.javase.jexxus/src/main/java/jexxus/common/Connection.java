@@ -39,7 +39,7 @@ public abstract class Connection {
 	 * @param deliveryType
 	 *            The requirements for the delivery of this data.
 	 */
-	public abstract void send(byte[] data, Delivery deliveryType);
+	public abstract boolean send(byte[] data, Delivery deliveryType);
 
 	protected abstract InputStream getTCPInputStream();
 

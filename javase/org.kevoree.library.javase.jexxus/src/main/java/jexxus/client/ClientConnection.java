@@ -1,23 +1,18 @@
 package jexxus.client;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import jexxus.common.Connection;
+import jexxus.common.ConnectionListener;
+import jexxus.common.Delivery;
+
+import javax.net.SocketFactory;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
+import java.io.*;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Arrays;
-
-import javax.net.SocketFactory;
-import javax.net.ssl.SSLSocket;
-import javax.net.ssl.SSLSocketFactory;
-
-import jexxus.common.Connection;
-import jexxus.common.ConnectionListener;
-import jexxus.common.Delivery;
 
 /**
  * Used to establish a connection to a server.
@@ -184,32 +179,39 @@ public class ClientConnection extends Connection {
     }
 
     @Override
-    public synchronized void send(byte[] data, Delivery deliveryType) {
+    public synchronized boolean send(byte[] data, Delivery deliveryType) {
         if (connected == false && deliveryType.equals(Delivery.RELIABLE)) {
             System.err.println("Cannot send message when not connected!");
-            return;
+            return false;
         }
 
         if (deliveryType == Delivery.RELIABLE) {
             // send with TCP
             try {
                 super.sendTCP(data);
+                return true;
             } catch (IOException e) {
                 System.err.println("Error writing TCP data.");
                 System.err.println(e.toString());
+                return false;
             }
         } else if (deliveryType == Delivery.UNRELIABLE) {
             if (udpPort == UDP_PORT_VALUE_FOR_NOT_USING_UDP) {
                 System.err.println("Cannot send Unreliable data unless a UDP port is specified.");
-                return;
+                return false;
             }
             packet.setData(data);
             try {
                 udpSocket.send(packet);
+                return true;
             } catch (IOException e) {
                 System.err.println("Error writing UDP data.");
                 System.err.println(e.toString());
+                return false;
             }
+        } else {
+            System.err.println("Unknown delivery type: " + deliveryType.toString());
+            return false;
         }
     }
 

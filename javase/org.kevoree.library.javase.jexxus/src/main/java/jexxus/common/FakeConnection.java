@@ -21,7 +21,7 @@ public class FakeConnection extends Connection {
     }
 
     @Override
-    public void send(byte[] data, Delivery deliveryType) { }
+    public boolean send(byte[] data, Delivery deliveryType) { return true; }
 
     @Override
     protected InputStream getTCPInputStream() {return null;}

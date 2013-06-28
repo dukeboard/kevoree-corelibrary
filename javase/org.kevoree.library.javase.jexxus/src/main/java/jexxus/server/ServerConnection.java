@@ -1,18 +1,14 @@
 package jexxus.server;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.SocketException;
-
 import jexxus.common.Connection;
 import jexxus.common.ConnectionListener;
 import jexxus.common.Delivery;
 import org.kevoree.log.Log;
+
+import java.io.*;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.SocketException;
 
 /**
  * Represents a server's connection to a client.
@@ -85,7 +81,7 @@ public class ServerConnection extends Connection {
 	}
 
 	@Override
-	public synchronized void send(byte[] data, Delivery deliveryType) {
+	public synchronized boolean send(byte[] data, Delivery deliveryType) {
 		if (connected == false) {
 			throw new RuntimeException("Cannot send message when not connected!");
 		}
@@ -93,13 +89,18 @@ public class ServerConnection extends Connection {
 			// send with TCP
 			try {
 				sendTCP(data);
+                return true;
 			} catch (IOException e) {
 				System.err.println("Error writing TCP data.");
 				System.err.println(e.toString());
+                return false;
 			}
 		} else if (deliveryType == Delivery.UNRELIABLE) {
-			controller.sendUDP(data, this);
-		}
+			return controller.sendUDP(data, this);
+		} else {
+            System.err.println("Unknown delivery type: " + deliveryType.toString());
+            return false;
+        }
 	}
 
 	/**
