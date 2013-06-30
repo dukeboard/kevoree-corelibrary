@@ -29,7 +29,6 @@ public class KInject(val instance: Any, val modelService: KevoreeModelHandlerSer
     }
 
     public fun kinject() {
-
         for(clazz in clazzList.keySet()){
             val modelServiceFields = fieldResolver.resolve(javaClass<KevoreeInject>(), clazz)!!
             for(mserv in modelServiceFields){

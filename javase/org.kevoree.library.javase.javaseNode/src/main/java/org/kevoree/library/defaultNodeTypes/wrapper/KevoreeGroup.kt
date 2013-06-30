@@ -37,7 +37,6 @@ public class KevoreeGroup(val target: AbstractGroupType, val nodeName: String, v
         if (!isStarted){
             try {
 
-
                 val injector = KInject(target, modelService, bootService, kevsEngine,dataSpace)
                 injector.kinject()
 
