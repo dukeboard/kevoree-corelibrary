@@ -9,9 +9,8 @@ import org.kevoree.framework.KevoreeChannelFragment
 import org.kevoree.framework.KevoreePort
 import org.kevoree.framework.message.PortUnbindMessage
 import org.kevoree.framework.message.FragmentUnbindMessage
-import org.kevoree.framework.KevoreeComponent
-import org.kevoree.framework.ChannelFragment
 import org.kevoree.log.Log
+import org.kevoree.ContainerNode
 
 /**
  * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 3, 29 June 2007;
@@ -67,6 +66,10 @@ class RemoveBindingCommand(val c : MBinding,val nodeName:String) : PrimitiveComm
                 return false
             }
         }
+    }
+
+    fun toString(): String {
+        return "RemoveBindingCommand "+c.getHub()!!.getName() + "<->" + (c.getPort()!!.eContainer() as ComponentInstance).getName()
     }
 
 }

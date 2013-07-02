@@ -50,4 +50,10 @@ class AddDeployUnit(val du: DeployUnit, val bs: org.kevoree.api.Bootstraper): Pr
             Log.debug("error ", e); return false
         }
     }
+
+    fun toString(): String {
+        return "AddDeployUnit "+du.getGroupName() + "/" + du.getUnitName() + "/" + du.getVersion()
+    }
+
+
 }

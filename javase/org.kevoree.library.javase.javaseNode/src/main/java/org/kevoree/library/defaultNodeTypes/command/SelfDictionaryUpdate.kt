@@ -48,4 +48,8 @@ class SelfDictionaryUpdate(val c: Instance, val node: AbstractNodeType): Primiti
         }
     }
 
+    fun toString(): String {
+        return "SelfDictionaryUpdate "+c.getName()
+    }
+
 }

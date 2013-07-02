@@ -73,6 +73,6 @@ class AddBindingCommand(val c: MBinding, val nodeName: String): PrimitiveCommand
     }
 
     fun toString(): String {
-        return "AddBindingCommand / "+c.getHub()!!.getName();
+        return "AddBindingCommand "+c.getHub()!!.getName() + "<->" + (c.getPort()!!.eContainer() as ComponentInstance).getName();
     }
 }

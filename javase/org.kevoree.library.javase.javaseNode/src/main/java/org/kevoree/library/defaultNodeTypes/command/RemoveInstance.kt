@@ -70,4 +70,8 @@ class RemoveInstance(val c: Instance, val nodeName: String, val modelservice: Ke
         }
     }
 
+    fun toString(): String {
+        return "RemoveInstance "+c.getName()
+    }
+
 }

@@ -37,4 +37,8 @@ class AddFragmentBindingCommand(val c: Channel, val remoteNodeName: String, val 
         RemoveFragmentBindingCommand(c, remoteNodeName, nodeName).execute()
     }
 
+    public fun toString() : String {
+        return "AddFragmentBindingCommand " + c.getName()
+    }
+
 }

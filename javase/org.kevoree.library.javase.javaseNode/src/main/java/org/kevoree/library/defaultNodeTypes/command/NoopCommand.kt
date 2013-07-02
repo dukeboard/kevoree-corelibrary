@@ -31,4 +31,8 @@ class NoopCommand(): PrimitiveCommand {
     override fun undo() {
 
     }
+
+    fun toString(): String {
+        return "NoopCommand"
+    }
 }

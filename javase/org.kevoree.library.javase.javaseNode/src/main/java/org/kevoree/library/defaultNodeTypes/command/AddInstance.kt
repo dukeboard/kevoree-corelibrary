@@ -106,5 +106,7 @@ class AddInstance(val c: Instance, val nodeName: String, val modelservice: Kevor
     }
 
 
-
+    public override fun toString(): String? {
+        return "AddInstance " + c.getName()
+    }
 }

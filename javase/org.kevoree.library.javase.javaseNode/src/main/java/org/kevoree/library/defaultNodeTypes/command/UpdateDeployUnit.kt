@@ -52,4 +52,8 @@ class UpdateDeployUnit(val du: DeployUnit, val bs: org.kevoree.api.Bootstraper):
     override fun doEnd() {
         lastKCL = null
     }
+
+    fun toString(): String {
+        return "UpdateDeployUnit "+du.getGroupName() + "/" + du.getUnitName() + "/" + du.getVersion()
+    }
 }

@@ -55,4 +55,8 @@ class RemoveDeployUnit(val du: DeployUnit, val bootstrap: org.kevoree.api.Bootst
     override fun doEnd() {
         lastKCL = null
     }
+
+    fun toString(): String {
+        return "RemoveDeployUnit " + du.getGroupName() + "/" + du.getUnitName() + "/" + du.getVersion()
+    }
 }
