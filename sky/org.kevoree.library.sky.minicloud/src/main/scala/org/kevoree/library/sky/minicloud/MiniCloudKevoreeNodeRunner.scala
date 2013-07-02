@@ -14,16 +14,15 @@ package org.kevoree.library.sky.minicloud
  * limitations under the License.
  */
 
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import java.io._
 import java.lang.Thread
 import util.matching.Regex
 import org.kevoree.ContainerRoot
 import org.kevoree.framework.{AbstractNodeType, KevoreeXmiHelper}
-import org.kevoree.library.sky.api.KevoreeNodeRunner
 import org.kevoree.impl.DefaultKevoreeFactory
 import scala.collection.JavaConversions._
+import org.kevoree.library.sky.api.execution.KevoreeNodeRunner
+import org.kevoree.log.Log
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
@@ -34,7 +33,6 @@ import scala.collection.JavaConversions._
  * @version 1.0
  */
 class MiniCloudKevoreeNodeRunner(nodeName: String, iaasNode: AbstractNodeType) extends KevoreeNodeRunner(nodeName) {
-  private val logger: Logger = LoggerFactory.getLogger(classOf[MiniCloudKevoreeNodeRunner])
 
   val factory = new DefaultKevoreeFactory
   private var nodePlatformProcess: Process = null
@@ -52,42 +50,42 @@ class MiniCloudKevoreeNodeRunner(nodeName: String, iaasNode: AbstractNodeType) e
 
   def startNode(iaasModel: ContainerRoot, childBootstrapModel: ContainerRoot): Boolean = {
     try {
-      logger.debug("Start " + nodeName)
+      Log.debug("Start " + nodeName)
       val version = findVersionForChildNode(nodeName, childBootstrapModel, iaasModel.getNodes.find(n => n.getName == iaasNode.getNodeName).get)
 
       if (version == factory.getVersion) {
-        logger.debug("try to start child node with the same Kevoree version")
+        Log.debug("try to start child node with the same Kevoree version")
         // find the classpath of the current node
         // if classpath is null then we download the jar with aether
         // else we start the child node with the same classpath as its parent.
         // main class  = org.kevoree.platform.standalone.app.Main
-        logger.debug(System.getProperty("java.class.path"))
+        Log.debug(System.getProperty("java.class.path"))
         if (System.getProperty("java.class.path") != null) {
-          logger.debug("trying to start child node with parent's classpath")
+          Log.debug("trying to start child node with parent's classpath")
           if (!startWithClassPath(childBootstrapModel)) {
-            logger.debug("Unable to start child node with parent's classpath, try to use aether bootstrap")
+            Log.debug("Unable to start child node with parent's classpath, try to use aether bootstrap")
             startWithAether(childBootstrapModel, version)
           } else {
             true
           }
         } else {
-          logger.debug("trying to start child node with aether bootstrap")
+          Log.debug("trying to start child node with aether bootstrap")
           startWithAether(childBootstrapModel, version)
         }
       } else {
-        logger.debug("try to start child node with {} as Kevoree version", version)
+        Log.debug("try to start child node with {} as Kevoree version", version)
         startWithAether(childBootstrapModel, version)
       }
     } catch {
       case e: IOException => {
-        logger.error("Unexpected error while trying to start " + nodeName, e)
+        Log.error("Unexpected error while trying to start " + nodeName, e)
         false
       }
     }
   }
 
   def stopNode(): Boolean = {
-    logger.debug("Kill " + nodeName)
+    Log.debug("Kill " + nodeName)
     try {
       if (nodePlatformProcess != null) {
         nodePlatformProcess.destroy()
@@ -96,11 +94,11 @@ class MiniCloudKevoreeNodeRunner(nodeName: String, iaasNode: AbstractNodeType) e
     }
     catch {
       case _@e => {
-        logger.debug(nodeName + " cannot be killed. Try to force kill...")
+        Log.debug(nodeName + " cannot be killed. Try to force kill...")
         if (nodePlatformProcess != null) {
           nodePlatformProcess.destroy()
         }
-        logger.debug(nodeName + " has been forcibly killed")
+        Log.debug(nodeName + " has been forcibly killed")
         true
       }
     }
@@ -128,7 +126,7 @@ class MiniCloudKevoreeNodeRunner(nodeName: String, iaasNode: AbstractNodeType) e
         Thread.currentThread().getContextClassLoader.loadClass("org.kevoree.platform.standalone.App")
       } catch {
         case _@e => {
-          logger.info("Can't find bootstrap class {}", "org.kevoree.platform.standalone.App")
+          Log.info("Can't find bootstrap class {}", "org.kevoree.platform.standalone.App")
           return false
         }
       }
@@ -141,22 +139,22 @@ class MiniCloudKevoreeNodeRunner(nodeName: String, iaasNode: AbstractNodeType) e
       }
       exec = exec ++ List[String]("-Dnode.headless=true", "-Dnode.bootstrap=" + tempFile.getAbsolutePath, "-Dnode.name=" + nodeName, "-classpath", System.getProperty("java.class.path"),
         "org.kevoree.platform.standalone.App")
-      logger.info("Start node with command: {}", exec.mkString(" "))
+      Log.info("Start node with command: {}", exec.mkString(" "))
       nodePlatformProcess = Runtime.getRuntime.exec(exec)
 
       configureLogFile(iaasNode, nodePlatformProcess)
 
       Thread.sleep(2000) // waiting the jvm is loaded
       val exitValue = nodePlatformProcess.exitValue
-      logger.debug("Unable to start platform from current classloader. ExitValue={}", exitValue)
+      Log.debug("Unable to start platform from current classloader. ExitValue={}", exitValue)
       false
     } catch {
       case e: IllegalThreadStateException => {
-        logger.info("platform " + nodeName + " is started")
+        Log.info("platform " + nodeName + " is started")
         true
       }
       case _@e => {
-        logger.debug("Unable to start platform from current classloader", e)
+        Log.debug("Unable to start platform from current classloader", e)
         false
       }
     }
@@ -179,7 +177,7 @@ class MiniCloudKevoreeNodeRunner(nodeName: String, iaasNode: AbstractNodeType) e
         exec = exec ++ List[String]("-Dnode.headless=true", "-Dnode.bootstrap=" + tempFile.getAbsolutePath, "-Dnode.name=" + nodeName, "-jar", platformFile.getAbsolutePath)
 
 
-        logger.info("Start node with command: {}", exec.mkString(" "))
+        Log.info("Start node with command: {}", exec.mkString(" "))
         nodePlatformProcess = Runtime.getRuntime.exec(exec)
 
         configureLogFile(iaasNode, nodePlatformProcess)
@@ -188,12 +186,12 @@ class MiniCloudKevoreeNodeRunner(nodeName: String, iaasNode: AbstractNodeType) e
         nodePlatformProcess.exitValue
         false
       } else {
-        logger.error("Unable to start node because the platform jar file is not available")
+        Log.error("Unable to start node because the platform jar file is not available")
         false
       }
     } catch {
       case e: IllegalThreadStateException => {
-        logger.info("platform " + nodeName + " is started")
+        Log.info("platform " + nodeName + " is started")
         true
       }
     }

@@ -2,16 +2,15 @@ package org.kevoree.library.sky.minicloud.nodeType;
 
 import org.kevoree.annotation.*;
 import org.kevoree.library.defaultNodeTypes.JavaSENode;
-import org.kevoree.library.sky.api.CommandMapper;
-import org.kevoree.library.sky.api.KevoreeNodeManager;
-import org.kevoree.library.sky.api.KevoreeNodeRunner;
-import org.kevoree.library.sky.api.PlanningManager;
-import org.kevoree.library.sky.api.nodeType.CloudNode;
-import org.kevoree.library.sky.api.nodeType.KevoreeNodeRunnerFactory;
-import org.kevoree.library.sky.api.nodeType.PaaSNode;
+import org.kevoree.library.sky.api.CloudNode;
+import org.kevoree.library.sky.api.KevoreeNodeRunnerFactory;
+import org.kevoree.library.sky.api.PaaSNode;
+import org.kevoree.library.sky.api.execution.CommandMapper;
+import org.kevoree.library.sky.api.execution.KevoreeNodeManager;
+import org.kevoree.library.sky.api.execution.KevoreeNodeRunner;
+import org.kevoree.library.sky.api.planning.PlanningManager;
 import org.kevoree.library.sky.minicloud.MiniCloudKevoreeNodeRunner;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.kevoree.log.Log;
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
@@ -30,13 +29,13 @@ import org.slf4j.LoggerFactory;
         @PrimitiveCommand(name = CloudNode.ADD_NODE, maxTime = 120000)
 }, values = {CloudNode.REMOVE_NODE})
 public class MiniCloudNode extends JavaSENode implements CloudNode, PaaSNode {
-    private static final Logger logger = LoggerFactory.getLogger(MiniCloudNode.class);
 
     private KevoreeNodeManager nodeManager;
 
     @Start
     @Override
     public void startNode() {
+        Log.debug("Starting node type of {}", this.getName());
         super.startNode();
         nodeManager = new KevoreeNodeManager(new MiniCloudNodeRunnerFactory());
         kompareBean = new PlanningManager(this);
@@ -47,7 +46,7 @@ public class MiniCloudNode extends JavaSENode implements CloudNode, PaaSNode {
     @Stop
     @Override
     public void stopNode() {
-        logger.debug("stopping node type of {}", this.getNodeName());
+        Log.debug("Stopping node type of {}", this.getName());
         nodeManager.stop();
         super.stopNode();
     }
