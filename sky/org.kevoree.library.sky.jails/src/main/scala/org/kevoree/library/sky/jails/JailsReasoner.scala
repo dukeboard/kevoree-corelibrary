@@ -3,8 +3,8 @@ package org.kevoree.library.sky.jails
 import nodeType.JailNode
 import org.kevoree.api.service.core.script.KevScriptEngine
 import org.kevoree.library.sky.jails.process.ProcessExecutor
-import org.slf4j.{LoggerFactory, Logger}
 import org.kevoree.framework.Constants
+import org.kevoree.log.Log
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
@@ -15,12 +15,11 @@ import org.kevoree.framework.Constants
  * @version 1.0
  */
 object JailsReasoner {
-  private val logger: Logger = LoggerFactory.getLogger(this.getClass)
 
   val processExecutor = new ProcessExecutor()
 
   def createNodes(kengine: KevScriptEngine, iaasNode: JailNode): Boolean = {
-    logger.debug("Trying to identify the set of already existing jails to add them on the model")
+    Log.debug("Trying to identify the set of already existing jails to add them on the model")
     // use ezjail-admin list and parse the result to get the IP and the name of the jail and the id
     val result = processExecutor.listJails()
     if (result._1) {
@@ -30,14 +29,14 @@ object JailsReasoner {
       }
       true
     } else {
-      logger.debug("Unable to get jails configuration. Existing jails will not be added on the current configuration")
+      Log.debug("Unable to get jails configuration. Existing jails will not be added on the current configuration")
       false
     }
   }
 
   def createNode(kengine: KevScriptEngine, iaasNode: JailNode, jid: String, ips: String, name: String) {
     // create a node for each existing jail
-    logger.debug("Trying to add the jail {} with {} as IPs", Array[String](name, ips))
+    Log.debug("Trying to add the jail {} with {} as IPs", Array[String](name, ips))
     kengine addVariable("nodeName", name)
     kengine addVariable("parentName", iaasNode.getName)
     kengine append "addNode {nodeName} : PJailNode\n"
@@ -61,7 +60,7 @@ object JailsReasoner {
           kengine append ("updateDictionary {nodeName} { {key} = '{value}' }\n")*/
       }
     } else {
-      logger.debug("Unable to get constraint about node {}", name)
+      Log.debug("Unable to get constraint about node {}", name)
     }
   }
 

@@ -3,16 +3,15 @@ package org.kevoree.library.sky.jails.nodeType;
 import org.kevoree.annotation.*;
 import org.kevoree.api.service.core.script.KevScriptEngine;
 import org.kevoree.library.defaultNodeTypes.JavaSENode;
-import org.kevoree.library.sky.api.CommandMapper;
-import org.kevoree.library.sky.api.KevoreeNodeManager;
-import org.kevoree.library.sky.api.KevoreeNodeRunner;
-import org.kevoree.library.sky.api.PlanningManager;
-import org.kevoree.library.sky.api.nodeType.CloudNode;
-import org.kevoree.library.sky.api.nodeType.KevoreeNodeRunnerFactory;
+import org.kevoree.library.sky.api.CloudNode;
+import org.kevoree.library.sky.api.KevoreeNodeRunnerFactory;
+import org.kevoree.library.sky.api.execution.CommandMapper;
+import org.kevoree.library.sky.api.execution.KevoreeNodeManager;
+import org.kevoree.library.sky.api.execution.KevoreeNodeRunner;
+import org.kevoree.library.sky.api.planning.PlanningManager;
 import org.kevoree.library.sky.jails.JailKevoreeNodeRunner;
 import org.kevoree.library.sky.jails.JailsReasoner;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.kevoree.log.Log;
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
@@ -40,7 +39,6 @@ import org.slf4j.LoggerFactory;
         @PrimitiveCommand(name = CloudNode.REMOVE_NODE, maxTime = JailNode.REMOVE_TIMEOUT)
 })
 public class JailNode extends JavaSENode implements CloudNode {
-    private static final Logger logger = LoggerFactory.getLogger(JailNode.class);
 
     private String inet;
     private String subnet;
@@ -71,7 +69,7 @@ public class JailNode extends JavaSENode implements CloudNode {
     @Stop
     @Override
     public void stopNode () {
-        logger.debug("stopping node type of {}", this.getNodeName());
+        Log.debug("stopping node type of {}", this.getNodeName());
         nodeManager.stop();
         super.stopNode();
     }
@@ -99,7 +97,6 @@ public class JailNode extends JavaSENode implements CloudNode {
             }
         }
     }
-
 
     public class JailNodeRunnerFactory implements KevoreeNodeRunnerFactory {
         @Override
@@ -154,11 +151,11 @@ public class JailNode extends JavaSENode implements CloudNode {
                 created = true;
                 break;
             } catch (Exception e) {
-                logger.warn("Error while try to update the configuration of node " + getName() + ", try number " + i, e);
+                Log.warn("Error while try to update the configuration of node " + getName() + ", try number " + i, e);
             }
         }
         if (!created) {
-            logger.error("After 20 attempt, it was not able to update the configuration of {}", getName());
+            Log.error("After 20 attempt, it was not able to update the configuration of {}", getName());
         }
     }
 }

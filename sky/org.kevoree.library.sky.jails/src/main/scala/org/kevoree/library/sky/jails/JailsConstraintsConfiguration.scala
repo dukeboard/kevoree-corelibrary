@@ -2,10 +2,10 @@ package org.kevoree.library.sky.jails
 
 import process.{ProcessStreamManager, ResultManagementActor}
 import util.matching.Regex
-import org.slf4j.LoggerFactory
 import org.kevoree.{ContainerNode, ContainerRoot}
 import org.kevoree.framework.KevoreePropertyHelper
-import org.kevoree.library.sky.api.property.PropertyConversionHelper
+import org.kevoree.library.sky.api.helper.PropertyConversionHelper
+import org.kevoree.log.Log
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,10 +16,8 @@ import org.kevoree.library.sky.api.property.PropertyConversionHelper
 
 object JailsConstraintsConfiguration {
 
-  private val logger = LoggerFactory.getLogger(this.getClass)
-
   def applyJailConstraints(model: ContainerRoot, node: ContainerNode): Boolean = {
-    logger.debug("try to specify constraints")
+    Log.debug("try to specify constraints")
     // TODO manage ARCH parameter
     /*model.getNodes.find(node => node.getName == nodeName) match {
       case None => logger.debug("Unable to find information about the node to start"); false
@@ -36,12 +34,12 @@ object JailsConstraintsConfiguration {
     }
     var execResult = true
     var exec = Array[String]()
-    logger.debug("asking to node property {}...", "RAM")
+    Log.debug("asking to node property {}...", "RAM")
     property = KevoreePropertyHelper.instance$.getProperty(node, "RAM", false, "")
     if (property == null) {
       property = "N/A"
     }
-    logger.debug("RAM = {}", property)
+    Log.debug("RAM = {}", property)
     if (property != "N/A") {
       try {
         //            var limit = 0
@@ -65,19 +63,19 @@ object JailsConstraintsConfiguration {
           exec = Array[String]("rctl", "-a", "jail:" + node.getName + ":vmemoryuse:" + modeId + "=" + limit)
           val resultActor = new ResultManagementActor()
           resultActor.starting()
-          logger.debug("running {}", exec)
+          Log.debug("running {}", exec)
           val p = Runtime.getRuntime.exec(exec)
           new Thread(new ProcessStreamManager(resultActor, p.getInputStream, Array(new Regex(".*")), Array(), p)).start()
           val result = resultActor.waitingFor(500)
           if (result._1) {
             execResult = true
           } else {
-            logger.debug("unable to set RAM limitation (empty line maybe mean the BSD kernel is not implemented rctl):\n{}", result._2)
+            Log.debug("unable to set RAM limitation (empty line maybe mean the BSD kernel is not implemented rctl):\n{}", result._2)
             execResult = false
           }
         }
       } catch {
-        case e: NumberFormatException => logger.warn("Unable to take into account RAM limitation because the value {} is not well defined for {}", Array[String](property, node.getName))
+        case e: NumberFormatException => Log.warn("Unable to take into account RAM limitation because the value {} is not well defined for {}", Array[String](property, node.getName))
       }
     }
     /*property = getComputedSystemCPUFrequency(KevoreePropertyHelper.getPropertyForNode(model, nodeName, "CPU_FREQUENCY") // TODO seems to be not implemented
@@ -136,18 +134,18 @@ object JailsConstraintsConfiguration {
         exec = Array[String]("rctl", "-a", "jail:" + node.getName + ":wallclock:" + modeId + "=" + limit)
         val resultActor = new ResultManagementActor()
         resultActor.starting()
-        logger.debug("running {}", exec)
+        Log.debug("running {}", exec)
         val p = Runtime.getRuntime.exec(exec)
         new Thread(new ProcessStreamManager(resultActor, p.getInputStream, Array(new Regex(".*")), Array(), p)).start()
         val result = resultActor.waitingFor(500)
         if (result._1) {
           execResult = true
         } else {
-          logger.debug("unable to set WALLCLOCKTIME limitation (empty line maybe mean the BSD kernel is not implemented rctl):\n{}", result._2)
+          Log.debug("unable to set WALLCLOCKTIME limitation (empty line maybe mean the BSD kernel is not implemented rctl):\n{}", result._2)
           execResult = false
         }
       } catch {
-        case e: NumberFormatException => logger.warn("Unable to take into account WALLCLOCKTIME limitation because the value {} is not well defined for {}", Array[String](property, node.getName))
+        case e: NumberFormatException => Log.warn("Unable to take into account WALLCLOCKTIME limitation because the value {} is not well defined for {}", Array[String](property, node.getName))
       }
     }
     property = KevoreePropertyHelper.instance$.getProperty(node, "DISK_SIZE", false, "")
@@ -174,21 +172,21 @@ object JailsConstraintsConfiguration {
         exec = Array[String]("rctl", "-a", "jail:" + node.getName + ":datasize:" + modeId + "=" + limit)
         val resultActor = new ResultManagementActor()
         resultActor.starting()
-        logger.debug("running {}", exec)
+        Log.debug("running {}", exec)
         val p = Runtime.getRuntime.exec(exec)
         new Thread(new ProcessStreamManager(resultActor, p.getInputStream, Array(new Regex(".*")), Array(), p)).start()
         val result = resultActor.waitingFor(500)
         if (result._1) {
           execResult = true
         } else {
-          logger.debug("unable to set DATA_SIZE limitation (empty line maybe mean the BSD kernel is not implemented rctl):\n{}", result._2)
+          Log.debug("unable to set DATA_SIZE limitation (empty line maybe mean the BSD kernel is not implemented rctl):\n{}", result._2)
           execResult = false
         }
       } catch {
-        case e: NumberFormatException => logger.warn("Unable to take into account DATA_SIZE limitation because the value {} is not well defined for {}. Default value used.", Array[String](property, node.getName))
+        case e: NumberFormatException => Log.warn("Unable to take into account DATA_SIZE limitation because the value {} is not well defined for {}. Default value used.", Array[String](property, node.getName))
       }
     }
-    logger.debug("specify constraints is done: {}", execResult)
+    Log.debug("specify constraints is done: {}", execResult)
     execResult
   }
 
@@ -199,7 +197,7 @@ object JailsConstraintsConfiguration {
         val exec = Array[String]("sysctl", "-a", "|", "egrep", "-i", "hw.model")
         val resultActor = new ResultManagementActor()
         resultActor.starting()
-        logger.debug("running {}", exec)
+        Log.debug("running {}", exec)
         val p = Runtime.getRuntime.exec(exec)
         new Thread(new ProcessStreamManager(resultActor, p.getInputStream, Array(new Regex("hw.model:.*@ (.*)")), Array(), p))
           .start()
@@ -214,7 +212,7 @@ object JailsConstraintsConfiguration {
           "N/A"
         }
       } else {
-        logger.debug("Unable to take into account CPU_FREQUENCY parameter!")
+        Log.debug("Unable to take into account CPU_FREQUENCY parameter!")
         "N/A"
       }
     } else {
@@ -227,12 +225,12 @@ object JailsConstraintsConfiguration {
     val exec = Array[String]("rctl", "-r", "jail:" + nodeName)
     val resultActor = new ResultManagementActor()
     resultActor.starting()
-    logger.debug("running {}", exec)
+    Log.debug("running {}", exec)
     val p = Runtime.getRuntime.exec(exec)
     new Thread(new ProcessStreamManager(resultActor, p.getInputStream, Array(new Regex(".*")), Array(), p)).start()
     val result = resultActor.waitingFor(500)
     if (!result._1) {
-      logger.debug("unable to remove jail limitations:\n{}", result._2)
+      Log.debug("unable to remove jail limitations:\n{}", result._2)
     }
     result._1
   }
@@ -241,7 +239,7 @@ object JailsConstraintsConfiguration {
     val exec = Array[String]("rctl", "-l", "jail:" + nodeName)
     val resultActor = new ResultManagementActor()
     resultActor.starting()
-    logger.debug("running {}", exec)
+    Log.debug("running {}", exec)
     val p = Runtime.getRuntime.exec(exec)
     new Thread(new ProcessStreamManager(resultActor, p.getInputStream, Array(new Regex(".*")), Array(), p)).start()
     val result = resultActor.waitingFor(500)

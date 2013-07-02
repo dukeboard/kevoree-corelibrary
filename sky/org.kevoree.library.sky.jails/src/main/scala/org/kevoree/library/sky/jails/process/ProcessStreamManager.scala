@@ -2,7 +2,7 @@ package org.kevoree.library.sky.jails.process
 
 import java.io.{InputStream, InputStreamReader, BufferedReader}
 import util.matching.Regex
-import org.slf4j.LoggerFactory
+import org.kevoree.log.Log
 
 
 /**
@@ -12,19 +12,16 @@ import org.slf4j.LoggerFactory
  * Time: 11:02
  */
 
-class ProcessStreamManager (resultActor: ResultManagementActor, inputStream: InputStream, outputRegexes: Array[Regex], errorRegexes: Array[Regex], p: Process) extends Runnable {
-  private val logger = LoggerFactory.getLogger(this.getClass)
+class ProcessStreamManager(resultActor: ResultManagementActor, inputStream: InputStream, outputRegexes: Array[Regex], errorRegexes: Array[Regex], p: Process) extends Runnable {
 
-  override def run () {
+  override def run() {
     val outputBuilder = new StringBuilder
     var errorBuilder = false
     try {
       val reader = new BufferedReader(new InputStreamReader(inputStream))
       var line = reader.readLine()
       while (line != null) {
-        if (logger.isTraceEnabled) {
-          logger.trace(line)
-        }
+        Log.trace(line)
         outputRegexes.find(regex => {
           val m = regex.pattern.matcher(line)
           m.find()
@@ -42,11 +39,11 @@ class ProcessStreamManager (resultActor: ResultManagementActor, inputStream: Inp
         line = reader.readLine()
       }
     } catch {
-      case _@e => logger.debug("Unable to read inputStream", e)
+      case _@e => Log.debug("Unable to read inputStream", e)
     }
-    logger.debug("waiting for the end of the process")
+    Log.debug("waiting for the end of the process")
     val exitValue = p.waitFor()
-    logger.debug("Process complete")
+    Log.debug("Process complete")
     if (errorBuilder || exitValue != 0) {
       resultActor.error(outputBuilder.toString())
       if (exitValue != 0) {
