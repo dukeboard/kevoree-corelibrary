@@ -1,4 +1,4 @@
-package org.kevoree.library.sky.api.nodeType;
+package org.kevoree.library.sky.api;
 
 import org.kevoree.annotation.*;
 
