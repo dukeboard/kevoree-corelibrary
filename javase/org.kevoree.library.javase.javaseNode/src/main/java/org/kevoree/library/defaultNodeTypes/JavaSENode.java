@@ -41,6 +41,7 @@ public class JavaSENode extends AbstractNodeType implements ModelListener {
     @Start
     @Override
     public void startNode() {
+        Log.debug("Starting node type of {}", this.getName());
         mapper = new CommandMapper();
         preTime = System.currentTimeMillis();
         getModelService().registerModelListener(this);
@@ -52,6 +53,7 @@ public class JavaSENode extends AbstractNodeType implements ModelListener {
     @Stop
     @Override
     public void stopNode() {
+        Log.debug("Stopping node type of {}", this.getName());
         getModelService().unregisterModelListener(this);
         kompareBean = null;
         mapper = null;
@@ -98,7 +100,7 @@ public class JavaSENode extends AbstractNodeType implements ModelListener {
 
     @Override
     public AdaptationModel kompare(ContainerRoot current, ContainerRoot target) {
-        return kompareBean.kompare(current, target, this.getNodeName());
+        return kompareBean.kompare(current, target, this.getName());
     }
 
     @Override
