@@ -1,6 +1,5 @@
 package org.kevoree.library.sky.provider.web
 
-import org.slf4j.LoggerFactory
 import org.kevoree.library.javase.webserver.{KevoreeHttpResponse, KevoreeHttpRequest}
 import util.matching.Regex
 import org.kevoree.library.sky.api.helper.KloudModelHelper
@@ -8,6 +7,7 @@ import org.kevoree.api.service.core.script.{KevScriptEngineException, KevScriptE
 import org.json.JSONStringer
 import org.kevoree.{TypeDefinition, Group}
 import scala.collection.JavaConversions._
+import org.kevoree.log.Log
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
@@ -18,7 +18,6 @@ import scala.collection.JavaConversions._
  * @version 1.0
  */
 class PaaSKloudUserResourceManagerPageGenerator(instance: KloudResourceManagerPage, pattern: String) extends KloudResourceManagerPageGenerator(instance, pattern) {
-  logger = LoggerFactory.getLogger(this.getClass)
   val PushModelRequest = new Regex(pattern + "PushModel")
   // TODO add user login
   val AddChildRequest = new Regex(pattern + "AddChild")
@@ -78,7 +77,7 @@ class PaaSKloudUserResourceManagerPageGenerator(instance: KloudResourceManagerPa
         jsonString = getNodeTypeList
       }
       if (jsonString != null) {
-        logger.debug(jsonString)
+        Log.debug(jsonString)
         response.setStatus(200)
         response.setContent(jsonString)
       } else {
@@ -133,7 +132,7 @@ class PaaSKloudUserResourceManagerPageGenerator(instance: KloudResourceManagerPa
               kengine.atomicInterpretDeploy()
               jsonresponse.key("code").value("0")
             } catch {
-              case e: Exception => logger.debug("Unable to add a new node", e); jsonresponse.key("code").value("-3").key("message").value("Unable to add a ne node: " + e.getMessage)
+              case e: Exception => Log.debug("Unable to add a new node", e); jsonresponse.key("code").value("-3").key("message").value("Unable to add a ne node: " + e.getMessage)
             }
           }
         }
@@ -156,7 +155,7 @@ class PaaSKloudUserResourceManagerPageGenerator(instance: KloudResourceManagerPa
             try {
               kengine.atomicInterpretDeploy()
             } catch {
-              case e: KevScriptEngineException => logger.warn("Unable to remove " + nodeName, e)
+              case e: KevScriptEngineException => Log.warn("Unable to remove " + nodeName, e)
             }
           }
         }
@@ -205,7 +204,7 @@ class PaaSKloudUserResourceManagerPageGenerator(instance: KloudResourceManagerPa
 
     }
     jsonresponse.key("types").value(types.toArray).endObject()
-    logger.debug(types.mkString(", "))
+    Log.debug(types.mkString(", "))
     jsonresponse.toString
   }
 

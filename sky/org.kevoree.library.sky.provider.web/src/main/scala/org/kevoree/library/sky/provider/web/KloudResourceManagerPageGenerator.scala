@@ -3,7 +3,7 @@ package org.kevoree.library.sky.provider.web
 import org.kevoree.library.javase.webserver.{KevoreeHttpRequest, KevoreeHttpResponse}
 import util.matching.Regex
 import java.io._
-import org.slf4j.LoggerFactory
+import org.kevoree.log.Log
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory
  * @version 1.0
  */
 abstract class KloudResourceManagerPageGenerator(instance: KloudResourceManagerPage, pattern: String) {
-  var logger = LoggerFactory.getLogger(this.getClass)
 
   val bootstrapCSSRequest = new Regex(pattern + "bootstrap/css/bootstrap.min.css")
   val bootstrapResponsiveCSSRequest = new Regex(pattern + "bootstrap/css/bootstrap-responsive.min.css")
@@ -33,7 +32,7 @@ abstract class KloudResourceManagerPageGenerator(instance: KloudResourceManagerP
   def process(request: KevoreeHttpRequest, response: KevoreeHttpResponse): KevoreeHttpResponse = {
     val processor = processBootstrapResources(request, response) orElse processJQueryResources(request, response) orElse processInternalResources(request, response) orElse
       internalProcess(request, response) orElse processError(request, response)
-    logger.debug("{} vs {}", Array[String](request.getUrl, pattern))
+    Log.debug("{} vs {}", Array[String](request.getUrl, pattern))
     processor(request.getUrl)
   }
 
@@ -90,10 +89,10 @@ abstract class KloudResourceManagerPageGenerator(instance: KloudResourceManagerP
     }
     catch {
       case e: FileNotFoundException => {
-        logger.error("Unable to get Bytes from stream", e)
+        Log.error("Unable to get Bytes from stream", e)
       }
       case e: IOException => {
-        logger.error("Unable to get Bytes from file", e)
+        Log.error("Unable to get Bytes from file", e)
       }
     }
     new Array[Byte](0)

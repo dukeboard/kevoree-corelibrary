@@ -10,8 +10,7 @@ import org.kevoree.library.sky.api.helper.KloudModelHelper;
 import org.kevoree.library.sky.provider.api.PaaSService;
 import org.kevoree.library.sky.provider.api.PaaSSlaveService;
 import org.kevoree.library.sky.provider.api.SubmissionException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.kevoree.log.Log;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -32,7 +31,6 @@ import java.util.concurrent.Executors;
 })
 @ComponentType
 public class PaaSManagerMaster extends AbstractComponentType implements PaaSService, PaaSSlaveService, ModelListener {
-	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private ContainerRoot paasModel;
 
@@ -66,7 +64,7 @@ public class PaaSManagerMaster extends AbstractComponentType implements PaaSServ
 					created = true;
 					break;
 				} catch (Exception e) {
-					logger.warn("Error while try to remove some nodes for the PaaS {}, try number {}", id, i);
+                    Log.warn("Error while try to remove some nodes for the PaaS {}, try number {}", id, i);
 				}
 			}
 			notifyPaaS(id, created, model);
@@ -89,7 +87,7 @@ public class PaaSManagerMaster extends AbstractComponentType implements PaaSServ
 					created = true;
 					break;
 				} catch (Exception e) {
-					logger.warn("Error while try to remove some nodes for the PaaS {}, try number {}", id, i);
+                    Log.warn("Error while try to remove some nodes for the PaaS {}, try number {}", id, i);
 				}
 			}
 			notifyPaaS(id, created, model);
@@ -118,7 +116,7 @@ public class PaaSManagerMaster extends AbstractComponentType implements PaaSServ
 				kengine.atomicInterpretDeploy();
 				return true;
 			} catch (Exception e) {
-				logger.warn("Error while try to merge a new model on the PaaS managed by {}, try number {}", getName(), i);
+                Log.warn("Error while try to merge a new model on the PaaS managed by {}, try number {}", getName(), i);
 			}
 		}
 		return false;
@@ -161,15 +159,15 @@ public class PaaSManagerMaster extends AbstractComponentType implements PaaSServ
 
 	@Override
 	public boolean preUpdate (ContainerRoot currentModel, ContainerRoot proposedModel) {
-		logger.debug("Trigger pre update");
+        Log.debug("Trigger pre update");
 
 		if (KloudModelHelper.isIaaSNode(currentModel, getNodeName()) && KloudModelHelper.isPaaSModel(proposedModel, getName(), getNodeName())) {
-			logger.debug("A new user model is received (sent through the core by a PaaS Group), adding a task to process a deployment");
+            Log.debug("A new user model is received (sent through the core by a PaaS Group), adding a task to process a deployment");
 			submitJob(proposedModel);
 			// abort the update because the model is not for the IaaS but for the PaaS
 			return false;
 		} else {
-			logger.debug("nothing specific, update can be done");
+            Log.debug("nothing specific, update can be done");
 			return true;
 		}
 	}

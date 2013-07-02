@@ -4,10 +4,10 @@ import org.kevoree.library.javase.webserver.{KevoreeHttpResponse, KevoreeHttpReq
 import org.kevoree.library.sky.api.helper.KloudModelHelper
 import org.json.JSONStringer
 import org.kevoree.api.service.core.script.KevScriptEngine
-import org.slf4j.LoggerFactory
 import util.matching.Regex
 import org.kevoree.{TypeDefinition, ContainerNode, ContainerRoot}
 import scala.collection.JavaConversions._
+import org.kevoree.log.Log
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
@@ -18,12 +18,13 @@ import scala.collection.JavaConversions._
  * @version 1.0
  */
 class IaaSKloudResourceManagerPageGenerator(instance: IaaSKloudResourceManagerPage, pattern: String, parentNodeName: String) extends KloudResourceManagerPageGenerator(instance, pattern) {
-  logger = LoggerFactory.getLogger(this.getClass)
 
   val rootRequest1 = new Regex(pattern.substring(0, pattern.length - 1))
   val rootRequest2 = new Regex(pattern)
   val addChildRequest = new Regex(pattern + "AddChild")
   val removeChildRequest = new Regex(pattern + "RemoveChild")
+  val startChildRequest = new Regex(pattern + "StartChild")
+  val stopChildRequest = new Regex(pattern + "StopChild")
   val NodeSubRequest = new Regex(pattern + "nodes/(.+)/(.+)")
   // TODO maybe remove nodes on regex
   val NodeHomeRequest = new Regex(pattern + "nodes/(.+)") // TODO maybe remove nodes on regex
@@ -33,6 +34,8 @@ class IaaSKloudResourceManagerPageGenerator(instance: IaaSKloudResourceManagerPa
     case rootRequest2() => getIaasPage(request, response)
     case addChildRequest() => addChild(request, response)
     case removeChildRequest() => removeChild(request, response)
+    case startChildRequest() => start(request, response)
+    case stopChildRequest() => stop(request, response)
     case NodeSubRequest(nodeName, fluxName) => getNodeLogPage(request, response, fluxName, nodeName)
     case NodeHomeRequest(nodeName) => getNodePage(request, response, nodeName)
   }
@@ -50,7 +53,6 @@ class IaaSKloudResourceManagerPageGenerator(instance: IaaSKloudResourceManagerPa
     response.setContent(htmlContent)
     response
   }
-
 
   private def getIaasPage(request: KevoreeHttpRequest, response: KevoreeHttpResponse): KevoreeHttpResponse = {
     val htmlContent = HTMLPageBuilder.getIaasPage(pattern, parentNodeName, instance.getModelService.getLastModel, instance.isPortBinded("delegate"))
@@ -90,7 +92,7 @@ class IaaSKloudResourceManagerPageGenerator(instance: IaaSKloudResourceManagerPa
         jsonString = getNodeTypeList
       }
       if (jsonString != null) {
-        logger.debug(jsonString)
+        Log.trace(jsonString)
         response.setStatus(200)
         response.setContent(jsonString)
       } else {
@@ -144,7 +146,7 @@ class IaaSKloudResourceManagerPageGenerator(instance: IaaSKloudResourceManagerPa
               }.start()
               jsonresponse.key("code").value("0")
             } catch {
-              case e: Throwable => logger.warn("Unable to add the child", e); jsonresponse.key("code").value("-2").key("message").value(e.getMessage)
+              case e: Throwable => Log.warn("Unable to add the child", e); jsonresponse.key("code").value("-2").key("message").value(e.getMessage)
             }
           } else {
             jsonresponse.key("code").value("-2").key("message").value("The name of the node must be defined")
@@ -197,7 +199,7 @@ class IaaSKloudResourceManagerPageGenerator(instance: IaaSKloudResourceManagerPa
 
         }
         jsonresponse.key("types").value(types.toArray).endObject()
-        logger.debug(types.mkString(", "))
+        Log.debug(types.mkString(", "))
         jsonresponse.toString
       }
     }
@@ -206,17 +208,56 @@ class IaaSKloudResourceManagerPageGenerator(instance: IaaSKloudResourceManagerPa
   private def removeChild(request: KevoreeHttpRequest, response: KevoreeHttpResponse): KevoreeHttpResponse = {
     val nodeName = request.getResolvedParams.get("name")
 
-
     new Thread() {
       override def run() {
         try {
           instance.remove(cleanModel(instance.getModelService.getLastModel, List[String](nodeName)))
         } catch {
-          case e: Throwable => logger.warn("Unable to clean the current model to remove the child " + nodeName, e)
+          case e: Throwable => Log.warn("Unable to clean the current model to remove the child " + nodeName, e)
         }
       }
     }.start()
 
+    getRedirectionPage(request, response, pattern)
+  }
+
+  private def start(request: KevoreeHttpRequest, response: KevoreeHttpResponse) : KevoreeHttpResponse = {
+    val nodeName = request.getResolvedParams.get("name")
+
+    new Thread() {
+      override def run() {
+        try {
+          instance.start(cleanModel(instance.getModelService.getLastModel, List[String](nodeName)))
+        } catch {
+          case e: Throwable => Log.warn("Unable to clean the current model to remove the child " + nodeName, e)
+        }
+      }
+    }.start()
+    /*val jsonresponse = new JSONStringer().`object`()
+    jsonresponse.key("code").value("0")
+    response.setStatus(200)
+    response.setContent(jsonresponse.endObject().toString)
+    response*/
+    getRedirectionPage(request, response, pattern)
+  }
+
+  private def stop(request: KevoreeHttpRequest, response: KevoreeHttpResponse) : KevoreeHttpResponse = {
+    val nodeName = request.getResolvedParams.get("name")
+
+    new Thread() {
+      override def run() {
+        try {
+          instance.stop(cleanModel(instance.getModelService.getLastModel, List[String](nodeName)))
+        } catch {
+          case e: Throwable => Log.warn("Unable to clean the current model to remove the child " + nodeName, e)
+        }
+      }
+    }.start()
+    /*val jsonresponse = new JSONStringer().`object`()
+    jsonresponse.key("code").value("0")
+    response.setStatus(200)
+    response.setContent(jsonresponse.endObject().toString)
+    response*/
     getRedirectionPage(request, response, pattern)
   }
 

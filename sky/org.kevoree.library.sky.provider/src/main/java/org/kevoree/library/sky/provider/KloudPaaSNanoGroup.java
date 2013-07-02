@@ -9,8 +9,7 @@ import org.kevoree.framework.KevoreeXmiHelper;
 import org.kevoree.library.nanohttp.NanoHTTPD;
 import org.kevoree.library.nanohttp.NanoRestGroup;
 import org.kevoree.library.sky.api.helper.KloudModelHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.kevoree.log.Log;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -33,7 +32,6 @@ import java.io.IOException;
         @DictionaryAttribute(name = "SSH_Public_Key", optional = true)
 })
 public class KloudPaaSNanoGroup extends NanoRestGroup {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Start
     public void startRestGroup() throws IOException {
@@ -60,10 +58,10 @@ public class KloudPaaSNanoGroup extends NanoRestGroup {
 
     @Override
     public boolean triggerPreUpdate(ContainerRoot currentModel, ContainerRoot proposedModel) {
-        logger.debug("Trigger pre update");
+        Log.debug("Trigger pre update");
 
         if (KloudModelHelper.isIaaSNode(currentModel, getNodeName()) && KloudModelHelper.isPaaSModel(proposedModel, getName(), getNodeName())) {
-            logger.debug("A new user model is received (sent by the core and coming from the IaaS), notify all the PaaS nodes");
+            Log.debug("A new user model is received (sent by the core and coming from the IaaS), notify all the PaaS nodes");
             // send to all the nodes except the one which is an IaaS node
             Group group = getModelElement();
             for (ContainerNode subNode : group.getSubNodes()) {
@@ -71,14 +69,14 @@ public class KloudPaaSNanoGroup extends NanoRestGroup {
                     try {
                         internalPush(getModelService().getLastModel(), subNode.getName(), this.getNodeName());
                     } catch (Exception e) {
-                        logger.warn("Unable to notify other members of {} group", group.getName());
+                        Log.warn("Unable to notify other members of {} group", group.getName());
                     }
                 }
             }
             // abort the update because the model is not for the IaaS but for the PaaS
             return false;
         } else {
-            logger.debug("nothing specific, update can be done");
+            Log.debug("nothing specific, update can be done");
             return true;
         }
     }
@@ -125,7 +123,7 @@ public class KloudPaaSNanoGroup extends NanoRestGroup {
                     try {
                         internalPush(getModelService().getLastModel(), subNode.getName(), this.getNodeName());
                     } catch (Exception e) {
-                        logger.warn("Unable to notify other members of {} group", group.getName());
+                        Log.warn("Unable to notify other members of {} group", group.getName());
                     }
                 }
             }

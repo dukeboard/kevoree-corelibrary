@@ -11,12 +11,15 @@ merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.webserver.s
 merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.provider/{kevoree.version}"
 merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.provider.web/{kevoree.version}"
 
+merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.fakeDomo/{kevoree.version}'
 
-addNode node0 : MiniCloudNode { coreLogLevel="WARN",logLevel="DEBUG"}
+
+addNode node0 : MiniCloudNode { coreLogLevel="DEBUG",logLevel="DEBUG"}
 addGroup sync : BasicGroup
 addToGroup sync node0
 
-addComponent LogBackConfigurator@node0 : LogBackConfigurator
+
+addComponent console@node0 : FakeConsole
 
 addComponent webServer@node0 : SprayWebServer {port = "8080", timeout = "5000"}
 addComponent iaasPage@node0 : IaaSKloudResourceManagerPage { urlpattern="/iaas"}

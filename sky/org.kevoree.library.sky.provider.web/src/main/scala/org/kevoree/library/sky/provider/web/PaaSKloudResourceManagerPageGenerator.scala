@@ -1,6 +1,5 @@
 package org.kevoree.library.sky.provider.web
 
-import org.slf4j.LoggerFactory
 import org.kevoree.library.javase.webserver.{KevoreeHttpResponse, KevoreeHttpRequest}
 import util.matching.Regex
 import org.kevoree.library.sky.api.helper.KloudModelHelper
@@ -8,6 +7,7 @@ import org.json.JSONStringer
 import org.kevoree.Group
 import org.kevoree.library.sky.provider.api.SubmissionException
 import org.kevoree.impl.DefaultKevoreeFactory
+import org.kevoree.log.Log
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
@@ -18,7 +18,7 @@ import org.kevoree.impl.DefaultKevoreeFactory
  * @version 1.0
  */
 class PaaSKloudResourceManagerPageGenerator(instance: PaaSKloudResourceManagerPage, pattern: String) extends KloudResourceManagerPageGenerator(instance, pattern) {
-  logger = LoggerFactory.getLogger(this.getClass)
+
   val factory = new DefaultKevoreeFactory
 
 
@@ -78,7 +78,7 @@ class PaaSKloudResourceManagerPageGenerator(instance: PaaSKloudResourceManagerPa
           instance.initialize(login, factory.createContainerRoot)
           jsonresponse.key("code").value("0")
         } catch {
-          case e: SubmissionException => logger.error("Unable to initialize the user PaaS: " + login, e);
+          case e: SubmissionException => Log.error("Unable to initialize the user PaaS: " + login, e);
           jsonresponse.key("code").value("-1").key("message")
             .value("Unable to initialize the user PaaS: " + login + "\nerror: " + e.getMessage)
         }

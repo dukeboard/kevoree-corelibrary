@@ -9,8 +9,7 @@ import org.kevoree.library.sky.api.helper.KloudModelHelper;
 import org.kevoree.library.sky.provider.api.PaaSManagerService;
 import org.kevoree.library.sky.provider.api.PaaSService;
 import org.kevoree.library.sky.provider.api.SubmissionException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.kevoree.log.Log;
 
 import java.util.List;
 
@@ -31,7 +30,6 @@ import java.util.List;
 })
 @ComponentType
 public class PaaSKloudUserManager extends AbstractComponentType implements PaaSManagerService {
-    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Start
     public void start() throws Exception {
@@ -70,7 +68,7 @@ public class PaaSKloudUserManager extends AbstractComponentType implements PaaSM
                 created = true;
                 break;
             } catch (Exception e) {
-                logger.warn("Error while try to add the group for the new PaaS {}, try number {}", id, i);
+                Log.warn("Error while try to add the group for the new PaaS {}, try number {}", id, i);
             }
         }
         // call merge operation if the group has been created
@@ -151,7 +149,7 @@ public class PaaSKloudUserManager extends AbstractComponentType implements PaaSM
                 kengine.atomicInterpretDeploy();
                 releaseDone = true;
             } catch (Exception e) {
-                logger.warn("Error while releasing platform {}, try number {}", id, i);
+                Log.warn("Error while releasing platform {}, try number {}", id, i);
             }
         }
         if (!releaseDone) {

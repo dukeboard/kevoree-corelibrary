@@ -3,9 +3,9 @@ package org.kevoree.library.sky.provider
 import org.kevoree._
 import org.kevoree.api.service.core.script.KevScriptEngine
 import org.kevoree.library.sky.api.helper.KloudModelHelper
-import org.slf4j.{LoggerFactory, Logger}
 import scala.collection.JavaConversions._
 import scala.Some
+import org.kevoree.log.Log
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
@@ -16,7 +16,6 @@ import scala.Some
  * @version 1.0
  */
 object PaaSKloudReasoner extends KloudReasoner {
-  private val logger: Logger = LoggerFactory.getLogger(this.getClass)
 
   def appendCreatePaaSManagerScript(iaasModel: ContainerRoot, id: String, nodeName: String, kloudManagerName: String, kloudManagerNodeName: String, portName: String, kengine: KevScriptEngine) {
     // FIXME add parameters for channelType and componentPortName and ComponentTypeName
@@ -103,7 +102,7 @@ object PaaSKloudReasoner extends KloudReasoner {
   private def countSlaves(nodeName: String, iaasModel: ContainerRoot): Int = {
     /*iaasModel.getNodes.find(n => n.getName == nodeName)*/
     iaasModel.findNodesByID(nodeName) match {
-      case null => logger.warn("The node {} doesn't exist !", nodeName); Int.MaxValue
+      case null => Log.warn("The node {} doesn't exist !", nodeName); Int.MaxValue
       case node: ContainerNode => {
         // TODO replace when the nature will be added and managed on the model
         //        node.getComponents.filter(c => KloudModelHelper.isASubType(c.getTypeDefinition, "")).size
@@ -115,7 +114,7 @@ object PaaSKloudReasoner extends KloudReasoner {
   def addNodes(addedNodes: java.util.List[ContainerNode], iaasModel: ContainerRoot, kengine: KevScriptEngine, masterComponentName: String, masterComponentTypeName: String, masterNodeName: String,
                masterPortName: String, slaveComponentTypeName: String, slavePortName: String): Boolean = {
     if (!addedNodes.isEmpty) {
-      logger.debug("Try to add all user nodes into the Kloud")
+      Log.debug("Try to add all user nodes into the Kloud")
 
       // create new node using PJavaSENode as type for each user node
       addedNodes.foreach {
@@ -124,7 +123,7 @@ object PaaSKloudReasoner extends KloudReasoner {
           kengine.addVariable("nodeType", node.getTypeDefinition.getName)
           // TODO maybe we need to merge the deploy unit that offer this type if it is not one of our types
           // add node
-          logger.debug("addNode {} : {}", Array[String](node.getName, node.getTypeDefinition.getName))
+          Log.debug("addNode {} : {}", Array[String](node.getName, node.getTypeDefinition.getName))
           kengine append "addNode {nodeName} : {nodeType}"
           // set dictionary attributes of node
           if (node.getDictionary != null) {
@@ -241,7 +240,7 @@ object PaaSKloudReasoner extends KloudReasoner {
     kengine addVariable("channelName", channelName)
     kengine addVariable("nodeName", nodeName)
     model.findHubsByID(channelName) match {
-      case null => logger.warn("Unable to find channel '{}', unable to update its properties", channelName)
+      case null => Log.warn("Unable to find channel '{}', unable to update its properties", channelName)
       case channel: Channel => {
         if (channel.getTypeDefinition.getName == "SocketChannel") {
           // looking for node specific dictionary values which correspond to the node define by nodeName
@@ -249,7 +248,7 @@ object PaaSKloudReasoner extends KloudReasoner {
           // if the dictionary attributes don't exist, we try to add them
           kengine append "updateDictionary {channelName} {port = '{attributeValue}'}@{nodeName}"
         } else {
-          logger.warn("Unable to fix channel parameters for the type '{}'", channel.getTypeDefinition.getName)
+          Log.warn("Unable to fix channel parameters for the type '{}'", channel.getTypeDefinition.getName)
         }
       }
     }

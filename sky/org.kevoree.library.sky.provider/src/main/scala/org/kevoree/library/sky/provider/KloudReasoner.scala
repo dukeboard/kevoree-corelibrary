@@ -2,9 +2,9 @@ package org.kevoree.library.sky.provider
 
 import org.kevoree.{DictionaryAttribute, ContainerNode, ContainerRoot}
 import org.kevoree.library.sky.api.helper.KloudModelHelper
-import org.slf4j.{Logger, LoggerFactory}
 import scala.collection.JavaConversions._
 import org.kevoree.api.service.core.script.KevScriptEngine
+import org.kevoree.log.Log
 
 
 /**
@@ -17,7 +17,6 @@ import org.kevoree.api.service.core.script.KevScriptEngine
  */
 
 class KloudReasoner {
-  private val logger: Logger = LoggerFactory.getLogger(this.getClass)
 
   def getNodesToRemove(currentModel: ContainerRoot, newModel: ContainerRoot): java.util.List[ContainerNode] = {
     var removedNodes = List[ContainerNode]()
@@ -25,7 +24,7 @@ class KloudReasoner {
       paasNode =>
         newModel.getNodes.filter(n => KloudModelHelper.isPaaSNode(newModel, n)).find(node => node.getName == paasNode.getName) match {
           case None => {
-            logger.debug("{} must be removed from the kloud.", paasNode.getName)
+            Log.debug("{} must be removed from the kloud.", paasNode.getName)
             removedNodes = removedNodes ++ List[ContainerNode](paasNode)
           }
           case Some(newUserNode) =>
@@ -41,7 +40,7 @@ class KloudReasoner {
       // the kloud platform must use PJavaSeNode or a subtype of it so JavaSeNode will not be instanciated on the Kloud
         currentModel.getNodes.filter(n => KloudModelHelper.isPaaSNode(currentModel, n)).find(node => node.getName == paasNode.getName) match {
           case None => {
-            logger.debug("{} must be added on the kloud.", paasNode.getName)
+            Log.debug("{} must be added on the kloud.", paasNode.getName)
             nodesToAdd = nodesToAdd ++ List[ContainerNode](paasNode)
           }
           case Some(userNode) =>
@@ -60,7 +59,7 @@ class KloudReasoner {
 
   def removeNodes(removedNodes: java.util.List[ContainerNode], iaasModel: ContainerRoot, kengine: KevScriptEngine): Boolean = {
     if (!removedNodes.isEmpty) {
-      logger.debug("Try to remove useless PaaS nodes into the Kloud")
+      Log.debug("Try to remove useless PaaS nodes into the Kloud")
 
       // build kevscript to remove useless nodes into the kloud model
       removedNodes.foreach {
@@ -69,8 +68,7 @@ class KloudReasoner {
             case None => false
             case Some(host) => true
           }) match {
-            case None => logger
-              .debug("Unable to find the parent of {}. Houston, maybe we have a problem!", node.getName)
+            case None => Log.debug("Unable to find the parent of {}. Houston, maybe we have a problem!", node.getName)
             case Some(parent) =>
               kengine.addVariable("nodeName", node.getName)
               kengine append "removeNode {nodeName}"

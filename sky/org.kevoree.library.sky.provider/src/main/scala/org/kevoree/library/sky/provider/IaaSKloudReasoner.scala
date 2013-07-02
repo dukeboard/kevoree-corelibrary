@@ -4,10 +4,10 @@ import org.kevoree.{ContainerNode, NodeType, ContainerRoot}
 import org.kevoree.api.service.core.script.KevScriptEngine
 import org.kevoree.library.sky.api.helper.{KloudNetworkHelper, KloudModelHelper}
 import org.kevoree.framework.{KevoreePropertyHelper, Constants}
-import org.slf4j.{LoggerFactory, Logger}
 import scala.collection.JavaConversions._
 import collection.mutable.ListBuffer
 import java.util
+import org.kevoree.log.Log
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
@@ -18,7 +18,6 @@ import java.util
  * @version 1.0
  */
 object IaaSKloudReasoner extends KloudReasoner {
-  private val logger: Logger = LoggerFactory.getLogger(this.getClass)
 
   def configureIsolatedNodes(iaasModel: ContainerRoot, kengine: KevScriptEngine): Boolean = {
     var doSomething = false
@@ -36,13 +35,11 @@ object IaaSKloudReasoner extends KloudReasoner {
             } else {
               doSomething = doSomething && false
             }
-
           }
         }
     }
-    logger.debug("configure isolated nodes : {}", doSomething)
+    Log.debug("configure isolated nodes : {}", doSomething)
     doSomething
-
   }
 
   def configureChildNodes(iaasModel: ContainerRoot, kengine: KevScriptEngine): Boolean = {
@@ -57,7 +54,7 @@ object IaaSKloudReasoner extends KloudReasoner {
     iaasModel.getNodes.filter(n => n.getHost == null && KloudModelHelper.isPaaSNode(iaasModel, n)).foreach {
       // select a host for each user node
       node => {
-        logger.debug("try to select a parent for {}", node.getName)
+        Log.debug("try to select a parent for {}", node.getName)
 
         if (potentialParents.isEmpty) {
           potentialParents = lookAtPotentialParents(parents)
@@ -73,7 +70,7 @@ object IaaSKloudReasoner extends KloudReasoner {
         val ips = new util.ArrayList[String]()
         val ipOption = defineIP(node.getName, parentName, iaasModel, kengine, usedIps)
         if (ipOption.isDefined) {
-          usedIps +=  ipOption.get
+          usedIps += ipOption.get
           ips.add(ipOption.get)
         }
         val portNumber = configureIsolatedNode(node, parentName, ips, iaasModel, kengine, usedPorts)
@@ -88,11 +85,11 @@ object IaaSKloudReasoner extends KloudReasoner {
             kengine append "updateDictionary {groupName} {ip='{ip}'}@{nodeName}"
         }
 
-        logger.debug("Add {} as child of {}", Array[String](node.getName, parentName))
+        Log.debug("Add {} as child of {}", Array[String](node.getName, parentName))
         doSomething = true
       }
     }
-    logger.debug("configure child nodes : {}", doSomething)
+    Log.debug("configure child nodes : {}", doSomething)
     doSomething
   }
 
@@ -112,7 +109,7 @@ object IaaSKloudReasoner extends KloudReasoner {
 
   def addNodes(addedNodes: java.util.List[ContainerNode], parentNodeNameOption: Option[String], iaasModel: ContainerRoot, kengine: KevScriptEngine): Boolean = {
     if (!addedNodes.isEmpty) {
-      logger.debug("Try to add {} user nodes into the Kloud", addedNodes.size())
+      Log.debug("Try to add {} user nodes into the Kloud", addedNodes.size())
 
       // create new node using PJavaSENode as type for each user node
       var usedIps = KloudNetworkHelper.listAllIp(iaasModel)
@@ -123,7 +120,7 @@ object IaaSKloudReasoner extends KloudReasoner {
           kengine.addVariable("nodeType", node.getTypeDefinition.getName)
           // TODO maybe we need to merge the deploy unit that offer this type if it is not one of our types
           // add node
-          logger.debug("addNode {} : {}", Array[String](node.getName, node.getTypeDefinition.getName))
+          Log.debug("addNode {} : {}", Array[String](node.getName, node.getTypeDefinition.getName))
           kengine append "addNode {nodeName} : {nodeType}"
           // set dictionary attributes of node
           if (node.getDictionary != null) {
@@ -139,15 +136,15 @@ object IaaSKloudReasoner extends KloudReasoner {
                 kengine append "updateDictionary {nodeName} {{attributeName} = '{attributeValue}'}"
             }
           }
-          logger.debug("{}", parentNodeNameOption)
+          Log.debug("{}", parentNodeNameOption)
           var parentName = ""
           if (parentNodeNameOption.isEmpty) {
             var potentialParents = ListBuffer[String]()
             if (potentialParents.isEmpty) {
               val parents = countChilds(iaasModel)
-              logger.debug("parents: {}", parents.mkString(", "))
+              Log.debug("parents: {}", parents.mkString(", "))
               potentialParents = lookAtPotentialParents(parents)
-              logger.debug("Potential parents: {}", potentialParents.mkString(", "))
+              Log.debug("Potential parents: {}", potentialParents.mkString(", "))
             }
             val index = (java.lang.Math.random() * potentialParents.size).asInstanceOf[Int]
             parentName = potentialParents(index)
@@ -162,15 +159,67 @@ object IaaSKloudReasoner extends KloudReasoner {
           val ipOption = defineIP(node.getName, parentName, iaasModel, kengine, usedIps)
           val ips = new util.ArrayList[String]()
           if (ipOption.isDefined) {
-            usedIps +=  ipOption.get
+            usedIps += ipOption.get
             ips.add(ipOption.get)
           }
           val portNumber = configureIsolatedNode(node, parentName, ips, iaasModel, kengine, usedPorts)
           if (portNumber != 0) {
-            usedPorts +=  portNumber
+            usedPorts += portNumber
           }
       }
       true
+    } else {
+      true
+    }
+  }
+
+  def startNodes(startedNodes: java.util.List[ContainerNode], parentNodeNameOption: Option[String], iaasModel: ContainerRoot, kengine: KevScriptEngine): Boolean = {
+    if (!startedNodes.isEmpty) {
+      Log.debug("Try to start {} user nodes into the Kloud", startedNodes.size())
+
+      startedNodes.forall {
+        node =>
+          if ((parentNodeNameOption.isDefined && node.getHost != null && node.getHost.getName == parentNodeNameOption.get) || parentNodeNameOption.isEmpty) {
+            kengine.addVariable("nodeName", node.getName)
+            kengine.addVariable("parentNodeName", node.getHost.getName)
+            Log.debug("startInstance {} : {}", Array[String](node.getName, node.getTypeDefinition.getName))
+            kengine append "startInstance {nodeName} @ {parentNodeName}"
+            true
+          } else {
+            Log.debug("Unable to start the node {} because its parent is not the specified one")
+            false
+          }
+      }
+    } else {
+      true
+    }
+  }
+
+  def stopNodes(stoppedNodes: java.util.List[ContainerNode], parentNodeNameOption: Option[String], iaasModel: ContainerRoot, kengine: KevScriptEngine): Boolean = {
+    if (!stoppedNodes.isEmpty) {
+      Log.debug("Try to stop {} user nodes into the Kloud", stoppedNodes.size())
+
+      stoppedNodes.forall {
+        node =>
+          Log.warn(node.getName)
+          Log.warn(parentNodeNameOption.toString)
+          Log.warn("" + node.getHost)
+          if ((parentNodeNameOption.isDefined && node.getHost != null && node.getHost.getName == parentNodeNameOption.get)) {
+            kengine.addVariable("nodeName", node.getName)
+            if (node.getHost != null) {
+              kengine.addVariable("parentNodeName", node.getHost.getName)
+              Log.debug("stopInstance {} @ {}", Array[String](node.getName, node.getTypeDefinition.getName))
+              kengine append "stopInstance {nodeName} @ {parentNodeName}"
+            } else {
+              Log.debug("stopInstance {}", node.getName)
+              kengine append "stopInstance {nodeName}"
+            }
+            true
+          } else {
+            Log.debug("Unable to start the node {} because its parent is not the specified one")
+            false
+          }
+      }
     } else {
       true
     }
@@ -217,7 +266,6 @@ object IaaSKloudReasoner extends KloudReasoner {
     }
   }
 
-
   private def defineIP(nodeName: String, parentName: String, model: ContainerRoot, kengine: KevScriptEngine, usedIps: ListBuffer[String]): Option[String] = {
     kengine.addVariable("nodeName", nodeName)
     kengine.addVariable("parentName", parentName)
@@ -228,10 +276,10 @@ object IaaSKloudReasoner extends KloudReasoner {
       kengine.addVariable("ip", ipOption.get)
       kengine append "network {nodeName} {'{ipKey}' = '{ip}' }\n"
     } else {
-      logger.debug("Unable to select an IP for {}", nodeName)
+      Log.debug("Unable to select an IP for {}", nodeName)
     }
 
-    logger.debug("IP {} has been selected for the node {} on the host {}", Array(ipOption, nodeName, parentName))
+    Log.debug("IP {} has been selected for the node {} on the host {}", Array(ipOption, nodeName, parentName))
     ipOption
   }
 

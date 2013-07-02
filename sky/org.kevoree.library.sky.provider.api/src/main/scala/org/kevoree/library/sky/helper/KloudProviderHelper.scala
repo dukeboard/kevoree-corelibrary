@@ -4,9 +4,9 @@ import org.kevoree.ContainerRoot
 import org.kevoree.framework.KevoreeXmiHelper
 import java.net.{URLConnection, URL}
 import java.io._
-import org.slf4j.{LoggerFactory, Logger}
 import org.kevoree.library.sky.api.helper.KloudModelHelper
 import scala.collection.JavaConversions._
+import org.kevoree.log.Log
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
@@ -17,8 +17,6 @@ import scala.collection.JavaConversions._
  * @version 1.0
  */
 object KloudProviderHelper {
-  private val logger: Logger = LoggerFactory.getLogger(this.getClass)
-
 
   def pullModel(urlPath: String): ContainerRoot = {
     try {
@@ -36,7 +34,7 @@ object KloudProviderHelper {
   }
 
   def sendModel(model: ContainerRoot, urlPath: String): Boolean = {
-    logger.debug("send model on {}", urlPath)
+    Log.debug("send model on {}", urlPath)
     try {
       val outStream: ByteArrayOutputStream = new ByteArrayOutputStream
       KevoreeXmiHelper.instance$.saveStream(outStream, model)

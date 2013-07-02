@@ -7,7 +7,7 @@ import io.Source
 import xml.Node
 import scala.collection.JavaConversions._
 import org.kevoree.library.sky.api.helper.KloudModelHelper
-import org.slf4j.LoggerFactory
+import org.kevoree.log.Log
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
@@ -18,9 +18,8 @@ import org.slf4j.LoggerFactory
  * @version 1.0
  */
 object HTMLPageBuilder {
-  val logger = LoggerFactory.getLogger(this.getClass)
 
-  def getRedirectionPage(completeURL : String): String = {
+  def getRedirectionPage(completeURL: String): String = {
     <html>
       <head>
         <title>Your Page Title</title>
@@ -28,7 +27,9 @@ object HTMLPageBuilder {
       </head>
       <body>
         You will be redirect to
-        <a href={completeURL}>{completeURL}</a>
+        <a href={completeURL}>
+          {completeURL}
+        </a>
         .
       </body>
     </html>.toString()
@@ -136,7 +137,7 @@ object HTMLPageBuilder {
                 {var result: List[scala.xml.Elem] = List()
               KloudModelHelper.getPaaSKloudGroups(model).foreach {
                 group => {
-                  logger.debug("{} is a user and he/she has {} nodes", group.getName, group.getSubNodes.length)
+                  Log.debug("{} is a user and he/she has {} nodes", group.getName, group.getSubNodes.length)
                   result = result ++ List(
                     <tr>
                       <td>
@@ -242,6 +243,7 @@ object HTMLPageBuilder {
                           logFolderOption = System.getProperty("java.io.tmpdir")
                         }
                         val file = new File(logFolderOption + File.separator + nodeName + ".log.out")
+                        Log.debug("Try to get log from file: {}", file.getAbsolutePath)
                         if (file.exists()) {
                           Source.fromFile(file).getLines().toList /*.reverse*/ .foreach {
                             line =>
@@ -262,6 +264,7 @@ object HTMLPageBuilder {
                           logFolderOption = System.getProperty("java.io.tmpdir")
                         }
                         val file = new File(logFolderOption + File.separator + nodeName + ".log.err")
+                        Log.debug("Try to get log from file: {}", file.getAbsolutePath)
                         if (file.exists()) {
                           Source.fromFile(file).getLines().toList /*.reverse*/ .foreach {
                             line =>
@@ -375,6 +378,11 @@ object HTMLPageBuilder {
               <td>
                 {if (allowManagement) {
                 <a class="btn btn-warning" href={pattern + "RemoveChild?name=" + child.getName}>delete</a>
+                if (!child.getStarted) {
+                  <a class="btn btn-warning" href={pattern + "StartChild?name=" + child.getName}>Start</a>
+                } else {
+                  <a class="btn btn-warning" href={pattern + "StopChild?name=" + child.getName}>Stop</a>
+                }
               }}
               </td>
             </tr>

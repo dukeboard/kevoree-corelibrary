@@ -21,4 +21,12 @@ public interface IaaSManagerService {
 	public void merge (ContainerRoot model) throws SubmissionException;
 
 	public void mergeToNode (ContainerRoot model, String nodeName) throws SubmissionException;
+
+    public void start(ContainerRoot model) throws SubmissionException;
+
+    public void startToNode(ContainerRoot model, String nodeName) throws SubmissionException;
+
+    public void stop(ContainerRoot model) throws SubmissionException;
+
+    public void stopToNode(ContainerRoot model, String nodeName) throws SubmissionException;
 }

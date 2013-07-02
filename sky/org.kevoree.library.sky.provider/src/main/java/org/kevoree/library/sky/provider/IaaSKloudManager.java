@@ -8,8 +8,7 @@ import org.kevoree.api.service.core.script.KevScriptEngine;
 import org.kevoree.framework.AbstractComponentType;
 import org.kevoree.library.sky.provider.api.IaaSManagerService;
 import org.kevoree.library.sky.provider.api.SubmissionException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.kevoree.log.Log;
 import scala.Option;
 
 import java.util.List;
@@ -28,8 +27,6 @@ import java.util.List;
         @ProvidedPort(name = "submit", type = PortType.SERVICE, className = IaaSManagerService.class)
 })
 public class IaaSKloudManager extends AbstractComponentType implements ModelListener, IaaSManagerService {
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Start
     public void start() {
@@ -71,7 +68,7 @@ public class IaaSKloudManager extends AbstractComponentType implements ModelList
             try {
                 updateIaaSConfiguration(kengine);
             } catch (SubmissionException e) {
-                logger.error("Unable to update infrastructure", e);
+                Log.error("Unable to update infrastructure", e);
             }
             this.getModelService().registerModelListener(this);
         }
@@ -89,16 +86,16 @@ public class IaaSKloudManager extends AbstractComponentType implements ModelList
         Boolean created = false;
         for (int i = 0; i < 20; i++) {
             try {
-                logger.debug("try to update IaaS node...");
+                Log.debug("try to update IaaS node...");
                 kengine.atomicInterpretDeploy();
                 created = true;
                 break;
             } catch (Exception e) {
-                logger.warn("Error while try to update the IaaS configuration due to {}, try number {}", e.getMessage(), i);
+                Log.warn("Error while try to update the IaaS configuration due to {}, try number {}", e.getMessage(), i);
             }
         }
         if (!created) {
-            logger.error("After 20 attempt, it was not able to update the IaaS configuration");
+            Log.error("After 20 attempt, it was not able to update the IaaS configuration");
             throw new SubmissionException("Unable to apply the request");
         }
     }
@@ -152,6 +149,46 @@ public class IaaSKloudManager extends AbstractComponentType implements ModelList
         List<ContainerNode> nodesToRemove = PaaSKloudReasoner.getNodesToRemove(getModelService().getLastModel(), model);
         KevScriptEngine kengine = getKevScriptEngineFactory().createKevScriptEngine();
         if (IaaSKloudReasoner.removeNodes(nodesToRemove, getModelService().getLastModel(), kengine) || IaaSKloudReasoner.addNodes(nodesToAdd, some, getModelService().getLastModel(), kengine)) {
+            updateIaaSConfiguration(kengine);
+        }
+    }
+
+    @Override
+    @Port(name = "submit", method = "start")
+    public void start(ContainerRoot model) throws SubmissionException {
+        Option<String> none = Option.apply(null);
+        KevScriptEngine kengine = getKevScriptEngineFactory().createKevScriptEngine();
+        if (IaaSKloudReasoner.startNodes(model.getNodes(), none, getModelService().getLastModel(), kengine)) {
+            updateIaaSConfiguration(kengine);
+        }
+    }
+
+    @Override
+    @Port(name = "submit", method = "startToNode")
+    public void startToNode(ContainerRoot model, String nodeName) throws SubmissionException {
+        Option<String> some = Option.apply(nodeName);
+        KevScriptEngine kengine = getKevScriptEngineFactory().createKevScriptEngine();
+        if (IaaSKloudReasoner.startNodes(model.getNodes(), some, getModelService().getLastModel(), kengine)) {
+            updateIaaSConfiguration(kengine);
+        }
+    }
+
+    @Override
+    @Port(name = "submit", method = "stop")
+    public void stop(ContainerRoot model) throws SubmissionException {
+        Option<String> none = Option.apply(null);
+        KevScriptEngine kengine = getKevScriptEngineFactory().createKevScriptEngine();
+        if (IaaSKloudReasoner.stopNodes(model.getNodes(), none, getModelService().getLastModel(), kengine)) {
+            updateIaaSConfiguration(kengine);
+        }
+    }
+
+    @Override
+    @Port(name = "submit", method = "stopToNode")
+    public void stopToNode(ContainerRoot model, String nodeName) throws SubmissionException {
+        Option<String> some = Option.apply(nodeName);
+        KevScriptEngine kengine = getKevScriptEngineFactory().createKevScriptEngine();
+        if (IaaSKloudReasoner.stopNodes(model.getNodes(), some, getModelService().getLastModel(), kengine)) {
             updateIaaSConfiguration(kengine);
         }
     }

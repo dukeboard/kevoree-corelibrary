@@ -11,8 +11,7 @@ import org.kevoree.framework.KevoreePropertyHelper;
 import org.kevoree.impl.DefaultKevoreeFactory;
 import org.kevoree.library.sky.provider.api.IaaSManagerService;
 import org.kevoree.library.sky.provider.api.SubmissionException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.kevoree.log.Log;
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
@@ -31,8 +30,6 @@ import org.slf4j.LoggerFactory;
         @RequiredPort(name = "delegate", type = PortType.SERVICE, className = IaaSManagerService.class, optional = true)
 })
 public class IaaSKloudManagerTester extends AbstractComponentType implements IaaSManagerService {
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
     private KevoreeFactory factory = new DefaultKevoreeFactory();
 
     private ContainerRoot model;
@@ -52,7 +49,7 @@ public class IaaSKloudManagerTester extends AbstractComponentType implements Iaa
                 if (model != null) {
                     boolean check = true;
                     check = add(model, check);
-                    logger.info("{}.add is OK: {}", getName(), check);
+                    Log.info("{}.add is OK: {}", getName(), check);
                     /*check = remove(model, check);
                     logger.info("{}.remove is OK: {}", getName(), check);
                     check = addToNode(model, check);
@@ -128,7 +125,7 @@ public class IaaSKloudManagerTester extends AbstractComponentType implements Iaa
                 for (ContainerNode node : model.getNodes()) {
                     ContainerNode addedNode = currentModel.findByPath(node.path(), ContainerNode.class);
                     if (addedNode == null) {
-                        logger.error("Node {} has not been added on the current model", node.getName());
+                        Log.error("Node {} has not been added on the current model", node.getName());
                         check = false;
                     }
                 }
@@ -143,7 +140,7 @@ public class IaaSKloudManagerTester extends AbstractComponentType implements Iaa
     @Override
     public void add(ContainerRoot model) throws SubmissionException {
         if (isPortBinded("delegate")) {
-            logger.debug("call delegate port with method add");
+            Log.debug("call delegate port with method add");
             getPortByName("delegate", IaaSManagerService.class).add(model);
         }
     }
@@ -157,7 +154,7 @@ public class IaaSKloudManagerTester extends AbstractComponentType implements Iaa
                 for (ContainerNode node : model.getNodes()) {
                     ContainerNode addedNode = currentModel.findByPath(node.path(), ContainerNode.class);
                     if (addedNode == null || (addedNode.getHost() != null && addedNode.getHost().getName().equals(getNodeName()))) {
-                        logger.error("Node {} has not been added on the current model or on the local node {}", node.getName(), getNodeName());
+                        Log.error("Node {} has not been added on the current model or on the local node {}", node.getName(), getNodeName());
                         check = false;
                     }
                 }
@@ -172,7 +169,7 @@ public class IaaSKloudManagerTester extends AbstractComponentType implements Iaa
     @Override
     public void addToNode(ContainerRoot model, String nodeName) throws SubmissionException {
         if (isPortBinded("delegate")) {
-            logger.debug("call delegate port with method addToNode");
+            Log.debug("call delegate port with method addToNode");
             getPortByName("delegate", IaaSManagerService.class).addToNode(model, nodeName);
         }
     }
@@ -186,7 +183,7 @@ public class IaaSKloudManagerTester extends AbstractComponentType implements Iaa
                 for (ContainerNode node : model.getNodes()) {
                     ContainerNode removedNode = currentModel.findByPath(node.path(), ContainerNode.class);
                     if (removedNode != null) {
-                        logger.error("Node {} has not been removed on the current model", node.getName());
+                        Log.error("Node {} has not been removed on the current model", node.getName());
                         check = false;
                     }
                 }
@@ -201,7 +198,7 @@ public class IaaSKloudManagerTester extends AbstractComponentType implements Iaa
     @Override
     public void remove(ContainerRoot model) throws SubmissionException {
         if (isPortBinded("delegate")) {
-            logger.debug("call delegate port with method remove");
+            Log.debug("call delegate port with method remove");
             getPortByName("delegate", IaaSManagerService.class).remove(model);
         }
     }
@@ -209,7 +206,7 @@ public class IaaSKloudManagerTester extends AbstractComponentType implements Iaa
     @Override
     public void merge(ContainerRoot model) throws SubmissionException {
         if (isPortBinded("delegate")) {
-            logger.debug("call delegate port with method merge");
+            Log.debug("call delegate port with method merge");
             getPortByName("delegate", IaaSManagerService.class).merge(model);
         }
     }
@@ -217,8 +214,40 @@ public class IaaSKloudManagerTester extends AbstractComponentType implements Iaa
     @Override
     public void mergeToNode(ContainerRoot model, String nodeName) throws SubmissionException {
         if (isPortBinded("delegate")) {
-            logger.debug("call delegate port with method mergeToNode");
+            Log.debug("call delegate port with method mergeToNode");
             getPortByName("delegate", IaaSManagerService.class).mergeToNode(model, nodeName);
+        }
+    }
+
+    @Override
+    public void start(ContainerRoot model) throws SubmissionException {
+        if (isPortBinded("delegate")) {
+            Log.debug("call delegate port with method mergeToNode");
+            getPortByName("delegate", IaaSManagerService.class).start(model);
+        }
+    }
+
+    @Override
+    public void startToNode(ContainerRoot model, String nodeName) throws SubmissionException {
+        if (isPortBinded("delegate")) {
+            Log.debug("call delegate port with method mergeToNode");
+            getPortByName("delegate", IaaSManagerService.class).startToNode(model, nodeName);
+        }
+    }
+
+    @Override
+    public void stop(ContainerRoot model) throws SubmissionException {
+        if (isPortBinded("delegate")) {
+            Log.debug("call delegate port with method mergeToNode");
+            getPortByName("delegate", IaaSManagerService.class).stop(model);
+        }
+    }
+
+    @Override
+    public void stopToNode(ContainerRoot model, String nodeName) throws SubmissionException {
+        if (isPortBinded("delegate")) {
+            Log.debug("call delegate port with method mergeToNode");
+            getPortByName("delegate", IaaSManagerService.class).stopToNode(model, nodeName);
         }
     }
 }

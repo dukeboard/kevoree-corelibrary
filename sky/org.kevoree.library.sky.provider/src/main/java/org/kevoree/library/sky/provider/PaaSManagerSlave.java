@@ -7,8 +7,7 @@ import org.kevoree.framework.AbstractComponentType;
 import org.kevoree.library.sky.api.helper.KloudModelHelper;
 import org.kevoree.library.sky.provider.api.PaaSSlaveService;
 import org.kevoree.library.sky.provider.api.SubmissionException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.kevoree.log.Log;
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
@@ -24,7 +23,6 @@ import org.slf4j.LoggerFactory;
 })
 @ComponentType
 public class PaaSManagerSlave extends AbstractComponentType implements ModelListener {
-	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private boolean bootstrapping = true;
 
@@ -64,7 +62,7 @@ public class PaaSManagerSlave extends AbstractComponentType implements ModelList
 					}
 					bootstrapping = false;
 				} catch (SubmissionException e) {
-					logger.warn("The request to get the PaaS model from the master fails", e);
+                    Log.warn("The request to get the PaaS model from the master fails", e);
 				}
 			}
 		}
