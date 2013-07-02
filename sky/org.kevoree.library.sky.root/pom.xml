@@ -47,11 +47,11 @@
             <artifactId>scala-library</artifactId>
             <version>${scala.version}</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.0.13</version>
-        </dependency>
+        </dependency>-->
 	</dependencies>
 
 	<build>
@@ -91,7 +91,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<nodeTypeNames>JavaSENode</nodeTypeNames>
-					<!-- TODO: Replace by HostNode -->
+					<!-- TODO: Replace by IaaSNode -->
 				</configuration>
 				<executions>
 					<execution>
