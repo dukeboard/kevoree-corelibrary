@@ -4,11 +4,11 @@ import org.kevoree.ContainerRoot;
 import org.kevoree.annotation.*;
 import org.kevoree.api.service.core.handler.ModelListener;
 import org.kevoree.library.defaultNodeTypes.JavaSENode;
-import org.kevoree.library.sky.api.CommandMapper;
-import org.kevoree.library.sky.api.KevoreeNodeManager;
-import org.kevoree.library.sky.api.KevoreeNodeRunner;
-import org.kevoree.library.sky.api.nodeType.CloudNode;
-import org.kevoree.library.sky.api.nodeType.KevoreeNodeRunnerFactory;
+import org.kevoree.library.sky.api.CloudNode;
+import org.kevoree.library.sky.api.KevoreeNodeRunnerFactory;
+import org.kevoree.library.sky.api.execution.CommandMapper;
+import org.kevoree.library.sky.api.execution.KevoreeNodeManager;
+import org.kevoree.library.sky.api.execution.KevoreeNodeRunner;
 import org.kevoree.log.Log;
 
 import java.lang.management.ManagementFactory;

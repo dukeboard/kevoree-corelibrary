@@ -3,8 +3,7 @@ package org.kevoree.library.sky.lxc;
 
 import org.kevoree.ContainerNode;
 import org.kevoree.ContainerRoot;
-import org.kevoree.framework.KevoreePropertyHelper;
-import org.kevoree.library.sky.api.KevoreeNodeRunner;
+import org.kevoree.library.sky.api.execution.KevoreeNodeRunner;
 import org.kevoree.log.Log;
 
 /**

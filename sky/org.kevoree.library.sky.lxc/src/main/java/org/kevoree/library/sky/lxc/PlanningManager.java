@@ -1,7 +1,7 @@
 package org.kevoree.library.sky.lxc;
 
 import org.kevoree.framework.AbstractNodeType;
-import org.kevoree.library.sky.api.nodeType.CloudNode;
+import org.kevoree.library.sky.api.CloudNode;
 import org.kevoreeadaptation.AdaptationPrimitive;
 
 import java.util.ArrayList;
@@ -9,35 +9,31 @@ import java.util.List;
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
- * Date: 28/06/13
- * Time: 10:00
+ * Date: 01/07/13
+ * Time: 10:10
  *
  * @author Erwan Daubert
  * @version 1.0
  */
-public class PlanningManager extends org.kevoree.library.sky.api.PlanningManager {
+class PlanningManager extends org.kevoree.library.sky.api.planning.PlanningManager {
 
     public PlanningManager(AbstractNodeType skyNode) {
         super(skyNode);
     }
 
-    @Override
-    public void createNextStep(List<AdaptationPrimitive> commands) {
-        List<AdaptationPrimitive> addNodeCommands = new ArrayList<AdaptationPrimitive>(10);
-        List<AdaptationPrimitive> currentCommands = new ArrayList<AdaptationPrimitive>();
-        for (int i = 0; i < commands.size(); i++) {
-            AdaptationPrimitive command = commands.get(i);
-            if (command.getPrimitiveType().getName().equals(CloudNode.ADD_NODE)) {
+    public void createNextStep(String primitiveType, List commands) {
+        if (primitiveType == CloudNode.ADD_NODE) {
+            List<AdaptationPrimitive> addNodeCommands = new ArrayList <AdaptationPrimitive>(10);
+            for (AdaptationPrimitive command : (List<AdaptationPrimitive>) commands) {
                 addNodeCommands.add(command);
                 if (addNodeCommands.size() == 10) {
-                    super.createNextStep(addNodeCommands);
+                    super.createNextStep(CloudNode.ADD_NODE, addNodeCommands);
                     addNodeCommands.clear();
                 }
-            } else {
-                currentCommands.add(command);
             }
+            super.createNextStep(CloudNode.ADD_NODE, addNodeCommands);
+        } else {
+            super.createNextStep(primitiveType, commands);
         }
-        super.createNextStep(addNodeCommands);
-        super.createNextStep(currentCommands);
     }
 }
