@@ -1,3 +1,4 @@
+/*
 package org.kevoree.library.javase.slf4j;
 
 import ch.qos.logback.classic.Level;
@@ -10,6 +11,7 @@ import org.kevoree.annotation.*;
 import org.kevoree.framework.AbstractComponentType;
 import org.slf4j.LoggerFactory;
 
+*/
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
  * Date: 04/06/13
@@ -17,7 +19,8 @@ import org.slf4j.LoggerFactory;
  *
  * @author Erwan Daubert
  * @version 1.0
- */
+ *//*
+
 @Library(name = "slf4j")
 @ComponentType
 @DictionaryType({
@@ -106,3 +109,4 @@ public class LogBackConfigurator extends AbstractComponentType {
         }
     }
 }
+*/

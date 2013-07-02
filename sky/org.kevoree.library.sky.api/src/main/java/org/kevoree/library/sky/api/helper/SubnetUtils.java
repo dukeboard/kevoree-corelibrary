@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kevoree.library.sky.api.nodeType.helper;
+package org.kevoree.library.sky.api.helper;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

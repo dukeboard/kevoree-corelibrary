@@ -1,7 +1,6 @@
 package org.kevoree.library.sky.api.helper;
 
 import org.junit.Test;
-import org.kevoree.library.sky.api.nodeType.helper.SubnetUtils;
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com

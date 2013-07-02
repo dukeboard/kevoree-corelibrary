@@ -3,10 +3,10 @@ package org.kevoree.library.sky.api.helper
 import org.kevoree.{ContainerNode, ContainerRoot}
 import org.kevoree.framework.{Constants, KevoreePropertyHelper}
 import java.net.{ServerSocket, InetSocketAddress, Socket, InetAddress}
-import org.slf4j.{LoggerFactory, Logger}
 import collection.mutable.ListBuffer
 import scala.collection.JavaConversions._
 import java.util
+import org.kevoree.log.Log
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
@@ -17,10 +17,9 @@ import java.util
  * @version 1.0
  */
 object KloudNetworkHelper {
-  private val logger: Logger = LoggerFactory.getLogger(this.getClass)
 
   def selectIP(parentNodeName: String, kloudModel: ContainerRoot, alreadyUsedIps: ListBuffer[String]): Option[String] = {
-    logger.debug("try to select an IP for a child of {}", parentNodeName)
+    Log.debug("try to select an IP for a child of {}", parentNodeName)
     kloudModel.findByPath("nodes[" + parentNodeName + "]", classOf[ContainerNode]) match {
       case null => None
       case node: ContainerNode => {

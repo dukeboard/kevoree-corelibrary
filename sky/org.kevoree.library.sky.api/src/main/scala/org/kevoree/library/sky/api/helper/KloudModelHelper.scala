@@ -1,10 +1,10 @@
 package org.kevoree.library.sky.api.helper
 
-import org.slf4j.{LoggerFactory, Logger}
 import org.kevoree._
 import core.basechecker.RootChecker
-import library.sky.api.checker.NodeNameKloudChecker
 import scala.collection.JavaConversions._
+import org.kevoree.library.sky.api.checker.NodeNameKloudChecker
+import org.kevoree.log.Log
 
 
 /**
@@ -17,7 +17,6 @@ import scala.collection.JavaConversions._
  */
 
 object KloudModelHelper {
-  private val logger: Logger = LoggerFactory.getLogger(this.getClass)
 
   def isPaaSModel(potentialPaaSModel: ContainerRoot, groupName: String, fragmentHostName: String): Boolean = {
     val foundGroupSelf = potentialPaaSModel.findByPath("groups[" + groupName + "]", classOf[Group]) != null
@@ -32,7 +31,7 @@ object KloudModelHelper {
 
   def getPaaSKloudGroups(model: ContainerRoot): java.util.List[Group] = {
     val potentialKloudUserNodes = model.getNodes.filter(n => isPaaSNode(model, n))
-    logger.debug(potentialKloudUserNodes.mkString(", "))
+    Log.debug(potentialKloudUserNodes.mkString(", "))
     // FIXME replace when nature will be added and managed
     //    model.getGroups.filter(g => (g.getTypeDefinition.getName == "PaaSGroup" || KloudTypeHelper.isASubType(g.getTypeDefinition, "PaaSGroup")) &&
     model.getGroups.filter(g => (g.getTypeDefinition.getName == "KloudPaaSNanoGroup" || isASubType(g.getTypeDefinition, "KloudPaaSNanoGroup")) &&
@@ -59,7 +58,7 @@ object KloudModelHelper {
   def isIaaSNode(currentModel: ContainerRoot, nodeName: String): Boolean = {
     // FIXME replace when nature will be added and managed
     currentModel.findByPath("nodes[" + nodeName + "]", classOf[ContainerNode]) match {
-      case null => logger.debug("There is no node named {}", nodeName); false
+      case null => Log.debug("There is no node named {}", nodeName); false
       case node: ContainerNode =>
         node.getTypeDefinition.asInstanceOf[NodeType].getManagedPrimitiveTypes.filter(p => p.getName == "RemoveNode" || p.getName == "AddNode").size == 2
     }
@@ -73,7 +72,7 @@ object KloudModelHelper {
   def isPaaSNode(currentModel: ContainerRoot, nodeName: String): Boolean = {
     // FIXME replace when nature will be added and managed
     currentModel.findByPath("nodes[" + nodeName + "]", classOf[ContainerNode]) match {
-      case null => logger.debug("There is no node named {}", nodeName); false
+      case null => Log.debug("There is no node named {}", nodeName); false
       case node: ContainerNode =>
         node.getTypeDefinition.getName == "PJavaSENode" || isASubType(node.getTypeDefinition, "PJavaSENode")
     }
