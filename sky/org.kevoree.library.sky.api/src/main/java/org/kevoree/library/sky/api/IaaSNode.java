@@ -1,7 +1,5 @@
 package org.kevoree.library.sky.api;
 
-import org.kevoree.annotation.DictionaryAttribute;
-import org.kevoree.annotation.DictionaryType;
 import org.kevoree.annotation.NodeType;
 
 /**
@@ -12,12 +10,6 @@ import org.kevoree.annotation.NodeType;
  * @author Erwan Daubert
  * @version 1.0
  */
-@DictionaryType({
-		@DictionaryAttribute(name = "inet", optional = true),
-		@DictionaryAttribute(name = "subnet", optional = true),
-		@DictionaryAttribute(name = "mask", optional = true)
-//		@DictionaryAttribute(name = "role", defaultValue = "host/container", vals = {"host", "container", "host/container"}, optional = true)
-})
 @NodeType
 public interface IaaSNode extends CloudNode {
 

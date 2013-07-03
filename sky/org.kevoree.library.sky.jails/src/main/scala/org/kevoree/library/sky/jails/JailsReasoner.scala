@@ -36,7 +36,7 @@ object JailsReasoner {
 
   def createNode(kengine: KevScriptEngine, iaasNode: JailNode, jid: String, ips: String, name: String) {
     // create a node for each existing jail
-    Log.debug("Trying to add the jail {} with {} as IPs", Array[String](name, ips))
+    Log.debug("Trying to add the jail {} with {} as IPs", name, ips)
     kengine addVariable("nodeName", name)
     kengine addVariable("parentName", iaasNode.getName)
     kengine append "addNode {nodeName} : PJailNode\n"

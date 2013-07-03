@@ -376,13 +376,13 @@ object HTMLPageBuilder {
                 {ipString}
               </td>
               <td>
+                {if (!child.getStarted) {
+                <a class="btn btn-warning" href={pattern + "StartChild?name=" + child.getName}>Start</a>
+              } else {
+                <a class="btn btn-warning" href={pattern + "StopChild?name=" + child.getName}>Stop</a>
+              }}
                 {if (allowManagement) {
-                <a class="btn btn-warning" href={pattern + "RemoveChild?name=" + child.getName}>delete</a>
-                if (!child.getStarted) {
-                  <a class="btn btn-warning" href={pattern + "StartChild?name=" + child.getName}>Start</a>
-                } else {
-                  <a class="btn btn-warning" href={pattern + "StopChild?name=" + child.getName}>Stop</a>
-                }
+                <a class="btn btn-danger" href={pattern + "RemoveChild?name=" + child.getName}>delete</a>
               }}
               </td>
             </tr>

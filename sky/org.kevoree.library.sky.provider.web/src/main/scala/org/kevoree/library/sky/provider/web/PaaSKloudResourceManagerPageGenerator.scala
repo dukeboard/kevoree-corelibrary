@@ -78,7 +78,7 @@ class PaaSKloudResourceManagerPageGenerator(instance: PaaSKloudResourceManagerPa
           instance.initialize(login, factory.createContainerRoot)
           jsonresponse.key("code").value("0")
         } catch {
-          case e: SubmissionException => Log.error("Unable to initialize the user PaaS: " + login, e);
+          case e: SubmissionException => Log.error("Unable to initialize the user PaaS: {}", login, e);
           jsonresponse.key("code").value("-1").key("message")
             .value("Unable to initialize the user PaaS: " + login + "\nerror: " + e.getMessage)
         }

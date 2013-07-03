@@ -61,7 +61,7 @@ class JailKevoreeNodeRunner(nodeName: String, iaasNode: JailNode, addTimeout: Lo
               false
             }
           } else {
-            Log.error("Unable to define a new alias {} with {}", Array[String](nodeName, newIps.mkString(", ")))
+            Log.error("Unable to define a new alias {} with {}", nodeName, newIps.mkString(", "))
             false
           }
         } else {
@@ -115,7 +115,7 @@ class JailKevoreeNodeRunner(nodeName: String, iaasNode: JailNode, addTimeout: Lo
     if (flavorsOption != null && iaasNode.getAvailableFlavors.contains(flavorsOption)) {
       flavorsOption
     } else if (flavorsOption != null && !iaasNode.getAvailableFlavors.contains(flavorsOption)) {
-      Log.warn("Unknown flavor ({}) or unavailable flavor on {}", Array[String](flavorsOption, iaasNode.getName))
+      Log.warn("Unknown flavor ({}) or unavailable flavor on {}", flavorsOption, iaasNode.getName)
       null
     } else {
       null
@@ -198,7 +198,7 @@ class JailKevoreeNodeRunner(nodeName: String, iaasNode: JailNode, addTimeout: Lo
       val oldIP = processExecutor.findJail(nodeName)._3
       // release IP alias to allow next IP selection to use this one
       if (oldIP != "-1" && !processExecutor.deleteNetworkAlias(iaasNode.getNetworkInterface, oldIP)) {
-        Log.warn("Unable to release ip alias {} for the network interface {}", Array[String](oldIP, iaasNode.getNetworkInterface))
+        Log.warn("Unable to release ip alias {} for the network interface {}", oldIP, iaasNode.getNetworkInterface)
       }
       // remove rctl constraint using rctl -r jail:<jailNode>
       if (!JailsConstraintsConfiguration.removeJailConstraints(nodeName)) {

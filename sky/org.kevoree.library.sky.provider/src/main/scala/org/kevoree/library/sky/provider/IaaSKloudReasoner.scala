@@ -85,7 +85,7 @@ object IaaSKloudReasoner extends KloudReasoner {
             kengine append "updateDictionary {groupName} {ip='{ip}'}@{nodeName}"
         }
 
-        Log.debug("Add {} as child of {}", Array[String](node.getName, parentName))
+        Log.debug("Add {} as child of {}", node.getName, parentName)
         doSomething = true
       }
     }
@@ -179,11 +179,17 @@ object IaaSKloudReasoner extends KloudReasoner {
 
       startedNodes.forall {
         node =>
-          if ((parentNodeNameOption.isDefined && node.getHost != null && node.getHost.getName == parentNodeNameOption.get) || parentNodeNameOption.isEmpty) {
+          if (node.getHost == null || (parentNodeNameOption.isDefined && node.getHost != null && node.getHost.getName == parentNodeNameOption.get)) {
             kengine.addVariable("nodeName", node.getName)
-            kengine.addVariable("parentNodeName", node.getHost.getName)
-            Log.debug("startInstance {} : {}", Array[String](node.getName, node.getTypeDefinition.getName))
-            kengine append "startInstance {nodeName} @ {parentNodeName}"
+            if (node.getHost != null) {
+              kengine.addVariable("parentNodeName", node.getHost.getName)
+              Log.debug("startInstance {} : {}", node.getName, node.getTypeDefinition.getName)
+              kengine append "startInstance {nodeName} @ {parentNodeName}"
+            } else {
+              Log.debug("startInstance {}", node.getName)
+              kengine append "startInstance {nodeName}"
+            }
+
             true
           } else {
             Log.debug("Unable to start the node {} because its parent is not the specified one")
@@ -204,11 +210,11 @@ object IaaSKloudReasoner extends KloudReasoner {
           Log.warn(node.getName)
           Log.warn(parentNodeNameOption.toString)
           Log.warn("" + node.getHost)
-          if ((parentNodeNameOption.isDefined && node.getHost != null && node.getHost.getName == parentNodeNameOption.get)) {
+          if (node.getHost == null || (parentNodeNameOption.isDefined && node.getHost != null && node.getHost.getName == parentNodeNameOption.get)) {
             kengine.addVariable("nodeName", node.getName)
             if (node.getHost != null) {
               kengine.addVariable("parentNodeName", node.getHost.getName)
-              Log.debug("stopInstance {} @ {}", Array[String](node.getName, node.getTypeDefinition.getName))
+              Log.debug("stopInstance {} @ {}", node.getName, node.getTypeDefinition.getName)
               kengine append "stopInstance {nodeName} @ {parentNodeName}"
             } else {
               Log.debug("stopInstance {}", node.getName)
@@ -279,7 +285,7 @@ object IaaSKloudReasoner extends KloudReasoner {
       Log.debug("Unable to select an IP for {}", nodeName)
     }
 
-    Log.debug("IP {} has been selected for the node {} on the host {}", Array(ipOption, nodeName, parentName))
+    Log.debug("IP {} has been selected for the node {} on the host {}", ipOption, nodeName, parentName)
     ipOption
   }
 

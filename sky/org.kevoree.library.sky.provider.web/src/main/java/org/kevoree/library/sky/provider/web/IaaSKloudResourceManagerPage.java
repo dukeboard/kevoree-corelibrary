@@ -79,7 +79,7 @@ public class IaaSKloudResourceManagerPage extends KloudResourceManagerPage imple
     @Override
     public void start(ContainerRoot model) throws SubmissionException {
         if (isPortBinded("delegate")) {
-            Log.debug("call delegate port with method mergeToNode");
+            Log.debug("call delegate port with method start");
             getPortByName("delegate", IaaSManagerService.class).start(model);
         }
     }
@@ -87,7 +87,7 @@ public class IaaSKloudResourceManagerPage extends KloudResourceManagerPage imple
     @Override
     public void stop(ContainerRoot model) throws SubmissionException {
         if (isPortBinded("delegate")) {
-            Log.debug("call delegate port with method mergeToNode");
+            Log.debug("call delegate port with method stop");
             getPortByName("delegate", IaaSManagerService.class).stop(model);
         }
     }
@@ -96,7 +96,7 @@ public class IaaSKloudResourceManagerPage extends KloudResourceManagerPage imple
     @Override
     public void startToNode(ContainerRoot model, String nodeName) throws SubmissionException {
         if (isPortBinded("delegate")) {
-            Log.debug("call delegate port with method mergeToNode");
+            Log.debug("call delegate port with method startToNode");
             getPortByName("delegate", IaaSManagerService.class).startToNode(model, nodeName);
         }
     }
@@ -104,7 +104,7 @@ public class IaaSKloudResourceManagerPage extends KloudResourceManagerPage imple
     @Override
     public void stopToNode(ContainerRoot model, String nodeName) throws SubmissionException {
         if (isPortBinded("delegate")) {
-            Log.debug("call delegate port with method mergeToNode");
+            Log.debug("call delegate port with method stopToNode");
             getPortByName("delegate", IaaSManagerService.class).stopToNode(model, nodeName);
         }
     }
