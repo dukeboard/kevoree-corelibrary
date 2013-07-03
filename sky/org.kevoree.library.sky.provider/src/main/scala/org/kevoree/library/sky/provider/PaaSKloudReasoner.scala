@@ -123,7 +123,7 @@ object PaaSKloudReasoner extends KloudReasoner {
           kengine.addVariable("nodeType", node.getTypeDefinition.getName)
           // TODO maybe we need to merge the deploy unit that offer this type if it is not one of our types
           // add node
-          Log.debug("addNode {} : {}", Array[String](node.getName, node.getTypeDefinition.getName))
+          Log.debug("addNode {} : {}", node.getName, node.getTypeDefinition.getName)
           kengine append "addNode {nodeName} : {nodeType}"
           // set dictionary attributes of node
           if (node.getDictionary != null) {

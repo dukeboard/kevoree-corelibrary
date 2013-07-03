@@ -32,7 +32,7 @@ abstract class KloudResourceManagerPageGenerator(instance: KloudResourceManagerP
   def process(request: KevoreeHttpRequest, response: KevoreeHttpResponse): KevoreeHttpResponse = {
     val processor = processBootstrapResources(request, response) orElse processJQueryResources(request, response) orElse processInternalResources(request, response) orElse
       internalProcess(request, response) orElse processError(request, response)
-    Log.debug("{} vs {}", Array[String](request.getUrl, pattern))
+    Log.debug("{} vs {}", request.getUrl, pattern)
     processor(request.getUrl)
   }
 
