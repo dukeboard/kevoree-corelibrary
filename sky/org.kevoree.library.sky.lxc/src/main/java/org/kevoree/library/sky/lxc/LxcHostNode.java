@@ -31,16 +31,23 @@ import java.util.concurrent.TimeUnit;
         @PrimitiveCommand(name = CloudNode.ADD_NODE, maxTime = LxcHostNode.ADD_TIMEOUT),
         @PrimitiveCommand(name = CloudNode.REMOVE_NODE, maxTime = LxcHostNode.REMOVE_TIMEOUT)
 })
+@DictionaryType({
+        @DictionaryAttribute(name = LxcHostNode.MAX_CONCURRENT_ADD_NODE, optional = true, defaultValue = "5")
+})
 public class LxcHostNode extends JavaSENode implements CloudNode {
 
     public static final long ADD_TIMEOUT = 300000l;
     public static final long REMOVE_TIMEOUT = 180000l;
+
+    static final String MAX_CONCURRENT_ADD_NODE = "MAX_CONCURRENT_ADD_NODE";
+
     private boolean done = false;
     private LxcManager lxcManager = new LxcManager();
     private  WatchContainers watchContainers;
     private KevoreeNodeManager nodeManager;
     private ScheduledThreadPoolExecutor executor = null;
 
+    private int maxAddNode;
 
     @Start
     @Override
@@ -48,7 +55,13 @@ public class LxcHostNode extends JavaSENode implements CloudNode {
         super.startNode();
         watchContainers = new WatchContainers(this,lxcManager);
         nodeManager = new KevoreeNodeManager(new LXCNodeRunnerFactory());
-        kompareBean = new PlanningManager(this);
+        maxAddNode = 5;
+        try {
+            maxAddNode = Integer.parseInt(getDictionary().get(MAX_CONCURRENT_ADD_NODE).toString());
+        } catch (NumberFormatException e) {
+
+        }
+        kompareBean = new PlanningManager(this, maxAddNode);
         mapper = new CommandMapper(nodeManager);
         mapper.setNodeType(this);
         lxcManager.setUrl_watchdog(getDictionary().get("WatchdogURL").toString());
