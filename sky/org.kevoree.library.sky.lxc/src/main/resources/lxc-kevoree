@@ -517,7 +517,7 @@ echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | ch
 chroot $rootfs apt-get install oracle-java7-installer --force-yes -y
  # TODO GENERIC DOWNLOAD
 chroot $rootfs apt-get install wget 
-chroot $rootfs wget http://oss.sonatype.org/content/repositories/releases/org/kevoree/watchdog/org.kevoree.watchdog/0.11/org.kevoree.watchdog-0.12.deb
+chroot $rootfs wget http://oss.sonatype.org/content/repositories/releases/org/kevoree/watchdog/org.kevoree.watchdog/0.12/org.kevoree.watchdog-0.12.deb
 chroot $rootfs dpkg -i org.kevoree.watchdog-0.12.deb
 
 }
