@@ -24,6 +24,9 @@ import org.kevoree.log.Log;
 
 @Library(name = "SKY")
 @DictionaryType({
+        @DictionaryAttribute(name = "inet", optional = true),
+        @DictionaryAttribute(name = "subnet", optional = true),
+        @DictionaryAttribute(name = "mask", optional = true),
         @DictionaryAttribute(name = "defaultFlavor", optional = true),
         /*@DictionaryAttribute(name = "useArchive", defaultValue = "false", vals= {"true", "false"}, optional = true),
 		@DictionaryAttribute(name = "archives", defaultValue = "http://localhost:8080/archives/", optional = true),*/
