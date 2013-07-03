@@ -78,14 +78,6 @@ public class PlanningManager extends KevoreeKompareBean {
                         command.setRef(subNode);
                         adaptationModel.addAdaptations(command);
                         processStopInstance(subNode, adaptationModel, current, factory);
-                    } else {
-                        if (subNode1.getStarted() != subNode.getStarted()) {
-                            if (subNode.getStarted()) {
-                                processStopInstance(subNode, adaptationModel, current, factory);
-                            } else {
-                                processStartInstance(subNode, adaptationModel, current, factory);
-                            }
-                        }
                     }
 
                 }
@@ -116,7 +108,7 @@ public class PlanningManager extends KevoreeKompareBean {
                         processStartInstance(subNode, adaptationModel, current, factory);
                     } else {
                         if (subNode1.getStarted() != subNode.getStarted()) {
-                            if (subNode.getStarted()) {
+                            if (subNode1.getStarted()) {
                                 processStopInstance(subNode, adaptationModel, current, factory);
                             } else {
                                 processStartInstance(subNode, adaptationModel, current, factory);
@@ -147,6 +139,7 @@ public class PlanningManager extends KevoreeKompareBean {
     }
 
     private void processStopInstance(Instance actualInstance, AdaptationModel adaptationModel, ContainerRoot actualRoot, KevoreeAdaptationFactory adaptationModelFactory) {
+        Log.debug("Process StopInstance on {}", actualInstance.getName());
         AdaptationPrimitive ccmd2 = adaptationModelFactory.createAdaptationPrimitive();
         ccmd2.setPrimitiveType(actualRoot.findAdaptationPrimitiveTypesByID(JavaSePrimitive.instance$.getStopInstance()));
         ccmd2.setRef(actualInstance);
@@ -154,6 +147,7 @@ public class PlanningManager extends KevoreeKompareBean {
     }
 
     private void processStartInstance(Instance updatedInstance, AdaptationModel adaptationModel, ContainerRoot updateRoot, KevoreeAdaptationFactory adaptationModelFactory) {
+        Log.debug("Process StartInstance on {}", updatedInstance.getName());
         AdaptationPrimitive ccmd2 = adaptationModelFactory.createAdaptationPrimitive();
         ccmd2.setPrimitiveType(updateRoot.findAdaptationPrimitiveTypesByID(JavaSePrimitive.instance$.getStartInstance()));
         ccmd2.setRef(updatedInstance);
