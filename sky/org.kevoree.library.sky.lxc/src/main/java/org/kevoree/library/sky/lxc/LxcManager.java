@@ -30,7 +30,7 @@ import java.util.List;
  */
 public class LxcManager {
 
-    private String clone_id = "baseclonekevore";
+    private String clone_id = "baseclonekevoree";
     private final int timeout = 50;
 
     private final String lxcstart = "lxc-start";
