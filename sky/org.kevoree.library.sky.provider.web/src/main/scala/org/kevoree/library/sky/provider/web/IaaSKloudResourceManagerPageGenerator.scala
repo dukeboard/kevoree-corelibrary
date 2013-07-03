@@ -213,7 +213,7 @@ class IaaSKloudResourceManagerPageGenerator(instance: IaaSKloudResourceManagerPa
         try {
           instance.remove(cleanModel(instance.getModelService.getLastModel, List[String](nodeName)))
         } catch {
-          case e: Throwable => Log.warn("Unable to clean the current model to remove the child " + nodeName, e)
+          case e: Throwable => Log.warn("Unable to clean the current model to remove the child {}", nodeName, e)
         }
       }
     }.start()
@@ -229,7 +229,7 @@ class IaaSKloudResourceManagerPageGenerator(instance: IaaSKloudResourceManagerPa
         try {
           instance.start(cleanModel(instance.getModelService.getLastModel, List[String](nodeName)))
         } catch {
-          case e: Throwable => Log.warn("Unable to clean the current model to remove the child " + nodeName, e)
+          case e: Throwable => Log.warn("Unable to clean the current model to remove the child {}", nodeName, e)
         }
       }
     }.start()
@@ -249,7 +249,7 @@ class IaaSKloudResourceManagerPageGenerator(instance: IaaSKloudResourceManagerPa
         try {
           instance.stop(cleanModel(instance.getModelService.getLastModel, List[String](nodeName)))
         } catch {
-          case e: Throwable => Log.warn("Unable to clean the current model to remove the child " + nodeName, e)
+          case e: Throwable => Log.warn("Unable to clean the current model to remove the child {}", nodeName, e)
         }
       }
     }.start()
