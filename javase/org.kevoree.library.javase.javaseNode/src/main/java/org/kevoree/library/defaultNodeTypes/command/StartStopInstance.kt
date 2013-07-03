@@ -20,20 +20,20 @@ import org.kevoree.log.Log
  * limitations under the License.
  */
 
-class StartStopInstance(c: Instance, nodeName: String, val start: Boolean): LifeCycleCommand(c, nodeName),Runnable {
+class StartStopInstance(c: Instance, nodeName: String, val start: Boolean): LifeCycleCommand(c, nodeName), Runnable {
 
-    var t : Thread? = null
+    var t: Thread? = null
     var resultAsync = false
-    var root : ContainerRoot? = null
-    var iact : KInstance? = null
-    var tg : ThreadGroup? = null
+    var root: ContainerRoot? = null
+    var iact: KInstance? = null
+    var tg: ThreadGroup? = null
 
     public override fun run() {
 
         Thread.currentThread().setContextClassLoader(iact.javaClass.getClassLoader())
         if(start){
             Thread.currentThread().setName("KevoreeStartInstance" + c.getName())
-            resultAsync= iact!!.kInstanceStart(root!!)
+            resultAsync = iact!!.kInstanceStart(root!!)
         } else {
             Thread.currentThread().setName("KevoreeStopInstance" + c.getName())
             val res = iact!!.kInstanceStop(root!!)
@@ -50,21 +50,21 @@ class StartStopInstance(c: Instance, nodeName: String, val start: Boolean): Life
 
         //Look thread group
         root = c.getTypeDefinition()!!.eContainer() as ContainerRoot
-        val ref = KevoreeDeployManager.getRef(c.javaClass.getName()+"_wrapper", c.getName())
-        tg = KevoreeDeployManager.getRef(c.javaClass.getName()+"_tg", c.getName()) as? ThreadGroup
+        val ref = KevoreeDeployManager.getRef(c.javaClass.getName() + "_wrapper", c.getName())
+        tg = KevoreeDeployManager.getRef(c.javaClass.getName() + "_tg", c.getName()) as? ThreadGroup
         if(tg != null && ref != null && ref is KInstance){
             iact = ref as KInstance
-            t = Thread(tg,this)
+            t = Thread(tg, this)
             t!!.start()
             t!!.join()
             if(!start){
                 //kill subthread
-                val subThread : Array<Thread> = Array<Thread>(tg!!.activeCount(),{i->Thread.currentThread()})
+                val subThread: Array<Thread> = Array<Thread>(tg!!.activeCount(), { i-> Thread.currentThread() })
                 tg!!.enumerate(subThread)
                 for(subT in subThread){
                     try {
                         subT.stop()
-                    } catch(t : Throwable){
+                    } catch(t: Throwable){
                         //ignore
                     }
                 }
@@ -78,7 +78,13 @@ class StartStopInstance(c: Instance, nodeName: String, val start: Boolean): Life
     }
 
     override fun toString(): String {
-        return "StartStopInstance "+c.getName()
+        var s = "StartStopInstance " + c.getName()
+        if (start) {
+            s += " start"
+        } else {
+            s += " stop"
+        }
+        return s
     }
 
 }

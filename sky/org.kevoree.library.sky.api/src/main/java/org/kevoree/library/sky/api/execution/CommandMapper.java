@@ -32,25 +32,25 @@ public class CommandMapper extends org.kevoree.library.defaultNodeTypes.CommandM
     public PrimitiveCommand buildPrimitiveCommand(AdaptationPrimitive adaptationPrimitive, String nodeName) {
         Log.debug("ask for primitiveCommand corresponding to {}", adaptationPrimitive.getPrimitiveType().getName());
         PrimitiveCommand command = null;
-        if (adaptationPrimitive.getPrimitiveType().getName() == CloudNode.REMOVE_NODE) {
+        if (adaptationPrimitive.getPrimitiveType().getName().equals(CloudNode.REMOVE_NODE)) {
             Log.debug("add REMOVE_NODE command on {}", ((ContainerNode) adaptationPrimitive.getRef()).getName());
 
             ContainerNode targetNode = (ContainerNode) adaptationPrimitive.getRef();
             ContainerRoot targetNodeRoot = (ContainerRoot) ((ContainerNode) adaptationPrimitive.getRef()).eContainer();
             command = new RemoveNodeCommand(targetNodeRoot, targetNode.getName(), nodeManager);
-        } else if (adaptationPrimitive.getPrimitiveType().getName() == CloudNode.ADD_NODE) {
+        } else if (adaptationPrimitive.getPrimitiveType().getName().equals(CloudNode.ADD_NODE)) {
             Log.debug("add ADD_NODE command on {}", ((ContainerNode) adaptationPrimitive.getRef()).getName());
 
             ContainerNode targetNode = (ContainerNode) adaptationPrimitive.getRef();
             ContainerRoot targetNodeRoot = (ContainerRoot) ((ContainerNode) adaptationPrimitive.getRef()).eContainer();
             command = new AddNodeCommand(targetNodeRoot, targetNode.getName(), nodeManager);
-        } else if (adaptationPrimitive.getPrimitiveType().getName() == JavaSePrimitive.instance$.getStartInstance() && adaptationPrimitive.getRef() instanceof ContainerNode) {
+        } else if (adaptationPrimitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getStartInstance()) && adaptationPrimitive.getRef() instanceof ContainerNode) {
             Log.debug("add START_NODE command on {}", ((ContainerNode) adaptationPrimitive.getRef()).getName());
 
             ContainerNode targetNode = (ContainerNode) adaptationPrimitive.getRef();
             ContainerRoot targetNodeRoot = (ContainerRoot) ((ContainerNode) adaptationPrimitive.getRef()).eContainer();
             command = new StartNodeCommand(targetNodeRoot, targetNode.getName(), nodeManager);
-        } else if (adaptationPrimitive.getPrimitiveType().getName() == JavaSePrimitive.instance$.getStopInstance() && adaptationPrimitive.getRef() instanceof ContainerNode) {
+        } else if (adaptationPrimitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getStopInstance()) && adaptationPrimitive.getRef() instanceof ContainerNode) {
             Log.debug("add STOP_NODE command on {}", ((ContainerNode) adaptationPrimitive.getRef()).getName());
 
             ContainerNode targetNode = (ContainerNode) adaptationPrimitive.getRef();
