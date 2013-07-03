@@ -24,15 +24,13 @@ import java.util.concurrent.TimeUnit;
 
 @Library(name = "SKY")
 @NodeType
-@DictionaryType({
-        @DictionaryAttribute(name="WatchdogURL", defaultValue ="http://oss.sonatype.org/content/repositories/releases/org/kevoree/watchdog/org.kevoree.watchdog/0.12/org.kevoree.watchdog-0.12.deb", optional=true)
-})
 @PrimitiveCommands(value = {
         @PrimitiveCommand(name = CloudNode.ADD_NODE, maxTime = LxcHostNode.ADD_TIMEOUT),
         @PrimitiveCommand(name = CloudNode.REMOVE_NODE, maxTime = LxcHostNode.REMOVE_TIMEOUT)
 })
 @DictionaryType({
-        @DictionaryAttribute(name = LxcHostNode.MAX_CONCURRENT_ADD_NODE, optional = true, defaultValue = "5")
+        @DictionaryAttribute(name = LxcHostNode.MAX_CONCURRENT_ADD_NODE, optional = true, defaultValue = "5"),
+        @DictionaryAttribute(name="WatchdogURL", defaultValue ="http://oss.sonatype.org/content/repositories/releases/org/kevoree/watchdog/org.kevoree.watchdog/0.12/org.kevoree.watchdog-0.12.deb", optional=true)
 })
 public class LxcHostNode extends JavaSENode implements CloudNode {
 
