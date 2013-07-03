@@ -1,24 +1,37 @@
 #!/bin/bash
-su -
+#
+# jedartois@gmail.com
+#
+# script install and configure lxc for ubuntu
+# Tested with Ubuntu Server 13.04   kernel 3.8
+
 idNode=`cat /etc/hostname`
 kevoreeVersion="2.0.0-SNAPSHOT"
-watchdogVersion="0.11"
+watchdogVersion="0.12"
 
-echo "Writing sources.list"
-echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" | tee -a /etc/apt/sources.list
-echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" | tee -a /etc/apt/sources.list# Update local software list
-apt-get update
+echo "Pouvez-vous s'il vous plait préciser la version de kevoree ?"
+read kevoreeVersion
+
+
+echo "Updating /etc/apt/sources.list"
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.back
+sudo echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" | tee -a /etc/apt/sources.list
+sudo echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" | tee -a /etc/apt/sources.list# Update local software list
+sudo apt-get update
  
 echo "Accept Oracle software license (only required once)"
-echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true |   /usr/bin/debconf-set-selections
+sudo echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true |   /usr/bin/debconf-set-selections
  
 echo "Install Oracle JDK7"
-apt-get install oracle-java7-installer --force-yes -y
+sudo apt-get install oracle-java7-installer --force-yes -y
 
-apt-get install lxc  --force-yes -y
+echo "Install LXC"
+sudo apt-get install lxc  --force-yes -y
 
-apt-get install  bridge-utils debootstrap --force-yes -y
+echo "Install bridge-utils debootstrap"
+sudo apt-get install  bridge-utils debootstrap --force-yes -y
 
+echo "Checking lxc-checkconfig"
 #check lxc config
 checklxc = `lxc-checkconfig | grep disabled`
 if [ "$checklxc" -eq 1 ]
@@ -27,8 +40,11 @@ if [ "$checklxc" -eq 1 ]
 	exit -1
     fi
 
+echo "Configure network"
 #configure bridge
- cat >> "/etc/network/interfaces" << EOF
+sudo cat >> "/etc/network/interfaces" << EOF
+
+
 auto br0
 iface br0 inet dhcp
     bridge_ports eth0
@@ -37,15 +53,16 @@ iface br0 inet dhcp
     bridge_maxwait 0
 EOF
 
+echo "Configure LXC"
 #configure lxc bridge
- cat > "/etc/lxc/lxc.conf" << EOF
+sudo cat > "/etc/lxc/lxc.conf" << EOF
 lxc.network.type=veth
 lxc.network.link=br0
 lxc.network.flags=up
 EOF
 
 # br0
-cat > "/etc/default/lxc" << EOF
+sudo cat > "/etc/default/lxc" << EOF
 # MIRROR to be used by ubuntu template at container creation:
 # Leaving it undefined is fine
 #MIRROR="http://archive.ubuntu.com/ubuntu"
@@ -73,34 +90,46 @@ LXC_SHUTDOWN_TIMEOUT=120
 
 EOF
 
- cat > "/etc/lxc/default.conf" << EOF
+sudo cat > "/etc/lxc/default.conf" << EOF
 lxc.network.type=veth
 lxc.network.link=br0
 lxc.network.flags=up
 EOF
 
 
-#create model 
-#TODO CHANGE NODENAME
-touch /etc/kevoree/bootmodel
- cat > "/etc/kevoree/bootmodel" << EOF
+echo "Configure Kevoree Watchdog"
+sudo apt-get install wget
+sudo wget http://oss.sonatype.org/content/repositories/releases/org/kevoree/watchdog/org.kevoree.watchdog/$watchdogVersion/org.kevoree.watchdog-$watchdogVersion.deb
+sudo dpkg -i org.kevoree.watchdog-$watchdogVersion.deb
+sudo rm org.kevoree.watchdog-$watchdogVersion.deb*
+
+echo "configure NAT"
+sudo echo 1 > /proc/sys/net/ipv4/ip_forward
+
+echo "Configure kevoree watchdog"
+sudo cat > "/etc/kevoree/config" << EOF
+KEVOREE_VERSION=$kevoreeVersion
+NODE_NAME=$(hostname)
+PING_PORT=9999
+PING_TIMEOUT=3000
+EOF
+
+#create model
+echo "Configure kevoree bootstrapmodel"
+sudo touch /etc/kevoree/bootmodel
+sudo cat > "/etc/kevoree/bootmodel" << EOF
 {
-merge 'mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.lxc/$kevoreeVersion'
-merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.jexxus/$kevoreeVersion'
+merge 'mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.lxc/2.0.0-SNAPSHOT'
+merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.jexxus/2.0.0-SNAPSHOT'
 addNode $idNode:LxcHostNode
 addGroup sync:BasicGroup
 addToGroup sync $idNode
 }
 EOF
-echo "Configure Kevoree Watchdog"
-apt-get install wget 
-wget http://oss.sonatype.org/content/repositories/releases/org/kevoree/watchdog/org.kevoree.watchdog/$watchdogVersion/org.kevoree.watchdog-$watchdogVersion.deb
-dpkg -i org.kevoree.watchdog-$watchdogVersion.deb
-rm org.kevoree.watchdog-$watchdogVersion.deb*
 
-echo "NAT"
-echo 1 > /proc/sys/net/ipv4/ip_forward
+# TODO /etc/init.d/kevoree watchdog user to be root ( lxc must be run as root)
+echo "Reboot"
+sudo sleep 1
 
-# TODO change watchdog user to be root ( lxc must be run as root)
 # reboot 
-reboot
+sudo reboot
