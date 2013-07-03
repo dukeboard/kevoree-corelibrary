@@ -3,13 +3,13 @@
 # jedartois@gmail.com
 #
 # script install and configure lxc for ubuntu
-# Tested with Ubuntu Server 13.04   kernel 3.8
+# Tested with Ubuntu Server 13.04 kernel 3.8
 
 idNode=`cat /etc/hostname`
 kevoreeVersion="2.0.0-SNAPSHOT"
 watchdogVersion="0.12"
 
-echo "Pouvez-vous s'il vous plait préciser la version de kevoree ?"
+echo "Can you please tell me the version of kevoree ?"
 read kevoreeVersion
 
 
@@ -119,8 +119,8 @@ echo "Configure kevoree bootstrapmodel"
 sudo touch /etc/kevoree/bootmodel
 sudo cat > "/etc/kevoree/bootmodel" << EOF
 {
-merge 'mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.lxc/2.0.0-SNAPSHOT'
-merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.jexxus/2.0.0-SNAPSHOT'
+merge 'mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.lxc/$kevoreeVersion'
+merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.jexxus/$kevoreeVersion'
 addNode $idNode:LxcHostNode
 addGroup sync:BasicGroup
 addToGroup sync $idNode
@@ -129,7 +129,7 @@ EOF
 
 # TODO /etc/init.d/kevoree watchdog user to be root ( lxc must be run as root)
 echo "Reboot"
-sudo sleep 1
+sudo sleep 5
 
 # reboot 
 sudo reboot

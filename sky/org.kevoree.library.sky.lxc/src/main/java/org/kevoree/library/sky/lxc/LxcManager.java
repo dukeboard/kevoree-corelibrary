@@ -41,7 +41,7 @@ public class LxcManager {
     private final String lxccreate = "lxc-create";
     private final String lxccgroup = "lxc-cgroup";
     private final String lxcinfo = "lxc-info";
-
+    private String url_watchdog = "http://oss.sonatype.org/content/repositories/releases/org/kevoree/watchdog/org.kevoree.watchdog/0.12/org.kevoree.watchdog-0.12.deb";
 
     /*
           cgroup.procs,
@@ -81,6 +81,10 @@ public class LxcManager {
                   notify_on_release
           tasks
 */
+
+    public void setUrl_watchdog(String url_watchdog){
+        this.url_watchdog = url_watchdog;
+    }
     public void setlimitMemory(String id,int limit_in_bytes) throws InterruptedException, IOException
     {
         //  lxc-cgroup -n node0 300000000           300M
@@ -315,7 +319,13 @@ public class LxcManager {
         allow_exec("/bin/lxc-ip");
         copy("lxc-list-containers", "/bin");
         allow_exec("/bin/lxc-list-containers");
-        copy("lxc-kevoree", "/usr/share/lxc/templates");
+        DefaultKevoreeFactory defaultKevoreeFactory = new DefaultKevoreeFactory();
+        String version =   defaultKevoreeFactory.getVersion();
+        String kevoreeTemplate =    new String(FileManager.load(LxcManager.class.getClassLoader().getResourceAsStream("lxc-kevoree")));
+        kevoreeTemplate  = kevoreeTemplate.replaceAll("$KEVOREE-VERSION$",version);
+        kevoreeTemplate = kevoreeTemplate.replaceAll("$KEVOREE-WATCHDOG$",url_watchdog);
+        FileManager.writeFile("/usr/share/lxc/templates/lxc-kevoree",kevoreeTemplate,false);
+
         allow_exec("/usr/share/lxc/templates/lxc-kevoree");
     }
 

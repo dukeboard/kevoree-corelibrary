@@ -24,6 +24,9 @@ import java.util.concurrent.TimeUnit;
 
 @Library(name = "SKY")
 @NodeType
+@DictionaryType({
+        @DictionaryAttribute(name="WatchdogURL", defaultValue ="http://oss.sonatype.org/content/repositories/releases/org/kevoree/watchdog/org.kevoree.watchdog/0.12/org.kevoree.watchdog-0.12.deb", optional=true)
+})
 @PrimitiveCommands(value = {
         @PrimitiveCommand(name = CloudNode.ADD_NODE, maxTime = LxcHostNode.ADD_TIMEOUT),
         @PrimitiveCommand(name = CloudNode.REMOVE_NODE, maxTime = LxcHostNode.REMOVE_TIMEOUT)
@@ -48,9 +51,10 @@ public class LxcHostNode extends JavaSENode implements CloudNode {
         kompareBean = new PlanningManager(this);
         mapper = new CommandMapper(nodeManager);
         mapper.setNodeType(this);
+        lxcManager.setUrl_watchdog(getDictionary().get("WatchdogURL").toString());
 
         executor = new ScheduledThreadPoolExecutor(ManagementFactory.getOperatingSystemMXBean().getAvailableProcessors());
-        executor.scheduleAtFixedRate(watchContainers,10,15,TimeUnit.SECONDS);
+        executor.scheduleAtFixedRate(watchContainers,10,20,TimeUnit.SECONDS);
 
         getModelService().registerModelListener(new LXCModelListener());
 
