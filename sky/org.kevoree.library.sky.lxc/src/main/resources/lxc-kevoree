@@ -509,6 +509,8 @@ mkdir $rootfs/tmp/kevoreewatchdog
 wget -P $rootfs/tmp/kevoreewatchdog $KEVOREE-WATCHDOG$
 chroot $rootfs dpkg -i /tmp/kevoreewatchdog/org.kevoree.watchdog-0.12.deb
 
+
+
 echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" | tee -a $rootfs/etc/apt/sources.list
 echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" | tee -a $rootfs/etc/apt/sources.list# Update local software list
 chroot $rootfs apt-get update
@@ -523,8 +525,8 @@ chroot $rootfs apt-get install oracle-java7-installer --force-yes -y
 
 #Update Version /etc/kevoree/config
 echo "Configure kevoree watchdog"
-chroot $rootfs cat > "/etc/kevoree/config" << EOF
-KEVOREE_VERSION=$KEVOREE-VERSION$
+cat > "$rootfs/etc/kevoree/config" << EOF
+KEVOREE_VERSION=LATEST
 NODE_NAME=$(hostname)
 PING_PORT=9999
 PING_TIMEOUT=3000
