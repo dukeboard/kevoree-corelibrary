@@ -1,0 +1,73 @@
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.jails/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.basicGossiper/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.defaultChannels/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.p2pSock/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.nioChannels/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.webserver.api/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.webserver.tjws/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.provider/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.provider.web/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.minicloud/{kevoree.version}"
+merge 'mvn:org.kevoree.thesis/org.kevoree.erwan.thesis/1.0-SNAPSHOT'
+
+addNode node0 : JavaSENode
+
+addNode fog1 : JailNode {inet="alc0", subnet="10.0.1.0", mask="24", defaultFlavor="kevjail", logLevel="INFO"}
+addNode fog2 : JailNode {inet="alc0", subnet="10.0.2.0", mask="24", defaultFlavor="kevjail", logLevel="INFO"}
+addNode fog3 : JailNode {inet="alc0", subnet="10.0.3.0", mask="24", defaultFlavor="kevjail", logLevel="INFO"}
+addNode fog4 : JailNode {inet="alc0", subnet="10.0.4.0", mask="24", defaultFlavor="kevjail", logLevel="INFO"}
+addNode fog5 : JailNode {inet="alc0", subnet="10.0.5.0", mask="24", defaultFlavor="kevjail", logLevel="INFO"}
+addNode fog6 : JailNode {inet="alc0", subnet="10.0.6.0", mask="24", defaultFlavor="kevjail", logLevel="INFO"}
+addNode fog7 : JailNode {inet="alc0", subnet="10.0.7.0", mask="24", defaultFlavor="kevjail", logLevel="INFO"}
+addNode fog8 : JailNode {inet="alc0", subnet="10.0.8.0", mask="24", defaultFlavor="kevjail", logLevel="INFO"}
+addNode fog9 : JailNode {inet="alc0", subnet="10.0.9.0", mask="24", defaultFlavor="kevjail", logLevel="INFO"}
+addNode fog10 : JailNode {inet="alc0", subnet="10.0.10.0", mask="24", defaultFlavor="kevjail", logLevel="INFO"}
+
+network node0 => node0 { "KEVOREE.remote.node.ip"= "127.0.0.1"}
+network fog1 => fog1 { "KEVOREE.remote.node.ip"= "10.0.1.1"}
+network fog2 => fog2 { "KEVOREE.remote.node.ip"= "10.0.2.1"}
+network fog3 => fog3 { "KEVOREE.remote.node.ip"= "10.0.3.1"}
+network fog4 => fog4 { "KEVOREE.remote.node.ip"= "10.0.4.1"}
+network fog5 => fog5 { "KEVOREE.remote.node.ip"= "10.0.5.1"}
+network fog6 => fog6 { "KEVOREE.remote.node.ip"= "10.0.6.1"}
+network fog7 => fog7 { "KEVOREE.remote.node.ip"= "10.0.7.1"}
+network fog8 => fog8 { "KEVOREE.remote.node.ip"= "10.0.8.1"}
+network fog9 => fog9 { "KEVOREE.remote.node.ip"= "10.0.9.1"}
+network fog10 => fog10 { "KEVOREE.remote.node.ip"= "10.0.10.1"}
+
+addGroup sync : BasicGossiperGroup
+addToGroup sync node0
+addToGroup sync fog1
+addToGroup sync fog2
+addToGroup sync fog3
+addToGroup sync fog4
+addToGroup sync fog5
+addToGroup sync fog6
+addToGroup sync fog7
+addToGroup sync fog8
+addToGroup sync fog9
+addToGroup sync fog10
+
+
+addComponent webServer@node0 :KTinyWebServer {port = "8080", timeout = "5000"}
+addComponent iaasPage@node0 : IaaSKloudResourceManagerPage { urlpattern="/iaas"}
+addComponent iaasManager@node0 :IaaSKloudManager
+
+addChannel iaasDelegateChannel : defSERVICE
+addChannel requestChannel : defMSG
+addChannel responseChannel : defMSG
+
+bind webServer.handler@node0 => requestChannel
+bind iaasPage.request@node0 => requestChannel
+bind webServer.response@node0 => responseChannel
+bind iaasPage.content@node0 => responseChannel
+bind iaasManager.submit@node0 => iaasDelegateChannel
+bind iaasPage.delegate@node0 => iaasDelegateChannel
+
+addComponent ws@node0 : KTinyWebServer {port = "8081", timeout = "5000"}
+addChannel chan1 : NioChannel
+addChannel chan2 : NioChannel
+bind ws.response@node0 => chan1
+bind ws.handler@node0 => chan2
+updateDictionary chan1 { port = "9000"}@node0
+updateDictionary chan2 { port = "16000"}@node0
