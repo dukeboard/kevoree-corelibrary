@@ -6,7 +6,7 @@
 # Tested with Ubuntu Server 13.04 kernel 3.8
 
 idNode=`cat /etc/hostname`
-kevoreeVersion="2.0.0-SNAPSHOT"
+kevoreeVersion="RELEASE"
 watchdogVersion="0.12"
 
 echo "Can you please tell me the version of kevoree ?"

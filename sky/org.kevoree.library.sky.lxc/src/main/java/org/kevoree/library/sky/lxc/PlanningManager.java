@@ -17,7 +17,9 @@ import java.util.List;
  */
 class PlanningManager extends org.kevoree.library.sky.api.planning.PlanningManager {
 
-    public PlanningManager(AbstractNodeType skyNode) {
+    private int maxAddNode;
+
+    public PlanningManager(AbstractNodeType skyNode, int maxAddNode) {
         super(skyNode);
     }
 
@@ -26,7 +28,7 @@ class PlanningManager extends org.kevoree.library.sky.api.planning.PlanningManag
             List<AdaptationPrimitive> addNodeCommands = new ArrayList <AdaptationPrimitive>(10);
             for (AdaptationPrimitive command : (List<AdaptationPrimitive>) commands) {
                 addNodeCommands.add(command);
-                if (addNodeCommands.size() == 10) {
+                if (addNodeCommands.size() == maxAddNode) {
                     super.createNextStep(CloudNode.ADD_NODE, addNodeCommands);
                     addNodeCommands.clear();
                 }
