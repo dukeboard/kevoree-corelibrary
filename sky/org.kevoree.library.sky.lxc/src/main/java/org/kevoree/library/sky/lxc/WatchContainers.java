@@ -9,12 +9,9 @@ import org.kevoree.framework.KevoreePropertyHelper;
 import org.kevoree.library.sky.lxc.utils.IPAddressValidator;
 import org.kevoree.log.Log;
 
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.io.IOException;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -49,7 +46,7 @@ public class WatchContainers implements Runnable {
     public void run() {
 
         ContainerRoot model = lxcHostNode.getModelService().getLastModel();
-        Log.info("WatchContainers is Scanning and monitoring the containers");
+        Log.debug("WatchContainers is Scanning and monitoring the containers");
         for( ContainerNode containerNode : model.getNodes()  ){
 
             if(!containerNode.getName().equals(lxcHostNode.getNodeName())){
@@ -74,7 +71,29 @@ public class WatchContainers implements Runnable {
                             Log.error("The format of the ip is wrong or not define");
                         }
                     }
+                    Integer ram= 0;
+                    Integer cpu_core=0;
+                    try
+                    {
+                        ram = Integer.parseInt(KevoreePropertyHelper.instance$.getProperty(containerNode, "RAM", false, ""));
+                        if(ram != null){
+                            LxcManager.setlimitMemory(containerNode.getName(),ram);
+                        }
 
+                    }catch (Exception e){
+
+                    }
+
+                    try
+                    {
+                        cpu_core = Integer.parseInt(KevoreePropertyHelper.instance$.getProperty(containerNode, "CPU_CORE", false, ""));
+                        if(cpu_core != null){
+                            LxcManager.setlimitCPU(containerNode.getName(),cpu_core);
+                        }
+
+                    }catch (Exception e){
+
+                    }
 
                 }    else {
 

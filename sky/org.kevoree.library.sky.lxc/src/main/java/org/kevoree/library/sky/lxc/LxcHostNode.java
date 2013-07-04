@@ -54,7 +54,7 @@ public class LxcHostNode extends JavaSENode implements CloudNode {
         lxcManager.setUrl_watchdog(getDictionary().get("WatchdogURL").toString());
 
         executor = new ScheduledThreadPoolExecutor(ManagementFactory.getOperatingSystemMXBean().getAvailableProcessors());
-        executor.scheduleAtFixedRate(watchContainers,10,20,TimeUnit.SECONDS);
+        executor.scheduleAtFixedRate(watchContainers,10,10,TimeUnit.SECONDS);
 
         getModelService().registerModelListener(new LXCModelListener());
 

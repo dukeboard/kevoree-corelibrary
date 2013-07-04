@@ -2,12 +2,9 @@ package org.kevoree.library.sky.lxc;
 
 import org.kevoree.ContainerNode;
 import org.kevoree.ContainerRoot;
-import org.kevoree.api.service.core.handler.UUIDModel;
 import org.kevoree.api.service.core.script.KevScriptEngine;
 import org.kevoree.api.service.core.script.KevScriptEngineException;
 import org.kevoree.api.service.core.script.KevScriptEngineFactory;
-import org.kevoree.cloner.ModelCloner;
-import org.kevoree.framework.KevoreePlatformHelper;
 import org.kevoree.framework.KevoreePropertyHelper;
 import org.kevoree.impl.DefaultKevoreeFactory;
 import org.kevoree.library.sky.lxc.utils.FileManager;
@@ -33,14 +30,14 @@ public class LxcManager {
     private String clone_id = "baseclonekevoree";
     private final int timeout = 50;
 
-    private final String lxcstart = "lxc-start";
-    private final String lxcstop = "lxc-stop";
-    private final String lxcdestroy = "lxc-destroy";
-    private final String lxcshutdown = "lxc-shutdown";
-    private final String lxcclone = "lxc-clone";
-    private final String lxccreate = "lxc-create";
-    private final String lxccgroup = "lxc-cgroup";
-    private final String lxcinfo = "lxc-info";
+    private final static String lxcstart = "lxc-start";
+    private final static String lxcstop = "lxc-stop";
+    private final static String lxcdestroy = "lxc-destroy";
+    private final static String lxcshutdown = "lxc-shutdown";
+    private final static String lxcclone = "lxc-clone";
+    private final static String lxccreate = "lxc-create";
+    private final static String lxccgroup = "lxc-cgroup";
+    private final static String lxcinfo = "lxc-info";
     private String url_watchdog = "http://oss.sonatype.org/content/repositories/releases/org/kevoree/watchdog/org.kevoree.watchdog/0.12/org.kevoree.watchdog-0.12.deb";
 
     /*
@@ -85,7 +82,7 @@ public class LxcManager {
     public void setUrl_watchdog(String url_watchdog){
         this.url_watchdog = url_watchdog;
     }
-    public void setlimitMemory(String id,int limit_in_bytes) throws InterruptedException, IOException
+    public static  void setlimitMemory(String id,int limit_in_bytes) throws InterruptedException, IOException
     {
         //  lxc-cgroup -n node0 300000000           300M
         Process processcreate = new ProcessBuilder(lxccgroup, "-n", id, "memory.limit_in_bytes", ""+limit_in_bytes).redirectErrorStream(true).start();
@@ -93,7 +90,7 @@ public class LxcManager {
         processcreate.waitFor();
     }
 
-    public void setlimitCPU(String id,int cpu_shares) throws InterruptedException, IOException
+    public static void setlimitCPU(String id,int cpu_shares) throws InterruptedException, IOException
     {
         //  lxc-cgroup -n node0 300000000           300M
         Process processcreate = new ProcessBuilder(lxccgroup, "-n", id, "cpu.shares", ""+cpu_shares).redirectErrorStream(true).start();
@@ -321,9 +318,11 @@ public class LxcManager {
         allow_exec("/bin/lxc-list-containers");
         DefaultKevoreeFactory defaultKevoreeFactory = new DefaultKevoreeFactory();
         String version =   defaultKevoreeFactory.getVersion();
+
         String kevoreeTemplate =    new String(FileManager.load(LxcManager.class.getClassLoader().getResourceAsStream("lxc-kevoree")));
-        kevoreeTemplate  = kevoreeTemplate.replaceAll("$KEVOREE-VERSION$",version);
-        kevoreeTemplate = kevoreeTemplate.replaceAll("$KEVOREE-WATCHDOG$",url_watchdog);
+        kevoreeTemplate  = kevoreeTemplate.replace("$KEVOREE-VERSION$",version);
+        kevoreeTemplate = kevoreeTemplate.replace("$KEVOREE-WATCHDOG$",url_watchdog);
+
         FileManager.writeFile("/usr/share/lxc/templates/lxc-kevoree",kevoreeTemplate,false);
 
         allow_exec("/usr/share/lxc/templates/lxc-kevoree");

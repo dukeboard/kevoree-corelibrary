@@ -504,7 +504,10 @@ post_process()
     fi
 # Import repository key
 chroot $rootfs apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
- 
+#chroot $rootfs apt-get install wget  --force-yes -y
+mkdir $rootfs/tmp/kevoreewatchdog
+wget -P $rootfs/tmp/kevoreewatchdog $KEVOREE-WATCHDOG$
+chroot $rootfs dpkg -i /tmp/kevoreewatchdog/org.kevoree.watchdog-0.12.deb
 
 echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" | tee -a $rootfs/etc/apt/sources.list
 echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" | tee -a $rootfs/etc/apt/sources.list# Update local software list
@@ -515,9 +518,8 @@ echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | ch
  
 # Install Oracle JDK7
 chroot $rootfs apt-get install oracle-java7-installer --force-yes -y
- # TODO GENERIC DOWNLOAD
-chroot $rootfs apt-get install wget 
-chroot $rootfs wget $KEVOREE-WATCHDOG$
+
+
 
 #Update Version /etc/kevoree/config
 echo "Configure kevoree watchdog"
