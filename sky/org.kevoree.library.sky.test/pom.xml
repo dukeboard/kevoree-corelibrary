@@ -82,7 +82,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <nodeTypeNames>JavaSENode</nodeTypeNames>
-                    <!-- TODO: Replace by HostNode -->
+                    <!-- TODO: Replace by IaaSNode -->
                 </configuration>
                 <executions>
                     <execution>
