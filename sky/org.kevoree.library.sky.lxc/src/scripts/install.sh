@@ -133,7 +133,7 @@ merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.defaultChan
 merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.webserver.spray/$kevoreeVersion'
 merge 'mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.provider.web/$kevoreeVersion'
 merge 'mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.provider/$kevoreeVersion'
-addComponent iaasPage@$idNode : IaaSKloudResourceManagerPage {urlpattern='/iaas'}
+addComponent iaasPage@$idNode : IaaSKloudResourceManagerPage {urlpattern='/'}
   addComponent iaasManager@$idNode : IaaSKloudManager {}
   addComponent webServer@$idNode : SprayWebServer {port='8080',timeout='5000'}
 addChannel requestChannel : defMSG {}
