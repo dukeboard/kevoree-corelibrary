@@ -8,7 +8,6 @@ merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.webserver.t
 merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.provider/{kevoree.version}"
 merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.provider.web/{kevoree.version}"
 merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.minicloud/{kevoree.version}"
-merge 'mvn:org.kevoree.thesis/org.kevoree.erwan.thesis/1.0-SNAPSHOT'
 
 addNode node0 : JavaSENode
 

@@ -1,4 +1,4 @@
-package org.kevoree.thesis;
+package org.kevoree.sky.test.generator;
 
 import org.kevoree.ContainerRoot;
 import org.kevoree.annotation.*;
@@ -21,7 +21,7 @@ import org.kevoree.log.Log;
         @DictionaryAttribute(name = "model", optional = true, defaultValue = "/home/edaubert/Documents/svns/kevoree_gforge/erwan_thesis/valid/thesis_validation4000.kev")
 })
 @ComponentType
-public class ThesisModelSubmitter extends AbstractComponentType {
+public class ErwanThesisModelSubmitter extends AbstractComponentType {
     private Thread t;
 
     @Start
@@ -35,11 +35,11 @@ public class ThesisModelSubmitter extends AbstractComponentType {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    KevoreeXmiHelper.instance$.save(ThesisModelSubmitter.this.getDictionary().get("model").toString() + "-base.kev", getModelService().getLastModel());
-                    ContainerRoot model = KevoreeXmiHelper.instance$.load(ThesisModelSubmitter.this.getDictionary().get("model").toString());
+                    KevoreeXmiHelper.instance$.save(ErwanThesisModelSubmitter.this.getDictionary().get("model").toString() + "-base.kev", getModelService().getLastModel());
+                    ContainerRoot model = KevoreeXmiHelper.instance$.load(ErwanThesisModelSubmitter.this.getDictionary().get("model").toString());
                     try {
-                        Log.warn("[TIME] ThesisModelSubmitter submit model: {}", System.currentTimeMillis());
-//					ThesisModelSubmitter.this.getPortByName("deploy", PaaSManagerService.class).initialize("edaubert", model);
+                        Log.warn("[TIME] ErwanThesisModelSubmitter submit model: {}", System.currentTimeMillis());
+//					ErwanThesisModelSubmitter.this.getPortByName("deploy", PaaSManagerService.class).initialize("edaubert", model);
                         updateIaaSConfiguration(model);
                     } catch (SubmissionException e) {
                         Log.error("Unable to initialize model on Cloud", e);
@@ -64,14 +64,14 @@ public class ThesisModelSubmitter extends AbstractComponentType {
             try {
                 Log.debug("try to update IaaS node...");
                 // TODO measure time
-                Log.warn("[TIME] ThesisModelSubmitter submit new model: {}", System.currentTimeMillis());
+                Log.warn("[TIME] ErwanThesisModelSubmitter submit new model: {}", System.currentTimeMillis());
 //				kengine.atomicInterpretDeploy();
                 getModelService().atomicUpdateModel(model);
                 created = true;
                 break;
             } catch (Exception e) {
                 Log.warn("Error while try to update the IaaS configuration due to {}, try number {}", e.getMessage(), i);
-                KevoreeXmiHelper.instance$.save(ThesisModelSubmitter.this.getDictionary().get("model").toString() + "-try" + i + ".kev", getModelService().getLastModel());
+                KevoreeXmiHelper.instance$.save(ErwanThesisModelSubmitter.this.getDictionary().get("model").toString() + "-try" + i + ".kev", getModelService().getLastModel());
             }
         }
         if (!created) {

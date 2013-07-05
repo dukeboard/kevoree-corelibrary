@@ -1,4 +1,4 @@
-package org.kevoree.thesis;
+package org.kevoree.sky.test.generator;
 
 import org.kevoree.annotation.ComponentType;
 import org.kevoree.annotation.Library;
@@ -143,7 +143,7 @@ public class ModelGenerator {
         List<String> hostNodeNames = findHostingNode(defaultScript, hostNodeTypes);
 
         kengine.append("merge 'mvn:org.kevoree.thesis/org.kevoree.erwan.thesis/1.0-SNAPSHOT'");
-        kengine.append("addComponent modelSubmitter@{defaultNodeName} :ThesisModelSubmitter {model = '{test.model}'}");
+        kengine.append("addComponent modelSubmitter@{defaultNodeName} :ErwanThesisModelSubmitter {model = '{test.model}'}");
 
         for (int i = 0; i < nbNode; i++) {
             kengine.addVariable("childName", "childNode" + i);
