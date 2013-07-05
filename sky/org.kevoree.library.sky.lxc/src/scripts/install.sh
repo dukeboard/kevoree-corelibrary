@@ -7,12 +7,12 @@
 
 idNode=`cat /etc/hostname`
 kevoreeVersion="RELEASE"
-watchdogVersion="0.13"
+watchdogVersion="0.14"
 
 echo "Can you please tell me the version of kevoree ?"
 read kevoreeVersion
 
-echo "Can you please tell me the version of the kevoree-watchdog(eg. 0.13) ?"
+echo "Can you please tell me the version of the kevoree-watchdog(eg. 0.14) ?"
 read watchdogVersion
 
 
@@ -151,7 +151,6 @@ updateDictionary responseChannel
 updateDictionary iaasDelegateChannel
 updateDictionary iaasManager@$idNode
 updateDictionary webServer@$idNode
-updateDictionary $idNode{WatchdogURL="http://oss.sonatype.org/content/repositories/releases/org/kevoree/watchdog/org.kevoree.watchdog/0.12/org.kevoree.watchdog-0.12.deb"}
 }
 EOF
 
