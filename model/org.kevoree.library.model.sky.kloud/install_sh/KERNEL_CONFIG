@@ -1,6 +1,0 @@
-options RACCT
-options RCTL
-
-device pf
-device pflog
-device pfsync
