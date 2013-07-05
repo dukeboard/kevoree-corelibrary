@@ -7,10 +7,13 @@
 
 idNode=`cat /etc/hostname`
 kevoreeVersion="RELEASE"
-watchdogVersion="0.12"
+watchdogVersion="0.13"
 
 echo "Can you please tell me the version of kevoree ?"
 read kevoreeVersion
+
+echo "Can you please tell me the version of the kevoree-watchdog(eg. 0.13) ?"
+read watchdogVersion
 
 
 echo "Updating /etc/apt/sources.list"
@@ -108,6 +111,8 @@ sudo echo 1 > /proc/sys/net/ipv4/ip_forward
 
 echo "Configure kevoree watchdog"
 sudo cat > "/etc/kevoree/config" << EOF
+KEVOREE_USER=root
+KEVOREE_GROUP=kevoree
 KEVOREE_VERSION=$kevoreeVersion
 NODE_NAME=$(hostname)
 PING_PORT=9999
@@ -124,10 +129,33 @@ merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.jexxus/$kev
 addNode $idNode:LxcHostNode
 addGroup sync:BasicGroup
 addToGroup sync $idNode
+merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.defaultChannels/$kevoreeVersion'
+merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.webserver.spray/$kevoreeVersion'
+merge 'mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.provider.web/$kevoreeVersion'
+merge 'mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.provider/$kevoreeVersion'
+addComponent iaasPage@$idNode : IaaSKloudResourceManagerPage {urlpattern='/iaas'}
+  addComponent iaasManager@$idNode : IaaSKloudManager {}
+  addComponent webServer@$idNode : SprayWebServer {port='8080',timeout='5000'}
+addChannel requestChannel : defMSG {}
+addChannel responseChannel : defMSG {}
+addChannel iaasDelegateChannel : defSERVICE {}
+bind iaasPage.request@$idNode => requestChannel
+bind iaasPage.content@$idNode => responseChannel
+bind iaasPage.delegate@$idNode => iaasDelegateChannel
+bind iaasManager.submit@$idNode => iaasDelegateChannel
+bind webServer.response@$idNode => responseChannel
+bind webServer.handler@$idNode => requestChannel
+updateDictionary iaasPage@$idNode
+updateDictionary requestChannel
+updateDictionary responseChannel
+updateDictionary iaasDelegateChannel
+updateDictionary iaasManager@$idNode
+updateDictionary webServer@$idNode
+updateDictionary $idNode{WatchdogURL="http://oss.sonatype.org/content/repositories/releases/org/kevoree/watchdog/org.kevoree.watchdog/0.12/org.kevoree.watchdog-0.12.deb"}
 }
 EOF
 
-# TODO /etc/init.d/kevoree watchdog user to be root ( lxc must be run as root)
+
 echo "Reboot"
 sudo sleep 5
 
