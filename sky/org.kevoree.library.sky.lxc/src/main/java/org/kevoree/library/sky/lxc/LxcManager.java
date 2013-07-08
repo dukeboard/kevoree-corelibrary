@@ -304,8 +304,6 @@ public class LxcManager {
 
     public void allow_exec(String path_file_exec) throws IOException {
         if (SystemHelper.getOS() != SystemHelper.OS.WIN32 && SystemHelper.getOS() != SystemHelper.OS.WIN64) {
-            System.out.println("chmod +x " + path_file_exec);
-            // todo check os
             Runtime.getRuntime().exec("chmod 777 " + path_file_exec);
         } else {
             // win32

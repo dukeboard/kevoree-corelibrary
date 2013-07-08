@@ -2,6 +2,7 @@ package org.kevoree.library.sky.lxc;
 
 import org.kevoree.ContainerRoot;
 import org.kevoree.annotation.*;
+import org.kevoree.api.service.core.handler.ModelHandlerLockCallBack;
 import org.kevoree.api.service.core.handler.ModelListener;
 import org.kevoree.library.defaultNodeTypes.JavaSENode;
 import org.kevoree.library.sky.api.CloudNode;
@@ -15,6 +16,7 @@ import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -38,6 +40,7 @@ public class LxcHostNode extends JavaSENode implements CloudNode {
 
     public static final long ADD_TIMEOUT = 300000l;
     public static final long REMOVE_TIMEOUT = 180000l;
+    public static final long CREATE_CLONE_TIMEOUT = 180000l;
 
     static final String MAX_CONCURRENT_ADD_NODE = "MAX_CONCURRENT_ADD_NODE";
 
@@ -48,12 +51,20 @@ public class LxcHostNode extends JavaSENode implements CloudNode {
     private ScheduledThreadPoolExecutor executor = null;
 
     private int maxAddNode;
-
+    private  CreateBaseClone createBaseClone;
     @Start
     @Override
     public void startNode() {
         super.startNode();
+
+        List<String> urls = new ArrayList<String>();
+        urls.add("https://oss.sonatype.org/content/groups/public/");//not mandatory but for early release
+        File watchdog = getBootStrapperService().resolveArtifact("org.kevoree.watchdog", "org.kevoree.watchdog", "RELEASE", "deb",urls);
+        lxcManager.setWatchdogLocalFile(watchdog);
+
+        createBaseClone = new CreateBaseClone(this, lxcManager);
         watchContainers = new WatchContainers(this, lxcManager);
+
         nodeManager = new KevoreeNodeManager(new LXCNodeRunnerFactory());
         maxAddNode = 5;
         try {
@@ -64,27 +75,11 @@ public class LxcHostNode extends JavaSENode implements CloudNode {
         kompareBean = new PlanningManager(this, maxAddNode);
         mapper = new CommandMapper(nodeManager);
         mapper.setNodeType(this);
-
-        List<String> urls = new ArrayList<String>();
-        urls.add("https://oss.sonatype.org/content/groups/public/");//not mandatory but for early release
-        File watchdog = getBootStrapperService().resolveArtifact("org.kevoree.watchdog", "org.kevoree.watchdog", "RELEASE", "deb",urls);
-        lxcManager.setWatchdogLocalFile(watchdog);
+        Thread clone = new Thread(createBaseClone);
+        clone.start();
 
         executor = new ScheduledThreadPoolExecutor(ManagementFactory.getOperatingSystemMXBean().getAvailableProcessors());
-        executor.scheduleAtFixedRate(watchContainers, 10, 10, TimeUnit.SECONDS);
-
-
-        try {
-            // install scripts
-            lxcManager.install();
-            // check if there is a clone source
-            lxcManager.createClone();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.error("Fatal Kevoree LXC configuration");
-        }
-
+        executor.scheduleAtFixedRate(watchContainers, 15, 15, TimeUnit.SECONDS);
     }
 
     @Stop
