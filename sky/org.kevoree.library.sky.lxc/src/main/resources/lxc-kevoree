@@ -505,9 +505,8 @@ post_process()
 # Import repository key
 chroot $rootfs apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
 #chroot $rootfs apt-get install wget  --force-yes -y
-mkdir $rootfs/tmp/kevoreewatchdog
-wget -P $rootfs/tmp/kevoreewatchdog $KEVOREE-WATCHDOG$
-chroot $rootfs dpkg -i /tmp/kevoreewatchdog/org.kevoree.watchdog-0.12.deb
+cp $KEVOREE-WATCHDOG$ $rootfs/tmp/kevoreewatchdog
+chroot $rootfs dpkg -i /tmp/kevoreewatchdog
 
 
 

@@ -1,4 +1,4 @@
-package org.kevoree.sky.test.generator;
+package org.kevoree.library.sky.test;
 
 import org.kevoree.annotation.ComponentType;
 import org.kevoree.annotation.Library;
@@ -32,8 +32,6 @@ public class ModelGenerator {
         String defaultNodeName = null;
         String hostNodeTypes = null;
         int nbNodes = -1;
-        int nbComponents = -1;
-        String[] componentTypes = null;
         boolean defineHosting = false;
 
         for (int i = 0; i < args.length; i++) {
@@ -59,7 +57,7 @@ public class ModelGenerator {
         }
 
         if (folderPath == null || defaultScriptPath == null || defaultNodeName == null || hostNodeTypes == null || nbNodes == -1) {
-            System.out.println("Missing arguments.\nYou must use something like that: -script <myscript> -targetFolder <myFolder> -defaultNode <nodeName> -hostNodeTypes <myNodeType1,myNodeType2> -nbNodes <number of nodes to create> [-defineHosting <true|false>]");
+            System.err.println("Missing arguments.\nYou must use something like that: -script <myscript> -targetFolder <myFolder> -defaultNode <nodeName> -hostNodeTypes <myNodeType1,myNodeType2> -nbNodes <number of nodes to create> [-defineHosting <true|false>]");
             System.exit(-1);
         }
 
@@ -125,6 +123,10 @@ public class ModelGenerator {
                 }
             }
         }
+        if (hostNodeNames.size() == 0) {
+            System.err.println("You must specified hosting type to allow the script to find this node in your configuration");
+            System.exit(-4);
+        }
         return hostNodeNames;
     }
 
@@ -136,14 +138,15 @@ public class ModelGenerator {
 
         kengine.addVariable("defaultNodeName", defaultNodeName);
         kengine.addVariable("kevoree.version", defaultKevoreeFactory.getVersion());
+        kengine.addVariable("test.model", storageModel);
 
         String defaultScript = loadDefaultScript(defaultScriptPath);
         kengine.append(defaultScript);
 
         List<String> hostNodeNames = findHostingNode(defaultScript, hostNodeTypes);
 
-        kengine.append("merge 'mvn:org.kevoree.thesis/org.kevoree.erwan.thesis/1.0-SNAPSHOT'");
-        kengine.append("addComponent modelSubmitter@{defaultNodeName} :ErwanThesisModelSubmitter {model = '{test.model}'}");
+        kengine.append("merge 'mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.test/{kevoree.version}'");
+        kengine.append("addComponent modelSubmitter@{defaultNodeName} :ModelSubmitter {model = '{test.model}'}");
 
         for (int i = 0; i < nbNode; i++) {
             kengine.addVariable("childName", "childNode" + i);

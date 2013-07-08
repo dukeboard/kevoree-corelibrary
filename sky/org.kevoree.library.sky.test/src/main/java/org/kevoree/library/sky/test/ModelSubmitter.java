@@ -1,5 +1,6 @@
-package org.kevoree.sky.test.generator;
+package org.kevoree.library.sky.test;
 
+import org.kevoree.ContainerNode;
 import org.kevoree.ContainerRoot;
 import org.kevoree.annotation.*;
 import org.kevoree.api.service.core.script.KevScriptEngineException;
@@ -21,7 +22,7 @@ import org.kevoree.log.Log;
         @DictionaryAttribute(name = "model", optional = true, defaultValue = "/home/edaubert/Documents/svns/kevoree_gforge/erwan_thesis/valid/thesis_validation4000.kev")
 })
 @ComponentType
-public class ErwanThesisModelSubmitter extends AbstractComponentType {
+public class ModelSubmitter extends AbstractComponentType {
     private Thread t;
 
     @Start
@@ -35,12 +36,12 @@ public class ErwanThesisModelSubmitter extends AbstractComponentType {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    KevoreeXmiHelper.instance$.save(ErwanThesisModelSubmitter.this.getDictionary().get("model").toString() + "-base.kev", getModelService().getLastModel());
-                    ContainerRoot model = KevoreeXmiHelper.instance$.load(ErwanThesisModelSubmitter.this.getDictionary().get("model").toString());
+                    KevoreeXmiHelper.instance$.save(ModelSubmitter.this.getDictionary().get("model").toString() + "-base.kev", getModelService().getLastModel());
+                    ContainerRoot model = KevoreeXmiHelper.instance$.load(ModelSubmitter.this.getDictionary().get("model").toString());
                     try {
-                        Log.warn("[TIME] ErwanThesisModelSubmitter submit model: {}", System.currentTimeMillis());
-//					ErwanThesisModelSubmitter.this.getPortByName("deploy", PaaSManagerService.class).initialize("edaubert", model);
-                        updateIaaSConfiguration(model);
+                        Log.warn("[TIME] ModelSubmitter submit model: {}", System.currentTimeMillis());
+//					ModelSubmitter.this.getPortByName("deploy", PaaSManagerService.class).initialize("edaubert", model);
+                        updateAndCheckIaaSConfiguration(model);
                     } catch (SubmissionException e) {
                         Log.error("Unable to initialize model on Cloud", e);
                     }
@@ -58,20 +59,30 @@ public class ErwanThesisModelSubmitter extends AbstractComponentType {
     public void update() throws KevScriptEngineException {
     }
 
-    private void updateIaaSConfiguration(ContainerRoot model) throws SubmissionException {
+    private void updateAndCheckIaaSConfiguration(ContainerRoot model) throws SubmissionException {
         Boolean created = false;
         for (int i = 0; i < 20; i++) {
             try {
                 Log.debug("try to update IaaS node...");
                 // TODO measure time
-                Log.warn("[TIME] ErwanThesisModelSubmitter submit new model: {}", System.currentTimeMillis());
+                Log.warn("[TIME] ModelSubmitter submit new model: {}", System.currentTimeMillis());
 //				kengine.atomicInterpretDeploy();
                 getModelService().atomicUpdateModel(model);
+
                 created = true;
+                // check all nodes are available
+                ContainerRoot currentModel = getModelService().getLastModel();
+                for (ContainerNode node : model.getNodes()) {
+                    ContainerNode addedNode = currentModel.findByPath(node.path(), ContainerNode.class);
+                    if (addedNode == null) {
+                        Log.error("Node {} has not been added on the current model", node.getName());
+                        created = false;
+                    }
+                }
                 break;
             } catch (Exception e) {
                 Log.warn("Error while try to update the IaaS configuration due to {}, try number {}", e.getMessage(), i);
-                KevoreeXmiHelper.instance$.save(ErwanThesisModelSubmitter.this.getDictionary().get("model").toString() + "-try" + i + ".kev", getModelService().getLastModel());
+//                KevoreeXmiHelper.instance$.save(ModelSubmitter.this.getDictionary().get("model").toString() + "-try" + i + ".kev", getModelService().getLastModel());
             }
         }
         if (!created) {

@@ -12,6 +12,7 @@ import org.kevoree.library.sky.lxc.utils.SystemHelper;
 import org.kevoree.log.Log;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -23,7 +24,6 @@ import java.util.List;
  * User: jed
  * Date: 05/06/13
  * Time: 09:34
- * To change this template use File | Settings | File Templates.
  */
 public class LxcManager {
 
@@ -38,7 +38,6 @@ public class LxcManager {
     private final static String lxccreate = "lxc-create";
     private final static String lxccgroup = "lxc-cgroup";
     private final static String lxcinfo = "lxc-info";
-    private String url_watchdog = "http://oss.sonatype.org/content/repositories/releases/org/kevoree/watchdog/org.kevoree.watchdog/0.12/org.kevoree.watchdog-0.12.deb";
 
     /*
           cgroup.procs,
@@ -79,9 +78,17 @@ public class LxcManager {
           tasks
 */
 
-    public void setUrl_watchdog(String url_watchdog){
-        this.url_watchdog = url_watchdog;
+
+    private File watchdogLocalFile = null;
+
+    public File getWatchdogLocalFile() {
+        return watchdogLocalFile;
     }
+
+    public void setWatchdogLocalFile(File watchdogLocalFile) {
+        this.watchdogLocalFile = watchdogLocalFile;
+    }
+
     public static  void setlimitMemory(String id,int limit_in_bytes) throws InterruptedException, IOException
     {
         //  lxc-cgroup -n node0 300000000           300M
@@ -321,7 +328,7 @@ public class LxcManager {
 
         String kevoreeTemplate =    new String(FileManager.load(LxcManager.class.getClassLoader().getResourceAsStream("lxc-kevoree")));
         kevoreeTemplate  = kevoreeTemplate.replace("$KEVOREE-VERSION$",version);
-        kevoreeTemplate = kevoreeTemplate.replace("$KEVOREE-WATCHDOG$",url_watchdog);
+        kevoreeTemplate = kevoreeTemplate.replace("$KEVOREE-WATCHDOG$",watchdogLocalFile.getAbsolutePath());
 
         FileManager.writeFile("/usr/share/lxc/templates/lxc-kevoree",kevoreeTemplate,false);
 

@@ -68,7 +68,7 @@ public class NetworkSender implements INetworkSender {
             m.writeTo(output);
             conn.send(output.toByteArray(), Delivery.RELIABLE);
             output.close();
-            org.kevoree.log.Log.debug("message ({}) sent to {}", m.getContentClass() , addr.toString());
+            org.kevoree.log.Log.debug("message ({}) sent to {}", m.getContentClass() , addr.getAddress().getHostAddress());
             return true;
         } catch (Exception e) {
             org.kevoree.log.Log.debug("", e);

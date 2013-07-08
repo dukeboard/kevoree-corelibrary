@@ -137,7 +137,7 @@ class GroupScorePeerSelector (timeout: Long, modelRef : AtomicReference[Containe
       nodeName =>
         peerCheckMap.put(nodeName, Tuple2(System.currentTimeMillis, 0))
         peerNbFailure.put(nodeName, 0)
-        org.kevoree.log.Log.debug("spam to say that scores are reinitiliaze")
+        org.kevoree.log.Log.debug("spam to say that scores are reinitialize")
     }
   }
 
