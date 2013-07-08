@@ -67,7 +67,17 @@ public class LxcHostNode extends JavaSENode implements CloudNode {
         executor = new ScheduledThreadPoolExecutor(ManagementFactory.getOperatingSystemMXBean().getAvailableProcessors());
         executor.scheduleAtFixedRate(watchContainers,10,10,TimeUnit.SECONDS);
 
-        getModelService().registerModelListener(new LXCModelListener());
+
+        try {
+            // install scripts
+            lxcManager.install();
+            // check if there is a clone source
+            lxcManager.createClone();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.error("Fatal Kevoree LXC configuration");
+        }
 
     }
 
@@ -91,63 +101,6 @@ public class LxcHostNode extends JavaSENode implements CloudNode {
         return lxcManager;
     }
 
-    private class LXCModelListener implements ModelListener {
-        @Override
-        public boolean preUpdate(ContainerRoot containerRoot, ContainerRoot containerRoot2) {
-            return true;
-        }
 
-        @Override
-        public boolean initUpdate(ContainerRoot containerRoot, ContainerRoot containerRoot2) {
-            return true;
-        }
 
-        @Override
-        public boolean afterLocalUpdate(ContainerRoot containerRoot, ContainerRoot containerRoot2) {
-            return true;
-        }
-
-        @Override
-        public void modelUpdated() {
-            if (!done) {
-                done = true;
-
-                try {
-                    // install scripts
-                    lxcManager.install();
-                    // check if there is a clone source
-                    lxcManager.createClone();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Log.error("Fatal Kevoree LXC configuration");
-                }
-
-                if (lxcManager.getContainers().size() > 0) {
-
-                    ContainerRoot target = null;
-                    // looking for previous containers
-                    try {
-                        target = lxcManager.buildModelCurrentLxcState(getKevScriptEngineFactory(), getNodeName());
-
-                        getModelService().unregisterModelListener(this);
-                        getModelService().atomicUpdateModel(target);
-                        getModelService().registerModelListener(this);
-                    } catch (Exception e) {
-                        Log.error("Getting Current LXC State", e);
-                    }
-
-                }
-            }
-
-        }
-
-        @Override
-        public void preRollback(ContainerRoot containerRoot, ContainerRoot containerRoot2) {
-        }
-
-        @Override
-        public void postRollback(ContainerRoot containerRoot, ContainerRoot containerRoot2) {
-        }
-    }
 }
