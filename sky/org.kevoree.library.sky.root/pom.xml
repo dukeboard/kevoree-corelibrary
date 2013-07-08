@@ -30,8 +30,8 @@
         <module>../org.kevoree.library.sky.provider</module>
         <module>../org.kevoree.library.sky.provider.web</module>
 
+        <module>../org.kevoree.library.sky.system</module>
         <module>../org.kevoree.library.sky.web</module>
-
         <module>../org.kevoree.library.sky.test</module>
 		
 	</modules>
