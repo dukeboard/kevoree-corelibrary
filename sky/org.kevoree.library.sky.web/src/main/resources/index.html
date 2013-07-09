@@ -1,6 +1,7 @@
 <html>
 <head>
     <title>Kevoree Model viewer</title>
+    <script src="lib/reconnecting-websocket.min.js"></script>
     <script src="lib/jquery.js"></script>
     <script src="lib/bootstrap.min.js"></script>
     <script src="lib/bootstrap-notify.js"></script>
@@ -51,6 +52,9 @@
             var nodes = model.findNodesByID(nodeName).getHosts();
             for (var i = 0; i < nodes.$size; i++) {
                 var childName = nodes.get(i).getName();
+
+                //look for IP, thanks to maxime
+
                 var newRemoveBt = $('<a></a>');
                 newRemoveBt.addClass("btn");
                 newRemoveBt.addClass("btn-warning");
@@ -67,7 +71,7 @@
             }
         }
 
-        ws = new WebSocket('ws://' + document.location.host + '/model/service');
+        ws = new ReconnectingWebSocket('ws://' + document.location.host + '/model/service');
         ws.onopen = function () {
         };
         ws.onclose = function () {
@@ -95,23 +99,18 @@
                 synchModel();
             }
         });
-
     });
-
-
 </script>
 
 <div class="container-fluid">
     <div class="row-fluid">
         <a class="btn btn-primary" id="btnAddChild">Add child</a>
-
          <div id="waitingMessage">
              <p>Processing request ... please wait ... </p>
              <div class="progress progress-striped">
                  <div class="bar" style="width: 30%;"></div>
              </div>
          </div>
-
     </div>
     <div class="row-fluid">
         <table class="table table-bordered">
