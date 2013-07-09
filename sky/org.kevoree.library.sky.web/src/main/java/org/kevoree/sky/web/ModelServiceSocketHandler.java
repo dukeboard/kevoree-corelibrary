@@ -58,7 +58,7 @@ public class ModelServiceSocketHandler extends BaseWebSocketHandler implements M
             modelService.updateModel(model, new ModelUpdateCallback() {
                 @Override
                 public void modelProcessed(ModelUpdateCallBackReturn modelUpdateCallBackReturn) {
-
+                    //TODO inform the GUI
                 }
             });  //send model to platform
         } catch (Exception e) {

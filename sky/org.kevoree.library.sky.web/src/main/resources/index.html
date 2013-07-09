@@ -39,7 +39,6 @@
             var oo3 = new kevoreeJSModule.java.io.OutputStream();
             saver.serialize(model, oo3);
             $('#waitingMessage').toggle("slow");
-            console.log($('#waitingMessage'));
             ws.send(oo3.$result)
 
         }
