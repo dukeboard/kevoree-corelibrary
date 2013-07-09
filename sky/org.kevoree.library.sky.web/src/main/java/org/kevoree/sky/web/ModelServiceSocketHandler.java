@@ -3,6 +3,8 @@ package org.kevoree.sky.web;
 import org.kevoree.ContainerRoot;
 import org.kevoree.api.service.core.handler.KevoreeModelHandlerService;
 import org.kevoree.api.service.core.handler.ModelListener;
+import org.kevoree.api.service.core.handler.ModelUpdateCallBackReturn;
+import org.kevoree.api.service.core.handler.ModelUpdateCallback;
 import org.kevoree.loader.JSONModelLoader;
 import org.kevoree.log.Log;
 import org.kevoree.serializer.JSONModelSerializer;
@@ -28,6 +30,11 @@ public class ModelServiceSocketHandler extends BaseWebSocketHandler implements M
 
     public ModelServiceSocketHandler(KevoreeModelHandlerService _modelService) {
         modelService = _modelService;
+        modelService.registerModelListener(this);
+    }
+
+    public void destroy(){
+        modelService.unregisterModelListener(this);
     }
 
     public void onOpen(WebSocketConnection connection) {
@@ -48,7 +55,12 @@ public class ModelServiceSocketHandler extends BaseWebSocketHandler implements M
     public void onMessage(WebSocketConnection connection, String message) {
         try {
             ContainerRoot model = (ContainerRoot) jsonLoader.loadModelFromString(message).get(0);
-            modelService.updateModel(model);  //send model to platform
+            modelService.updateModel(model, new ModelUpdateCallback() {
+                @Override
+                public void modelProcessed(ModelUpdateCallBackReturn modelUpdateCallBackReturn) {
+
+                }
+            });  //send model to platform
         } catch (Exception e) {
             Log.error("Can't send base model", e);
         }
