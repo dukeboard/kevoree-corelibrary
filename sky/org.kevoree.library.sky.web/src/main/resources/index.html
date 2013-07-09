@@ -1,0 +1,123 @@
+<html>
+<head>
+    <title>Kevoree Model viewer</title>
+    <script src="lib/jquery.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="lib/bootstrap-notify.js"></script>
+    <script src="lib/kotlin-lib-ecma3.js"></script>
+    <script src="lib/kotlin-lib.js"></script>
+    <script src="lib/kotlin-maps.js"></script>
+    <script type="text/javascript" src="lib/org.kevoree.modeling.sample.kevoree.js.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/bootstrap-notify.css" rel="stylesheet">
+</head>
+
+<body>
+
+<img src="http://kevoree.org/images/kevoree-gris.png" style="width: 400px;"/>
+
+<script>
+    /* Global variables */
+    var kevoreeJSModule, factory, loader, saver, model, ws, nodeName = {};
+
+    $(function () {
+        /* Model manipulation objects */
+        kevoreeJSModule = Kotlin.modules['org.kevoree.modeling.sample.kevoree.js'];
+        loader = new kevoreeJSModule.org.kevoree.loader.JSONModelLoader();
+        saver = new kevoreeJSModule.org.kevoree.serializer.JSONModelSerializer();
+        factory = new kevoreeJSModule.org.kevoree.impl.DefaultKevoreeFactory();
+        /* Meta information set */
+        var request = new XMLHttpRequest();
+        request.open('GET', '/metadata/nodeName', false);  // `false` makes the request synchronous
+        request.send(null);
+        nodeName = request.responseText;
+        console.log("Current Node Name : " + nodeName);
+
+        function synchModel(){
+            //send to node
+            var oo3 = new kevoreeJSModule.java.io.OutputStream();
+            saver.serialize(model, oo3);
+            ws.send(oo3.$result)
+        }
+
+        /* WS connection set */
+        function refreshModel(text) {
+            model = loader.loadModelFromString(text).get(0);
+            $('#nodeList').empty(); //clear nodeList
+            var nodes = model.findNodesByID(nodeName).getHosts();
+            for (var i = 0; i < nodes.$size; i++) {
+                var childName = nodes.get(i).getName();
+                var newRemoveBt = $('<a></a>');
+                newRemoveBt.addClass("btn");
+                newRemoveBt.addClass("btn-warning");
+                newRemoveBt.id = 'remove'+childName;
+                newRemoveBt.append("Remove child");
+                console.log(newRemoveBt);
+                $('#nodeList').append($('<tr>').append($('<td>').append(nodes.get(i).getName())).append($('<td>')).append($('<td>').append(newRemoveBt)) );
+                newRemoveBt.click(function (event) {
+                    var currentNode = model.findNodesByID(nodeName);
+                    var currentChildNode = model.findNodesByID(childName);
+                    currentNode.removeHosts(currentChildNode);
+                    model.removeNodes(currentChildNode);
+                    synchModel();
+                });
+            }
+        }
+
+        ws = new WebSocket('ws://' + document.location.host + '/model/service');
+        ws.onopen = function () {
+        };
+        ws.onclose = function () {
+        };
+        ws.onmessage = function (msg) {
+            refreshModel(msg.data);
+        };
+
+        /* UI Bt actions */
+        $("#btnAddChild").click(function (event) {
+            var currentNode = model.findNodesByID(nodeName);
+            var paasType = model.findTypeDefinitionsByID("PJavaSENode");
+            if (!paasType) {
+                alert("TypeDefinition PaasNode not found please add it to the platform ")
+            }
+            if (!currentNode) {
+                alert("TypeDefinition PaasNode not found please add it to the platform ")
+            }
+            if (currentNode != undefined && paasType != undefined) {
+                var newChildNode = factory.createContainerNode();
+                newChildNode.setName("node" + Math.floor((Math.random() * 1000) + 1));
+                newChildNode.setTypeDefinition(paasType);
+                currentNode.addHosts(newChildNode);
+                model.addNodes(newChildNode);
+                synchModel();
+            }
+        });
+
+    });
+
+
+</script>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <a class="btn btn-primary" id="btnAddChild">Add child</a>
+    </div>
+    <div class="row-fluid">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <td>virtual node</td>
+                <td>ip</td>
+                <td>action(s)</td>
+            </tr>
+            </thead>
+            <tbody id="nodeList">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+</body>
+</html>

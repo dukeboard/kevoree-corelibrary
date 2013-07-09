@@ -1,0 +1,5 @@
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.minicloud/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.web/{kevoree.version}"
+
+addNode node0 : MiniCloudNode
+addComponent webf@node0 : WebFrontend
