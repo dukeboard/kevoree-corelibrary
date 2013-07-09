@@ -56,11 +56,15 @@
         <module>../org.kevoree.library.javase.adaptationSuperviser</module>
         <module>../org.kevoree.library.javase.basicGossiper</module>
         <module>../org.kevoree.library.javase.webSocketGrp</module>
-        <module>../org.kevoree.library.javase.accesscontrolGroup</module>
         <module>../org.kevoree.library.javase.mavenCache</module>
         <module>../org.kevoree.library.javase.webserver.webbit</module>
         <module>../org.kevoree.library.javase.autoBasicGossiper</module>
         <module>../org.kevoree.library.javase.jmdns</module>
+
+        <!--
+        <module>../org.kevoree.library.javase.accesscontrolGroup</module>
+        -->
+
     </modules>
 
     <dependencies>
