@@ -50,8 +50,8 @@ public class WatchContainers implements Runnable {
     public void run() {
         ContainerRoot model = lxcHostNode.getModelService().getLastModel();
         UUIDModel uuidModel = null;
-        if(starting){
-            if (lxcManager.getContainers().size() > 0){
+
+            if (lxcManager.getContainers().size() > model.getNodes().size()){
                 try {
                     ContainerRoot  scanned = lxcManager.buildModelCurrentLxcState(lxcHostNode.getKevScriptEngineFactory(), lxcHostNode.getNodeName());
                     if( scanned.getNodes().size() > model.getNodes().size()){
@@ -64,7 +64,7 @@ public class WatchContainers implements Runnable {
                     Log.error("Updating model from lxc-ls");
                 }
             }
-        }
+
 
         Log.debug("WatchContainers is Scanning and monitoring the containers");
 
