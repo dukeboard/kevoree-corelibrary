@@ -1,6 +1,7 @@
 <html>
 <head>
     <title>Kevoree Model viewer</title>
+    <script src="lib/reconnecting-websocket.min.js"></script>
     <script src="lib/jquery.js"></script>
     <script src="lib/bootstrap.min.js"></script>
     <script src="lib/bootstrap-notify.js"></script>
@@ -22,6 +23,7 @@
     var kevoreeJSModule, factory, loader, saver, model, ws, nodeName = {};
 
     $(function () {
+
         /* Model manipulation objects */
         kevoreeJSModule = Kotlin.modules['org.kevoree.modeling.sample.kevoree.js'];
         loader = new kevoreeJSModule.org.kevoree.loader.JSONModelLoader();
@@ -34,30 +36,29 @@
         nodeName = request.responseText;
         console.log("Current Node Name : " + nodeName);
 
-        function synchModel(){
+        function synchModel() {
             //send to node
             var oo3 = new kevoreeJSModule.java.io.OutputStream();
             saver.serialize(model, oo3);
-            $('#waitingMessage').toggle("slow");
-            console.log($('#waitingMessage'));
             ws.send(oo3.$result)
-
         }
 
         /* WS connection set */
         function refreshModel(text) {
-            $('#waitingMessage').toggle("slow");
             model = loader.loadModelFromString(text).get(0);
             $('#nodeList').empty(); //clear nodeList
             var nodes = model.findNodesByID(nodeName).getHosts();
             for (var i = 0; i < nodes.$size; i++) {
                 var childName = nodes.get(i).getName();
+
+                //look for IP, thanks to maxime
+
                 var newRemoveBt = $('<a></a>');
                 newRemoveBt.addClass("btn");
                 newRemoveBt.addClass("btn-warning");
-                newRemoveBt.id = 'remove'+childName;
+                newRemoveBt.id = 'remove' + childName;
                 newRemoveBt.append("Remove child");
-                $('#nodeList').append($('<tr>').append($('<td>').append(nodes.get(i).getName())).append($('<td>')).append($('<td>').append(newRemoveBt)) );
+                $('#nodeList').append($('<tr>').append($('<td>').append(nodes.get(i).getName())).append($('<td>')).append($('<td>').append(newRemoveBt)));
                 newRemoveBt.click(function (event) {
                     var currentNode = model.findNodesByID(nodeName);
                     var currentChildNode = model.findNodesByID(childName);
@@ -68,14 +69,36 @@
             }
         }
 
-        ws = new WebSocket('ws://' + document.location.host + '/model/service');
+        function refreshEvent(data){
+            var message = $('#waitingMessage');
+            if(data == "done"){
+                message.fadeOut('slow', function() {
+                    $(this).css({"visibility":"hidden"});
+                });
+            }
+            if(data == "update"){
+                message.fadeIn('slow', function() {
+                    $(this).css({"visibility":"visible"});
+                });
+            }
+        }
+
+        refreshEvent("done");
+        ws = new ReconnectingWebSocket('ws://' + document.location.host + '/model/service');
         ws.onopen = function () {
         };
         ws.onclose = function () {
         };
         ws.onmessage = function (msg) {
-            refreshModel(msg.data);
+            if (msg.data.startsWith("model=")) {
+                refreshModel(msg.data.substring(6));
+            }
+            if (msg.data.startsWith("event=")) {
+                refreshEvent(msg.data.substring(6));
+            }
         };
+
+
 
         /* UI Bt actions */
         $("#btnAddChild").click(function (event) {
@@ -96,23 +119,20 @@
                 synchModel();
             }
         });
-
     });
-
-
 </script>
 
 <div class="container-fluid">
     <div class="row-fluid">
         <a class="btn btn-primary" id="btnAddChild">Add child</a>
 
-         <div id="waitingMessage">
-             <p>Processing request ... please wait ... </p>
-             <div class="progress progress-striped">
-                 <div class="bar" style="width: 30%;"></div>
-             </div>
-         </div>
+        <div id="waitingMessage">
+            <p>Processing request ... please wait ... </p>
 
+            <div class="progress progress-striped">
+                <div class="bar" style="width: 30%;"></div>
+            </div>
+        </div>
     </div>
     <div class="row-fluid">
         <table class="table table-bordered">
@@ -128,7 +148,6 @@
         </table>
     </div>
 </div>
-
 
 
 </body>

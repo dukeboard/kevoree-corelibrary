@@ -125,11 +125,11 @@ public class WebSocketGroup extends AbstractGroupType {
 		WebSocketClient client = new WebSocketClient(URI.create("ws://" + ip + ":" + port)) {
 			@Override
 			public void onMessage(ByteBuffer bytes) {
-				Log.debug("Receiving compressed model...");
+				Log.debug("Receiving model...");
 				ByteArrayInputStream bais = new ByteArrayInputStream(
 						bytes.array());
 				final ContainerRoot root = KevoreeXmiHelper.instance$
-						.loadCompressedStream(bais);
+						.loadStream(bais);
 				try {
 					exchanger.exchange(root);
 				} catch (InterruptedException e) {
@@ -222,7 +222,7 @@ public class WebSocketGroup extends AbstractGroupType {
 		}
 
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
-		KevoreeXmiHelper.instance$.saveCompressedStream(output, model);
+		KevoreeXmiHelper.instance$.saveStream(output, model);
 		byte[] data = output.toByteArray();
 
 		List<String> ips = KevoreePropertyHelper.instance$.getNetworkProperties(model,
@@ -283,11 +283,11 @@ public class WebSocketGroup extends AbstractGroupType {
 				throws Throwable {
             switch (msg[0]) {
                 case PUSH:
-                    Log.debug("Compressed model received from "
+                    Log.debug("Model received from "
                             + connection.httpRequest().header("Host") + ": loading...");
                     ByteArrayInputStream bais = new ByteArrayInputStream(msg, 1, msg.length-1);
                     ContainerRoot model = KevoreeXmiHelper.instance$
-                            .loadCompressedStream(bais);
+                            .loadStream(bais);
                     updateLocalModel(model);
                     Log.debug("Model loaded from XMI String");
                     break;
@@ -296,9 +296,9 @@ public class WebSocketGroup extends AbstractGroupType {
                     Log.debug("Pull request received from "
                             + connection.httpRequest().header("Host") + ": loading...");
                     ByteArrayOutputStream output = new ByteArrayOutputStream();
-                    KevoreeXmiHelper.instance$.saveCompressedStream(output, getModelService().getLastModel());
+                    KevoreeXmiHelper.instance$.saveStream(output, getModelService().getLastModel());
                     connection.send(output.toByteArray());
-                    Log.debug("Compressed model pulled back to "
+                    Log.debug("Model pulled back to "
                             + connection.httpRequest().header("Host"));
                     break;
 

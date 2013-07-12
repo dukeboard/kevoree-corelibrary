@@ -2,6 +2,6 @@
 merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.javaseNode/{kevoree.version}'
 merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.jexxus/{kevoree.version}'
 
-addNode node0:JavaSENode {logLevel = "INFO"}
-addGroup sync: AutoBasicGroup
-addToGroup sync node0
+addNode node42:JavaSENode {logLevel = "DEBUG"}
+addGroup sync: BasicGroup
+addToGroup sync node42

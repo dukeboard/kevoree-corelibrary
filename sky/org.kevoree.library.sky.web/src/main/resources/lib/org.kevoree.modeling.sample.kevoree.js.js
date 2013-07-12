@@ -123,1115 +123,6 @@
       var xr = f(x);
       var yr = f(y);
       return xr.compareTo(yr);
-    },
-    fw: function () {
-      this.set__dictionary(null);
-    },
-    fx: function () {
-      this.set__dictionaryType(null);
-    },
-    fy: function () {
-      this.set__dictionary(null);
-    },
-    fz: function (elem) {
-      this.removeProvided(elem);
-    },
-    f10: function (provided) {
-      this.removeProvided(provided);
-    },
-    f11: function (el) {
-      this.removeProvided(el);
-    },
-    f12: function (elem) {
-      this.removeRequired(elem);
-    },
-    f13: function (required) {
-      this.removeRequired(required);
-    },
-    f14: function (el) {
-      this.removeRequired(el);
-    },
-    f15: function () {
-      this.set__dictionaryType(null);
-    },
-    f16: function (elem) {
-      this.removeRequired(elem);
-    },
-    f17: function (required) {
-      this.removeRequired(required);
-    },
-    f18: function (el_0) {
-      this.removeRequired(el_0);
-    },
-    f19: function (elem) {
-      this.removeIntegrationPatterns(elem);
-    },
-    f1a: function (integrationPatterns) {
-      this.removeIntegrationPatterns(integrationPatterns);
-    },
-    f1b: function (el_0) {
-      this.removeIntegrationPatterns(el_0);
-    },
-    f1c: function () {
-      this.set__extraFonctionalProperties(null);
-    },
-    f1d: function (elem) {
-      this.removeProvided(elem);
-    },
-    f1e: function (provided) {
-      this.removeProvided(provided);
-    },
-    f1f: function (el_0) {
-      this.removeProvided(el_0);
-    },
-    f1g: function () {
-      this.set__dictionaryType(null);
-    },
-    f1h: function (elem) {
-      this.removeRequired(elem);
-    },
-    f1i: function (required) {
-      this.removeRequired(required);
-    },
-    f1j: function (el_0) {
-      this.removeRequired(el_0);
-    },
-    f1k: function (elem) {
-      this.removeIntegrationPatterns(elem);
-    },
-    f1l: function (integrationPatterns) {
-      this.removeIntegrationPatterns(integrationPatterns);
-    },
-    f1m: function (el_0) {
-      this.removeIntegrationPatterns(el_0);
-    },
-    f1n: function () {
-      this.set__extraFonctionalProperties(null);
-    },
-    f1o: function (elem) {
-      this.removeProvided(elem);
-    },
-    f1p: function (provided) {
-      this.removeProvided(provided);
-    },
-    f1q: function (el_0) {
-      this.removeProvided(el_0);
-    },
-    f1r: function (elem) {
-      this.removeWires(elem);
-    },
-    f1s: function (wires) {
-      this.removeWires(wires);
-    },
-    f1t: function (el) {
-      this.removeWires(el);
-    },
-    f1u: function () {
-      this.set__dictionary(null);
-    },
-    f1v: function (elem) {
-      this.removeComponents(elem);
-    },
-    f1w: function (components) {
-      this.removeComponents(components);
-    },
-    f1x: function (el_0) {
-      this.removeComponents(el_0);
-    },
-    f1y: function (elem) {
-      this.removeNodes(elem);
-    },
-    f1z: function (nodes) {
-      this.removeNodes(nodes);
-    },
-    f20: function (el_0) {
-      this.removeNodes(el_0);
-    },
-    f21: function (elem) {
-      this.removeTypeDefinitions(elem);
-    },
-    f22: function (typeDefinitions) {
-      this.removeTypeDefinitions(typeDefinitions);
-    },
-    f23: function (el_0) {
-      this.removeTypeDefinitions(el_0);
-    },
-    f24: function (elem) {
-      this.removeRepositories(elem);
-    },
-    f25: function (repositories) {
-      this.removeRepositories(repositories);
-    },
-    f26: function (el_0) {
-      this.removeRepositories(el_0);
-    },
-    f27: function (elem) {
-      this.removeDataTypes(elem);
-    },
-    f28: function (dataTypes) {
-      this.removeDataTypes(dataTypes);
-    },
-    f29: function (el_0) {
-      this.removeDataTypes(el_0);
-    },
-    f2a: function (elem) {
-      this.removeLibraries(elem);
-    },
-    f2b: function (libraries) {
-      this.removeLibraries(libraries);
-    },
-    f2c: function (el_0) {
-      this.removeLibraries(el_0);
-    },
-    f2d: function (elem) {
-      this.removeHubs(elem);
-    },
-    f2e: function (hubs) {
-      this.removeHubs(hubs);
-    },
-    f2f: function (el_0) {
-      this.removeHubs(el_0);
-    },
-    f2g: function (elem) {
-      this.removeMBindings(elem);
-    },
-    f2h: function (mBindings) {
-      this.removeMBindings(mBindings);
-    },
-    f2i: function (el) {
-      this.removeMBindings(el);
-    },
-    f2j: function (elem) {
-      this.removeDeployUnits(elem);
-    },
-    f2k: function (deployUnits) {
-      this.removeDeployUnits(deployUnits);
-    },
-    f2l: function (el) {
-      this.removeDeployUnits(el);
-    },
-    f2m: function (elem) {
-      this.removeNodeNetworks(elem);
-    },
-    f2n: function (nodeNetworks) {
-      this.removeNodeNetworks(nodeNetworks);
-    },
-    f2o: function (el) {
-      this.removeNodeNetworks(el);
-    },
-    f2p: function (elem) {
-      this.removeGroups(elem);
-    },
-    f2q: function (groups) {
-      this.removeGroups(groups);
-    },
-    f2r: function (el_0) {
-      this.removeGroups(el_0);
-    },
-    f2s: function (elem) {
-      this.removeAdaptationPrimitiveTypes(elem);
-    },
-    f2t: function (adaptationPrimitiveTypes) {
-      this.removeAdaptationPrimitiveTypes(adaptationPrimitiveTypes);
-    },
-    f2u: function (el_0) {
-      this.removeAdaptationPrimitiveTypes(el_0);
-    },
-    f2v: function (elem) {
-      this.removeValues(elem);
-    },
-    f2w: function (values) {
-      this.removeValues(values);
-    },
-    f2x: function (el) {
-      this.removeValues(el);
-    },
-    f2y: function (elem) {
-      this.removeAttributes(elem);
-    },
-    f2z: function (attributes) {
-      this.removeAttributes(attributes);
-    },
-    f30: function (el_0) {
-      this.removeAttributes(el_0);
-    },
-    f31: function (elem) {
-      this.removeDefaultValues(elem);
-    },
-    f32: function (defaultValues) {
-      this.removeDefaultValues(defaultValues);
-    },
-    f33: function (el) {
-      this.removeDefaultValues(el);
-    },
-    f34: function () {
-      this.set__dictionary(null);
-    },
-    f35: function () {
-      this.set__dictionaryType(null);
-    },
-    f36: function () {
-      this.set__dictionary(null);
-    },
-    f37: function (elem) {
-      this.removeExtraFonctionalProperties(elem);
-    },
-    f38: function (extraFonctionalProperties) {
-      this.removeExtraFonctionalProperties(extraFonctionalProperties);
-    },
-    f39: function (el) {
-      this.removeExtraFonctionalProperties(el);
-    },
-    f3a: function () {
-      this.set__dictionaryType(null);
-    },
-    f3b: function () {
-      this.set__dictionaryType(null);
-    },
-    f3c: function (elem) {
-      this.removeChilds(elem);
-    },
-    f3d: function (childs) {
-      this.removeChilds(childs);
-    },
-    f3e: function (el_0) {
-      this.removeChilds(el_0);
-    },
-    f3f: function (elem) {
-      this.removeNetworkProperties(elem);
-    },
-    f3g: function (networkProperties) {
-      this.removeNetworkProperties(networkProperties);
-    },
-    f3h: function (el_0) {
-      this.removeNetworkProperties(el_0);
-    },
-    f3i: function (elem) {
-      this.removeLink(elem);
-    },
-    f3j: function (link) {
-      this.removeLink(link);
-    },
-    f3k: function (el) {
-      this.removeLink(el);
-    },
-    f3l: function () {
-      this.set__dictionaryType(null);
-    },
-    f3m: function (elem) {
-      this.removeManagedPrimitiveTypeRefs(elem);
-    },
-    f3n: function (managedPrimitiveTypeRefs) {
-      this.removeManagedPrimitiveTypeRefs(managedPrimitiveTypeRefs);
-    },
-    f3o: function (el) {
-      this.removeManagedPrimitiveTypeRefs(el);
-    },
-    f3p: function (elem) {
-      this.removeParameters(elem);
-    },
-    f3q: function (parameters) {
-      this.removeParameters(parameters);
-    },
-    f3r: function (el_0) {
-      this.removeParameters(el_0);
-    },
-    f3s: function () {
-      this.set__dictionaryType(null);
-    },
-    f3t: function (elem) {
-      this.removeMappings(elem);
-    },
-    f3u: function (mappings) {
-      this.removeMappings(mappings);
-    },
-    f3v: function (el) {
-      this.removeMappings(el);
-    },
-    f3w: function () {
-      this.set__dictionaryType(null);
-    },
-    f3x: function (elem) {
-      this.removeOperations(elem);
-    },
-    f3y: function (operations) {
-      this.removeOperations(operations);
-    },
-    f3z: function (el_0) {
-      this.removeOperations(el_0);
-    },
-    f40: function () {
-      this.set__dictionaryType(null);
-    },
-    f41: function (context, adjustedRef, modelElem) {
-      var typeDefinitionRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((typeDefinitionRef === null || typeDefinitionRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        typeDefinitionRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (typeDefinitionRef !== null && typeDefinitionRef !== undefined) {
-        modelElem.setTypeDefinition(typeDefinitionRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : TypeDefinition not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f42: function (context, adjustedRef_0, modelElem) {
-      var namespaceRef = context.get_map().get(adjustedRef_0);
-      var i = 0;
-      while ((namespaceRef === null || namespaceRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        namespaceRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_0) : null;
-      }
-      if (namespaceRef !== null && namespaceRef !== undefined) {
-        modelElem.setNamespace(namespaceRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : Namespace not found in map ! xmiRef:' + adjustedRef_0);
-      }
-    },
-    f43: function (context, adjustedRef, modelElem) {
-      var deployUnitsRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((deployUnitsRef === null || deployUnitsRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        deployUnitsRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (deployUnitsRef !== null && deployUnitsRef !== undefined) {
-        modelElem.addDeployUnits(deployUnitsRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : DeployUnit not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f44: function (context, adjustedRef_0, modelElem) {
-      var superTypesRef = context.get_map().get(adjustedRef_0);
-      var i = 0;
-      while ((superTypesRef === null || superTypesRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        superTypesRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_0) : null;
-      }
-      if (superTypesRef !== null && superTypesRef !== undefined) {
-        modelElem.addSuperTypes(superTypesRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : TypeDefinition not found in map ! xmiRef:' + adjustedRef_0);
-      }
-    },
-    f45: function (context, adjustedRef, modelElem) {
-      var typeDefinitionRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((typeDefinitionRef === null || typeDefinitionRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        typeDefinitionRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (typeDefinitionRef !== null && typeDefinitionRef !== undefined) {
-        modelElem.setTypeDefinition(typeDefinitionRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : TypeDefinition not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f46: function (context, adjustedRef_0, modelElem) {
-      var hostsRef = context.get_map().get(adjustedRef_0);
-      var i = 0;
-      while ((hostsRef === null || hostsRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        hostsRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_0) : null;
-      }
-      if (hostsRef !== null && hostsRef !== undefined) {
-        modelElem.addHosts(hostsRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : ContainerNode not found in map ! xmiRef:' + adjustedRef_0);
-      }
-    },
-    f47: function (context, adjustedRef_1, modelElem) {
-      var hostRef = context.get_map().get(adjustedRef_1);
-      var i = 0;
-      while ((hostRef === null || hostRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        hostRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_1) : null;
-      }
-      if (hostRef !== null && hostRef !== undefined) {
-        modelElem.setHost(hostRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : ContainerNode not found in map ! xmiRef:' + adjustedRef_1);
-      }
-    },
-    f48: function (context, adjustedRef, modelElem) {
-      var deployUnitsRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((deployUnitsRef === null || deployUnitsRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        deployUnitsRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (deployUnitsRef !== null && deployUnitsRef !== undefined) {
-        modelElem.addDeployUnits(deployUnitsRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : DeployUnit not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f49: function (context, adjustedRef_0, modelElem) {
-      var superTypesRef = context.get_map().get(adjustedRef_0);
-      var i = 0;
-      while ((superTypesRef === null || superTypesRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        superTypesRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_0) : null;
-      }
-      if (superTypesRef !== null && superTypesRef !== undefined) {
-        modelElem.addSuperTypes(superTypesRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : TypeDefinition not found in map ! xmiRef:' + adjustedRef_0);
-      }
-    },
-    f4a: function (context, adjustedRef, modelElem) {
-      var bindingsRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((bindingsRef === null || bindingsRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        bindingsRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (bindingsRef !== null && bindingsRef !== undefined) {
-        modelElem.addBindings(bindingsRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : MBinding not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f4b: function (context, adjustedRef_0, modelElem) {
-      var portTypeRefRef = context.get_map().get(adjustedRef_0);
-      var i = 0;
-      while ((portTypeRefRef === null || portTypeRefRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        portTypeRefRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_0) : null;
-      }
-      if (portTypeRefRef !== null && portTypeRefRef !== undefined) {
-        modelElem.setPortTypeRef(portTypeRefRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : PortTypeRef not found in map ! xmiRef:' + adjustedRef_0);
-      }
-    },
-    f4c: function (context, adjustedRef, modelElem) {
-      var parentRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((parentRef === null || parentRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        parentRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (parentRef !== null && parentRef !== undefined) {
-        modelElem.setParent(parentRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : Namespace not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f4d: function (context, adjustedRef, modelElem) {
-      var genericTypesRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((genericTypesRef === null || genericTypesRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        genericTypesRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (genericTypesRef !== null && genericTypesRef !== undefined) {
-        modelElem.addGenericTypes(genericTypesRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : TypedElement not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f4e: function (context, adjustedRef, modelElem) {
-      var attributeRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((attributeRef === null || attributeRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        attributeRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (attributeRef !== null && attributeRef !== undefined) {
-        modelElem.setAttribute(attributeRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : DictionaryAttribute not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f4f: function (context, adjustedRef_0, modelElem) {
-      var targetNodeRef = context.get_map().get(adjustedRef_0);
-      var i = 0;
-      while ((targetNodeRef === null || targetNodeRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        targetNodeRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_0) : null;
-      }
-      if (targetNodeRef !== null && targetNodeRef !== undefined) {
-        modelElem.setTargetNode(targetNodeRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : ContainerNode not found in map ! xmiRef:' + adjustedRef_0);
-      }
-    },
-    f4g: function (context, adjustedRef, modelElem) {
-      var deployUnitsRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((deployUnitsRef === null || deployUnitsRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        deployUnitsRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (deployUnitsRef !== null && deployUnitsRef !== undefined) {
-        modelElem.addDeployUnits(deployUnitsRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : DeployUnit not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f4h: function (context, adjustedRef_0, modelElem) {
-      var superTypesRef = context.get_map().get(adjustedRef_0);
-      var i = 0;
-      while ((superTypesRef === null || superTypesRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        superTypesRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_0) : null;
-      }
-      if (superTypesRef !== null && superTypesRef !== undefined) {
-        modelElem.addSuperTypes(superTypesRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : TypeDefinition not found in map ! xmiRef:' + adjustedRef_0);
-      }
-    },
-    f4i: function (context, adjustedRef_1, modelElem) {
-      var childsRef = context.get_map().get(adjustedRef_1);
-      var i = 0;
-      while ((childsRef === null || childsRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        childsRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_1) : null;
-      }
-      if (childsRef !== null && childsRef !== undefined) {
-        modelElem.addChilds(childsRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : ComponentType not found in map ! xmiRef:' + adjustedRef_1);
-      }
-    },
-    f4j: function (context, adjustedRef, modelElem) {
-      var refRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((refRef === null || refRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        refRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (refRef !== null && refRef !== undefined) {
-        modelElem.setRef(refRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : PortType not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f4k: function (context, adjustedRef, modelElem) {
-      var portsRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((portsRef === null || portsRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        portsRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (portsRef !== null && portsRef !== undefined) {
-        modelElem.addPorts(portsRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : PortTypeRef not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f4l: function (context, adjustedRef, modelElem) {
-      var deployUnitsRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((deployUnitsRef === null || deployUnitsRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        deployUnitsRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (deployUnitsRef !== null && deployUnitsRef !== undefined) {
-        modelElem.addDeployUnits(deployUnitsRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : DeployUnit not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f4m: function (context, adjustedRef_0, modelElem) {
-      var superTypesRef = context.get_map().get(adjustedRef_0);
-      var i = 0;
-      while ((superTypesRef === null || superTypesRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        superTypesRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_0) : null;
-      }
-      if (superTypesRef !== null && superTypesRef !== undefined) {
-        modelElem.addSuperTypes(superTypesRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : TypeDefinition not found in map ! xmiRef:' + adjustedRef_0);
-      }
-    },
-    f4n: function (context, adjustedRef, modelElem) {
-      var returnTypeRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((returnTypeRef === null || returnTypeRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        returnTypeRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (returnTypeRef !== null && returnTypeRef !== undefined) {
-        modelElem.setReturnType(returnTypeRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : TypedElement not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f4o: function (context, adjustedRef, modelElem) {
-      var typeRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((typeRef === null || typeRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        typeRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (typeRef !== null && typeRef !== undefined) {
-        modelElem.setType(typeRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : TypedElement not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f4p: function (context, adjustedRef, modelElem) {
-      var genericTypesRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((genericTypesRef === null || genericTypesRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        genericTypesRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (genericTypesRef !== null && genericTypesRef !== undefined) {
-        modelElem.addGenericTypes(genericTypesRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : TypedElement not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f4q: function (context, adjustedRef, modelElem) {
-      var deployUnitsRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((deployUnitsRef === null || deployUnitsRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        deployUnitsRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (deployUnitsRef !== null && deployUnitsRef !== undefined) {
-        modelElem.addDeployUnits(deployUnitsRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : DeployUnit not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f4r: function (context, adjustedRef_0, modelElem) {
-      var superTypesRef = context.get_map().get(adjustedRef_0);
-      var i = 0;
-      while ((superTypesRef === null || superTypesRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        superTypesRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_0) : null;
-      }
-      if (superTypesRef !== null && superTypesRef !== undefined) {
-        modelElem.addSuperTypes(superTypesRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : TypeDefinition not found in map ! xmiRef:' + adjustedRef_0);
-      }
-    },
-    f4s: function (context, adjustedRef_1, modelElem) {
-      var filtersRef = context.get_map().get(adjustedRef_1);
-      var i = 0;
-      while ((filtersRef === null || filtersRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        filtersRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_1) : null;
-      }
-      if (filtersRef !== null && filtersRef !== undefined) {
-        modelElem.addFilters(filtersRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : TypedElement not found in map ! xmiRef:' + adjustedRef_1);
-      }
-    },
-    f4t: function (context, adjustedRef, modelElem) {
-      var unitsRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((unitsRef === null || unitsRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        unitsRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (unitsRef !== null && unitsRef !== undefined) {
-        modelElem.addUnits(unitsRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : DeployUnit not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f4u: function (context, adjustedRef, modelElem) {
-      var requiredLibsRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((requiredLibsRef === null || requiredLibsRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        requiredLibsRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (requiredLibsRef !== null && requiredLibsRef !== undefined) {
-        modelElem.addRequiredLibs(requiredLibsRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : DeployUnit not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f4v: function (context, adjustedRef_0, modelElem) {
-      var targetNodeTypeRef = context.get_map().get(adjustedRef_0);
-      var i = 0;
-      while ((targetNodeTypeRef === null || targetNodeTypeRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        targetNodeTypeRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_0) : null;
-      }
-      if (targetNodeTypeRef !== null && targetNodeTypeRef !== undefined) {
-        modelElem.setTargetNodeType(targetNodeTypeRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : NodeType not found in map ! xmiRef:' + adjustedRef_0);
-      }
-    },
-    f4w: function (context, adjustedRef, modelElem) {
-      var subTypesRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((subTypesRef === null || subTypesRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        subTypesRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (subTypesRef !== null && subTypesRef !== undefined) {
-        modelElem.addSubTypes(subTypesRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : TypeDefinition not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f4x: function (context, adjustedRef, modelElem) {
-      var portTypesRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((portTypesRef === null || portTypesRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        portTypesRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (portTypesRef !== null && portTypesRef !== undefined) {
-        modelElem.addPortTypes(portTypesRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : PortTypeRef not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f4y: function (context, adjustedRef, modelElem) {
-      var portTypesRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((portTypesRef === null || portTypesRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        portTypesRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (portTypesRef !== null && portTypesRef !== undefined) {
-        modelElem.addPortTypes(portTypesRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : PortTypeRef not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f4z: function (context, adjustedRef, modelElem) {
-      var typeDefinitionRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((typeDefinitionRef === null || typeDefinitionRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        typeDefinitionRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (typeDefinitionRef !== null && typeDefinitionRef !== undefined) {
-        modelElem.setTypeDefinition(typeDefinitionRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : TypeDefinition not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f50: function (context, adjustedRef_0, modelElem) {
-      var bindingsRef = context.get_map().get(adjustedRef_0);
-      var i = 0;
-      while ((bindingsRef === null || bindingsRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        bindingsRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_0) : null;
-      }
-      if (bindingsRef !== null && bindingsRef !== undefined) {
-        modelElem.addBindings(bindingsRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : MBinding not found in map ! xmiRef:' + adjustedRef_0);
-      }
-    },
-    f51: function (context, adjustedRef, modelElem) {
-      var portRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((portRef === null || portRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        portRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (portRef !== null && portRef !== undefined) {
-        modelElem.setPort(portRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : Port not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f52: function (context, adjustedRef_0, modelElem) {
-      var hubRef = context.get_map().get(adjustedRef_0);
-      var i = 0;
-      while ((hubRef === null || hubRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        hubRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_0) : null;
-      }
-      if (hubRef !== null && hubRef !== undefined) {
-        modelElem.setHub(hubRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : Channel not found in map ! xmiRef:' + adjustedRef_0);
-      }
-    },
-    f53: function (context, adjustedRef, modelElem) {
-      var initByRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((initByRef === null || initByRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        initByRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (initByRef !== null && initByRef !== undefined) {
-        modelElem.setInitBy(initByRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : ContainerNode not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f54: function (context, adjustedRef_0, modelElem) {
-      var targetRef = context.get_map().get(adjustedRef_0);
-      var i = 0;
-      while ((targetRef === null || targetRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        targetRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_0) : null;
-      }
-      if (targetRef !== null && targetRef !== undefined) {
-        modelElem.setTarget(targetRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : ContainerNode not found in map ! xmiRef:' + adjustedRef_0);
-      }
-    },
-    f55: function (context, adjustedRef, modelElem) {
-      var deployUnitsRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((deployUnitsRef === null || deployUnitsRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        deployUnitsRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (deployUnitsRef !== null && deployUnitsRef !== undefined) {
-        modelElem.addDeployUnits(deployUnitsRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : DeployUnit not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f56: function (context, adjustedRef_0, modelElem) {
-      var superTypesRef = context.get_map().get(adjustedRef_0);
-      var i = 0;
-      while ((superTypesRef === null || superTypesRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        superTypesRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_0) : null;
-      }
-      if (superTypesRef !== null && superTypesRef !== undefined) {
-        modelElem.addSuperTypes(superTypesRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : TypeDefinition not found in map ! xmiRef:' + adjustedRef_0);
-      }
-    },
-    f57: function (context, adjustedRef, modelElem) {
-      var deployUnitsRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((deployUnitsRef === null || deployUnitsRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        deployUnitsRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (deployUnitsRef !== null && deployUnitsRef !== undefined) {
-        modelElem.addDeployUnits(deployUnitsRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : DeployUnit not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f58: function (context, adjustedRef_0, modelElem) {
-      var superTypesRef = context.get_map().get(adjustedRef_0);
-      var i = 0;
-      while ((superTypesRef === null || superTypesRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        superTypesRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_0) : null;
-      }
-      if (superTypesRef !== null && superTypesRef !== undefined) {
-        modelElem.addSuperTypes(superTypesRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : TypeDefinition not found in map ! xmiRef:' + adjustedRef_0);
-      }
-    },
-    f59: function (context, adjustedRef, modelElem) {
-      var typeDefinitionRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((typeDefinitionRef === null || typeDefinitionRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        typeDefinitionRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (typeDefinitionRef !== null && typeDefinitionRef !== undefined) {
-        modelElem.setTypeDefinition(typeDefinitionRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : TypeDefinition not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f5a: function (context, adjustedRef, modelElem) {
-      var deployUnitsRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((deployUnitsRef === null || deployUnitsRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        deployUnitsRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (deployUnitsRef !== null && deployUnitsRef !== undefined) {
-        modelElem.addDeployUnits(deployUnitsRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : DeployUnit not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f5b: function (context, adjustedRef_0, modelElem) {
-      var superTypesRef = context.get_map().get(adjustedRef_0);
-      var i = 0;
-      while ((superTypesRef === null || superTypesRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        superTypesRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_0) : null;
-      }
-      if (superTypesRef !== null && superTypesRef !== undefined) {
-        modelElem.addSuperTypes(superTypesRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : TypeDefinition not found in map ! xmiRef:' + adjustedRef_0);
-      }
-    },
-    f5c: function (context, adjustedRef, modelElem) {
-      var typeDefinitionRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((typeDefinitionRef === null || typeDefinitionRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        typeDefinitionRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (typeDefinitionRef !== null && typeDefinitionRef !== undefined) {
-        modelElem.setTypeDefinition(typeDefinitionRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : TypeDefinition not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f5d: function (context, adjustedRef_0, modelElem) {
-      var subNodesRef = context.get_map().get(adjustedRef_0);
-      var i = 0;
-      while ((subNodesRef === null || subNodesRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        subNodesRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_0) : null;
-      }
-      if (subNodesRef !== null && subNodesRef !== undefined) {
-        modelElem.addSubNodes(subNodesRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : ContainerNode not found in map ! xmiRef:' + adjustedRef_0);
-      }
-    },
-    f5e: function (context, adjustedRef, modelElem) {
-      var deployUnitsRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((deployUnitsRef === null || deployUnitsRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        deployUnitsRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (deployUnitsRef !== null && deployUnitsRef !== undefined) {
-        modelElem.addDeployUnits(deployUnitsRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : DeployUnit not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f5f: function (context, adjustedRef_0, modelElem) {
-      var superTypesRef = context.get_map().get(adjustedRef_0);
-      var i = 0;
-      while ((superTypesRef === null || superTypesRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        superTypesRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_0) : null;
-      }
-      if (superTypesRef !== null && superTypesRef !== undefined) {
-        modelElem.addSuperTypes(superTypesRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : TypeDefinition not found in map ! xmiRef:' + adjustedRef_0);
-      }
-    },
-    f5g: function (context, adjustedRef, modelElem) {
-      var deployUnitsRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((deployUnitsRef === null || deployUnitsRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        deployUnitsRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (deployUnitsRef !== null && deployUnitsRef !== undefined) {
-        modelElem.addDeployUnits(deployUnitsRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : DeployUnit not found in map ! xmiRef:' + adjustedRef);
-      }
-    },
-    f5h: function (context, adjustedRef_0, modelElem) {
-      var superTypesRef = context.get_map().get(adjustedRef_0);
-      var i = 0;
-      while ((superTypesRef === null || superTypesRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        superTypesRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_0) : null;
-      }
-      if (superTypesRef !== null && superTypesRef !== undefined) {
-        modelElem.addSuperTypes(superTypesRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : TypeDefinition not found in map ! xmiRef:' + adjustedRef_0);
-      }
-    },
-    f5i: function (context, adjustedRef_1, modelElem) {
-      var managedPrimitiveTypesRef = context.get_map().get(adjustedRef_1);
-      var i = 0;
-      while ((managedPrimitiveTypesRef === null || managedPrimitiveTypesRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        managedPrimitiveTypesRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef_1) : null;
-      }
-      if (managedPrimitiveTypesRef !== null && managedPrimitiveTypesRef !== undefined) {
-        modelElem.addManagedPrimitiveTypes(managedPrimitiveTypesRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : AdaptationPrimitiveType not found in map ! xmiRef:' + adjustedRef_1);
-      }
-    },
-    f5j: function (context, adjustedRef, modelElem) {
-      var refRef = context.get_map().get(adjustedRef);
-      var i = 0;
-      while ((refRef === null || refRef === undefined) && i < context.get_loadedRoots().size()) {
-        var tmp$0;
-        refRef = (tmp$0 = context.get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(adjustedRef) : null;
-      }
-      if (refRef !== null && refRef !== undefined) {
-        modelElem.setRef(refRef);
-      }
-       else {
-        throw new Kotlin.Exception('KMF Load error : AdaptationPrimitiveType not found in map ! xmiRef:' + adjustedRef);
-      }
     }
   }
   , classes = function () {
@@ -1239,23 +130,23 @@
     })
     , c8 = Kotlin.createTrait({
     })
-    , cr = Kotlin.createTrait(c8, {
+    , cs = Kotlin.createTrait(c8, {
     })
-    , c1 = Kotlin.createTrait(c8, cr, {
+    , c1 = Kotlin.createTrait(c8, cs, {
     })
     , c2 = Kotlin.createTrait(c8, {
     })
-    , ck = Kotlin.createTrait(c8, cr, {
+    , ck = Kotlin.createTrait(c8, cs, {
     })
-    , c3 = Kotlin.createTrait(c8, cr, ck, {
+    , c3 = Kotlin.createTrait(c8, cs, ck, {
     })
-    , c16 = Kotlin.createTrait(c8, cr, {
+    , c17 = Kotlin.createTrait(c8, cs, {
     })
-    , cn = Kotlin.createTrait(c8, c16, {
+    , cn = Kotlin.createTrait(c8, c17, {
     })
     , c4 = Kotlin.createTrait(c8, cn, {
     })
-    , c5 = Kotlin.createTrait(c8, cr, ck, {
+    , c5 = Kotlin.createTrait(c8, cs, ck, {
     })
     , c6 = Kotlin.createTrait(c8, cn, {
     })
@@ -1283,9 +174,6 @@
       set_internal_containmentRefName: function (tmp$0) {
         this.$internal_containmentRefName = tmp$0;
       },
-      setContainmentRefName: function (name) {
-        this.set_internal_containmentRefName(name);
-      },
       get_internal_readOnlyElem: function () {
         return this.$internal_readOnlyElem;
       },
@@ -1301,26 +189,30 @@
       setInternalReadOnly: function () {
         this.set_internal_readOnlyElem(true);
       },
+      getRefInParent: function () {
+        return this.get_internal_containmentRefName();
+      },
       isReadOnly: function () {
         return this.get_internal_readOnlyElem();
       },
       isRecursiveReadOnly: function () {
         return this.get_internal_recursive_readOnlyElem();
       },
-      setEContainer: function (container, unsetCmd) {
+      setEContainer: function (container, unsetCmd, refNameInParent) {
         if (this.get_internal_readOnlyElem()) {
           return;
         }
         var tempUnsetCmd = this.get_internal_unsetCmd();
         this.set_internal_unsetCmd(null);
         if (tempUnsetCmd !== null && tempUnsetCmd !== undefined) {
-          tempUnsetCmd();
+          tempUnsetCmd.run();
         }
         this.set_internal_eContainer(container);
         this.set_internal_unsetCmd(unsetCmd);
+        this.set_internal_containmentRefName(refNameInParent);
       }
     })
-    , ca = Kotlin.createTrait(c8, cr, ck, {
+    , ca = Kotlin.createTrait(c8, cs, ck, {
     })
     , cb = Kotlin.createTrait(c8, {
     })
@@ -1328,9 +220,9 @@
     })
     , cd = Kotlin.createTrait(c8, {
     })
-    , c17 = Kotlin.createTrait(c8, cr, {
+    , c18 = Kotlin.createTrait(c8, cs, {
     })
-    , ce = Kotlin.createTrait(c8, c17, {
+    , ce = Kotlin.createTrait(c8, c18, {
     })
     , cf = Kotlin.createTrait(c8, {
     })
@@ -1342,54 +234,56 @@
     })
     , cj = Kotlin.createTrait(c8, cn, {
     })
-    , cl = Kotlin.createTrait(c8, cr, {
+    , cl = Kotlin.createTrait(c8, cs, {
     })
     , cm = Kotlin.createTrait({
     })
     , co = Kotlin.createTrait({
     })
-    , cp = Kotlin.createTrait(c8, {
+    , cp = Kotlin.createTrait({
     })
-    , c10 = Kotlin.createTrait(c8, c16, {
+    , cq = Kotlin.createTrait(c8, {
     })
-    , cq = Kotlin.createTrait(c8, c10, {
+    , c11 = Kotlin.createTrait(c8, c17, {
     })
-    , cs = Kotlin.createTrait(c8, cr, {
+    , cr = Kotlin.createTrait(c8, c11, {
     })
-    , ct = Kotlin.createTrait(c8, cr, {
+    , ct = Kotlin.createTrait(c8, cs, {
     })
-    , cu = Kotlin.createTrait(c8, {
+    , cu = Kotlin.createTrait(c8, cs, {
     })
     , cv = Kotlin.createTrait(c8, {
     })
-    , cw = Kotlin.createTrait(c8, cn, {
+    , cw = Kotlin.createTrait(c8, {
     })
-    , cx = Kotlin.createTrait(c8, cr, {
+    , cx = Kotlin.createTrait(c8, cn, {
     })
-    , cy = Kotlin.createTrait(c8, cr, {
+    , cy = Kotlin.createTrait(c8, cs, {
     })
-    , cz = Kotlin.createTrait(c8, {
+    , cz = Kotlin.createTrait(c8, cs, {
     })
-    , c11 = Kotlin.createTrait(c8, {
+    , c10 = Kotlin.createTrait(c8, {
     })
-    , c12 = Kotlin.createTrait(c8, cr, {
+    , c12 = Kotlin.createTrait(c8, {
     })
-    , c13 = Kotlin.createTrait(c8, {
+    , c13 = Kotlin.createTrait(c8, cs, {
     })
-    , c14 = Kotlin.createTrait({
+    , c14 = Kotlin.createTrait(c8, {
     })
-    , c15 = Kotlin.createTrait(c8, c10, {
+    , c15 = Kotlin.createTrait({
     })
-    , c18 = Kotlin.createTrait(c8, cr, {
+    , c16 = Kotlin.createTrait(c8, c11, {
     })
-    , c19 = Kotlin.createTrait(c8, {
+    , c19 = Kotlin.createTrait(c8, cs, {
     })
-    , c1a = Kotlin.createTrait({
+    , c1a = Kotlin.createTrait(c8, {
+    })
+    , c1b = Kotlin.createTrait({
       handleEvent: function (arg1) {
         noImpl;
       }
     })
-    , c1b = Kotlin.createClass(Kotlin.Iterator, {
+    , c1c = Kotlin.createClass(Kotlin.Iterator, {
       initialize: function () {
         this.$state = _.kotlin.support.State.get_NotReady();
         this.$nextValue = null;
@@ -1449,58 +343,11 @@
         this.set_state(_.kotlin.support.State.get_Done());
       }
     })
-    , c1c = Kotlin.createTrait({
+    , c1d = Kotlin.createTrait({
     });
-    return {c0: c0, c8: c8, cr: cr, c1: c1, c2: c2, ck: ck, c3: c3, c16: c16, cn: cn, c4: c4, c5: c5, c6: c6, c7: c7, c9: c9, ca: ca, cb: cb, cc: cc, cd: cd, c17: c17, ce: ce, cf: cf, cg: cg, ch: ch, ci: ci, cj: cj, cl: cl, cm: cm, co: co, cp: cp, c10: c10, cq: cq, cs: cs, ct: ct, cu: cu, cv: cv, cw: cw, cx: cx, cy: cy, cz: cz, c11: c11, c12: c12, c13: c13, c14: c14, c15: c15, c18: c18, c19: c19, c1a: c1a, c1b: c1b, c1c: c1c};
+    return {c0: c0, c8: c8, cs: cs, c1: c1, c2: c2, ck: ck, c3: c3, c17: c17, cn: cn, c4: c4, c5: c5, c6: c6, c7: c7, c9: c9, ca: ca, cb: cb, cc: cc, cd: cd, c18: c18, ce: ce, cf: cf, cg: cg, ch: ch, ci: ci, cj: cj, cl: cl, cm: cm, co: co, cp: cp, cq: cq, c11: c11, cr: cr, ct: ct, cu: cu, cv: cv, cw: cw, cx: cx, cy: cy, cz: cz, c10: c10, c12: c12, c13: c13, c14: c14, c15: c15, c16: c16, c19: c19, c1a: c1a, c1b: c1b, c1c: c1c, c1d: c1d};
   }()
   , _ = {
-    kevoree: Kotlin.definePackage({
-      myApp: function () {
-        var element = document.getElementById('foo');
-        if (element !== null && element !== undefined) {
-          var factory = new _.org.kevoree.impl.DefaultKevoreeFactory();
-          var root = factory.createContainerRoot();
-          var node0 = factory.createContainerNode();
-          node0.setName('node0');
-          root.addNodes(node0);
-          var lookupNode = root.findNodesByID('node0');
-          var tmp$0, tmp$1, tmp$2, tmp$3, tmp$4, tmp$5, tmp$6, tmp$7, tmp$8, tmp$9, tmp$10, tmp$11, tmp$12, tmp$13, tmp$14, tmp$15, tmp$16, tmp$17, tmp$18, tmp$19, tmp$20, tmp$21, tmp$22;
-          element.appendChild((tmp$0 = document.createElement('br')) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE());
-          element.appendChild((tmp$1 = document.createTextNode('lookupNode')) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE());
-          element.appendChild((tmp$3 = document.createTextNode(((tmp$2 = lookupNode) !== null && tmp$2 !== undefined ? tmp$2 : Kotlin.throwNPE()).getName())) !== null && tmp$3 !== undefined ? tmp$3 : Kotlin.throwNPE());
-          element.appendChild((tmp$4 = document.createElement('br')) !== null && tmp$4 !== undefined ? tmp$4 : Kotlin.throwNPE());
-          var oo = new _.java.io.OutputStream();
-          var saver = new _.org.kevoree.serializer.JSONModelSerializer();
-          saver.serialize(root, oo);
-          element.appendChild((tmp$5 = document.createTextNode('Direct Creation Saved')) !== null && tmp$5 !== undefined ? tmp$5 : Kotlin.throwNPE());
-          element.appendChild((tmp$6 = document.createElement('br')) !== null && tmp$6 !== undefined ? tmp$6 : Kotlin.throwNPE());
-          element.appendChild((tmp$7 = document.createTextNode(oo.get_result())) !== null && tmp$7 !== undefined ? tmp$7 : Kotlin.throwNPE());
-          element.appendChild((tmp$8 = document.createElement('br')) !== null && tmp$8 !== undefined ? tmp$8 : Kotlin.throwNPE());
-          var loader = new _.org.kevoree.loader.JSONModelLoader();
-          var modelLoaded = ((tmp$9 = loader.loadModelFromString(oo.get_result())) !== null && tmp$9 !== undefined ? tmp$9 : Kotlin.throwNPE()).get(0);
-          element.appendChild((tmp$10 = document.createTextNode('Node Size')) !== null && tmp$10 !== undefined ? tmp$10 : Kotlin.throwNPE());
-          element.appendChild((tmp$11 = document.createElement('br')) !== null && tmp$11 !== undefined ? tmp$11 : Kotlin.throwNPE());
-          element.appendChild((tmp$12 = document.createTextNode(',size=' + _.kotlin.get_size(modelLoaded.getNodes()))) !== null && tmp$12 !== undefined ? tmp$12 : Kotlin.throwNPE());
-          element.appendChild((tmp$13 = document.createElement('br')) !== null && tmp$13 !== undefined ? tmp$13 : Kotlin.throwNPE());
-          var oo2 = new _.java.io.OutputStream();
-          saver.serialize(modelLoaded, oo2);
-          element.appendChild((tmp$14 = document.createTextNode('After reload in browser')) !== null && tmp$14 !== undefined ? tmp$14 : Kotlin.throwNPE());
-          element.appendChild((tmp$15 = document.createElement('br')) !== null && tmp$15 !== undefined ? tmp$15 : Kotlin.throwNPE());
-          element.appendChild((tmp$16 = document.createTextNode(oo2.get_result())) !== null && tmp$16 !== undefined ? tmp$16 : Kotlin.throwNPE());
-          element.appendChild((tmp$17 = document.createElement('br')) !== null && tmp$17 !== undefined ? tmp$17 : Kotlin.throwNPE());
-          var cloner = new _.org.kevoree.cloner.ModelCloner();
-          var clonedRoot = cloner.clone(root);
-          var oo3 = new _.java.io.OutputStream();
-          saver.serialize((tmp$18 = clonedRoot) !== null && tmp$18 !== undefined ? tmp$18 : Kotlin.throwNPE(), oo3);
-          element.appendChild((tmp$19 = document.createTextNode('After cloned in browser')) !== null && tmp$19 !== undefined ? tmp$19 : Kotlin.throwNPE());
-          element.appendChild((tmp$20 = document.createElement('br')) !== null && tmp$20 !== undefined ? tmp$20 : Kotlin.throwNPE());
-          element.appendChild((tmp$21 = document.createTextNode(oo3.get_result())) !== null && tmp$21 !== undefined ? tmp$21 : Kotlin.throwNPE());
-          element.appendChild((tmp$22 = document.createElement('br')) !== null && tmp$22 !== undefined ? tmp$22 : Kotlin.throwNPE());
-          return root;
-        }
-        return null;
-      }
-    }),
     java: Kotlin.definePackage({
       io: Kotlin.definePackage({
         ByteArrayInputStream: Kotlin.createClass(classes.c0, {
@@ -1633,26 +480,26 @@
         IntegrationPattern: classes.cl,
         KevoreeFactory: classes.cm,
         LifeCycleTypeDefinition: classes.cn,
-        MBinding: classes.cp,
-        MessagePortType: classes.cq,
-        NamedElement: classes.cr,
-        Namespace: classes.cs,
-        NetworkProperty: classes.ct,
-        NodeLink: classes.cu,
-        NodeNetwork: classes.cv,
-        NodeType: classes.cw,
-        Operation: classes.cx,
-        Parameter: classes.cy,
-        Port: classes.cz,
-        PortType: classes.c10,
-        PortTypeMapping: classes.c11,
-        PortTypeRef: classes.c12,
-        Repository: classes.c13,
-        ServicePortType: classes.c15,
-        TypeDefinition: classes.c16,
-        TypedElement: classes.c17,
-        TypeLibrary: classes.c18,
-        Wire: classes.c19,
+        MBinding: classes.cq,
+        MessagePortType: classes.cr,
+        NamedElement: classes.cs,
+        Namespace: classes.ct,
+        NetworkProperty: classes.cu,
+        NodeLink: classes.cv,
+        NodeNetwork: classes.cw,
+        NodeType: classes.cx,
+        Operation: classes.cy,
+        Parameter: classes.cz,
+        Port: classes.c10,
+        PortType: classes.c11,
+        PortTypeMapping: classes.c12,
+        PortTypeRef: classes.c13,
+        Repository: classes.c14,
+        ServicePortType: classes.c16,
+        TypeDefinition: classes.c17,
+        TypedElement: classes.c18,
+        TypeLibrary: classes.c19,
+        Wire: classes.c1a,
         cloner: Kotlin.definePackage({
           ModelCloner: Kotlin.createClass({
             initialize: function () {
@@ -1883,7 +730,26 @@
         }),
         container: Kotlin.definePackage({
           KMFContainer: classes.c8,
-          KMFContainerImpl: classes.c9
+          KMFContainerImpl: classes.c9,
+          RemoveFromContainerCommand: Kotlin.createClass({
+            initialize: function (target, method, element) {
+              this.$target = target;
+              this.$method = method;
+              this.$element = element;
+            },
+            get_target: function () {
+              return this.$target;
+            },
+            get_method: function () {
+              return this.$method;
+            },
+            get_element: function () {
+              return this.$element;
+            },
+            run: function () {
+              this.get_target().reflexiveSetters(this.get_method(), this.get_element());
+            }
+          })
         }),
         factory: Kotlin.definePackage({
           MainFactory: Kotlin.createClass({
@@ -1994,6 +860,8 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+            },
             internalGetKey: function () {
               return this.getName();
             },
@@ -2021,6 +889,13 @@
             },
             findByPath: function (query) {
               return null;
+            },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
             },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.AdaptationPrimitiveType) || !Kotlin.isType(similarObj, _.org.kevoree.impl.AdaptationPrimitiveTypeImpl)) {
@@ -2147,6 +1022,21 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 2; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'setRef') {
+                    {
+                      tmp$2 = this.setRef(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1) {
+                }
+              }
+              tmp$2;
+            },
             path: function () {
               if (this.eContainer() === null || this.eContainer() === undefined) {
                 return '';
@@ -2157,6 +1047,13 @@
             },
             findByPath: function (query) {
               return null;
+            },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
             },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.AdaptationPrimitiveTypeRef) || !Kotlin.isType(similarObj, _.org.kevoree.impl.AdaptationPrimitiveTypeRefImpl)) {
@@ -2312,13 +1209,11 @@
               }
               if (!Kotlin.equals(this.get__dictionary(), dictionary)) {
                 if (this.get__dictionary() !== null && this.get__dictionary() !== undefined) {
-                  var tmp$0, tmp$1;
-                  ((tmp$0 = this.get__dictionary()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                  ((tmp$1 = this.get__dictionary()) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                  var tmp$0;
+                  ((tmp$0 = this.get__dictionary()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
                 }
                 if (dictionary !== null && dictionary !== undefined) {
-                  dictionary.setEContainer(this, Kotlin.b3(_f.fw, this));
-                  dictionary.setContainmentRefName('dictionary');
+                  dictionary.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'setDictionary', null), 'dictionary');
                 }
                 this.set__dictionary(dictionary);
               }
@@ -2388,7 +1283,7 @@
               }
               this.set__bindings_java_cache(null);
               if (this.get__bindings().size() !== 0 && this.get__bindings().indexOf(bindings) !== -1) {
-                this.get__bindings().remove(this.get__bindings().indexOf(bindings));
+                this.get__bindings().remove(bindings);
                 bindings.noOpposite_setHub(null);
               }
             },
@@ -2413,13 +1308,14 @@
               }
               this.set__bindings_java_cache(null);
               if (this.get__bindings().size() !== 0 && this.get__bindings().indexOf(bindings) !== -1) {
-                this.get__bindings().remove(this.get__bindings().indexOf(bindings));
+                this.get__bindings().remove(bindings);
               }
             },
             noOpposite_removeAllBindings: function () {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var temp_els = this.getBindings();
               this.set__bindings_java_cache(null);
               this.get__bindings().clear();
             },
@@ -2482,6 +1378,35 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 4; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'setTypeDefinition') {
+                    {
+                      tmp$2 = this.setTypeDefinition(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'setDictionary') {
+                    {
+                      tmp$2 = this.setDictionary(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2)
+                  if (tmp$0 === 'addBindings') {
+                    {
+                      tmp$2 = this.addBindings(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 3) {
+                }
+              }
+              tmp$2;
+            },
             internalGetKey: function () {
               return this.getName();
             },
@@ -2509,6 +1434,13 @@
             },
             findByPath: function (query) {
               return null;
+            },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
             },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.Channel) || !Kotlin.isType(similarObj, _.org.kevoree.impl.ChannelImpl)) {
@@ -2835,13 +1767,14 @@
               }
               this.set__deployUnits_java_cache(null);
               if (this.get__deployUnits().size() !== 0 && this.get__deployUnits().indexOf(deployUnits) !== -1) {
-                this.get__deployUnits().remove(this.get__deployUnits().indexOf(deployUnits));
+                this.get__deployUnits().remove(deployUnits);
               }
             },
             removeAllDeployUnits: function () {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var temp_els = this.getDeployUnits();
               this.set__deployUnits_java_cache(null);
               this.get__deployUnits().clear();
             },
@@ -2854,13 +1787,11 @@
               }
               if (!Kotlin.equals(this.get__dictionaryType(), dictionaryType)) {
                 if (this.get__dictionaryType() !== null && this.get__dictionaryType() !== undefined) {
-                  var tmp$0, tmp$1;
-                  ((tmp$0 = this.get__dictionaryType()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                  ((tmp$1 = this.get__dictionaryType()) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                  var tmp$0;
+                  ((tmp$0 = this.get__dictionaryType()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
                 }
                 if (dictionaryType !== null && dictionaryType !== undefined) {
-                  dictionaryType.setEContainer(this, Kotlin.b3(_f.fx, this));
-                  dictionaryType.setContainmentRefName('dictionaryType');
+                  dictionaryType.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'setDictionaryType', null), 'dictionaryType');
                 }
                 this.set__dictionaryType(dictionaryType);
               }
@@ -2920,6 +1851,8 @@
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var tmp$0;
+              var temp_els = (tmp$0 = this.getSuperTypes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               this.set__superTypes_java_cache(null);
               this.get__superTypes().clear();
             },
@@ -2992,6 +1925,35 @@
                 clonedSelfObject.setInternalReadOnly();
               }
               return clonedSelfObject;
+            },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 4; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'addDeployUnits') {
+                    {
+                      tmp$2 = this.addDeployUnits(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'setDictionaryType') {
+                    {
+                      tmp$2 = this.setDictionaryType(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2)
+                  if (tmp$0 === 'addSuperTypes') {
+                    {
+                      tmp$2 = this.addSuperTypes(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 3) {
+                }
+              }
+              tmp$2;
             },
             internalGetKey: function () {
               return this.getName();
@@ -3078,6 +2040,13 @@
                 }
               }
               return tmp$4;
+            },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
             },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.ChannelType) || !Kotlin.isType(similarObj, _.org.kevoree.impl.ChannelTypeImpl)) {
@@ -3312,13 +2281,11 @@
               }
               if (!Kotlin.equals(this.get__dictionary(), dictionary)) {
                 if (this.get__dictionary() !== null && this.get__dictionary() !== undefined) {
-                  var tmp$0, tmp$1;
-                  ((tmp$0 = this.get__dictionary()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                  ((tmp$1 = this.get__dictionary()) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                  var tmp$0;
+                  ((tmp$0 = this.get__dictionary()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
                 }
                 if (dictionary !== null && dictionary !== undefined) {
-                  dictionary.setEContainer(this, Kotlin.b3(_f.fy, this));
-                  dictionary.setContainmentRefName('dictionary');
+                  dictionary.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'setDictionary', null), 'dictionary');
                 }
                 this.set__dictionary(dictionary);
               }
@@ -3341,8 +2308,7 @@
                   var tmp$0 = provided.iterator();
                   while (tmp$0.hasNext()) {
                     var elem = tmp$0.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.fz, this, elem));
-                    elem.setContainmentRefName('provided');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeProvided', elem), 'provided');
                   }
                 }
               }
@@ -3352,8 +2318,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__provided_java_cache(null);
-              provided.setEContainer(this, Kotlin.b0(_f.f10, this, provided));
-              provided.setContainmentRefName('provided');
+              provided.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeProvided', provided), 'provided');
               this.get__provided().add(provided);
             },
             addAllProvided: function (provided) {
@@ -3366,8 +2331,7 @@
                 var tmp$0 = provided.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(this, Kotlin.b0(_f.f11, this, el));
-                  el.setContainmentRefName('provided');
+                  el.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeProvided', el), 'provided');
                 }
               }
             },
@@ -3377,10 +2341,9 @@
               }
               this.set__provided_java_cache(null);
               if (this.get__provided().size() !== 0 && this.get__provided().indexOf(provided) !== -1) {
-                this.get__provided().remove(this.get__provided().indexOf(provided));
-                var tmp$0, tmp$1;
-                ((tmp$0 = provided) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = provided) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                this.get__provided().remove(provided);
+                var tmp$0;
+                ((tmp$0 = provided) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllProvided: function () {
@@ -3392,8 +2355,7 @@
                 var tmp$0 = temp_els.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__provided_java_cache(null);
@@ -3417,8 +2379,7 @@
                   var tmp$0 = required.iterator();
                   while (tmp$0.hasNext()) {
                     var elem = tmp$0.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f12, this, elem));
-                    elem.setContainmentRefName('required');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeRequired', elem), 'required');
                   }
                 }
               }
@@ -3428,8 +2389,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__required_java_cache(null);
-              required.setEContainer(this, Kotlin.b0(_f.f13, this, required));
-              required.setContainmentRefName('required');
+              required.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeRequired', required), 'required');
               this.get__required().add(required);
             },
             addAllRequired: function (required) {
@@ -3442,8 +2402,7 @@
                 var tmp$0 = required.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(this, Kotlin.b0(_f.f14, this, el));
-                  el.setContainmentRefName('required');
+                  el.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeRequired', el), 'required');
                 }
               }
             },
@@ -3453,10 +2412,9 @@
               }
               this.set__required_java_cache(null);
               if (this.get__required().size() !== 0 && this.get__required().indexOf(required) !== -1) {
-                this.get__required().remove(this.get__required().indexOf(required));
-                var tmp$0, tmp$1;
-                ((tmp$0 = required) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = required) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                this.get__required().remove(required);
+                var tmp$0;
+                ((tmp$0 = required) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllRequired: function () {
@@ -3468,8 +2426,7 @@
                 var tmp$0 = temp_els.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__required_java_cache(null);
@@ -3595,6 +2552,49 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 6; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'setTypeDefinition') {
+                    {
+                      tmp$2 = this.setTypeDefinition(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'setDictionary') {
+                    {
+                      tmp$2 = this.setDictionary(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2)
+                  if (tmp$0 === 'removeProvided') {
+                    {
+                      tmp$2 = this.removeProvided(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 3)
+                  if (tmp$0 === 'removeRequired') {
+                    {
+                      tmp$2 = this.removeRequired(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 4)
+                  if (tmp$0 === 'setNamespace') {
+                    {
+                      tmp$2 = this.setNamespace(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 5) {
+                }
+              }
+              tmp$2;
+            },
             internalGetKey: function () {
               return this.getName();
             },
@@ -3623,6 +2623,51 @@
             findByPath: function (query) {
               return null;
             },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              {
+                var tmp$0 = this.getProvided().iterator();
+                while (tmp$0.hasNext()) {
+                  var subElement = tmp$0.next();
+                  var lookEqualsSub = false;
+                  {
+                    var tmp$1 = similarObjCasted.getProvided().iterator();
+                    while (tmp$1.hasNext()) {
+                      var subElement2 = tmp$1.next();
+                      if (subElement.deepModelEquals(subElement2)) {
+                        lookEqualsSub = true;
+                      }
+                    }
+                  }
+                  if (!lookEqualsSub) {
+                    return false;
+                  }
+                }
+              }
+              {
+                var tmp$2 = this.getRequired().iterator();
+                while (tmp$2.hasNext()) {
+                  var subElement_0 = tmp$2.next();
+                  var lookEqualsSub_0 = false;
+                  {
+                    var tmp$3 = similarObjCasted.getRequired().iterator();
+                    while (tmp$3.hasNext()) {
+                      var subElement2_0 = tmp$3.next();
+                      if (subElement_0.deepModelEquals(subElement2_0)) {
+                        lookEqualsSub_0 = true;
+                      }
+                    }
+                  }
+                  if (!lookEqualsSub_0) {
+                    return false;
+                  }
+                }
+              }
+              return true;
+            },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.ComponentInstance) || !Kotlin.isType(similarObj, _.org.kevoree.impl.ComponentInstanceImpl)) {
                 return false;
@@ -3642,44 +2687,6 @@
               }
               if (this.getRequired().size() !== similarObjCasted.getRequired().size()) {
                 return false;
-              }
-              {
-                var tmp$0 = this.getProvided().iterator();
-                while (tmp$0.hasNext()) {
-                  var subElement = tmp$0.next();
-                  var lookEqualsSub = false;
-                  {
-                    var tmp$1 = similarObjCasted.getProvided().iterator();
-                    while (tmp$1.hasNext()) {
-                      var subElement2 = tmp$1.next();
-                      if (subElement.modelEquals(subElement2)) {
-                        lookEqualsSub = true;
-                      }
-                    }
-                  }
-                  if (!lookEqualsSub) {
-                    return false;
-                  }
-                }
-              }
-              {
-                var tmp$2 = this.getRequired().iterator();
-                while (tmp$2.hasNext()) {
-                  var subElement_0 = tmp$2.next();
-                  var lookEqualsSub_0 = false;
-                  {
-                    var tmp$3 = similarObjCasted.getRequired().iterator();
-                    while (tmp$3.hasNext()) {
-                      var subElement2_0 = tmp$3.next();
-                      if (subElement_0.modelEquals(subElement2_0)) {
-                        lookEqualsSub_0 = true;
-                      }
-                    }
-                  }
-                  if (!lookEqualsSub_0) {
-                    return false;
-                  }
-                }
               }
               return true;
             }
@@ -4022,13 +3029,14 @@
               }
               this.set__deployUnits_java_cache(null);
               if (this.get__deployUnits().size() !== 0 && this.get__deployUnits().indexOf(deployUnits) !== -1) {
-                this.get__deployUnits().remove(this.get__deployUnits().indexOf(deployUnits));
+                this.get__deployUnits().remove(deployUnits);
               }
             },
             removeAllDeployUnits: function () {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var temp_els = this.getDeployUnits();
               this.set__deployUnits_java_cache(null);
               this.get__deployUnits().clear();
             },
@@ -4041,13 +3049,11 @@
               }
               if (!Kotlin.equals(this.get__dictionaryType(), dictionaryType)) {
                 if (this.get__dictionaryType() !== null && this.get__dictionaryType() !== undefined) {
-                  var tmp$0, tmp$1;
-                  ((tmp$0 = this.get__dictionaryType()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                  ((tmp$1 = this.get__dictionaryType()) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                  var tmp$0;
+                  ((tmp$0 = this.get__dictionaryType()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
                 }
                 if (dictionaryType !== null && dictionaryType !== undefined) {
-                  dictionaryType.setEContainer(this, Kotlin.b3(_f.f15, this));
-                  dictionaryType.setContainmentRefName('dictionaryType');
+                  dictionaryType.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'setDictionaryType', null), 'dictionaryType');
                 }
                 this.set__dictionaryType(dictionaryType);
               }
@@ -4107,6 +3113,8 @@
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var tmp$0;
+              var temp_els = (tmp$0 = this.getSuperTypes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               this.set__superTypes_java_cache(null);
               this.get__superTypes().clear();
             },
@@ -4134,8 +3142,7 @@
                   var tmp$1 = required.iterator();
                   while (tmp$1.hasNext()) {
                     var elem = tmp$1.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f16, this, elem));
-                    elem.setContainmentRefName('required');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeRequired', elem), 'required');
                   }
                 }
               }
@@ -4145,8 +3152,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__required_java_cache(null);
-              required.setEContainer(this, Kotlin.b0(_f.f17, this, required));
-              required.setContainmentRefName('required');
+              required.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeRequired', required), 'required');
               this.get__required().put(required.getName(), required);
             },
             addAllRequired: function (required) {
@@ -4165,8 +3171,7 @@
                 var tmp$1 = required.iterator();
                 while (tmp$1.hasNext()) {
                   var el_0 = tmp$1.next();
-                  el_0.setEContainer(this, Kotlin.b0(_f.f18, this, el_0));
-                  el_0.setContainmentRefName('required');
+                  el_0.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeRequired', el_0), 'required');
                 }
               }
             },
@@ -4177,9 +3182,8 @@
               this.set__required_java_cache(null);
               if (this.get__required().size() !== 0 && this.get__required().containsKey(required.getName())) {
                 this.get__required().remove(required.getName());
-                var tmp$0, tmp$1;
-                ((tmp$0 = required) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = required) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                var tmp$0;
+                ((tmp$0 = required) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllRequired: function () {
@@ -4187,13 +3191,12 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               var tmp$0;
+              var temp_els = (tmp$0 = this.getRequired()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               {
-                var tmp$1 = ((tmp$0 = this.getRequired()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).iterator();
+                var tmp$1 = temp_els.iterator();
                 while (tmp$1.hasNext()) {
-                  var elm = tmp$1.next();
-                  var el = elm;
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  var el = tmp$1.next();
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__required_java_cache(null);
@@ -4223,8 +3226,7 @@
                   var tmp$1 = integrationPatterns.iterator();
                   while (tmp$1.hasNext()) {
                     var elem = tmp$1.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f19, this, elem));
-                    elem.setContainmentRefName('integrationPatterns');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeIntegrationPatterns', elem), 'integrationPatterns');
                   }
                 }
               }
@@ -4234,8 +3236,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__integrationPatterns_java_cache(null);
-              integrationPatterns.setEContainer(this, Kotlin.b0(_f.f1a, this, integrationPatterns));
-              integrationPatterns.setContainmentRefName('integrationPatterns');
+              integrationPatterns.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeIntegrationPatterns', integrationPatterns), 'integrationPatterns');
               this.get__integrationPatterns().put(integrationPatterns.getName(), integrationPatterns);
             },
             addAllIntegrationPatterns: function (integrationPatterns) {
@@ -4254,8 +3255,7 @@
                 var tmp$1 = integrationPatterns.iterator();
                 while (tmp$1.hasNext()) {
                   var el_0 = tmp$1.next();
-                  el_0.setEContainer(this, Kotlin.b0(_f.f1b, this, el_0));
-                  el_0.setContainmentRefName('integrationPatterns');
+                  el_0.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeIntegrationPatterns', el_0), 'integrationPatterns');
                 }
               }
             },
@@ -4266,9 +3266,8 @@
               this.set__integrationPatterns_java_cache(null);
               if (this.get__integrationPatterns().size() !== 0 && this.get__integrationPatterns().containsKey(integrationPatterns.getName())) {
                 this.get__integrationPatterns().remove(integrationPatterns.getName());
-                var tmp$0, tmp$1;
-                ((tmp$0 = integrationPatterns) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = integrationPatterns) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                var tmp$0;
+                ((tmp$0 = integrationPatterns) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllIntegrationPatterns: function () {
@@ -4276,13 +3275,12 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               var tmp$0;
+              var temp_els = (tmp$0 = this.getIntegrationPatterns()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               {
-                var tmp$1 = ((tmp$0 = this.getIntegrationPatterns()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).iterator();
+                var tmp$1 = temp_els.iterator();
                 while (tmp$1.hasNext()) {
-                  var elm = tmp$1.next();
-                  var el = elm;
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  var el = tmp$1.next();
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__integrationPatterns_java_cache(null);
@@ -4297,13 +3295,11 @@
               }
               if (!Kotlin.equals(this.get__extraFonctionalProperties(), extraFonctionalProperties)) {
                 if (this.get__extraFonctionalProperties() !== null && this.get__extraFonctionalProperties() !== undefined) {
-                  var tmp$0, tmp$1;
-                  ((tmp$0 = this.get__extraFonctionalProperties()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                  ((tmp$1 = this.get__extraFonctionalProperties()) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                  var tmp$0;
+                  ((tmp$0 = this.get__extraFonctionalProperties()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
                 }
                 if (extraFonctionalProperties !== null && extraFonctionalProperties !== undefined) {
-                  extraFonctionalProperties.setEContainer(this, Kotlin.b3(_f.f1c, this));
-                  extraFonctionalProperties.setContainmentRefName('extraFonctionalProperties');
+                  extraFonctionalProperties.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'setExtraFonctionalProperties', null), 'extraFonctionalProperties');
                 }
                 this.set__extraFonctionalProperties(extraFonctionalProperties);
               }
@@ -4332,8 +3328,7 @@
                   var tmp$1 = provided.iterator();
                   while (tmp$1.hasNext()) {
                     var elem = tmp$1.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f1d, this, elem));
-                    elem.setContainmentRefName('provided');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeProvided', elem), 'provided');
                   }
                 }
               }
@@ -4343,8 +3338,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__provided_java_cache(null);
-              provided.setEContainer(this, Kotlin.b0(_f.f1e, this, provided));
-              provided.setContainmentRefName('provided');
+              provided.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeProvided', provided), 'provided');
               this.get__provided().put(provided.getName(), provided);
             },
             addAllProvided: function (provided) {
@@ -4363,8 +3357,7 @@
                 var tmp$1 = provided.iterator();
                 while (tmp$1.hasNext()) {
                   var el_0 = tmp$1.next();
-                  el_0.setEContainer(this, Kotlin.b0(_f.f1f, this, el_0));
-                  el_0.setContainmentRefName('provided');
+                  el_0.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeProvided', el_0), 'provided');
                 }
               }
             },
@@ -4375,9 +3368,8 @@
               this.set__provided_java_cache(null);
               if (this.get__provided().size() !== 0 && this.get__provided().containsKey(provided.getName())) {
                 this.get__provided().remove(provided.getName());
-                var tmp$0, tmp$1;
-                ((tmp$0 = provided) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = provided) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                var tmp$0;
+                ((tmp$0 = provided) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllProvided: function () {
@@ -4385,13 +3377,12 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               var tmp$0;
+              var temp_els = (tmp$0 = this.getProvided()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               {
-                var tmp$1 = ((tmp$0 = this.getProvided()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).iterator();
+                var tmp$1 = temp_els.iterator();
                 while (tmp$1.hasNext()) {
-                  var elm = tmp$1.next();
-                  var el = elm;
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  var el = tmp$1.next();
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__provided_java_cache(null);
@@ -4559,6 +3550,63 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 8; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'addDeployUnits') {
+                    {
+                      tmp$2 = this.addDeployUnits(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'setDictionaryType') {
+                    {
+                      tmp$2 = this.setDictionaryType(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2)
+                  if (tmp$0 === 'addSuperTypes') {
+                    {
+                      tmp$2 = this.addSuperTypes(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 3)
+                  if (tmp$0 === 'removeRequired') {
+                    {
+                      tmp$2 = this.removeRequired(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 4)
+                  if (tmp$0 === 'removeIntegrationPatterns') {
+                    {
+                      tmp$2 = this.removeIntegrationPatterns(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 5)
+                  if (tmp$0 === 'setExtraFonctionalProperties') {
+                    {
+                      tmp$2 = this.setExtraFonctionalProperties(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 6)
+                  if (tmp$0 === 'removeProvided') {
+                    {
+                      tmp$2 = this.removeProvided(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 7) {
+                }
+              }
+              tmp$2;
+            },
             internalGetKey: function () {
               return this.getName();
             },
@@ -4632,7 +3680,7 @@
                     {
                       var objFound_0 = this.findRequiredByID(queryID);
                       if (!Kotlin.equals(subquery, '') && (objFound_0 !== null && objFound_0 !== undefined)) {
-                        throw new Kotlin.Exception('KMFQL : rejected sucessor');
+                        throw new Kotlin.Exception('KMFQL : rejected sucessor' + relationName + ' from ComponentType');
                       }
                        else {
                         tmp$2 = objFound_0;
@@ -4658,7 +3706,7 @@
                     {
                       var objFound_2 = this.findProvidedByID(queryID);
                       if (!Kotlin.equals(subquery, '') && (objFound_2 !== null && objFound_2 !== undefined)) {
-                        throw new Kotlin.Exception('KMFQL : rejected sucessor');
+                        throw new Kotlin.Exception('KMFQL : rejected sucessor' + relationName + ' from ComponentType');
                       }
                        else {
                         tmp$2 = objFound_2;
@@ -4671,6 +3719,43 @@
                 }
               }
               return tmp$2;
+            },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              {
+                var tmp$0 = this.getRequired().iterator();
+                while (tmp$0.hasNext()) {
+                  var subElement = tmp$0.next();
+                  var foundedElement = similarObjCasted.findRequiredByID(subElement.getName());
+                  if (foundedElement === null || foundedElement === undefined || !Kotlin.equals(foundedElement, subElement)) {
+                    return false;
+                  }
+                }
+              }
+              {
+                var tmp$1 = this.getIntegrationPatterns().iterator();
+                while (tmp$1.hasNext()) {
+                  var subElement_0 = tmp$1.next();
+                  var foundedElement_0 = similarObjCasted.findIntegrationPatternsByID(subElement_0.getName());
+                  if (foundedElement_0 === null || foundedElement_0 === undefined || !Kotlin.equals(foundedElement_0, subElement_0)) {
+                    return false;
+                  }
+                }
+              }
+              {
+                var tmp$2 = this.getProvided().iterator();
+                while (tmp$2.hasNext()) {
+                  var subElement_1 = tmp$2.next();
+                  var foundedElement_1 = similarObjCasted.findProvidedByID(subElement_1.getName());
+                  if (foundedElement_1 === null || foundedElement_1 === undefined || !Kotlin.equals(foundedElement_1, subElement_1)) {
+                    return false;
+                  }
+                }
+              }
+              return true;
             },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.ComponentType) || !Kotlin.isType(similarObj, _.org.kevoree.impl.ComponentTypeImpl)) {
@@ -4712,36 +3797,6 @@
               }
               if (this.getProvided().size() !== similarObjCasted.getProvided().size()) {
                 return false;
-              }
-              {
-                var tmp$0 = this.getRequired().iterator();
-                while (tmp$0.hasNext()) {
-                  var subElement = tmp$0.next();
-                  var foundedElement = similarObjCasted.findRequiredByID(subElement.getName());
-                  if (foundedElement === null || foundedElement === undefined || !Kotlin.equals(foundedElement, subElement)) {
-                    return false;
-                  }
-                }
-              }
-              {
-                var tmp$1 = this.getIntegrationPatterns().iterator();
-                while (tmp$1.hasNext()) {
-                  var subElement_0 = tmp$1.next();
-                  var foundedElement_0 = similarObjCasted.findIntegrationPatternsByID(subElement_0.getName());
-                  if (foundedElement_0 === null || foundedElement_0 === undefined || !Kotlin.equals(foundedElement_0, subElement_0)) {
-                    return false;
-                  }
-                }
-              }
-              {
-                var tmp$2 = this.getProvided().iterator();
-                while (tmp$2.hasNext()) {
-                  var subElement_1 = tmp$2.next();
-                  var foundedElement_1 = similarObjCasted.findProvidedByID(subElement_1.getName());
-                  if (foundedElement_1 === null || foundedElement_1 === undefined || !Kotlin.equals(foundedElement_1, subElement_1)) {
-                    return false;
-                  }
-                }
               }
               return true;
             }
@@ -5124,13 +4179,14 @@
               }
               this.set__deployUnits_java_cache(null);
               if (this.get__deployUnits().size() !== 0 && this.get__deployUnits().indexOf(deployUnits) !== -1) {
-                this.get__deployUnits().remove(this.get__deployUnits().indexOf(deployUnits));
+                this.get__deployUnits().remove(deployUnits);
               }
             },
             removeAllDeployUnits: function () {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var temp_els = this.getDeployUnits();
               this.set__deployUnits_java_cache(null);
               this.get__deployUnits().clear();
             },
@@ -5143,13 +4199,11 @@
               }
               if (!Kotlin.equals(this.get__dictionaryType(), dictionaryType)) {
                 if (this.get__dictionaryType() !== null && this.get__dictionaryType() !== undefined) {
-                  var tmp$0, tmp$1;
-                  ((tmp$0 = this.get__dictionaryType()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                  ((tmp$1 = this.get__dictionaryType()) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                  var tmp$0;
+                  ((tmp$0 = this.get__dictionaryType()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
                 }
                 if (dictionaryType !== null && dictionaryType !== undefined) {
-                  dictionaryType.setEContainer(this, Kotlin.b3(_f.f1g, this));
-                  dictionaryType.setContainmentRefName('dictionaryType');
+                  dictionaryType.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'setDictionaryType', null), 'dictionaryType');
                 }
                 this.set__dictionaryType(dictionaryType);
               }
@@ -5209,6 +4263,8 @@
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var tmp$0;
+              var temp_els = (tmp$0 = this.getSuperTypes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               this.set__superTypes_java_cache(null);
               this.get__superTypes().clear();
             },
@@ -5236,8 +4292,7 @@
                   var tmp$1 = required.iterator();
                   while (tmp$1.hasNext()) {
                     var elem = tmp$1.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f1h, this, elem));
-                    elem.setContainmentRefName('required');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeRequired', elem), 'required');
                   }
                 }
               }
@@ -5247,8 +4302,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__required_java_cache(null);
-              required.setEContainer(this, Kotlin.b0(_f.f1i, this, required));
-              required.setContainmentRefName('required');
+              required.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeRequired', required), 'required');
               this.get__required().put(required.getName(), required);
             },
             addAllRequired: function (required) {
@@ -5267,8 +4321,7 @@
                 var tmp$1 = required.iterator();
                 while (tmp$1.hasNext()) {
                   var el_0 = tmp$1.next();
-                  el_0.setEContainer(this, Kotlin.b0(_f.f1j, this, el_0));
-                  el_0.setContainmentRefName('required');
+                  el_0.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeRequired', el_0), 'required');
                 }
               }
             },
@@ -5279,9 +4332,8 @@
               this.set__required_java_cache(null);
               if (this.get__required().size() !== 0 && this.get__required().containsKey(required.getName())) {
                 this.get__required().remove(required.getName());
-                var tmp$0, tmp$1;
-                ((tmp$0 = required) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = required) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                var tmp$0;
+                ((tmp$0 = required) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllRequired: function () {
@@ -5289,13 +4341,12 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               var tmp$0;
+              var temp_els = (tmp$0 = this.getRequired()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               {
-                var tmp$1 = ((tmp$0 = this.getRequired()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).iterator();
+                var tmp$1 = temp_els.iterator();
                 while (tmp$1.hasNext()) {
-                  var elm = tmp$1.next();
-                  var el = elm;
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  var el = tmp$1.next();
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__required_java_cache(null);
@@ -5325,8 +4376,7 @@
                   var tmp$1 = integrationPatterns.iterator();
                   while (tmp$1.hasNext()) {
                     var elem = tmp$1.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f1k, this, elem));
-                    elem.setContainmentRefName('integrationPatterns');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeIntegrationPatterns', elem), 'integrationPatterns');
                   }
                 }
               }
@@ -5336,8 +4386,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__integrationPatterns_java_cache(null);
-              integrationPatterns.setEContainer(this, Kotlin.b0(_f.f1l, this, integrationPatterns));
-              integrationPatterns.setContainmentRefName('integrationPatterns');
+              integrationPatterns.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeIntegrationPatterns', integrationPatterns), 'integrationPatterns');
               this.get__integrationPatterns().put(integrationPatterns.getName(), integrationPatterns);
             },
             addAllIntegrationPatterns: function (integrationPatterns) {
@@ -5356,8 +4405,7 @@
                 var tmp$1 = integrationPatterns.iterator();
                 while (tmp$1.hasNext()) {
                   var el_0 = tmp$1.next();
-                  el_0.setEContainer(this, Kotlin.b0(_f.f1m, this, el_0));
-                  el_0.setContainmentRefName('integrationPatterns');
+                  el_0.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeIntegrationPatterns', el_0), 'integrationPatterns');
                 }
               }
             },
@@ -5368,9 +4416,8 @@
               this.set__integrationPatterns_java_cache(null);
               if (this.get__integrationPatterns().size() !== 0 && this.get__integrationPatterns().containsKey(integrationPatterns.getName())) {
                 this.get__integrationPatterns().remove(integrationPatterns.getName());
-                var tmp$0, tmp$1;
-                ((tmp$0 = integrationPatterns) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = integrationPatterns) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                var tmp$0;
+                ((tmp$0 = integrationPatterns) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllIntegrationPatterns: function () {
@@ -5378,13 +4425,12 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               var tmp$0;
+              var temp_els = (tmp$0 = this.getIntegrationPatterns()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               {
-                var tmp$1 = ((tmp$0 = this.getIntegrationPatterns()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).iterator();
+                var tmp$1 = temp_els.iterator();
                 while (tmp$1.hasNext()) {
-                  var elm = tmp$1.next();
-                  var el = elm;
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  var el = tmp$1.next();
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__integrationPatterns_java_cache(null);
@@ -5399,13 +4445,11 @@
               }
               if (!Kotlin.equals(this.get__extraFonctionalProperties(), extraFonctionalProperties)) {
                 if (this.get__extraFonctionalProperties() !== null && this.get__extraFonctionalProperties() !== undefined) {
-                  var tmp$0, tmp$1;
-                  ((tmp$0 = this.get__extraFonctionalProperties()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                  ((tmp$1 = this.get__extraFonctionalProperties()) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                  var tmp$0;
+                  ((tmp$0 = this.get__extraFonctionalProperties()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
                 }
                 if (extraFonctionalProperties !== null && extraFonctionalProperties !== undefined) {
-                  extraFonctionalProperties.setEContainer(this, Kotlin.b3(_f.f1n, this));
-                  extraFonctionalProperties.setContainmentRefName('extraFonctionalProperties');
+                  extraFonctionalProperties.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'setExtraFonctionalProperties', null), 'extraFonctionalProperties');
                 }
                 this.set__extraFonctionalProperties(extraFonctionalProperties);
               }
@@ -5434,8 +4478,7 @@
                   var tmp$1 = provided.iterator();
                   while (tmp$1.hasNext()) {
                     var elem = tmp$1.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f1o, this, elem));
-                    elem.setContainmentRefName('provided');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeProvided', elem), 'provided');
                   }
                 }
               }
@@ -5445,8 +4488,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__provided_java_cache(null);
-              provided.setEContainer(this, Kotlin.b0(_f.f1p, this, provided));
-              provided.setContainmentRefName('provided');
+              provided.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeProvided', provided), 'provided');
               this.get__provided().put(provided.getName(), provided);
             },
             addAllProvided: function (provided) {
@@ -5465,8 +4507,7 @@
                 var tmp$1 = provided.iterator();
                 while (tmp$1.hasNext()) {
                   var el_0 = tmp$1.next();
-                  el_0.setEContainer(this, Kotlin.b0(_f.f1q, this, el_0));
-                  el_0.setContainmentRefName('provided');
+                  el_0.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeProvided', el_0), 'provided');
                 }
               }
             },
@@ -5477,9 +4518,8 @@
               this.set__provided_java_cache(null);
               if (this.get__provided().size() !== 0 && this.get__provided().containsKey(provided.getName())) {
                 this.get__provided().remove(provided.getName());
-                var tmp$0, tmp$1;
-                ((tmp$0 = provided) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = provided) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                var tmp$0;
+                ((tmp$0 = provided) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllProvided: function () {
@@ -5487,13 +4527,12 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               var tmp$0;
+              var temp_els = (tmp$0 = this.getProvided()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               {
-                var tmp$1 = ((tmp$0 = this.getProvided()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).iterator();
+                var tmp$1 = temp_els.iterator();
                 while (tmp$1.hasNext()) {
-                  var elm = tmp$1.next();
-                  var el = elm;
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  var el = tmp$1.next();
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__provided_java_cache(null);
@@ -5554,6 +4593,8 @@
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var tmp$0;
+              var temp_els = (tmp$0 = this.getChilds()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               this.set__childs_java_cache(null);
               this.get__childs().clear();
             },
@@ -5575,8 +4616,7 @@
                   var tmp$0 = wires.iterator();
                   while (tmp$0.hasNext()) {
                     var elem = tmp$0.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f1r, this, elem));
-                    elem.setContainmentRefName('wires');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeWires', elem), 'wires');
                   }
                 }
               }
@@ -5586,8 +4626,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__wires_java_cache(null);
-              wires.setEContainer(this, Kotlin.b0(_f.f1s, this, wires));
-              wires.setContainmentRefName('wires');
+              wires.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeWires', wires), 'wires');
               this.get__wires().add(wires);
             },
             addAllWires: function (wires) {
@@ -5600,8 +4639,7 @@
                 var tmp$0 = wires.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(this, Kotlin.b0(_f.f1t, this, el));
-                  el.setContainmentRefName('wires');
+                  el.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeWires', el), 'wires');
                 }
               }
             },
@@ -5611,10 +4649,9 @@
               }
               this.set__wires_java_cache(null);
               if (this.get__wires().size() !== 0 && this.get__wires().indexOf(wires) !== -1) {
-                this.get__wires().remove(this.get__wires().indexOf(wires));
-                var tmp$0, tmp$1;
-                ((tmp$0 = wires) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = wires) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                this.get__wires().remove(wires);
+                var tmp$0;
+                ((tmp$0 = wires) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllWires: function () {
@@ -5626,8 +4663,7 @@
                 var tmp$0 = temp_els.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__wires_java_cache(null);
@@ -5833,6 +4869,77 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 10; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'addDeployUnits') {
+                    {
+                      tmp$2 = this.addDeployUnits(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'setDictionaryType') {
+                    {
+                      tmp$2 = this.setDictionaryType(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2)
+                  if (tmp$0 === 'addSuperTypes') {
+                    {
+                      tmp$2 = this.addSuperTypes(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 3)
+                  if (tmp$0 === 'removeRequired') {
+                    {
+                      tmp$2 = this.removeRequired(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 4)
+                  if (tmp$0 === 'removeIntegrationPatterns') {
+                    {
+                      tmp$2 = this.removeIntegrationPatterns(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 5)
+                  if (tmp$0 === 'setExtraFonctionalProperties') {
+                    {
+                      tmp$2 = this.setExtraFonctionalProperties(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 6)
+                  if (tmp$0 === 'removeProvided') {
+                    {
+                      tmp$2 = this.removeProvided(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 7)
+                  if (tmp$0 === 'addChilds') {
+                    {
+                      tmp$2 = this.addChilds(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 8)
+                  if (tmp$0 === 'removeWires') {
+                    {
+                      tmp$2 = this.removeWires(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 9) {
+                }
+              }
+              tmp$2;
+            },
             internalGetKey: function () {
               return this.getName();
             },
@@ -5909,7 +5016,7 @@
                     {
                       var objFound_0 = this.findRequiredByID(queryID);
                       if (!Kotlin.equals(subquery, '') && (objFound_0 !== null && objFound_0 !== undefined)) {
-                        throw new Kotlin.Exception('KMFQL : rejected sucessor');
+                        throw new Kotlin.Exception('KMFQL : rejected sucessor' + relationName + ' from CompositeType');
                       }
                        else {
                         tmp$2 = objFound_0;
@@ -5935,7 +5042,7 @@
                     {
                       var objFound_2 = this.findProvidedByID(queryID);
                       if (!Kotlin.equals(subquery, '') && (objFound_2 !== null && objFound_2 !== undefined)) {
-                        throw new Kotlin.Exception('KMFQL : rejected sucessor');
+                        throw new Kotlin.Exception('KMFQL : rejected sucessor' + relationName + ' from CompositeType');
                       }
                        else {
                         tmp$2 = objFound_2;
@@ -5961,6 +5068,62 @@
                 }
               }
               return tmp$2;
+            },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              {
+                var tmp$0 = this.getRequired().iterator();
+                while (tmp$0.hasNext()) {
+                  var subElement = tmp$0.next();
+                  var foundedElement = similarObjCasted.findRequiredByID(subElement.getName());
+                  if (foundedElement === null || foundedElement === undefined || !Kotlin.equals(foundedElement, subElement)) {
+                    return false;
+                  }
+                }
+              }
+              {
+                var tmp$1 = this.getIntegrationPatterns().iterator();
+                while (tmp$1.hasNext()) {
+                  var subElement_0 = tmp$1.next();
+                  var foundedElement_0 = similarObjCasted.findIntegrationPatternsByID(subElement_0.getName());
+                  if (foundedElement_0 === null || foundedElement_0 === undefined || !Kotlin.equals(foundedElement_0, subElement_0)) {
+                    return false;
+                  }
+                }
+              }
+              {
+                var tmp$2 = this.getProvided().iterator();
+                while (tmp$2.hasNext()) {
+                  var subElement_1 = tmp$2.next();
+                  var foundedElement_1 = similarObjCasted.findProvidedByID(subElement_1.getName());
+                  if (foundedElement_1 === null || foundedElement_1 === undefined || !Kotlin.equals(foundedElement_1, subElement_1)) {
+                    return false;
+                  }
+                }
+              }
+              {
+                var tmp$3 = this.getWires().iterator();
+                while (tmp$3.hasNext()) {
+                  var subElement_2 = tmp$3.next();
+                  var lookEqualsSub = false;
+                  {
+                    var tmp$4 = similarObjCasted.getWires().iterator();
+                    while (tmp$4.hasNext()) {
+                      var subElement2 = tmp$4.next();
+                      if (subElement_2.deepModelEquals(subElement2)) {
+                        lookEqualsSub = true;
+                      }
+                    }
+                  }
+                  if (!lookEqualsSub) {
+                    return false;
+                  }
+                }
+              }
+              return true;
             },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.CompositeType) || !Kotlin.isType(similarObj, _.org.kevoree.impl.CompositeTypeImpl)) {
@@ -6005,55 +5168,6 @@
               }
               if (this.getWires().size() !== similarObjCasted.getWires().size()) {
                 return false;
-              }
-              {
-                var tmp$0 = this.getRequired().iterator();
-                while (tmp$0.hasNext()) {
-                  var subElement = tmp$0.next();
-                  var foundedElement = similarObjCasted.findRequiredByID(subElement.getName());
-                  if (foundedElement === null || foundedElement === undefined || !Kotlin.equals(foundedElement, subElement)) {
-                    return false;
-                  }
-                }
-              }
-              {
-                var tmp$1 = this.getIntegrationPatterns().iterator();
-                while (tmp$1.hasNext()) {
-                  var subElement_0 = tmp$1.next();
-                  var foundedElement_0 = similarObjCasted.findIntegrationPatternsByID(subElement_0.getName());
-                  if (foundedElement_0 === null || foundedElement_0 === undefined || !Kotlin.equals(foundedElement_0, subElement_0)) {
-                    return false;
-                  }
-                }
-              }
-              {
-                var tmp$2 = this.getProvided().iterator();
-                while (tmp$2.hasNext()) {
-                  var subElement_1 = tmp$2.next();
-                  var foundedElement_1 = similarObjCasted.findProvidedByID(subElement_1.getName());
-                  if (foundedElement_1 === null || foundedElement_1 === undefined || !Kotlin.equals(foundedElement_1, subElement_1)) {
-                    return false;
-                  }
-                }
-              }
-              {
-                var tmp$3 = this.getWires().iterator();
-                while (tmp$3.hasNext()) {
-                  var subElement_2 = tmp$3.next();
-                  var lookEqualsSub = false;
-                  {
-                    var tmp$4 = similarObjCasted.getWires().iterator();
-                    while (tmp$4.hasNext()) {
-                      var subElement2 = tmp$4.next();
-                      if (subElement_2.modelEquals(subElement2)) {
-                        lookEqualsSub = true;
-                      }
-                    }
-                  }
-                  if (!lookEqualsSub) {
-                    return false;
-                  }
-                }
               }
               return true;
             }
@@ -6240,13 +5354,11 @@
               }
               if (!Kotlin.equals(this.get__dictionary(), dictionary)) {
                 if (this.get__dictionary() !== null && this.get__dictionary() !== undefined) {
-                  var tmp$0, tmp$1;
-                  ((tmp$0 = this.get__dictionary()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                  ((tmp$1 = this.get__dictionary()) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                  var tmp$0;
+                  ((tmp$0 = this.get__dictionary()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
                 }
                 if (dictionary !== null && dictionary !== undefined) {
-                  dictionary.setEContainer(this, Kotlin.b3(_f.f1u, this));
-                  dictionary.setContainmentRefName('dictionary');
+                  dictionary.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'setDictionary', null), 'dictionary');
                 }
                 this.set__dictionary(dictionary);
               }
@@ -6275,8 +5387,7 @@
                   var tmp$1 = components.iterator();
                   while (tmp$1.hasNext()) {
                     var elem = tmp$1.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f1v, this, elem));
-                    elem.setContainmentRefName('components');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeComponents', elem), 'components');
                   }
                 }
               }
@@ -6286,8 +5397,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__components_java_cache(null);
-              components.setEContainer(this, Kotlin.b0(_f.f1w, this, components));
-              components.setContainmentRefName('components');
+              components.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeComponents', components), 'components');
               this.get__components().put(components.getName(), components);
             },
             addAllComponents: function (components) {
@@ -6306,8 +5416,7 @@
                 var tmp$1 = components.iterator();
                 while (tmp$1.hasNext()) {
                   var el_0 = tmp$1.next();
-                  el_0.setEContainer(this, Kotlin.b0(_f.f1x, this, el_0));
-                  el_0.setContainmentRefName('components');
+                  el_0.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeComponents', el_0), 'components');
                 }
               }
             },
@@ -6318,9 +5427,8 @@
               this.set__components_java_cache(null);
               if (this.get__components().size() !== 0 && this.get__components().containsKey(components.getName())) {
                 this.get__components().remove(components.getName());
-                var tmp$0, tmp$1;
-                ((tmp$0 = components) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = components) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                var tmp$0;
+                ((tmp$0 = components) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllComponents: function () {
@@ -6328,13 +5436,12 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               var tmp$0;
+              var temp_els = (tmp$0 = this.getComponents()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               {
-                var tmp$1 = ((tmp$0 = this.getComponents()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).iterator();
+                var tmp$1 = temp_els.iterator();
                 while (tmp$1.hasNext()) {
-                  var elm = tmp$1.next();
-                  var el = elm;
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  var el = tmp$1.next();
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__components_java_cache(null);
@@ -6432,11 +5539,11 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               var tmp$0;
+              var temp_els = (tmp$0 = this.getHosts()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               {
-                var tmp$1 = ((tmp$0 = this.getHosts()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).iterator();
+                var tmp$1 = temp_els.iterator();
                 while (tmp$1.hasNext()) {
-                  var elm = tmp$1.next();
-                  var el = elm;
+                  var el = tmp$1.next();
                   el.noOpposite_setHost(null);
                 }
               }
@@ -6456,6 +5563,8 @@
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var tmp$0;
+              var temp_els = (tmp$0 = this.getHosts()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               this.set__hosts_java_cache(null);
               this.get__hosts().clear();
             },
@@ -6580,6 +5689,49 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 6; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'setTypeDefinition') {
+                    {
+                      tmp$2 = this.setTypeDefinition(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'setDictionary') {
+                    {
+                      tmp$2 = this.setDictionary(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2)
+                  if (tmp$0 === 'removeComponents') {
+                    {
+                      tmp$2 = this.removeComponents(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 3)
+                  if (tmp$0 === 'addHosts') {
+                    {
+                      tmp$2 = this.addHosts(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 4)
+                  if (tmp$0 === 'setHost') {
+                    {
+                      tmp$2 = this.setHost(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 5) {
+                }
+              }
+              tmp$2;
+            },
             internalGetKey: function () {
               return this.getName();
             },
@@ -6641,7 +5793,7 @@
                     {
                       var objFound = this.findComponentsByID(queryID);
                       if (!Kotlin.equals(subquery, '') && (objFound !== null && objFound !== undefined)) {
-                        throw new Kotlin.Exception('KMFQL : rejected sucessor');
+                        throw new Kotlin.Exception('KMFQL : rejected sucessor' + relationName + ' from ContainerNode');
                       }
                        else {
                         tmp$2 = objFound;
@@ -6675,6 +5827,23 @@
               }
               return tmp$2;
             },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              {
+                var tmp$0 = this.getComponents().iterator();
+                while (tmp$0.hasNext()) {
+                  var subElement = tmp$0.next();
+                  var foundedElement = similarObjCasted.findComponentsByID(subElement.getName());
+                  if (foundedElement === null || foundedElement === undefined || !Kotlin.equals(foundedElement, subElement)) {
+                    return false;
+                  }
+                }
+              }
+              return true;
+            },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.ContainerNode) || !Kotlin.isType(similarObj, _.org.kevoree.impl.ContainerNodeImpl)) {
                 return false;
@@ -6691,16 +5860,6 @@
               }
               if (this.getComponents().size() !== similarObjCasted.getComponents().size()) {
                 return false;
-              }
-              {
-                var tmp$0 = this.getComponents().iterator();
-                while (tmp$0.hasNext()) {
-                  var subElement = tmp$0.next();
-                  var foundedElement = similarObjCasted.findComponentsByID(subElement.getName());
-                  if (foundedElement === null || foundedElement === undefined || !Kotlin.equals(foundedElement, subElement)) {
-                    return false;
-                  }
-                }
               }
               return true;
             }
@@ -7074,8 +6233,7 @@
                   var tmp$1 = nodes.iterator();
                   while (tmp$1.hasNext()) {
                     var elem = tmp$1.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f1y, this, elem));
-                    elem.setContainmentRefName('nodes');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeNodes', elem), 'nodes');
                   }
                 }
               }
@@ -7085,8 +6243,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__nodes_java_cache(null);
-              nodes.setEContainer(this, Kotlin.b0(_f.f1z, this, nodes));
-              nodes.setContainmentRefName('nodes');
+              nodes.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeNodes', nodes), 'nodes');
               this.get__nodes().put(nodes.getName(), nodes);
             },
             addAllNodes: function (nodes) {
@@ -7105,8 +6262,7 @@
                 var tmp$1 = nodes.iterator();
                 while (tmp$1.hasNext()) {
                   var el_0 = tmp$1.next();
-                  el_0.setEContainer(this, Kotlin.b0(_f.f20, this, el_0));
-                  el_0.setContainmentRefName('nodes');
+                  el_0.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeNodes', el_0), 'nodes');
                 }
               }
             },
@@ -7117,9 +6273,8 @@
               this.set__nodes_java_cache(null);
               if (this.get__nodes().size() !== 0 && this.get__nodes().containsKey(nodes.getName())) {
                 this.get__nodes().remove(nodes.getName());
-                var tmp$0, tmp$1;
-                ((tmp$0 = nodes) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = nodes) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                var tmp$0;
+                ((tmp$0 = nodes) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllNodes: function () {
@@ -7127,13 +6282,12 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               var tmp$0;
+              var temp_els = (tmp$0 = this.getNodes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               {
-                var tmp$1 = ((tmp$0 = this.getNodes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).iterator();
+                var tmp$1 = temp_els.iterator();
                 while (tmp$1.hasNext()) {
-                  var elm = tmp$1.next();
-                  var el = elm;
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  var el = tmp$1.next();
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__nodes_java_cache(null);
@@ -7163,8 +6317,7 @@
                   var tmp$1 = typeDefinitions.iterator();
                   while (tmp$1.hasNext()) {
                     var elem = tmp$1.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f21, this, elem));
-                    elem.setContainmentRefName('typeDefinitions');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeTypeDefinitions', elem), 'typeDefinitions');
                   }
                 }
               }
@@ -7174,8 +6327,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__typeDefinitions_java_cache(null);
-              typeDefinitions.setEContainer(this, Kotlin.b0(_f.f22, this, typeDefinitions));
-              typeDefinitions.setContainmentRefName('typeDefinitions');
+              typeDefinitions.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeTypeDefinitions', typeDefinitions), 'typeDefinitions');
               this.get__typeDefinitions().put(typeDefinitions.getName(), typeDefinitions);
             },
             addAllTypeDefinitions: function (typeDefinitions) {
@@ -7194,8 +6346,7 @@
                 var tmp$1 = typeDefinitions.iterator();
                 while (tmp$1.hasNext()) {
                   var el_0 = tmp$1.next();
-                  el_0.setEContainer(this, Kotlin.b0(_f.f23, this, el_0));
-                  el_0.setContainmentRefName('typeDefinitions');
+                  el_0.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeTypeDefinitions', el_0), 'typeDefinitions');
                 }
               }
             },
@@ -7206,9 +6357,8 @@
               this.set__typeDefinitions_java_cache(null);
               if (this.get__typeDefinitions().size() !== 0 && this.get__typeDefinitions().containsKey(typeDefinitions.getName())) {
                 this.get__typeDefinitions().remove(typeDefinitions.getName());
-                var tmp$0, tmp$1;
-                ((tmp$0 = typeDefinitions) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = typeDefinitions) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                var tmp$0;
+                ((tmp$0 = typeDefinitions) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllTypeDefinitions: function () {
@@ -7216,13 +6366,12 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               var tmp$0;
+              var temp_els = (tmp$0 = this.getTypeDefinitions()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               {
-                var tmp$1 = ((tmp$0 = this.getTypeDefinitions()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).iterator();
+                var tmp$1 = temp_els.iterator();
                 while (tmp$1.hasNext()) {
-                  var elm = tmp$1.next();
-                  var el = elm;
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  var el = tmp$1.next();
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__typeDefinitions_java_cache(null);
@@ -7252,8 +6401,7 @@
                   var tmp$1 = repositories.iterator();
                   while (tmp$1.hasNext()) {
                     var elem = tmp$1.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f24, this, elem));
-                    elem.setContainmentRefName('repositories');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeRepositories', elem), 'repositories');
                   }
                 }
               }
@@ -7263,8 +6411,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__repositories_java_cache(null);
-              repositories.setEContainer(this, Kotlin.b0(_f.f25, this, repositories));
-              repositories.setContainmentRefName('repositories');
+              repositories.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeRepositories', repositories), 'repositories');
               this.get__repositories().put(repositories.getUrl(), repositories);
             },
             addAllRepositories: function (repositories) {
@@ -7283,8 +6430,7 @@
                 var tmp$1 = repositories.iterator();
                 while (tmp$1.hasNext()) {
                   var el_0 = tmp$1.next();
-                  el_0.setEContainer(this, Kotlin.b0(_f.f26, this, el_0));
-                  el_0.setContainmentRefName('repositories');
+                  el_0.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeRepositories', el_0), 'repositories');
                 }
               }
             },
@@ -7295,9 +6441,8 @@
               this.set__repositories_java_cache(null);
               if (this.get__repositories().size() !== 0 && this.get__repositories().containsKey(repositories.getUrl())) {
                 this.get__repositories().remove(repositories.getUrl());
-                var tmp$0, tmp$1;
-                ((tmp$0 = repositories) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = repositories) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                var tmp$0;
+                ((tmp$0 = repositories) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllRepositories: function () {
@@ -7305,13 +6450,12 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               var tmp$0;
+              var temp_els = (tmp$0 = this.getRepositories()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               {
-                var tmp$1 = ((tmp$0 = this.getRepositories()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).iterator();
+                var tmp$1 = temp_els.iterator();
                 while (tmp$1.hasNext()) {
-                  var elm = tmp$1.next();
-                  var el = elm;
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  var el = tmp$1.next();
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__repositories_java_cache(null);
@@ -7341,8 +6485,7 @@
                   var tmp$1 = dataTypes.iterator();
                   while (tmp$1.hasNext()) {
                     var elem = tmp$1.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f27, this, elem));
-                    elem.setContainmentRefName('dataTypes');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeDataTypes', elem), 'dataTypes');
                   }
                 }
               }
@@ -7352,8 +6495,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__dataTypes_java_cache(null);
-              dataTypes.setEContainer(this, Kotlin.b0(_f.f28, this, dataTypes));
-              dataTypes.setContainmentRefName('dataTypes');
+              dataTypes.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeDataTypes', dataTypes), 'dataTypes');
               this.get__dataTypes().put(dataTypes.getName(), dataTypes);
             },
             addAllDataTypes: function (dataTypes) {
@@ -7372,8 +6514,7 @@
                 var tmp$1 = dataTypes.iterator();
                 while (tmp$1.hasNext()) {
                   var el_0 = tmp$1.next();
-                  el_0.setEContainer(this, Kotlin.b0(_f.f29, this, el_0));
-                  el_0.setContainmentRefName('dataTypes');
+                  el_0.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeDataTypes', el_0), 'dataTypes');
                 }
               }
             },
@@ -7384,9 +6525,8 @@
               this.set__dataTypes_java_cache(null);
               if (this.get__dataTypes().size() !== 0 && this.get__dataTypes().containsKey(dataTypes.getName())) {
                 this.get__dataTypes().remove(dataTypes.getName());
-                var tmp$0, tmp$1;
-                ((tmp$0 = dataTypes) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = dataTypes) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                var tmp$0;
+                ((tmp$0 = dataTypes) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllDataTypes: function () {
@@ -7394,13 +6534,12 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               var tmp$0;
+              var temp_els = (tmp$0 = this.getDataTypes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               {
-                var tmp$1 = ((tmp$0 = this.getDataTypes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).iterator();
+                var tmp$1 = temp_els.iterator();
                 while (tmp$1.hasNext()) {
-                  var elm = tmp$1.next();
-                  var el = elm;
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  var el = tmp$1.next();
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__dataTypes_java_cache(null);
@@ -7430,8 +6569,7 @@
                   var tmp$1 = libraries.iterator();
                   while (tmp$1.hasNext()) {
                     var elem = tmp$1.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f2a, this, elem));
-                    elem.setContainmentRefName('libraries');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeLibraries', elem), 'libraries');
                   }
                 }
               }
@@ -7441,8 +6579,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__libraries_java_cache(null);
-              libraries.setEContainer(this, Kotlin.b0(_f.f2b, this, libraries));
-              libraries.setContainmentRefName('libraries');
+              libraries.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeLibraries', libraries), 'libraries');
               this.get__libraries().put(libraries.getName(), libraries);
             },
             addAllLibraries: function (libraries) {
@@ -7461,8 +6598,7 @@
                 var tmp$1 = libraries.iterator();
                 while (tmp$1.hasNext()) {
                   var el_0 = tmp$1.next();
-                  el_0.setEContainer(this, Kotlin.b0(_f.f2c, this, el_0));
-                  el_0.setContainmentRefName('libraries');
+                  el_0.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeLibraries', el_0), 'libraries');
                 }
               }
             },
@@ -7473,9 +6609,8 @@
               this.set__libraries_java_cache(null);
               if (this.get__libraries().size() !== 0 && this.get__libraries().containsKey(libraries.getName())) {
                 this.get__libraries().remove(libraries.getName());
-                var tmp$0, tmp$1;
-                ((tmp$0 = libraries) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = libraries) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                var tmp$0;
+                ((tmp$0 = libraries) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllLibraries: function () {
@@ -7483,13 +6618,12 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               var tmp$0;
+              var temp_els = (tmp$0 = this.getLibraries()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               {
-                var tmp$1 = ((tmp$0 = this.getLibraries()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).iterator();
+                var tmp$1 = temp_els.iterator();
                 while (tmp$1.hasNext()) {
-                  var elm = tmp$1.next();
-                  var el = elm;
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  var el = tmp$1.next();
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__libraries_java_cache(null);
@@ -7519,8 +6653,7 @@
                   var tmp$1 = hubs.iterator();
                   while (tmp$1.hasNext()) {
                     var elem = tmp$1.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f2d, this, elem));
-                    elem.setContainmentRefName('hubs');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeHubs', elem), 'hubs');
                   }
                 }
               }
@@ -7530,8 +6663,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__hubs_java_cache(null);
-              hubs.setEContainer(this, Kotlin.b0(_f.f2e, this, hubs));
-              hubs.setContainmentRefName('hubs');
+              hubs.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeHubs', hubs), 'hubs');
               this.get__hubs().put(hubs.getName(), hubs);
             },
             addAllHubs: function (hubs) {
@@ -7550,8 +6682,7 @@
                 var tmp$1 = hubs.iterator();
                 while (tmp$1.hasNext()) {
                   var el_0 = tmp$1.next();
-                  el_0.setEContainer(this, Kotlin.b0(_f.f2f, this, el_0));
-                  el_0.setContainmentRefName('hubs');
+                  el_0.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeHubs', el_0), 'hubs');
                 }
               }
             },
@@ -7562,9 +6693,8 @@
               this.set__hubs_java_cache(null);
               if (this.get__hubs().size() !== 0 && this.get__hubs().containsKey(hubs.getName())) {
                 this.get__hubs().remove(hubs.getName());
-                var tmp$0, tmp$1;
-                ((tmp$0 = hubs) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = hubs) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                var tmp$0;
+                ((tmp$0 = hubs) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllHubs: function () {
@@ -7572,13 +6702,12 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               var tmp$0;
+              var temp_els = (tmp$0 = this.getHubs()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               {
-                var tmp$1 = ((tmp$0 = this.getHubs()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).iterator();
+                var tmp$1 = temp_els.iterator();
                 while (tmp$1.hasNext()) {
-                  var elm = tmp$1.next();
-                  var el = elm;
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  var el = tmp$1.next();
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__hubs_java_cache(null);
@@ -7602,8 +6731,7 @@
                   var tmp$0 = mBindings.iterator();
                   while (tmp$0.hasNext()) {
                     var elem = tmp$0.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f2g, this, elem));
-                    elem.setContainmentRefName('mBindings');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeMBindings', elem), 'mBindings');
                   }
                 }
               }
@@ -7613,8 +6741,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__mBindings_java_cache(null);
-              mBindings.setEContainer(this, Kotlin.b0(_f.f2h, this, mBindings));
-              mBindings.setContainmentRefName('mBindings');
+              mBindings.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeMBindings', mBindings), 'mBindings');
               this.get__mBindings().add(mBindings);
             },
             addAllMBindings: function (mBindings) {
@@ -7627,8 +6754,7 @@
                 var tmp$0 = mBindings.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(this, Kotlin.b0(_f.f2i, this, el));
-                  el.setContainmentRefName('mBindings');
+                  el.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeMBindings', el), 'mBindings');
                 }
               }
             },
@@ -7638,10 +6764,9 @@
               }
               this.set__mBindings_java_cache(null);
               if (this.get__mBindings().size() !== 0 && this.get__mBindings().indexOf(mBindings) !== -1) {
-                this.get__mBindings().remove(this.get__mBindings().indexOf(mBindings));
-                var tmp$0, tmp$1;
-                ((tmp$0 = mBindings) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = mBindings) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                this.get__mBindings().remove(mBindings);
+                var tmp$0;
+                ((tmp$0 = mBindings) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllMBindings: function () {
@@ -7653,8 +6778,7 @@
                 var tmp$0 = temp_els.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__mBindings_java_cache(null);
@@ -7678,8 +6802,7 @@
                   var tmp$0 = deployUnits.iterator();
                   while (tmp$0.hasNext()) {
                     var elem = tmp$0.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f2j, this, elem));
-                    elem.setContainmentRefName('deployUnits');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeDeployUnits', elem), 'deployUnits');
                   }
                 }
               }
@@ -7689,8 +6812,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__deployUnits_java_cache(null);
-              deployUnits.setEContainer(this, Kotlin.b0(_f.f2k, this, deployUnits));
-              deployUnits.setContainmentRefName('deployUnits');
+              deployUnits.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeDeployUnits', deployUnits), 'deployUnits');
               this.get__deployUnits().add(deployUnits);
             },
             addAllDeployUnits: function (deployUnits) {
@@ -7703,8 +6825,7 @@
                 var tmp$0 = deployUnits.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(this, Kotlin.b0(_f.f2l, this, el));
-                  el.setContainmentRefName('deployUnits');
+                  el.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeDeployUnits', el), 'deployUnits');
                 }
               }
             },
@@ -7714,10 +6835,9 @@
               }
               this.set__deployUnits_java_cache(null);
               if (this.get__deployUnits().size() !== 0 && this.get__deployUnits().indexOf(deployUnits) !== -1) {
-                this.get__deployUnits().remove(this.get__deployUnits().indexOf(deployUnits));
-                var tmp$0, tmp$1;
-                ((tmp$0 = deployUnits) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = deployUnits) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                this.get__deployUnits().remove(deployUnits);
+                var tmp$0;
+                ((tmp$0 = deployUnits) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllDeployUnits: function () {
@@ -7729,8 +6849,7 @@
                 var tmp$0 = temp_els.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__deployUnits_java_cache(null);
@@ -7754,8 +6873,7 @@
                   var tmp$0 = nodeNetworks.iterator();
                   while (tmp$0.hasNext()) {
                     var elem = tmp$0.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f2m, this, elem));
-                    elem.setContainmentRefName('nodeNetworks');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeNodeNetworks', elem), 'nodeNetworks');
                   }
                 }
               }
@@ -7765,8 +6883,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__nodeNetworks_java_cache(null);
-              nodeNetworks.setEContainer(this, Kotlin.b0(_f.f2n, this, nodeNetworks));
-              nodeNetworks.setContainmentRefName('nodeNetworks');
+              nodeNetworks.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeNodeNetworks', nodeNetworks), 'nodeNetworks');
               this.get__nodeNetworks().add(nodeNetworks);
             },
             addAllNodeNetworks: function (nodeNetworks) {
@@ -7779,8 +6896,7 @@
                 var tmp$0 = nodeNetworks.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(this, Kotlin.b0(_f.f2o, this, el));
-                  el.setContainmentRefName('nodeNetworks');
+                  el.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeNodeNetworks', el), 'nodeNetworks');
                 }
               }
             },
@@ -7790,10 +6906,9 @@
               }
               this.set__nodeNetworks_java_cache(null);
               if (this.get__nodeNetworks().size() !== 0 && this.get__nodeNetworks().indexOf(nodeNetworks) !== -1) {
-                this.get__nodeNetworks().remove(this.get__nodeNetworks().indexOf(nodeNetworks));
-                var tmp$0, tmp$1;
-                ((tmp$0 = nodeNetworks) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = nodeNetworks) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                this.get__nodeNetworks().remove(nodeNetworks);
+                var tmp$0;
+                ((tmp$0 = nodeNetworks) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllNodeNetworks: function () {
@@ -7805,8 +6920,7 @@
                 var tmp$0 = temp_els.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__nodeNetworks_java_cache(null);
@@ -7836,8 +6950,7 @@
                   var tmp$1 = groups.iterator();
                   while (tmp$1.hasNext()) {
                     var elem = tmp$1.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f2p, this, elem));
-                    elem.setContainmentRefName('groups');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeGroups', elem), 'groups');
                   }
                 }
               }
@@ -7847,8 +6960,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__groups_java_cache(null);
-              groups.setEContainer(this, Kotlin.b0(_f.f2q, this, groups));
-              groups.setContainmentRefName('groups');
+              groups.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeGroups', groups), 'groups');
               this.get__groups().put(groups.getName(), groups);
             },
             addAllGroups: function (groups) {
@@ -7867,8 +6979,7 @@
                 var tmp$1 = groups.iterator();
                 while (tmp$1.hasNext()) {
                   var el_0 = tmp$1.next();
-                  el_0.setEContainer(this, Kotlin.b0(_f.f2r, this, el_0));
-                  el_0.setContainmentRefName('groups');
+                  el_0.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeGroups', el_0), 'groups');
                 }
               }
             },
@@ -7879,9 +6990,8 @@
               this.set__groups_java_cache(null);
               if (this.get__groups().size() !== 0 && this.get__groups().containsKey(groups.getName())) {
                 this.get__groups().remove(groups.getName());
-                var tmp$0, tmp$1;
-                ((tmp$0 = groups) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = groups) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                var tmp$0;
+                ((tmp$0 = groups) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllGroups: function () {
@@ -7889,13 +6999,12 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               var tmp$0;
+              var temp_els = (tmp$0 = this.getGroups()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               {
-                var tmp$1 = ((tmp$0 = this.getGroups()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).iterator();
+                var tmp$1 = temp_els.iterator();
                 while (tmp$1.hasNext()) {
-                  var elm = tmp$1.next();
-                  var el = elm;
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  var el = tmp$1.next();
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__groups_java_cache(null);
@@ -7925,8 +7034,7 @@
                   var tmp$1 = adaptationPrimitiveTypes.iterator();
                   while (tmp$1.hasNext()) {
                     var elem = tmp$1.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f2s, this, elem));
-                    elem.setContainmentRefName('adaptationPrimitiveTypes');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeAdaptationPrimitiveTypes', elem), 'adaptationPrimitiveTypes');
                   }
                 }
               }
@@ -7936,8 +7044,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__adaptationPrimitiveTypes_java_cache(null);
-              adaptationPrimitiveTypes.setEContainer(this, Kotlin.b0(_f.f2t, this, adaptationPrimitiveTypes));
-              adaptationPrimitiveTypes.setContainmentRefName('adaptationPrimitiveTypes');
+              adaptationPrimitiveTypes.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeAdaptationPrimitiveTypes', adaptationPrimitiveTypes), 'adaptationPrimitiveTypes');
               this.get__adaptationPrimitiveTypes().put(adaptationPrimitiveTypes.getName(), adaptationPrimitiveTypes);
             },
             addAllAdaptationPrimitiveTypes: function (adaptationPrimitiveTypes) {
@@ -7956,8 +7063,7 @@
                 var tmp$1 = adaptationPrimitiveTypes.iterator();
                 while (tmp$1.hasNext()) {
                   var el_0 = tmp$1.next();
-                  el_0.setEContainer(this, Kotlin.b0(_f.f2u, this, el_0));
-                  el_0.setContainmentRefName('adaptationPrimitiveTypes');
+                  el_0.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeAdaptationPrimitiveTypes', el_0), 'adaptationPrimitiveTypes');
                 }
               }
             },
@@ -7968,9 +7074,8 @@
               this.set__adaptationPrimitiveTypes_java_cache(null);
               if (this.get__adaptationPrimitiveTypes().size() !== 0 && this.get__adaptationPrimitiveTypes().containsKey(adaptationPrimitiveTypes.getName())) {
                 this.get__adaptationPrimitiveTypes().remove(adaptationPrimitiveTypes.getName());
-                var tmp$0, tmp$1;
-                ((tmp$0 = adaptationPrimitiveTypes) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = adaptationPrimitiveTypes) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                var tmp$0;
+                ((tmp$0 = adaptationPrimitiveTypes) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllAdaptationPrimitiveTypes: function () {
@@ -7978,13 +7083,12 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               var tmp$0;
+              var temp_els = (tmp$0 = this.getAdaptationPrimitiveTypes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               {
-                var tmp$1 = ((tmp$0 = this.getAdaptationPrimitiveTypes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).iterator();
+                var tmp$1 = temp_els.iterator();
                 while (tmp$1.hasNext()) {
-                  var elm = tmp$1.next();
-                  var el = elm;
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  var el = tmp$1.next();
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__adaptationPrimitiveTypes_java_cache(null);
@@ -8293,6 +7397,8 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+            },
             path: function () {
               if (this.eContainer() === null || this.eContainer() === undefined) {
                 return '';
@@ -8374,7 +7480,7 @@
                     {
                       var objFound_1 = this.findRepositoriesByID(queryID);
                       if (!Kotlin.equals(subquery, '') && (objFound_1 !== null && objFound_1 !== undefined)) {
-                        throw new Kotlin.Exception('KMFQL : rejected sucessor');
+                        throw new Kotlin.Exception('KMFQL : rejected sucessor' + relationName + ' from ContainerRoot');
                       }
                        else {
                         tmp$2 = objFound_1;
@@ -8413,7 +7519,7 @@
                     {
                       var objFound_4 = this.findHubsByID(queryID);
                       if (!Kotlin.equals(subquery, '') && (objFound_4 !== null && objFound_4 !== undefined)) {
-                        throw new Kotlin.Exception('KMFQL : rejected sucessor');
+                        throw new Kotlin.Exception('KMFQL : rejected sucessor' + relationName + ' from ContainerRoot');
                       }
                        else {
                         tmp$2 = objFound_4;
@@ -8439,7 +7545,7 @@
                     {
                       var objFound_6 = this.findAdaptationPrimitiveTypesByID(queryID);
                       if (!Kotlin.equals(subquery, '') && (objFound_6 !== null && objFound_6 !== undefined)) {
-                        throw new Kotlin.Exception('KMFQL : rejected sucessor');
+                        throw new Kotlin.Exception('KMFQL : rejected sucessor' + relationName + ' from ContainerRoot');
                       }
                        else {
                         tmp$2 = objFound_6;
@@ -8453,44 +7559,11 @@
               }
               return tmp$2;
             },
-            modelEquals: function (similarObj) {
-              if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.ContainerRoot) || !Kotlin.isType(similarObj, _.org.kevoree.impl.ContainerRootImpl)) {
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
                 return false;
               }
               var similarObjCasted = similarObj;
-              if (this.getNodes().size() !== similarObjCasted.getNodes().size()) {
-                return false;
-              }
-              if (this.getTypeDefinitions().size() !== similarObjCasted.getTypeDefinitions().size()) {
-                return false;
-              }
-              if (this.getRepositories().size() !== similarObjCasted.getRepositories().size()) {
-                return false;
-              }
-              if (this.getDataTypes().size() !== similarObjCasted.getDataTypes().size()) {
-                return false;
-              }
-              if (this.getLibraries().size() !== similarObjCasted.getLibraries().size()) {
-                return false;
-              }
-              if (this.getHubs().size() !== similarObjCasted.getHubs().size()) {
-                return false;
-              }
-              if (this.getMBindings().size() !== similarObjCasted.getMBindings().size()) {
-                return false;
-              }
-              if (this.getDeployUnits().size() !== similarObjCasted.getDeployUnits().size()) {
-                return false;
-              }
-              if (this.getNodeNetworks().size() !== similarObjCasted.getNodeNetworks().size()) {
-                return false;
-              }
-              if (this.getGroups().size() !== similarObjCasted.getGroups().size()) {
-                return false;
-              }
-              if (this.getAdaptationPrimitiveTypes().size() !== similarObjCasted.getAdaptationPrimitiveTypes().size()) {
-                return false;
-              }
               {
                 var tmp$0 = this.getNodes().iterator();
                 while (tmp$0.hasNext()) {
@@ -8560,7 +7633,7 @@
                     var tmp$7 = similarObjCasted.getMBindings().iterator();
                     while (tmp$7.hasNext()) {
                       var subElement2 = tmp$7.next();
-                      if (subElement_5.modelEquals(subElement2)) {
+                      if (subElement_5.deepModelEquals(subElement2)) {
                         lookEqualsSub = true;
                       }
                     }
@@ -8579,7 +7652,7 @@
                     var tmp$9 = similarObjCasted.getDeployUnits().iterator();
                     while (tmp$9.hasNext()) {
                       var subElement2_0 = tmp$9.next();
-                      if (subElement_6.modelEquals(subElement2_0)) {
+                      if (subElement_6.deepModelEquals(subElement2_0)) {
                         lookEqualsSub_0 = true;
                       }
                     }
@@ -8598,7 +7671,7 @@
                     var tmp$11 = similarObjCasted.getNodeNetworks().iterator();
                     while (tmp$11.hasNext()) {
                       var subElement2_1 = tmp$11.next();
-                      if (subElement_7.modelEquals(subElement2_1)) {
+                      if (subElement_7.deepModelEquals(subElement2_1)) {
                         lookEqualsSub_1 = true;
                       }
                     }
@@ -8629,13 +7702,53 @@
                 }
               }
               return true;
+            },
+            modelEquals: function (similarObj) {
+              if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.ContainerRoot) || !Kotlin.isType(similarObj, _.org.kevoree.impl.ContainerRootImpl)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              if (this.getNodes().size() !== similarObjCasted.getNodes().size()) {
+                return false;
+              }
+              if (this.getTypeDefinitions().size() !== similarObjCasted.getTypeDefinitions().size()) {
+                return false;
+              }
+              if (this.getRepositories().size() !== similarObjCasted.getRepositories().size()) {
+                return false;
+              }
+              if (this.getDataTypes().size() !== similarObjCasted.getDataTypes().size()) {
+                return false;
+              }
+              if (this.getLibraries().size() !== similarObjCasted.getLibraries().size()) {
+                return false;
+              }
+              if (this.getHubs().size() !== similarObjCasted.getHubs().size()) {
+                return false;
+              }
+              if (this.getMBindings().size() !== similarObjCasted.getMBindings().size()) {
+                return false;
+              }
+              if (this.getDeployUnits().size() !== similarObjCasted.getDeployUnits().size()) {
+                return false;
+              }
+              if (this.getNodeNetworks().size() !== similarObjCasted.getNodeNetworks().size()) {
+                return false;
+              }
+              if (this.getGroups().size() !== similarObjCasted.getGroups().size()) {
+                return false;
+              }
+              if (this.getAdaptationPrimitiveTypes().size() !== similarObjCasted.getAdaptationPrimitiveTypes().size()) {
+                return false;
+              }
+              return true;
             }
           }),
           DefaultKevoreeFactory: Kotlin.createClass(classes.cm, {
             initialize: function () {
             },
             getVersion: function () {
-              return '1.0.0';
+              return '1.0.0-SNAPSHOT';
             },
             createComponentInstance: function () {
               return new _.org.kevoree.impl.ComponentInstanceImpl();
@@ -8986,13 +8099,14 @@
               }
               this.set__requiredLibs_java_cache(null);
               if (this.get__requiredLibs().size() !== 0 && this.get__requiredLibs().indexOf(requiredLibs) !== -1) {
-                this.get__requiredLibs().remove(this.get__requiredLibs().indexOf(requiredLibs));
+                this.get__requiredLibs().remove(requiredLibs);
               }
             },
             removeAllRequiredLibs: function () {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var temp_els = this.getRequiredLibs();
               this.set__requiredLibs_java_cache(null);
               this.get__requiredLibs().clear();
             },
@@ -9053,6 +8167,28 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 3; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'addRequiredLibs') {
+                    {
+                      tmp$2 = this.addRequiredLibs(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'setTargetNodeType') {
+                    {
+                      tmp$2 = this.setTargetNodeType(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2) {
+                }
+              }
+              tmp$2;
+            },
             path: function () {
               if (this.eContainer() === null || this.eContainer() === undefined) {
                 return '';
@@ -9063,6 +8199,13 @@
             },
             findByPath: function (query) {
               return null;
+            },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
             },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.DeployUnit) || !Kotlin.isType(similarObj, _.org.kevoree.impl.DeployUnitImpl)) {
@@ -9293,6 +8436,8 @@
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var tmp$0;
+              var temp_els = (tmp$0 = this.getGenericTypes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               this.set__genericTypes_java_cache(null);
               this.get__genericTypes().clear();
             },
@@ -9329,6 +8474,21 @@
                 clonedSelfObject.setInternalReadOnly();
               }
               return clonedSelfObject;
+            },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 2; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'addGenericTypes') {
+                    {
+                      tmp$2 = this.addGenericTypes(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1) {
+                }
+              }
+              tmp$2;
             },
             internalGetKey: function () {
               return this.getName();
@@ -9415,6 +8575,13 @@
                 }
               }
               return tmp$4;
+            },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
             },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.DictionaryAttribute) || !Kotlin.isType(similarObj, _.org.kevoree.impl.DictionaryAttributeImpl)) {
@@ -9532,8 +8699,7 @@
                   var tmp$0 = values.iterator();
                   while (tmp$0.hasNext()) {
                     var elem = tmp$0.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f2v, this, elem));
-                    elem.setContainmentRefName('values');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeValues', elem), 'values');
                   }
                 }
               }
@@ -9543,8 +8709,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__values_java_cache(null);
-              values.setEContainer(this, Kotlin.b0(_f.f2w, this, values));
-              values.setContainmentRefName('values');
+              values.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeValues', values), 'values');
               this.get__values().add(values);
             },
             addAllValues: function (values) {
@@ -9557,8 +8722,7 @@
                 var tmp$0 = values.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(this, Kotlin.b0(_f.f2x, this, el));
-                  el.setContainmentRefName('values');
+                  el.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeValues', el), 'values');
                 }
               }
             },
@@ -9568,10 +8732,9 @@
               }
               this.set__values_java_cache(null);
               if (this.get__values().size() !== 0 && this.get__values().indexOf(values) !== -1) {
-                this.get__values().remove(this.get__values().indexOf(values));
-                var tmp$0, tmp$1;
-                ((tmp$0 = values) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = values) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                this.get__values().remove(values);
+                var tmp$0;
+                ((tmp$0 = values) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllValues: function () {
@@ -9583,8 +8746,7 @@
                 var tmp$0 = temp_els.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__values_java_cache(null);
@@ -9633,6 +8795,8 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+            },
             path: function () {
               if (this.eContainer() === null || this.eContainer() === undefined) {
                 return '';
@@ -9644,14 +8808,11 @@
             findByPath: function (query) {
               return null;
             },
-            modelEquals: function (similarObj) {
-              if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.Dictionary) || !Kotlin.isType(similarObj, _.org.kevoree.impl.DictionaryImpl)) {
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
                 return false;
               }
               var similarObjCasted = similarObj;
-              if (this.getValues().size() !== similarObjCasted.getValues().size()) {
-                return false;
-              }
               {
                 var tmp$0 = this.getValues().iterator();
                 while (tmp$0.hasNext()) {
@@ -9661,7 +8822,7 @@
                     var tmp$1 = similarObjCasted.getValues().iterator();
                     while (tmp$1.hasNext()) {
                       var subElement2 = tmp$1.next();
-                      if (subElement.modelEquals(subElement2)) {
+                      if (subElement.deepModelEquals(subElement2)) {
                         lookEqualsSub = true;
                       }
                     }
@@ -9670,6 +8831,16 @@
                     return false;
                   }
                 }
+              }
+              return true;
+            },
+            modelEquals: function (similarObj) {
+              if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.Dictionary) || !Kotlin.isType(similarObj, _.org.kevoree.impl.DictionaryImpl)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              if (this.getValues().size() !== similarObjCasted.getValues().size()) {
+                return false;
               }
               return true;
             }
@@ -9800,8 +8971,7 @@
                   var tmp$1 = attributes.iterator();
                   while (tmp$1.hasNext()) {
                     var elem = tmp$1.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f2y, this, elem));
-                    elem.setContainmentRefName('attributes');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeAttributes', elem), 'attributes');
                   }
                 }
               }
@@ -9811,8 +8981,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__attributes_java_cache(null);
-              attributes.setEContainer(this, Kotlin.b0(_f.f2z, this, attributes));
-              attributes.setContainmentRefName('attributes');
+              attributes.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeAttributes', attributes), 'attributes');
               this.get__attributes().put(attributes.getName(), attributes);
             },
             addAllAttributes: function (attributes) {
@@ -9831,8 +9000,7 @@
                 var tmp$1 = attributes.iterator();
                 while (tmp$1.hasNext()) {
                   var el_0 = tmp$1.next();
-                  el_0.setEContainer(this, Kotlin.b0(_f.f30, this, el_0));
-                  el_0.setContainmentRefName('attributes');
+                  el_0.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeAttributes', el_0), 'attributes');
                 }
               }
             },
@@ -9843,9 +9011,8 @@
               this.set__attributes_java_cache(null);
               if (this.get__attributes().size() !== 0 && this.get__attributes().containsKey(attributes.getName())) {
                 this.get__attributes().remove(attributes.getName());
-                var tmp$0, tmp$1;
-                ((tmp$0 = attributes) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = attributes) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                var tmp$0;
+                ((tmp$0 = attributes) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllAttributes: function () {
@@ -9853,13 +9020,12 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               var tmp$0;
+              var temp_els = (tmp$0 = this.getAttributes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               {
-                var tmp$1 = ((tmp$0 = this.getAttributes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).iterator();
+                var tmp$1 = temp_els.iterator();
                 while (tmp$1.hasNext()) {
-                  var elm = tmp$1.next();
-                  var el = elm;
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  var el = tmp$1.next();
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__attributes_java_cache(null);
@@ -9883,8 +9049,7 @@
                   var tmp$0 = defaultValues.iterator();
                   while (tmp$0.hasNext()) {
                     var elem = tmp$0.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f31, this, elem));
-                    elem.setContainmentRefName('defaultValues');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeDefaultValues', elem), 'defaultValues');
                   }
                 }
               }
@@ -9894,8 +9059,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__defaultValues_java_cache(null);
-              defaultValues.setEContainer(this, Kotlin.b0(_f.f32, this, defaultValues));
-              defaultValues.setContainmentRefName('defaultValues');
+              defaultValues.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeDefaultValues', defaultValues), 'defaultValues');
               this.get__defaultValues().add(defaultValues);
             },
             addAllDefaultValues: function (defaultValues) {
@@ -9908,8 +9072,7 @@
                 var tmp$0 = defaultValues.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(this, Kotlin.b0(_f.f33, this, el));
-                  el.setContainmentRefName('defaultValues');
+                  el.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeDefaultValues', el), 'defaultValues');
                 }
               }
             },
@@ -9919,10 +9082,9 @@
               }
               this.set__defaultValues_java_cache(null);
               if (this.get__defaultValues().size() !== 0 && this.get__defaultValues().indexOf(defaultValues) !== -1) {
-                this.get__defaultValues().remove(this.get__defaultValues().indexOf(defaultValues));
-                var tmp$0, tmp$1;
-                ((tmp$0 = defaultValues) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = defaultValues) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                this.get__defaultValues().remove(defaultValues);
+                var tmp$0;
+                ((tmp$0 = defaultValues) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllDefaultValues: function () {
@@ -9934,8 +9096,7 @@
                 var tmp$0 = temp_els.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__defaultValues_java_cache(null);
@@ -10010,6 +9171,8 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+            },
             path: function () {
               if (this.eContainer() === null || this.eContainer() === undefined) {
                 return '';
@@ -10065,7 +9228,7 @@
                     {
                       var objFound = this.findAttributesByID(queryID);
                       if (!Kotlin.equals(subquery, '') && (objFound !== null && objFound !== undefined)) {
-                        throw new Kotlin.Exception('KMFQL : rejected sucessor');
+                        throw new Kotlin.Exception('KMFQL : rejected sucessor' + relationName + ' from DictionaryType');
                       }
                        else {
                         tmp$4 = objFound;
@@ -10079,17 +9242,11 @@
               }
               return tmp$4;
             },
-            modelEquals: function (similarObj) {
-              if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.DictionaryType) || !Kotlin.isType(similarObj, _.org.kevoree.impl.DictionaryTypeImpl)) {
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
                 return false;
               }
               var similarObjCasted = similarObj;
-              if (this.getAttributes().size() !== similarObjCasted.getAttributes().size()) {
-                return false;
-              }
-              if (this.getDefaultValues().size() !== similarObjCasted.getDefaultValues().size()) {
-                return false;
-              }
               {
                 var tmp$0 = this.getAttributes().iterator();
                 while (tmp$0.hasNext()) {
@@ -10109,7 +9266,7 @@
                     var tmp$2 = similarObjCasted.getDefaultValues().iterator();
                     while (tmp$2.hasNext()) {
                       var subElement2 = tmp$2.next();
-                      if (subElement_0.modelEquals(subElement2)) {
+                      if (subElement_0.deepModelEquals(subElement2)) {
                         lookEqualsSub = true;
                       }
                     }
@@ -10118,6 +9275,19 @@
                     return false;
                   }
                 }
+              }
+              return true;
+            },
+            modelEquals: function (similarObj) {
+              if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.DictionaryType) || !Kotlin.isType(similarObj, _.org.kevoree.impl.DictionaryTypeImpl)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              if (this.getAttributes().size() !== similarObjCasted.getAttributes().size()) {
+                return false;
+              }
+              if (this.getDefaultValues().size() !== similarObjCasted.getDefaultValues().size()) {
+                return false;
               }
               return true;
             }
@@ -10269,6 +9439,28 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 3; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'setAttribute') {
+                    {
+                      tmp$2 = this.setAttribute(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'setTargetNode') {
+                    {
+                      tmp$2 = this.setTargetNode(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2) {
+                }
+              }
+              tmp$2;
+            },
             path: function () {
               if (this.eContainer() === null || this.eContainer() === undefined) {
                 return '';
@@ -10279,6 +9471,13 @@
             },
             findByPath: function (query) {
               return null;
+            },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
             },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.DictionaryValue) || !Kotlin.isType(similarObj, _.org.kevoree.impl.DictionaryValueImpl)) {
@@ -10414,6 +9613,8 @@
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var tmp$0;
+              var temp_els = (tmp$0 = this.getPortTypes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               this.set__portTypes_java_cache(null);
               this.get__portTypes().clear();
             },
@@ -10445,6 +9646,21 @@
                 clonedSelfObject.setInternalReadOnly();
               }
               return clonedSelfObject;
+            },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 2; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'addPortTypes') {
+                    {
+                      tmp$2 = this.addPortTypes(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1) {
+                }
+              }
+              tmp$2;
             },
             path: function () {
               if (this.eContainer() === null || this.eContainer() === undefined) {
@@ -10501,7 +9717,7 @@
                     {
                       var objFound = this.findPortTypesByID(queryID);
                       if (!Kotlin.equals(subquery, '') && (objFound !== null && objFound !== undefined)) {
-                        throw new Kotlin.Exception('KMFQL : rejected sucessor');
+                        throw new Kotlin.Exception('KMFQL : rejected sucessor' + relationName + ' from ExtraFonctionalProperty');
                       }
                        else {
                         tmp$4 = objFound;
@@ -10514,6 +9730,13 @@
                 }
               }
               return tmp$4;
+            },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
             },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.ExtraFonctionalProperty) || !Kotlin.isType(similarObj, _.org.kevoree.impl.ExtraFonctionalPropertyImpl)) {
@@ -10666,13 +9889,11 @@
               }
               if (!Kotlin.equals(this.get__dictionary(), dictionary)) {
                 if (this.get__dictionary() !== null && this.get__dictionary() !== undefined) {
-                  var tmp$0, tmp$1;
-                  ((tmp$0 = this.get__dictionary()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                  ((tmp$1 = this.get__dictionary()) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                  var tmp$0;
+                  ((tmp$0 = this.get__dictionary()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
                 }
                 if (dictionary !== null && dictionary !== undefined) {
-                  dictionary.setEContainer(this, Kotlin.b3(_f.f34, this));
-                  dictionary.setContainmentRefName('dictionary');
+                  dictionary.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'setDictionary', null), 'dictionary');
                 }
                 this.set__dictionary(dictionary);
               }
@@ -10732,6 +9953,8 @@
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var tmp$0;
+              var temp_els = (tmp$0 = this.getSubNodes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               this.set__subNodes_java_cache(null);
               this.get__subNodes().clear();
             },
@@ -10793,6 +10016,35 @@
                 clonedSelfObject.setInternalReadOnly();
               }
               return clonedSelfObject;
+            },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 4; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'setTypeDefinition') {
+                    {
+                      tmp$2 = this.setTypeDefinition(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'setDictionary') {
+                    {
+                      tmp$2 = this.setDictionary(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2)
+                  if (tmp$0 === 'addSubNodes') {
+                    {
+                      tmp$2 = this.addSubNodes(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 3) {
+                }
+              }
+              tmp$2;
             },
             internalGetKey: function () {
               return this.getName();
@@ -10865,6 +10117,13 @@
                 }
               }
               return tmp$2;
+            },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
             },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.Group) || !Kotlin.isType(similarObj, _.org.kevoree.impl.GroupImpl)) {
@@ -11127,13 +10386,14 @@
               }
               this.set__deployUnits_java_cache(null);
               if (this.get__deployUnits().size() !== 0 && this.get__deployUnits().indexOf(deployUnits) !== -1) {
-                this.get__deployUnits().remove(this.get__deployUnits().indexOf(deployUnits));
+                this.get__deployUnits().remove(deployUnits);
               }
             },
             removeAllDeployUnits: function () {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var temp_els = this.getDeployUnits();
               this.set__deployUnits_java_cache(null);
               this.get__deployUnits().clear();
             },
@@ -11146,13 +10406,11 @@
               }
               if (!Kotlin.equals(this.get__dictionaryType(), dictionaryType)) {
                 if (this.get__dictionaryType() !== null && this.get__dictionaryType() !== undefined) {
-                  var tmp$0, tmp$1;
-                  ((tmp$0 = this.get__dictionaryType()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                  ((tmp$1 = this.get__dictionaryType()) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                  var tmp$0;
+                  ((tmp$0 = this.get__dictionaryType()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
                 }
                 if (dictionaryType !== null && dictionaryType !== undefined) {
-                  dictionaryType.setEContainer(this, Kotlin.b3(_f.f35, this));
-                  dictionaryType.setContainmentRefName('dictionaryType');
+                  dictionaryType.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'setDictionaryType', null), 'dictionaryType');
                 }
                 this.set__dictionaryType(dictionaryType);
               }
@@ -11212,6 +10470,8 @@
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var tmp$0;
+              var temp_els = (tmp$0 = this.getSuperTypes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               this.set__superTypes_java_cache(null);
               this.get__superTypes().clear();
             },
@@ -11280,6 +10540,35 @@
                 clonedSelfObject.setInternalReadOnly();
               }
               return clonedSelfObject;
+            },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 4; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'addDeployUnits') {
+                    {
+                      tmp$2 = this.addDeployUnits(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'setDictionaryType') {
+                    {
+                      tmp$2 = this.setDictionaryType(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2)
+                  if (tmp$0 === 'addSuperTypes') {
+                    {
+                      tmp$2 = this.addSuperTypes(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 3) {
+                }
+              }
+              tmp$2;
             },
             internalGetKey: function () {
               return this.getName();
@@ -11366,6 +10655,13 @@
                 }
               }
               return tmp$4;
+            },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
             },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.GroupType) || !Kotlin.isType(similarObj, _.org.kevoree.impl.GroupTypeImpl)) {
@@ -11524,13 +10820,11 @@
               }
               if (!Kotlin.equals(this.get__dictionary(), dictionary)) {
                 if (this.get__dictionary() !== null && this.get__dictionary() !== undefined) {
-                  var tmp$0, tmp$1;
-                  ((tmp$0 = this.get__dictionary()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                  ((tmp$1 = this.get__dictionary()) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                  var tmp$0;
+                  ((tmp$0 = this.get__dictionary()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
                 }
                 if (dictionary !== null && dictionary !== undefined) {
-                  dictionary.setEContainer(this, Kotlin.b3(_f.f36, this));
-                  dictionary.setContainmentRefName('dictionary');
+                  dictionary.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'setDictionary', null), 'dictionary');
                 }
                 this.set__dictionary(dictionary);
               }
@@ -11582,6 +10876,28 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 3; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'setTypeDefinition') {
+                    {
+                      tmp$2 = this.setTypeDefinition(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'setDictionary') {
+                    {
+                      tmp$2 = this.setDictionary(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2) {
+                }
+              }
+              tmp$2;
+            },
             internalGetKey: function () {
               return this.getName();
             },
@@ -11609,6 +10925,13 @@
             },
             findByPath: function (query) {
               return null;
+            },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
             },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.Instance) || !Kotlin.isType(similarObj, _.org.kevoree.impl.InstanceImpl)) {
@@ -11756,8 +11079,7 @@
                   var tmp$0 = extraFonctionalProperties.iterator();
                   while (tmp$0.hasNext()) {
                     var elem = tmp$0.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f37, this, elem));
-                    elem.setContainmentRefName('extraFonctionalProperties');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeExtraFonctionalProperties', elem), 'extraFonctionalProperties');
                   }
                 }
               }
@@ -11767,8 +11089,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__extraFonctionalProperties_java_cache(null);
-              extraFonctionalProperties.setEContainer(this, Kotlin.b0(_f.f38, this, extraFonctionalProperties));
-              extraFonctionalProperties.setContainmentRefName('extraFonctionalProperties');
+              extraFonctionalProperties.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeExtraFonctionalProperties', extraFonctionalProperties), 'extraFonctionalProperties');
               this.get__extraFonctionalProperties().add(extraFonctionalProperties);
             },
             addAllExtraFonctionalProperties: function (extraFonctionalProperties) {
@@ -11781,8 +11102,7 @@
                 var tmp$0 = extraFonctionalProperties.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(this, Kotlin.b0(_f.f39, this, el));
-                  el.setContainmentRefName('extraFonctionalProperties');
+                  el.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeExtraFonctionalProperties', el), 'extraFonctionalProperties');
                 }
               }
             },
@@ -11792,10 +11112,9 @@
               }
               this.set__extraFonctionalProperties_java_cache(null);
               if (this.get__extraFonctionalProperties().size() !== 0 && this.get__extraFonctionalProperties().indexOf(extraFonctionalProperties) !== -1) {
-                this.get__extraFonctionalProperties().remove(this.get__extraFonctionalProperties().indexOf(extraFonctionalProperties));
-                var tmp$0, tmp$1;
-                ((tmp$0 = extraFonctionalProperties) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = extraFonctionalProperties) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                this.get__extraFonctionalProperties().remove(extraFonctionalProperties);
+                var tmp$0;
+                ((tmp$0 = extraFonctionalProperties) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllExtraFonctionalProperties: function () {
@@ -11807,8 +11126,7 @@
                 var tmp$0 = temp_els.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__extraFonctionalProperties_java_cache(null);
@@ -11869,6 +11187,8 @@
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var tmp$0;
+              var temp_els = (tmp$0 = this.getPortTypes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               this.set__portTypes_java_cache(null);
               this.get__portTypes().clear();
             },
@@ -11927,6 +11247,28 @@
                 clonedSelfObject.setInternalReadOnly();
               }
               return clonedSelfObject;
+            },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 3; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'removeExtraFonctionalProperties') {
+                    {
+                      tmp$2 = this.removeExtraFonctionalProperties(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'addPortTypes') {
+                    {
+                      tmp$2 = this.addPortTypes(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2) {
+                }
+              }
+              tmp$2;
             },
             internalGetKey: function () {
               return this.getName();
@@ -12000,7 +11342,7 @@
                     {
                       var objFound = this.findPortTypesByID(queryID);
                       if (!Kotlin.equals(subquery, '') && (objFound !== null && objFound !== undefined)) {
-                        throw new Kotlin.Exception('KMFQL : rejected sucessor');
+                        throw new Kotlin.Exception('KMFQL : rejected sucessor' + relationName + ' from IntegrationPattern');
                       }
                        else {
                         tmp$4 = objFound;
@@ -12014,6 +11356,32 @@
               }
               return tmp$4;
             },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              {
+                var tmp$0 = this.getExtraFonctionalProperties().iterator();
+                while (tmp$0.hasNext()) {
+                  var subElement = tmp$0.next();
+                  var lookEqualsSub = false;
+                  {
+                    var tmp$1 = similarObjCasted.getExtraFonctionalProperties().iterator();
+                    while (tmp$1.hasNext()) {
+                      var subElement2 = tmp$1.next();
+                      if (subElement.deepModelEquals(subElement2)) {
+                        lookEqualsSub = true;
+                      }
+                    }
+                  }
+                  if (!lookEqualsSub) {
+                    return false;
+                  }
+                }
+              }
+              return true;
+            },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.IntegrationPattern) || !Kotlin.isType(similarObj, _.org.kevoree.impl.IntegrationPatternImpl)) {
                 return false;
@@ -12024,25 +11392,6 @@
               }
               if (this.getExtraFonctionalProperties().size() !== similarObjCasted.getExtraFonctionalProperties().size()) {
                 return false;
-              }
-              {
-                var tmp$0 = this.getExtraFonctionalProperties().iterator();
-                while (tmp$0.hasNext()) {
-                  var subElement = tmp$0.next();
-                  var lookEqualsSub = false;
-                  {
-                    var tmp$1 = similarObjCasted.getExtraFonctionalProperties().iterator();
-                    while (tmp$1.hasNext()) {
-                      var subElement2 = tmp$1.next();
-                      if (subElement.modelEquals(subElement2)) {
-                        lookEqualsSub = true;
-                      }
-                    }
-                  }
-                  if (!lookEqualsSub) {
-                    return false;
-                  }
-                }
               }
               return true;
             }
@@ -12291,13 +11640,14 @@
               }
               this.set__deployUnits_java_cache(null);
               if (this.get__deployUnits().size() !== 0 && this.get__deployUnits().indexOf(deployUnits) !== -1) {
-                this.get__deployUnits().remove(this.get__deployUnits().indexOf(deployUnits));
+                this.get__deployUnits().remove(deployUnits);
               }
             },
             removeAllDeployUnits: function () {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var temp_els = this.getDeployUnits();
               this.set__deployUnits_java_cache(null);
               this.get__deployUnits().clear();
             },
@@ -12310,13 +11660,11 @@
               }
               if (!Kotlin.equals(this.get__dictionaryType(), dictionaryType)) {
                 if (this.get__dictionaryType() !== null && this.get__dictionaryType() !== undefined) {
-                  var tmp$0, tmp$1;
-                  ((tmp$0 = this.get__dictionaryType()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                  ((tmp$1 = this.get__dictionaryType()) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                  var tmp$0;
+                  ((tmp$0 = this.get__dictionaryType()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
                 }
                 if (dictionaryType !== null && dictionaryType !== undefined) {
-                  dictionaryType.setEContainer(this, Kotlin.b3(_f.f3a, this));
-                  dictionaryType.setContainmentRefName('dictionaryType');
+                  dictionaryType.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'setDictionaryType', null), 'dictionaryType');
                 }
                 this.set__dictionaryType(dictionaryType);
               }
@@ -12376,6 +11724,8 @@
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var tmp$0;
+              var temp_els = (tmp$0 = this.getSuperTypes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               this.set__superTypes_java_cache(null);
               this.get__superTypes().clear();
             },
@@ -12444,6 +11794,35 @@
                 clonedSelfObject.setInternalReadOnly();
               }
               return clonedSelfObject;
+            },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 4; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'addDeployUnits') {
+                    {
+                      tmp$2 = this.addDeployUnits(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'setDictionaryType') {
+                    {
+                      tmp$2 = this.setDictionaryType(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2)
+                  if (tmp$0 === 'addSuperTypes') {
+                    {
+                      tmp$2 = this.addSuperTypes(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 3) {
+                }
+              }
+              tmp$2;
             },
             internalGetKey: function () {
               return this.getName();
@@ -12531,6 +11910,13 @@
               }
               return tmp$4;
             },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
+            },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.LifeCycleTypeDefinition) || !Kotlin.isType(similarObj, _.org.kevoree.impl.LifeCycleTypeDefinitionImpl)) {
                 return false;
@@ -12563,7 +11949,7 @@
               return true;
             }
           }),
-          MBindingImpl: Kotlin.createClass(classes.c9, classes.cp, {
+          MBindingImpl: Kotlin.createClass(classes.c9, classes.cq, {
             initialize: function () {
               this.$internal_eContainer = null;
               this.$internal_containmentRefName = null;
@@ -12729,6 +12115,28 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 3; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'setPort') {
+                    {
+                      tmp$2 = this.setPort(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'setHub') {
+                    {
+                      tmp$2 = this.setHub(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2) {
+                }
+              }
+              tmp$2;
+            },
             path: function () {
               if (this.eContainer() === null || this.eContainer() === undefined) {
                 return '';
@@ -12740,6 +12148,13 @@
             findByPath: function (query) {
               return null;
             },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
+            },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.MBinding) || !Kotlin.isType(similarObj, _.org.kevoree.impl.MBindingImpl)) {
                 return false;
@@ -12748,7 +12163,7 @@
               return true;
             }
           }),
-          MessagePortTypeImpl: Kotlin.createClass(classes.c9, classes.cq, {
+          MessagePortTypeImpl: Kotlin.createClass(classes.c9, classes.cr, {
             initialize: function () {
               this.$internal_eContainer = null;
               this.$internal_containmentRefName = null;
@@ -12980,13 +12395,14 @@
               }
               this.set__deployUnits_java_cache(null);
               if (this.get__deployUnits().size() !== 0 && this.get__deployUnits().indexOf(deployUnits) !== -1) {
-                this.get__deployUnits().remove(this.get__deployUnits().indexOf(deployUnits));
+                this.get__deployUnits().remove(deployUnits);
               }
             },
             removeAllDeployUnits: function () {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var temp_els = this.getDeployUnits();
               this.set__deployUnits_java_cache(null);
               this.get__deployUnits().clear();
             },
@@ -12999,13 +12415,11 @@
               }
               if (!Kotlin.equals(this.get__dictionaryType(), dictionaryType)) {
                 if (this.get__dictionaryType() !== null && this.get__dictionaryType() !== undefined) {
-                  var tmp$0, tmp$1;
-                  ((tmp$0 = this.get__dictionaryType()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                  ((tmp$1 = this.get__dictionaryType()) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                  var tmp$0;
+                  ((tmp$0 = this.get__dictionaryType()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
                 }
                 if (dictionaryType !== null && dictionaryType !== undefined) {
-                  dictionaryType.setEContainer(this, Kotlin.b3(_f.f3b, this));
-                  dictionaryType.setContainmentRefName('dictionaryType');
+                  dictionaryType.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'setDictionaryType', null), 'dictionaryType');
                 }
                 this.set__dictionaryType(dictionaryType);
               }
@@ -13065,6 +12479,8 @@
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var tmp$0;
+              var temp_els = (tmp$0 = this.getSuperTypes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               this.set__superTypes_java_cache(null);
               this.get__superTypes().clear();
             },
@@ -13123,6 +12539,8 @@
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var tmp$0;
+              var temp_els = (tmp$0 = this.getFilters()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               this.set__filters_java_cache(null);
               this.get__filters().clear();
             },
@@ -13201,6 +12619,42 @@
                 clonedSelfObject.setInternalReadOnly();
               }
               return clonedSelfObject;
+            },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 5; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'addDeployUnits') {
+                    {
+                      tmp$2 = this.addDeployUnits(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'setDictionaryType') {
+                    {
+                      tmp$2 = this.setDictionaryType(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2)
+                  if (tmp$0 === 'addSuperTypes') {
+                    {
+                      tmp$2 = this.addSuperTypes(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 3)
+                  if (tmp$0 === 'addFilters') {
+                    {
+                      tmp$2 = this.addFilters(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 4) {
+                }
+              }
+              tmp$2;
             },
             internalGetKey: function () {
               return this.getName();
@@ -13283,6 +12737,13 @@
               }
               return tmp$2;
             },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
+            },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.MessagePortType) || !Kotlin.isType(similarObj, _.org.kevoree.impl.MessagePortTypeImpl)) {
                 return false;
@@ -13309,7 +12770,7 @@
               return true;
             }
           }),
-          NamedElementImpl: Kotlin.createClass(classes.c9, classes.cr, {
+          NamedElementImpl: Kotlin.createClass(classes.c9, classes.cs, {
             initialize: function () {
               this.$internal_eContainer = null;
               this.$internal_containmentRefName = null;
@@ -13390,6 +12851,8 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+            },
             internalGetKey: function () {
               return this.getName();
             },
@@ -13418,6 +12881,13 @@
             findByPath: function (query) {
               return null;
             },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
+            },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.NamedElement) || !Kotlin.isType(similarObj, _.org.kevoree.impl.NamedElementImpl)) {
                 return false;
@@ -13429,7 +12899,7 @@
               return true;
             }
           }),
-          NamespaceImpl: Kotlin.createClass(classes.c9, classes.cs, {
+          NamespaceImpl: Kotlin.createClass(classes.c9, classes.ct, {
             initialize: function () {
               this.$internal_eContainer = null;
               this.$internal_containmentRefName = null;
@@ -13556,8 +13026,7 @@
                   var tmp$1 = childs.iterator();
                   while (tmp$1.hasNext()) {
                     var elem = tmp$1.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f3c, this, elem));
-                    elem.setContainmentRefName('childs');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeChilds', elem), 'childs');
                   }
                 }
               }
@@ -13567,8 +13036,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__childs_java_cache(null);
-              childs.setEContainer(this, Kotlin.b0(_f.f3d, this, childs));
-              childs.setContainmentRefName('childs');
+              childs.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeChilds', childs), 'childs');
               this.get__childs().put(childs.getName(), childs);
             },
             addAllChilds: function (childs) {
@@ -13587,8 +13055,7 @@
                 var tmp$1 = childs.iterator();
                 while (tmp$1.hasNext()) {
                   var el_0 = tmp$1.next();
-                  el_0.setEContainer(this, Kotlin.b0(_f.f3e, this, el_0));
-                  el_0.setContainmentRefName('childs');
+                  el_0.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeChilds', el_0), 'childs');
                 }
               }
             },
@@ -13599,9 +13066,8 @@
               this.set__childs_java_cache(null);
               if (this.get__childs().size() !== 0 && this.get__childs().containsKey(childs.getName())) {
                 this.get__childs().remove(childs.getName());
-                var tmp$0, tmp$1;
-                ((tmp$0 = childs) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = childs) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                var tmp$0;
+                ((tmp$0 = childs) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllChilds: function () {
@@ -13609,13 +13075,12 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               var tmp$0;
+              var temp_els = (tmp$0 = this.getChilds()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               {
-                var tmp$1 = ((tmp$0 = this.getChilds()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).iterator();
+                var tmp$1 = temp_els.iterator();
                 while (tmp$1.hasNext()) {
-                  var elm = tmp$1.next();
-                  var el = elm;
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  var el = tmp$1.next();
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__childs_java_cache(null);
@@ -13685,6 +13150,28 @@
                 clonedSelfObject.setInternalReadOnly();
               }
               return clonedSelfObject;
+            },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 3; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'removeChilds') {
+                    {
+                      tmp$2 = this.removeChilds(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'setParent') {
+                    {
+                      tmp$2 = this.setParent(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2) {
+                }
+              }
+              tmp$2;
             },
             internalGetKey: function () {
               return this.getName();
@@ -13758,17 +13245,11 @@
               }
               return tmp$2;
             },
-            modelEquals: function (similarObj) {
-              if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.Namespace) || !Kotlin.isType(similarObj, _.org.kevoree.impl.NamespaceImpl)) {
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
                 return false;
               }
               var similarObjCasted = similarObj;
-              if (!Kotlin.equals(this.getName(), similarObjCasted.getName())) {
-                return false;
-              }
-              if (this.getChilds().size() !== similarObjCasted.getChilds().size()) {
-                return false;
-              }
               {
                 var tmp$0 = this.getChilds().iterator();
                 while (tmp$0.hasNext()) {
@@ -13780,9 +13261,22 @@
                 }
               }
               return true;
+            },
+            modelEquals: function (similarObj) {
+              if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.Namespace) || !Kotlin.isType(similarObj, _.org.kevoree.impl.NamespaceImpl)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              if (!Kotlin.equals(this.getName(), similarObjCasted.getName())) {
+                return false;
+              }
+              if (this.getChilds().size() !== similarObjCasted.getChilds().size()) {
+                return false;
+              }
+              return true;
             }
           }),
-          NetworkPropertyImpl: Kotlin.createClass(classes.c9, classes.ct, {
+          NetworkPropertyImpl: Kotlin.createClass(classes.c9, classes.cu, {
             initialize: function () {
               this.$internal_eContainer = null;
               this.$internal_containmentRefName = null;
@@ -13897,6 +13391,8 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+            },
             internalGetKey: function () {
               return this.getName();
             },
@@ -13925,6 +13421,13 @@
             findByPath: function (query) {
               return null;
             },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
+            },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.NetworkProperty) || !Kotlin.isType(similarObj, _.org.kevoree.impl.NetworkPropertyImpl)) {
                 return false;
@@ -13942,7 +13445,7 @@
               return true;
             }
           }),
-          NodeLinkImpl: Kotlin.createClass(classes.c9, classes.cu, {
+          NodeLinkImpl: Kotlin.createClass(classes.c9, classes.cv, {
             initialize: function () {
               this.$internal_eContainer = null;
               this.$internal_containmentRefName = null;
@@ -14089,8 +13592,7 @@
                   var tmp$1 = networkProperties.iterator();
                   while (tmp$1.hasNext()) {
                     var elem = tmp$1.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f3f, this, elem));
-                    elem.setContainmentRefName('networkProperties');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeNetworkProperties', elem), 'networkProperties');
                   }
                 }
               }
@@ -14100,8 +13602,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__networkProperties_java_cache(null);
-              networkProperties.setEContainer(this, Kotlin.b0(_f.f3g, this, networkProperties));
-              networkProperties.setContainmentRefName('networkProperties');
+              networkProperties.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeNetworkProperties', networkProperties), 'networkProperties');
               this.get__networkProperties().put(networkProperties.getName(), networkProperties);
             },
             addAllNetworkProperties: function (networkProperties) {
@@ -14120,8 +13621,7 @@
                 var tmp$1 = networkProperties.iterator();
                 while (tmp$1.hasNext()) {
                   var el_0 = tmp$1.next();
-                  el_0.setEContainer(this, Kotlin.b0(_f.f3h, this, el_0));
-                  el_0.setContainmentRefName('networkProperties');
+                  el_0.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeNetworkProperties', el_0), 'networkProperties');
                 }
               }
             },
@@ -14132,9 +13632,8 @@
               this.set__networkProperties_java_cache(null);
               if (this.get__networkProperties().size() !== 0 && this.get__networkProperties().containsKey(networkProperties.getName())) {
                 this.get__networkProperties().remove(networkProperties.getName());
-                var tmp$0, tmp$1;
-                ((tmp$0 = networkProperties) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = networkProperties) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                var tmp$0;
+                ((tmp$0 = networkProperties) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllNetworkProperties: function () {
@@ -14142,13 +13641,12 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               var tmp$0;
+              var temp_els = (tmp$0 = this.getNetworkProperties()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               {
-                var tmp$1 = ((tmp$0 = this.getNetworkProperties()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).iterator();
+                var tmp$1 = temp_els.iterator();
                 while (tmp$1.hasNext()) {
-                  var elm = tmp$1.next();
-                  var el = elm;
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  var el = tmp$1.next();
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__networkProperties_java_cache(null);
@@ -14199,6 +13697,8 @@
                 clonedSelfObject.setInternalReadOnly();
               }
               return clonedSelfObject;
+            },
+            reflexiveSetters: function (method, value) {
             },
             path: function () {
               if (this.eContainer() === null || this.eContainer() === undefined) {
@@ -14255,7 +13755,7 @@
                     {
                       var objFound = this.findNetworkPropertiesByID(queryID);
                       if (!Kotlin.equals(subquery, '') && (objFound !== null && objFound !== undefined)) {
-                        throw new Kotlin.Exception('KMFQL : rejected sucessor');
+                        throw new Kotlin.Exception('KMFQL : rejected sucessor' + relationName + ' from NodeLink');
                       }
                        else {
                         tmp$4 = objFound;
@@ -14268,6 +13768,23 @@
                 }
               }
               return tmp$4;
+            },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              {
+                var tmp$0 = this.getNetworkProperties().iterator();
+                while (tmp$0.hasNext()) {
+                  var subElement = tmp$0.next();
+                  var foundedElement = similarObjCasted.findNetworkPropertiesByID(subElement.getName());
+                  if (foundedElement === null || foundedElement === undefined || !Kotlin.equals(foundedElement, subElement)) {
+                    return false;
+                  }
+                }
+              }
+              return true;
             },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.NodeLink) || !Kotlin.isType(similarObj, _.org.kevoree.impl.NodeLinkImpl)) {
@@ -14286,20 +13803,10 @@
               if (this.getNetworkProperties().size() !== similarObjCasted.getNetworkProperties().size()) {
                 return false;
               }
-              {
-                var tmp$0 = this.getNetworkProperties().iterator();
-                while (tmp$0.hasNext()) {
-                  var subElement = tmp$0.next();
-                  var foundedElement = similarObjCasted.findNetworkPropertiesByID(subElement.getName());
-                  if (foundedElement === null || foundedElement === undefined || !Kotlin.equals(foundedElement, subElement)) {
-                    return false;
-                  }
-                }
-              }
               return true;
             }
           }),
-          NodeNetworkImpl: Kotlin.createClass(classes.c9, classes.cv, {
+          NodeNetworkImpl: Kotlin.createClass(classes.c9, classes.cw, {
             initialize: function () {
               this.$internal_eContainer = null;
               this.$internal_containmentRefName = null;
@@ -14416,8 +13923,7 @@
                   var tmp$0 = link.iterator();
                   while (tmp$0.hasNext()) {
                     var elem = tmp$0.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f3i, this, elem));
-                    elem.setContainmentRefName('link');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeLink', elem), 'link');
                   }
                 }
               }
@@ -14427,8 +13933,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__link_java_cache(null);
-              link.setEContainer(this, Kotlin.b0(_f.f3j, this, link));
-              link.setContainmentRefName('link');
+              link.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeLink', link), 'link');
               this.get__link().add(link);
             },
             addAllLink: function (link) {
@@ -14441,8 +13946,7 @@
                 var tmp$0 = link.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(this, Kotlin.b0(_f.f3k, this, el));
-                  el.setContainmentRefName('link');
+                  el.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeLink', el), 'link');
                 }
               }
             },
@@ -14452,10 +13956,9 @@
               }
               this.set__link_java_cache(null);
               if (this.get__link().size() !== 0 && this.get__link().indexOf(link) !== -1) {
-                this.get__link().remove(this.get__link().indexOf(link));
-                var tmp$0, tmp$1;
-                ((tmp$0 = link) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = link) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                this.get__link().remove(link);
+                var tmp$0;
+                ((tmp$0 = link) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllLink: function () {
@@ -14467,8 +13970,7 @@
                 var tmp$0 = temp_els.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__link_java_cache(null);
@@ -14559,6 +14061,35 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 4; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'removeLink') {
+                    {
+                      tmp$2 = this.removeLink(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'setInitBy') {
+                    {
+                      tmp$2 = this.setInitBy(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2)
+                  if (tmp$0 === 'setTarget') {
+                    {
+                      tmp$2 = this.setTarget(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 3) {
+                }
+              }
+              tmp$2;
+            },
             path: function () {
               if (this.eContainer() === null || this.eContainer() === undefined) {
                 return '';
@@ -14570,14 +14101,11 @@
             findByPath: function (query) {
               return null;
             },
-            modelEquals: function (similarObj) {
-              if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.NodeNetwork) || !Kotlin.isType(similarObj, _.org.kevoree.impl.NodeNetworkImpl)) {
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
                 return false;
               }
               var similarObjCasted = similarObj;
-              if (this.getLink().size() !== similarObjCasted.getLink().size()) {
-                return false;
-              }
               {
                 var tmp$0 = this.getLink().iterator();
                 while (tmp$0.hasNext()) {
@@ -14587,7 +14115,7 @@
                     var tmp$1 = similarObjCasted.getLink().iterator();
                     while (tmp$1.hasNext()) {
                       var subElement2 = tmp$1.next();
-                      if (subElement.modelEquals(subElement2)) {
+                      if (subElement.deepModelEquals(subElement2)) {
                         lookEqualsSub = true;
                       }
                     }
@@ -14598,9 +14126,19 @@
                 }
               }
               return true;
+            },
+            modelEquals: function (similarObj) {
+              if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.NodeNetwork) || !Kotlin.isType(similarObj, _.org.kevoree.impl.NodeNetworkImpl)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              if (this.getLink().size() !== similarObjCasted.getLink().size()) {
+                return false;
+              }
+              return true;
             }
           }),
-          NodeTypeImpl: Kotlin.createClass(classes.c9, classes.cw, {
+          NodeTypeImpl: Kotlin.createClass(classes.c9, classes.cx, {
             initialize: function () {
               this.$internal_eContainer = null;
               this.$internal_containmentRefName = null;
@@ -14891,13 +14429,14 @@
               }
               this.set__deployUnits_java_cache(null);
               if (this.get__deployUnits().size() !== 0 && this.get__deployUnits().indexOf(deployUnits) !== -1) {
-                this.get__deployUnits().remove(this.get__deployUnits().indexOf(deployUnits));
+                this.get__deployUnits().remove(deployUnits);
               }
             },
             removeAllDeployUnits: function () {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var temp_els = this.getDeployUnits();
               this.set__deployUnits_java_cache(null);
               this.get__deployUnits().clear();
             },
@@ -14910,13 +14449,11 @@
               }
               if (!Kotlin.equals(this.get__dictionaryType(), dictionaryType)) {
                 if (this.get__dictionaryType() !== null && this.get__dictionaryType() !== undefined) {
-                  var tmp$0, tmp$1;
-                  ((tmp$0 = this.get__dictionaryType()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                  ((tmp$1 = this.get__dictionaryType()) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                  var tmp$0;
+                  ((tmp$0 = this.get__dictionaryType()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
                 }
                 if (dictionaryType !== null && dictionaryType !== undefined) {
-                  dictionaryType.setEContainer(this, Kotlin.b3(_f.f3l, this));
-                  dictionaryType.setContainmentRefName('dictionaryType');
+                  dictionaryType.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'setDictionaryType', null), 'dictionaryType');
                 }
                 this.set__dictionaryType(dictionaryType);
               }
@@ -14976,6 +14513,8 @@
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var tmp$0;
+              var temp_els = (tmp$0 = this.getSuperTypes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               this.set__superTypes_java_cache(null);
               this.get__superTypes().clear();
             },
@@ -15034,6 +14573,8 @@
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var tmp$0;
+              var temp_els = (tmp$0 = this.getManagedPrimitiveTypes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               this.set__managedPrimitiveTypes_java_cache(null);
               this.get__managedPrimitiveTypes().clear();
             },
@@ -15055,8 +14596,7 @@
                   var tmp$0 = managedPrimitiveTypeRefs.iterator();
                   while (tmp$0.hasNext()) {
                     var elem = tmp$0.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f3m, this, elem));
-                    elem.setContainmentRefName('managedPrimitiveTypeRefs');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeManagedPrimitiveTypeRefs', elem), 'managedPrimitiveTypeRefs');
                   }
                 }
               }
@@ -15066,8 +14606,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__managedPrimitiveTypeRefs_java_cache(null);
-              managedPrimitiveTypeRefs.setEContainer(this, Kotlin.b0(_f.f3n, this, managedPrimitiveTypeRefs));
-              managedPrimitiveTypeRefs.setContainmentRefName('managedPrimitiveTypeRefs');
+              managedPrimitiveTypeRefs.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeManagedPrimitiveTypeRefs', managedPrimitiveTypeRefs), 'managedPrimitiveTypeRefs');
               this.get__managedPrimitiveTypeRefs().add(managedPrimitiveTypeRefs);
             },
             addAllManagedPrimitiveTypeRefs: function (managedPrimitiveTypeRefs) {
@@ -15080,8 +14619,7 @@
                 var tmp$0 = managedPrimitiveTypeRefs.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(this, Kotlin.b0(_f.f3o, this, el));
-                  el.setContainmentRefName('managedPrimitiveTypeRefs');
+                  el.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeManagedPrimitiveTypeRefs', el), 'managedPrimitiveTypeRefs');
                 }
               }
             },
@@ -15091,10 +14629,9 @@
               }
               this.set__managedPrimitiveTypeRefs_java_cache(null);
               if (this.get__managedPrimitiveTypeRefs().size() !== 0 && this.get__managedPrimitiveTypeRefs().indexOf(managedPrimitiveTypeRefs) !== -1) {
-                this.get__managedPrimitiveTypeRefs().remove(this.get__managedPrimitiveTypeRefs().indexOf(managedPrimitiveTypeRefs));
-                var tmp$0, tmp$1;
-                ((tmp$0 = managedPrimitiveTypeRefs) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = managedPrimitiveTypeRefs) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                this.get__managedPrimitiveTypeRefs().remove(managedPrimitiveTypeRefs);
+                var tmp$0;
+                ((tmp$0 = managedPrimitiveTypeRefs) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllManagedPrimitiveTypeRefs: function () {
@@ -15106,8 +14643,7 @@
                 var tmp$0 = temp_els.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__managedPrimitiveTypeRefs_java_cache(null);
@@ -15217,6 +14753,49 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 6; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'addDeployUnits') {
+                    {
+                      tmp$2 = this.addDeployUnits(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'setDictionaryType') {
+                    {
+                      tmp$2 = this.setDictionaryType(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2)
+                  if (tmp$0 === 'addSuperTypes') {
+                    {
+                      tmp$2 = this.addSuperTypes(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 3)
+                  if (tmp$0 === 'addManagedPrimitiveTypes') {
+                    {
+                      tmp$2 = this.addManagedPrimitiveTypes(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 4)
+                  if (tmp$0 === 'removeManagedPrimitiveTypeRefs') {
+                    {
+                      tmp$2 = this.removeManagedPrimitiveTypeRefs(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 5) {
+                }
+              }
+              tmp$2;
+            },
             internalGetKey: function () {
               return this.getName();
             },
@@ -15284,7 +14863,7 @@
                     {
                       var objFound_0 = this.findManagedPrimitiveTypesByID(queryID);
                       if (!Kotlin.equals(subquery, '') && (objFound_0 !== null && objFound_0 !== undefined)) {
-                        throw new Kotlin.Exception('KMFQL : rejected sucessor');
+                        throw new Kotlin.Exception('KMFQL : rejected sucessor' + relationName + ' from NodeType');
                       }
                        else {
                         tmp$2 = objFound_0;
@@ -15297,6 +14876,32 @@
                 }
               }
               return tmp$2;
+            },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              {
+                var tmp$0 = this.getManagedPrimitiveTypeRefs().iterator();
+                while (tmp$0.hasNext()) {
+                  var subElement = tmp$0.next();
+                  var lookEqualsSub = false;
+                  {
+                    var tmp$1 = similarObjCasted.getManagedPrimitiveTypeRefs().iterator();
+                    while (tmp$1.hasNext()) {
+                      var subElement2 = tmp$1.next();
+                      if (subElement.deepModelEquals(subElement2)) {
+                        lookEqualsSub = true;
+                      }
+                    }
+                  }
+                  if (!lookEqualsSub) {
+                    return false;
+                  }
+                }
+              }
+              return true;
             },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.NodeType) || !Kotlin.isType(similarObj, _.org.kevoree.impl.NodeTypeImpl)) {
@@ -15330,29 +14935,10 @@
               if (this.getManagedPrimitiveTypeRefs().size() !== similarObjCasted.getManagedPrimitiveTypeRefs().size()) {
                 return false;
               }
-              {
-                var tmp$0 = this.getManagedPrimitiveTypeRefs().iterator();
-                while (tmp$0.hasNext()) {
-                  var subElement = tmp$0.next();
-                  var lookEqualsSub = false;
-                  {
-                    var tmp$1 = similarObjCasted.getManagedPrimitiveTypeRefs().iterator();
-                    while (tmp$1.hasNext()) {
-                      var subElement2 = tmp$1.next();
-                      if (subElement.modelEquals(subElement2)) {
-                        lookEqualsSub = true;
-                      }
-                    }
-                  }
-                  if (!lookEqualsSub) {
-                    return false;
-                  }
-                }
-              }
               return true;
             }
           }),
-          OperationImpl: Kotlin.createClass(classes.c9, classes.cx, {
+          OperationImpl: Kotlin.createClass(classes.c9, classes.cy, {
             initialize: function () {
               this.$internal_eContainer = null;
               this.$internal_containmentRefName = null;
@@ -15479,8 +15065,7 @@
                   var tmp$1 = parameters.iterator();
                   while (tmp$1.hasNext()) {
                     var elem = tmp$1.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f3p, this, elem));
-                    elem.setContainmentRefName('parameters');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeParameters', elem), 'parameters');
                   }
                 }
               }
@@ -15490,8 +15075,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__parameters_java_cache(null);
-              parameters.setEContainer(this, Kotlin.b0(_f.f3q, this, parameters));
-              parameters.setContainmentRefName('parameters');
+              parameters.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeParameters', parameters), 'parameters');
               this.get__parameters().put(parameters.getName(), parameters);
             },
             addAllParameters: function (parameters) {
@@ -15510,8 +15094,7 @@
                 var tmp$1 = parameters.iterator();
                 while (tmp$1.hasNext()) {
                   var el_0 = tmp$1.next();
-                  el_0.setEContainer(this, Kotlin.b0(_f.f3r, this, el_0));
-                  el_0.setContainmentRefName('parameters');
+                  el_0.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeParameters', el_0), 'parameters');
                 }
               }
             },
@@ -15522,9 +15105,8 @@
               this.set__parameters_java_cache(null);
               if (this.get__parameters().size() !== 0 && this.get__parameters().containsKey(parameters.getName())) {
                 this.get__parameters().remove(parameters.getName());
-                var tmp$0, tmp$1;
-                ((tmp$0 = parameters) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = parameters) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                var tmp$0;
+                ((tmp$0 = parameters) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllParameters: function () {
@@ -15532,13 +15114,12 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               var tmp$0;
+              var temp_els = (tmp$0 = this.getParameters()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               {
-                var tmp$1 = ((tmp$0 = this.getParameters()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).iterator();
+                var tmp$1 = temp_els.iterator();
                 while (tmp$1.hasNext()) {
-                  var elm = tmp$1.next();
-                  var el = elm;
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  var el = tmp$1.next();
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__parameters_java_cache(null);
@@ -15609,6 +15190,28 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 3; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'removeParameters') {
+                    {
+                      tmp$2 = this.removeParameters(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'setReturnType') {
+                    {
+                      tmp$2 = this.setReturnType(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2) {
+                }
+              }
+              tmp$2;
+            },
             internalGetKey: function () {
               return this.getName();
             },
@@ -15660,7 +15263,7 @@
                     {
                       var objFound = this.findParametersByID(queryID);
                       if (!Kotlin.equals(subquery, '') && (objFound !== null && objFound !== undefined)) {
-                        throw new Kotlin.Exception('KMFQL : rejected sucessor');
+                        throw new Kotlin.Exception('KMFQL : rejected sucessor' + relationName + ' from Operation');
                       }
                        else {
                         tmp$2 = objFound;
@@ -15681,17 +15284,11 @@
               }
               return tmp$2;
             },
-            modelEquals: function (similarObj) {
-              if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.Operation) || !Kotlin.isType(similarObj, _.org.kevoree.impl.OperationImpl)) {
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
                 return false;
               }
               var similarObjCasted = similarObj;
-              if (!Kotlin.equals(this.getName(), similarObjCasted.getName())) {
-                return false;
-              }
-              if (this.getParameters().size() !== similarObjCasted.getParameters().size()) {
-                return false;
-              }
               {
                 var tmp$0 = this.getParameters().iterator();
                 while (tmp$0.hasNext()) {
@@ -15703,9 +15300,22 @@
                 }
               }
               return true;
+            },
+            modelEquals: function (similarObj) {
+              if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.Operation) || !Kotlin.isType(similarObj, _.org.kevoree.impl.OperationImpl)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              if (!Kotlin.equals(this.getName(), similarObjCasted.getName())) {
+                return false;
+              }
+              if (this.getParameters().size() !== similarObjCasted.getParameters().size()) {
+                return false;
+              }
+              return true;
             }
           }),
-          ParameterImpl: Kotlin.createClass(classes.c9, classes.cy, {
+          ParameterImpl: Kotlin.createClass(classes.c9, classes.cz, {
             initialize: function () {
               this.$internal_eContainer = null;
               this.$internal_containmentRefName = null;
@@ -15836,6 +15446,21 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 2; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'setType') {
+                    {
+                      tmp$2 = this.setType(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1) {
+                }
+              }
+              tmp$2;
+            },
             internalGetKey: function () {
               return this.getName();
             },
@@ -15864,6 +15489,13 @@
             findByPath: function (query) {
               return null;
             },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
+            },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.Parameter) || !Kotlin.isType(similarObj, _.org.kevoree.impl.ParameterImpl)) {
                 return false;
@@ -15878,7 +15510,7 @@
               return true;
             }
           }),
-          PortImpl: Kotlin.createClass(classes.c9, classes.cz, {
+          PortImpl: Kotlin.createClass(classes.c9, classes.c10, {
             initialize: function () {
               this.$internal_eContainer = null;
               this.$internal_containmentRefName = null;
@@ -16023,7 +15655,7 @@
               }
               this.set__bindings_java_cache(null);
               if (this.get__bindings().size() !== 0 && this.get__bindings().indexOf(bindings) !== -1) {
-                this.get__bindings().remove(this.get__bindings().indexOf(bindings));
+                this.get__bindings().remove(bindings);
                 bindings.noOpposite_setPort(null);
               }
             },
@@ -16048,13 +15680,14 @@
               }
               this.set__bindings_java_cache(null);
               if (this.get__bindings().size() !== 0 && this.get__bindings().indexOf(bindings) !== -1) {
-                this.get__bindings().remove(this.get__bindings().indexOf(bindings));
+                this.get__bindings().remove(bindings);
               }
             },
             noOpposite_removeAllBindings: function () {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var temp_els = this.getBindings();
               this.set__bindings_java_cache(null);
               this.get__bindings().clear();
             },
@@ -16108,6 +15741,28 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 3; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'addBindings') {
+                    {
+                      tmp$2 = this.addBindings(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'setPortTypeRef') {
+                    {
+                      tmp$2 = this.setPortTypeRef(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2) {
+                }
+              }
+              tmp$2;
+            },
             path: function () {
               if (this.eContainer() === null || this.eContainer() === undefined) {
                 return '';
@@ -16119,6 +15774,13 @@
             findByPath: function (query) {
               return null;
             },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
+            },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.Port) || !Kotlin.isType(similarObj, _.org.kevoree.impl.PortImpl)) {
                 return false;
@@ -16127,7 +15789,7 @@
               return true;
             }
           }),
-          PortTypeImpl: Kotlin.createClass(classes.c9, classes.c10, {
+          PortTypeImpl: Kotlin.createClass(classes.c9, classes.c11, {
             initialize: function () {
               this.$internal_eContainer = null;
               this.$internal_containmentRefName = null;
@@ -16339,13 +16001,14 @@
               }
               this.set__deployUnits_java_cache(null);
               if (this.get__deployUnits().size() !== 0 && this.get__deployUnits().indexOf(deployUnits) !== -1) {
-                this.get__deployUnits().remove(this.get__deployUnits().indexOf(deployUnits));
+                this.get__deployUnits().remove(deployUnits);
               }
             },
             removeAllDeployUnits: function () {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var temp_els = this.getDeployUnits();
               this.set__deployUnits_java_cache(null);
               this.get__deployUnits().clear();
             },
@@ -16358,13 +16021,11 @@
               }
               if (!Kotlin.equals(this.get__dictionaryType(), dictionaryType)) {
                 if (this.get__dictionaryType() !== null && this.get__dictionaryType() !== undefined) {
-                  var tmp$0, tmp$1;
-                  ((tmp$0 = this.get__dictionaryType()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                  ((tmp$1 = this.get__dictionaryType()) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                  var tmp$0;
+                  ((tmp$0 = this.get__dictionaryType()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
                 }
                 if (dictionaryType !== null && dictionaryType !== undefined) {
-                  dictionaryType.setEContainer(this, Kotlin.b3(_f.f3s, this));
-                  dictionaryType.setContainmentRefName('dictionaryType');
+                  dictionaryType.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'setDictionaryType', null), 'dictionaryType');
                 }
                 this.set__dictionaryType(dictionaryType);
               }
@@ -16424,6 +16085,8 @@
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var tmp$0;
+              var temp_els = (tmp$0 = this.getSuperTypes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               this.set__superTypes_java_cache(null);
               this.get__superTypes().clear();
             },
@@ -16490,6 +16153,35 @@
                 clonedSelfObject.setInternalReadOnly();
               }
               return clonedSelfObject;
+            },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 4; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'addDeployUnits') {
+                    {
+                      tmp$2 = this.addDeployUnits(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'setDictionaryType') {
+                    {
+                      tmp$2 = this.setDictionaryType(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2)
+                  if (tmp$0 === 'addSuperTypes') {
+                    {
+                      tmp$2 = this.addSuperTypes(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 3) {
+                }
+              }
+              tmp$2;
             },
             internalGetKey: function () {
               return this.getName();
@@ -16577,6 +16269,13 @@
               }
               return tmp$4;
             },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
+            },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.PortType) || !Kotlin.isType(similarObj, _.org.kevoree.impl.PortTypeImpl)) {
                 return false;
@@ -16603,7 +16302,7 @@
               return true;
             }
           }),
-          PortTypeMappingImpl: Kotlin.createClass(classes.c9, classes.c11, {
+          PortTypeMappingImpl: Kotlin.createClass(classes.c9, classes.c12, {
             initialize: function () {
               this.$internal_eContainer = null;
               this.$internal_containmentRefName = null;
@@ -16718,6 +16417,8 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+            },
             path: function () {
               if (this.eContainer() === null || this.eContainer() === undefined) {
                 return '';
@@ -16728,6 +16429,13 @@
             },
             findByPath: function (query) {
               return null;
+            },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
             },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.PortTypeMapping) || !Kotlin.isType(similarObj, _.org.kevoree.impl.PortTypeMappingImpl)) {
@@ -16746,7 +16454,7 @@
               return true;
             }
           }),
-          PortTypeRefImpl: Kotlin.createClass(classes.c9, classes.c12, {
+          PortTypeRefImpl: Kotlin.createClass(classes.c9, classes.c13, {
             initialize: function () {
               this.$internal_eContainer = null;
               this.$internal_containmentRefName = null;
@@ -16910,8 +16618,7 @@
                   var tmp$0 = mappings.iterator();
                   while (tmp$0.hasNext()) {
                     var elem = tmp$0.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f3t, this, elem));
-                    elem.setContainmentRefName('mappings');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeMappings', elem), 'mappings');
                   }
                 }
               }
@@ -16921,8 +16628,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__mappings_java_cache(null);
-              mappings.setEContainer(this, Kotlin.b0(_f.f3u, this, mappings));
-              mappings.setContainmentRefName('mappings');
+              mappings.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeMappings', mappings), 'mappings');
               this.get__mappings().add(mappings);
             },
             addAllMappings: function (mappings) {
@@ -16935,8 +16641,7 @@
                 var tmp$0 = mappings.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(this, Kotlin.b0(_f.f3v, this, el));
-                  el.setContainmentRefName('mappings');
+                  el.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeMappings', el), 'mappings');
                 }
               }
             },
@@ -16946,10 +16651,9 @@
               }
               this.set__mappings_java_cache(null);
               if (this.get__mappings().size() !== 0 && this.get__mappings().indexOf(mappings) !== -1) {
-                this.get__mappings().remove(this.get__mappings().indexOf(mappings));
-                var tmp$0, tmp$1;
-                ((tmp$0 = mappings) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = mappings) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                this.get__mappings().remove(mappings);
+                var tmp$0;
+                ((tmp$0 = mappings) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllMappings: function () {
@@ -16961,8 +16665,7 @@
                 var tmp$0 = temp_els.iterator();
                 while (tmp$0.hasNext()) {
                   var el = tmp$0.next();
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__mappings_java_cache(null);
@@ -17024,6 +16727,28 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 3; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'setRef') {
+                    {
+                      tmp$2 = this.setRef(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'removeMappings') {
+                    {
+                      tmp$2 = this.removeMappings(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2) {
+                }
+              }
+              tmp$2;
+            },
             internalGetKey: function () {
               return this.getName();
             },
@@ -17052,6 +16777,32 @@
             findByPath: function (query) {
               return null;
             },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              {
+                var tmp$0 = this.getMappings().iterator();
+                while (tmp$0.hasNext()) {
+                  var subElement = tmp$0.next();
+                  var lookEqualsSub = false;
+                  {
+                    var tmp$1 = similarObjCasted.getMappings().iterator();
+                    while (tmp$1.hasNext()) {
+                      var subElement2 = tmp$1.next();
+                      if (subElement.deepModelEquals(subElement2)) {
+                        lookEqualsSub = true;
+                      }
+                    }
+                  }
+                  if (!lookEqualsSub) {
+                    return false;
+                  }
+                }
+              }
+              return true;
+            },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.PortTypeRef) || !Kotlin.isType(similarObj, _.org.kevoree.impl.PortTypeRefImpl)) {
                 return false;
@@ -17069,29 +16820,10 @@
               if (this.getMappings().size() !== similarObjCasted.getMappings().size()) {
                 return false;
               }
-              {
-                var tmp$0 = this.getMappings().iterator();
-                while (tmp$0.hasNext()) {
-                  var subElement = tmp$0.next();
-                  var lookEqualsSub = false;
-                  {
-                    var tmp$1 = similarObjCasted.getMappings().iterator();
-                    while (tmp$1.hasNext()) {
-                      var subElement2 = tmp$1.next();
-                      if (subElement.modelEquals(subElement2)) {
-                        lookEqualsSub = true;
-                      }
-                    }
-                  }
-                  if (!lookEqualsSub) {
-                    return false;
-                  }
-                }
-              }
               return true;
             }
           }),
-          RepositoryImpl: Kotlin.createClass(classes.c9, classes.c13, {
+          RepositoryImpl: Kotlin.createClass(classes.c9, classes.c14, {
             initialize: function () {
               this.$internal_eContainer = null;
               this.$internal_containmentRefName = null;
@@ -17211,13 +16943,14 @@
               }
               this.set__units_java_cache(null);
               if (this.get__units().size() !== 0 && this.get__units().indexOf(units) !== -1) {
-                this.get__units().remove(this.get__units().indexOf(units));
+                this.get__units().remove(units);
               }
             },
             removeAllUnits: function () {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var temp_els = this.getUnits();
               this.set__units_java_cache(null);
               this.get__units().clear();
             },
@@ -17251,6 +16984,21 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 2; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'addUnits') {
+                    {
+                      tmp$2 = this.addUnits(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1) {
+                }
+              }
+              tmp$2;
+            },
             internalGetKey: function () {
               return this.getUrl();
             },
@@ -17279,6 +17027,13 @@
             findByPath: function (query) {
               return null;
             },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
+            },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.Repository) || !Kotlin.isType(similarObj, _.org.kevoree.impl.RepositoryImpl)) {
                 return false;
@@ -17290,7 +17045,7 @@
               return true;
             }
           }),
-          ServicePortTypeImpl: Kotlin.createClass(classes.c9, classes.c15, {
+          ServicePortTypeImpl: Kotlin.createClass(classes.c9, classes.c16, {
             initialize: function () {
               this.$internal_eContainer = null;
               this.$internal_containmentRefName = null;
@@ -17545,13 +17300,14 @@
               }
               this.set__deployUnits_java_cache(null);
               if (this.get__deployUnits().size() !== 0 && this.get__deployUnits().indexOf(deployUnits) !== -1) {
-                this.get__deployUnits().remove(this.get__deployUnits().indexOf(deployUnits));
+                this.get__deployUnits().remove(deployUnits);
               }
             },
             removeAllDeployUnits: function () {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var temp_els = this.getDeployUnits();
               this.set__deployUnits_java_cache(null);
               this.get__deployUnits().clear();
             },
@@ -17564,13 +17320,11 @@
               }
               if (!Kotlin.equals(this.get__dictionaryType(), dictionaryType)) {
                 if (this.get__dictionaryType() !== null && this.get__dictionaryType() !== undefined) {
-                  var tmp$0, tmp$1;
-                  ((tmp$0 = this.get__dictionaryType()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                  ((tmp$1 = this.get__dictionaryType()) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                  var tmp$0;
+                  ((tmp$0 = this.get__dictionaryType()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
                 }
                 if (dictionaryType !== null && dictionaryType !== undefined) {
-                  dictionaryType.setEContainer(this, Kotlin.b3(_f.f3w, this));
-                  dictionaryType.setContainmentRefName('dictionaryType');
+                  dictionaryType.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'setDictionaryType', null), 'dictionaryType');
                 }
                 this.set__dictionaryType(dictionaryType);
               }
@@ -17630,6 +17384,8 @@
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var tmp$0;
+              var temp_els = (tmp$0 = this.getSuperTypes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               this.set__superTypes_java_cache(null);
               this.get__superTypes().clear();
             },
@@ -17657,8 +17413,7 @@
                   var tmp$1 = operations.iterator();
                   while (tmp$1.hasNext()) {
                     var elem = tmp$1.next();
-                    elem.setEContainer(this, Kotlin.b0(_f.f3x, this, elem));
-                    elem.setContainmentRefName('operations');
+                    elem.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeOperations', elem), 'operations');
                   }
                 }
               }
@@ -17668,8 +17423,7 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__operations_java_cache(null);
-              operations.setEContainer(this, Kotlin.b0(_f.f3y, this, operations));
-              operations.setContainmentRefName('operations');
+              operations.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeOperations', operations), 'operations');
               this.get__operations().put(operations.getName(), operations);
             },
             addAllOperations: function (operations) {
@@ -17688,8 +17442,7 @@
                 var tmp$1 = operations.iterator();
                 while (tmp$1.hasNext()) {
                   var el_0 = tmp$1.next();
-                  el_0.setEContainer(this, Kotlin.b0(_f.f3z, this, el_0));
-                  el_0.setContainmentRefName('operations');
+                  el_0.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'removeOperations', el_0), 'operations');
                 }
               }
             },
@@ -17700,9 +17453,8 @@
               this.set__operations_java_cache(null);
               if (this.get__operations().size() !== 0 && this.get__operations().containsKey(operations.getName())) {
                 this.get__operations().remove(operations.getName());
-                var tmp$0, tmp$1;
-                ((tmp$0 = operations) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                ((tmp$1 = operations) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                var tmp$0;
+                ((tmp$0 = operations) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
               }
             },
             removeAllOperations: function () {
@@ -17710,13 +17462,12 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               var tmp$0;
+              var temp_els = (tmp$0 = this.getOperations()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               {
-                var tmp$1 = ((tmp$0 = this.getOperations()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).iterator();
+                var tmp$1 = temp_els.iterator();
                 while (tmp$1.hasNext()) {
-                  var elm = tmp$1.next();
-                  var el = elm;
-                  el.setEContainer(null, null);
-                  el.setContainmentRefName(null);
+                  var el = tmp$1.next();
+                  el.setEContainer(null, null, null);
                 }
               }
               this.set__operations_java_cache(null);
@@ -17813,6 +17564,42 @@
               }
               return clonedSelfObject;
             },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 5; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'addDeployUnits') {
+                    {
+                      tmp$2 = this.addDeployUnits(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'setDictionaryType') {
+                    {
+                      tmp$2 = this.setDictionaryType(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2)
+                  if (tmp$0 === 'addSuperTypes') {
+                    {
+                      tmp$2 = this.addSuperTypes(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 3)
+                  if (tmp$0 === 'removeOperations') {
+                    {
+                      tmp$2 = this.removeOperations(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 4) {
+                }
+              }
+              tmp$2;
+            },
             internalGetKey: function () {
               return this.getName();
             },
@@ -17894,6 +17681,23 @@
               }
               return tmp$2;
             },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              {
+                var tmp$0 = this.getOperations().iterator();
+                while (tmp$0.hasNext()) {
+                  var subElement = tmp$0.next();
+                  var foundedElement = similarObjCasted.findOperationsByID(subElement.getName());
+                  if (foundedElement === null || foundedElement === undefined || !Kotlin.equals(foundedElement, subElement)) {
+                    return false;
+                  }
+                }
+              }
+              return true;
+            },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.ServicePortType) || !Kotlin.isType(similarObj, _.org.kevoree.impl.ServicePortTypeImpl)) {
                 return false;
@@ -17923,20 +17727,10 @@
               if (this.getOperations().size() !== similarObjCasted.getOperations().size()) {
                 return false;
               }
-              {
-                var tmp$0 = this.getOperations().iterator();
-                while (tmp$0.hasNext()) {
-                  var subElement = tmp$0.next();
-                  var foundedElement = similarObjCasted.findOperationsByID(subElement.getName());
-                  if (foundedElement === null || foundedElement === undefined || !Kotlin.equals(foundedElement, subElement)) {
-                    return false;
-                  }
-                }
-              }
               return true;
             }
           }),
-          TypeDefinitionImpl: Kotlin.createClass(classes.c9, classes.c16, {
+          TypeDefinitionImpl: Kotlin.createClass(classes.c9, classes.c17, {
             initialize: function () {
               this.$internal_eContainer = null;
               this.$internal_containmentRefName = null;
@@ -18137,13 +17931,14 @@
               }
               this.set__deployUnits_java_cache(null);
               if (this.get__deployUnits().size() !== 0 && this.get__deployUnits().indexOf(deployUnits) !== -1) {
-                this.get__deployUnits().remove(this.get__deployUnits().indexOf(deployUnits));
+                this.get__deployUnits().remove(deployUnits);
               }
             },
             removeAllDeployUnits: function () {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var temp_els = this.getDeployUnits();
               this.set__deployUnits_java_cache(null);
               this.get__deployUnits().clear();
             },
@@ -18156,13 +17951,11 @@
               }
               if (!Kotlin.equals(this.get__dictionaryType(), dictionaryType)) {
                 if (this.get__dictionaryType() !== null && this.get__dictionaryType() !== undefined) {
-                  var tmp$0, tmp$1;
-                  ((tmp$0 = this.get__dictionaryType()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null);
-                  ((tmp$1 = this.get__dictionaryType()) !== null && tmp$1 !== undefined ? tmp$1 : Kotlin.throwNPE()).setContainmentRefName(null);
+                  var tmp$0;
+                  ((tmp$0 = this.get__dictionaryType()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE()).setEContainer(null, null, null);
                 }
                 if (dictionaryType !== null && dictionaryType !== undefined) {
-                  dictionaryType.setEContainer(this, Kotlin.b3(_f.f40, this));
-                  dictionaryType.setContainmentRefName('dictionaryType');
+                  dictionaryType.setEContainer(this, new _.org.kevoree.container.RemoveFromContainerCommand(this, 'setDictionaryType', null), 'dictionaryType');
                 }
                 this.set__dictionaryType(dictionaryType);
               }
@@ -18222,6 +18015,8 @@
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var tmp$0;
+              var temp_els = (tmp$0 = this.getSuperTypes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               this.set__superTypes_java_cache(null);
               this.get__superTypes().clear();
             },
@@ -18287,6 +18082,35 @@
                 clonedSelfObject.setInternalReadOnly();
               }
               return clonedSelfObject;
+            },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 4; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'addDeployUnits') {
+                    {
+                      tmp$2 = this.addDeployUnits(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1)
+                  if (tmp$0 === 'setDictionaryType') {
+                    {
+                      tmp$2 = this.setDictionaryType(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 2)
+                  if (tmp$0 === 'addSuperTypes') {
+                    {
+                      tmp$2 = this.addSuperTypes(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 3) {
+                }
+              }
+              tmp$2;
             },
             internalGetKey: function () {
               return this.getName();
@@ -18374,6 +18198,13 @@
               }
               return tmp$4;
             },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
+            },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.TypeDefinition) || !Kotlin.isType(similarObj, _.org.kevoree.impl.TypeDefinitionImpl)) {
                 return false;
@@ -18397,7 +18228,7 @@
               return true;
             }
           }),
-          TypedElementImpl: Kotlin.createClass(classes.c9, classes.c17, {
+          TypedElementImpl: Kotlin.createClass(classes.c9, classes.c18, {
             initialize: function () {
               this.$internal_eContainer = null;
               this.$internal_containmentRefName = null;
@@ -18536,6 +18367,8 @@
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var tmp$0;
+              var temp_els = (tmp$0 = this.getGenericTypes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               this.set__genericTypes_java_cache(null);
               this.get__genericTypes().clear();
             },
@@ -18568,6 +18401,21 @@
                 clonedSelfObject.setInternalReadOnly();
               }
               return clonedSelfObject;
+            },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 2; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'addGenericTypes') {
+                    {
+                      tmp$2 = this.addGenericTypes(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1) {
+                }
+              }
+              tmp$2;
             },
             internalGetKey: function () {
               return this.getName();
@@ -18655,6 +18503,13 @@
               }
               return tmp$4;
             },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
+            },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.TypedElement) || !Kotlin.isType(similarObj, _.org.kevoree.impl.TypedElementImpl)) {
                 return false;
@@ -18666,7 +18521,7 @@
               return true;
             }
           }),
-          TypeLibraryImpl: Kotlin.createClass(classes.c9, classes.c18, {
+          TypeLibraryImpl: Kotlin.createClass(classes.c9, classes.c19, {
             initialize: function () {
               this.$internal_eContainer = null;
               this.$internal_containmentRefName = null;
@@ -18805,6 +18660,8 @@
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var tmp$0;
+              var temp_els = (tmp$0 = this.getSubTypes()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               this.set__subTypes_java_cache(null);
               this.get__subTypes().clear();
             },
@@ -18837,6 +18694,21 @@
                 clonedSelfObject.setInternalReadOnly();
               }
               return clonedSelfObject;
+            },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 2; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'addSubTypes') {
+                    {
+                      tmp$2 = this.addSubTypes(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1) {
+                }
+              }
+              tmp$2;
             },
             internalGetKey: function () {
               return this.getName();
@@ -18924,6 +18796,13 @@
               }
               return tmp$4;
             },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
+            },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.TypeLibrary) || !Kotlin.isType(similarObj, _.org.kevoree.impl.TypeLibraryImpl)) {
                 return false;
@@ -18935,7 +18814,7 @@
               return true;
             }
           }),
-          WireImpl: Kotlin.createClass(classes.c9, classes.c19, {
+          WireImpl: Kotlin.createClass(classes.c9, classes.c1a, {
             initialize: function () {
               this.$internal_eContainer = null;
               this.$internal_containmentRefName = null;
@@ -19051,7 +18930,7 @@
               }
               this.set__ports_java_cache(null);
               if (_.kotlin.get_size_0(this.get__ports()) === 2 && this.get__ports().containsKey(ports.getName())) {
-                throw new Kotlin.UnsupportedOperationException('The list of ports must contain at least 2 element. Connot remove sizeof(ports)=' + _.kotlin.get_size_0(this.get__ports()));
+                throw new Kotlin.UnsupportedOperationException('The list of ports must contain at least 2 element. Can not remove sizeof(ports)=' + _.kotlin.get_size_0(this.get__ports()));
               }
                else {
                 this.get__ports().remove(ports.getName());
@@ -19061,6 +18940,8 @@
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
+              var tmp$0;
+              var temp_els = (tmp$0 = this.getPorts()) !== null && tmp$0 !== undefined ? tmp$0 : Kotlin.throwNPE();
               this.set__ports_java_cache(null);
               this.get__ports().clear();
             },
@@ -19092,6 +18973,21 @@
                 clonedSelfObject.setInternalReadOnly();
               }
               return clonedSelfObject;
+            },
+            reflexiveSetters: function (method, value) {
+              var tmp$0, tmp$1, tmp$2;
+              for (tmp$1 = 0, tmp$0 = method; tmp$1 < 2; ++tmp$1) {
+                if (tmp$1 === 0)
+                  if (tmp$0 === 'addPorts') {
+                    {
+                      tmp$2 = this.addPorts(value);
+                    }
+                    break;
+                  }
+                if (tmp$1 === 1) {
+                }
+              }
+              tmp$2;
             },
             path: function () {
               if (this.eContainer() === null || this.eContainer() === undefined) {
@@ -19148,7 +19044,7 @@
                     {
                       var objFound = this.findPortsByID(queryID);
                       if (!Kotlin.equals(subquery, '') && (objFound !== null && objFound !== undefined)) {
-                        throw new Kotlin.Exception('KMFQL : rejected sucessor');
+                        throw new Kotlin.Exception('KMFQL : rejected sucessor' + relationName + ' from Wire');
                       }
                        else {
                         tmp$4 = objFound;
@@ -19161,6 +19057,13 @@
                 }
               }
               return tmp$4;
+            },
+            deepModelEquals: function (similarObj) {
+              if (!this.modelEquals(similarObj)) {
+                return false;
+              }
+              var similarObjCasted = similarObj;
+              return true;
             },
             modelEquals: function (similarObj) {
               if (similarObj === null || similarObj === undefined || !Kotlin.isType(similarObj, _.org.kevoree.Wire) || !Kotlin.isType(similarObj, _.org.kevoree.impl.WireImpl)) {
@@ -19497,7 +19400,7 @@
                 var tmp$2 = context.get_resolvers().iterator();
                 while (tmp$2.hasNext()) {
                   var res = tmp$2.next();
-                  res();
+                  res.run();
                 }
               }
               return context.get_loadedRoots();
@@ -19581,7 +19484,7 @@
                           tmp$2 = modelElem.setTypeDefinition(ref);
                         }
                          else {
-                          tmp$2 = context.get_resolvers().add(Kotlin.b1(_f.f41, this, [context, adjustedRef, modelElem]));
+                          tmp$2 = context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'setTypeDefinition', adjustedRef));
                         }
                       }
                       break;
@@ -19648,7 +19551,7 @@
                           tmp$2 = modelElem.setNamespace(ref_0);
                         }
                          else {
-                          tmp$2 = context.get_resolvers().add(Kotlin.b1(_f.f42, this, [context, adjustedRef_0, modelElem]));
+                          tmp$2 = context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'setNamespace', adjustedRef_0));
                         }
                       }
                       break;
@@ -19750,7 +19653,7 @@
                             modelElem.addDeployUnits(ref);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f43, this, [context, adjustedRef, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addDeployUnits', adjustedRef));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -19787,7 +19690,7 @@
                             modelElem.addSuperTypes(ref_0);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f44, this, [context, adjustedRef_0, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addSuperTypes', adjustedRef_0));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -19911,7 +19814,7 @@
                           tmp$2 = modelElem.setTypeDefinition(ref);
                         }
                          else {
-                          tmp$2 = context.get_resolvers().add(Kotlin.b1(_f.f45, this, [context, adjustedRef, modelElem]));
+                          tmp$2 = context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'setTypeDefinition', adjustedRef));
                         }
                       }
                       break;
@@ -19963,7 +19866,7 @@
                             modelElem.addHosts(ref_0);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f46, this, [context, adjustedRef_0, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addHosts', adjustedRef_0));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -19987,7 +19890,7 @@
                           tmp$2 = modelElem.setHost(ref_1);
                         }
                          else {
-                          tmp$2 = context.get_resolvers().add(Kotlin.b1(_f.f47, this, [context, adjustedRef_1, modelElem]));
+                          tmp$2 = context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'setHost', adjustedRef_1));
                         }
                       }
                       break;
@@ -20377,7 +20280,7 @@
                             modelElem.addDeployUnits(ref);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f48, this, [context, adjustedRef, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addDeployUnits', adjustedRef));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -20414,7 +20317,7 @@
                             modelElem.addSuperTypes(ref_0);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f49, this, [context, adjustedRef_0, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addSuperTypes', adjustedRef_0));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -20462,7 +20365,7 @@
                             modelElem.addBindings(ref);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f4a, this, [context, adjustedRef, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addBindings', adjustedRef));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -20486,7 +20389,7 @@
                           tmp$2 = modelElem.setPortTypeRef(ref_0);
                         }
                          else {
-                          tmp$2 = context.get_resolvers().add(Kotlin.b1(_f.f4b, this, [context, adjustedRef_0, modelElem]));
+                          tmp$2 = context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'setPortTypeRef', adjustedRef_0));
                         }
                       }
                       break;
@@ -20555,7 +20458,7 @@
                           tmp$2 = modelElem.setParent(ref);
                         }
                          else {
-                          tmp$2 = context.get_resolvers().add(Kotlin.b1(_f.f4c, this, [context, adjustedRef, modelElem]));
+                          tmp$2 = context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'setParent', adjustedRef));
                         }
                       }
                       break;
@@ -20733,7 +20636,7 @@
                             modelElem.addGenericTypes(ref);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f4d, this, [context, adjustedRef, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addGenericTypes', adjustedRef));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -20787,7 +20690,7 @@
                           tmp$2 = modelElem.setAttribute(ref);
                         }
                          else {
-                          tmp$2 = context.get_resolvers().add(Kotlin.b1(_f.f4e, this, [context, adjustedRef, modelElem]));
+                          tmp$2 = context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'setAttribute', adjustedRef));
                         }
                       }
                       break;
@@ -20809,7 +20712,7 @@
                           tmp$2 = modelElem.setTargetNode(ref_0);
                         }
                          else {
-                          tmp$2 = context.get_resolvers().add(Kotlin.b1(_f.f4f, this, [context, adjustedRef_0, modelElem]));
+                          tmp$2 = context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'setTargetNode', adjustedRef_0));
                         }
                       }
                       break;
@@ -20911,7 +20814,7 @@
                             modelElem.addDeployUnits(ref);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f4g, this, [context, adjustedRef, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addDeployUnits', adjustedRef));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -20948,7 +20851,7 @@
                             modelElem.addSuperTypes(ref_0);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f4h, this, [context, adjustedRef_0, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addSuperTypes', adjustedRef_0));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -21036,7 +20939,7 @@
                             modelElem.addChilds(ref_1);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f4i, this, [context, adjustedRef_1, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addChilds', adjustedRef_1));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -21121,7 +21024,7 @@
                           tmp$2 = modelElem.setRef(ref);
                         }
                          else {
-                          tmp$2 = context.get_resolvers().add(Kotlin.b1(_f.f4j, this, [context, adjustedRef, modelElem]));
+                          tmp$2 = context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'setRef', adjustedRef));
                         }
                       }
                       break;
@@ -21184,7 +21087,7 @@
                             modelElem.addPorts(ref);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f4k, this, [context, adjustedRef, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addPorts', adjustedRef));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -21279,7 +21182,7 @@
                             modelElem.addDeployUnits(ref);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f4l, this, [context, adjustedRef, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addDeployUnits', adjustedRef));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -21316,7 +21219,7 @@
                             modelElem.addSuperTypes(ref_0);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f4m, this, [context, adjustedRef_0, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addSuperTypes', adjustedRef_0));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -21404,7 +21307,7 @@
                           tmp$2 = modelElem.setReturnType(ref);
                         }
                          else {
-                          tmp$2 = context.get_resolvers().add(Kotlin.b1(_f.f4n, this, [context, adjustedRef, modelElem]));
+                          tmp$2 = context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'setReturnType', adjustedRef));
                         }
                       }
                       break;
@@ -21463,7 +21366,7 @@
                           tmp$2 = modelElem.setType(ref);
                         }
                          else {
-                          tmp$2 = context.get_resolvers().add(Kotlin.b1(_f.f4o, this, [context, adjustedRef, modelElem]));
+                          tmp$2 = context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'setType', adjustedRef));
                         }
                       }
                       break;
@@ -21517,7 +21420,7 @@
                             modelElem.addGenericTypes(ref);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f4p, this, [context, adjustedRef, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addGenericTypes', adjustedRef));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -21604,7 +21507,7 @@
                             modelElem.addDeployUnits(ref);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f4q, this, [context, adjustedRef, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addDeployUnits', adjustedRef));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -21641,7 +21544,7 @@
                             modelElem.addSuperTypes(ref_0);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f4r, this, [context, adjustedRef_0, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addSuperTypes', adjustedRef_0));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -21667,7 +21570,7 @@
                             modelElem.addFilters(ref_1);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f4s, this, [context, adjustedRef_1, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addFilters', adjustedRef_1));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -21723,7 +21626,7 @@
                             modelElem.addUnits(ref);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f4t, this, [context, adjustedRef, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addUnits', adjustedRef));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -21827,7 +21730,7 @@
                             modelElem.addRequiredLibs(ref);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f4u, this, [context, adjustedRef, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addRequiredLibs', adjustedRef));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -21851,7 +21754,7 @@
                           tmp$2 = modelElem.setTargetNodeType(ref_0);
                         }
                          else {
-                          tmp$2 = context.get_resolvers().add(Kotlin.b1(_f.f4v, this, [context, adjustedRef_0, modelElem]));
+                          tmp$2 = context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'setTargetNodeType', adjustedRef_0));
                         }
                       }
                       break;
@@ -21905,7 +21808,7 @@
                             modelElem.addSubTypes(ref);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f4w, this, [context, adjustedRef, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addSubTypes', adjustedRef));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -22008,7 +21911,7 @@
                             modelElem.addPortTypes(ref);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f4x, this, [context, adjustedRef, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addPortTypes', adjustedRef));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -22056,7 +21959,7 @@
                             modelElem.addPortTypes(ref);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f4y, this, [context, adjustedRef, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addPortTypes', adjustedRef));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -22164,7 +22067,7 @@
                           tmp$2 = modelElem.setTypeDefinition(ref);
                         }
                          else {
-                          tmp$2 = context.get_resolvers().add(Kotlin.b1(_f.f4z, this, [context, adjustedRef, modelElem]));
+                          tmp$2 = context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'setTypeDefinition', adjustedRef));
                         }
                       }
                       break;
@@ -22199,7 +22102,7 @@
                             modelElem.addBindings(ref_0);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f50, this, [context, adjustedRef_0, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addBindings', adjustedRef_0));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -22245,7 +22148,7 @@
                           tmp$2 = modelElem.setPort(ref);
                         }
                          else {
-                          tmp$2 = context.get_resolvers().add(Kotlin.b1(_f.f51, this, [context, adjustedRef, modelElem]));
+                          tmp$2 = context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'setPort', adjustedRef));
                         }
                       }
                       break;
@@ -22267,7 +22170,7 @@
                           tmp$2 = modelElem.setHub(ref_0);
                         }
                          else {
-                          tmp$2 = context.get_resolvers().add(Kotlin.b1(_f.f52, this, [context, adjustedRef_0, modelElem]));
+                          tmp$2 = context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'setHub', adjustedRef_0));
                         }
                       }
                       break;
@@ -22328,7 +22231,7 @@
                           tmp$2 = modelElem.setInitBy(ref);
                         }
                          else {
-                          tmp$2 = context.get_resolvers().add(Kotlin.b1(_f.f53, this, [context, adjustedRef, modelElem]));
+                          tmp$2 = context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'setInitBy', adjustedRef));
                         }
                       }
                       break;
@@ -22350,7 +22253,7 @@
                           tmp$2 = modelElem.setTarget(ref_0);
                         }
                          else {
-                          tmp$2 = context.get_resolvers().add(Kotlin.b1(_f.f54, this, [context, adjustedRef_0, modelElem]));
+                          tmp$2 = context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'setTarget', adjustedRef_0));
                         }
                       }
                       break;
@@ -22588,7 +22491,7 @@
                             modelElem.addDeployUnits(ref);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f55, this, [context, adjustedRef, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addDeployUnits', adjustedRef));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -22625,7 +22528,7 @@
                             modelElem.addSuperTypes(ref_0);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f56, this, [context, adjustedRef_0, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addSuperTypes', adjustedRef_0));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -22705,7 +22608,7 @@
                             modelElem.addDeployUnits(ref);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f57, this, [context, adjustedRef, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addDeployUnits', adjustedRef));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -22742,7 +22645,7 @@
                             modelElem.addSuperTypes(ref_0);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f58, this, [context, adjustedRef_0, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addSuperTypes', adjustedRef_0));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -22804,7 +22707,7 @@
                           tmp$2 = modelElem.setTypeDefinition(ref);
                         }
                          else {
-                          tmp$2 = context.get_resolvers().add(Kotlin.b1(_f.f59, this, [context, adjustedRef, modelElem]));
+                          tmp$2 = context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'setTypeDefinition', adjustedRef));
                         }
                       }
                       break;
@@ -22917,7 +22820,7 @@
                             modelElem.addDeployUnits(ref);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f5a, this, [context, adjustedRef, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addDeployUnits', adjustedRef));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -22954,7 +22857,7 @@
                             modelElem.addSuperTypes(ref_0);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f5b, this, [context, adjustedRef_0, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addSuperTypes', adjustedRef_0));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -23016,7 +22919,7 @@
                           tmp$2 = modelElem.setTypeDefinition(ref);
                         }
                          else {
-                          tmp$2 = context.get_resolvers().add(Kotlin.b1(_f.f5c, this, [context, adjustedRef, modelElem]));
+                          tmp$2 = context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'setTypeDefinition', adjustedRef));
                         }
                       }
                       break;
@@ -23051,7 +22954,7 @@
                             modelElem.addSubNodes(ref_0);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f5d, this, [context, adjustedRef_0, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addSubNodes', adjustedRef_0));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -23155,7 +23058,7 @@
                             modelElem.addDeployUnits(ref);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f5e, this, [context, adjustedRef, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addDeployUnits', adjustedRef));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -23192,7 +23095,7 @@
                             modelElem.addSuperTypes(ref_0);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f5f, this, [context, adjustedRef_0, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addSuperTypes', adjustedRef_0));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -23296,7 +23199,7 @@
                             modelElem.addDeployUnits(ref);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f5g, this, [context, adjustedRef, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addDeployUnits', adjustedRef));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -23333,7 +23236,7 @@
                             modelElem.addSuperTypes(ref_0);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f5h, this, [context, adjustedRef_0, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addSuperTypes', adjustedRef_0));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -23359,7 +23262,7 @@
                             modelElem.addManagedPrimitiveTypes(ref_1);
                           }
                            else {
-                            context.get_resolvers().add(Kotlin.b1(_f.f5i, this, [context, adjustedRef_1, modelElem]));
+                            context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'addManagedPrimitiveTypes', adjustedRef_1));
                           }
                         }
                         tmp$2 = reader.endArray();
@@ -23460,7 +23363,7 @@
                           tmp$2 = modelElem.setRef(ref);
                         }
                          else {
-                          tmp$2 = context.get_resolvers().add(Kotlin.b1(_f.f5j, this, [context, adjustedRef, modelElem]));
+                          tmp$2 = context.get_resolvers().add(new _.org.kevoree.loader.JSONResolveCommand(context, modelElem, 'setRef', adjustedRef));
                         }
                       }
                       break;
@@ -23664,7 +23567,22 @@
               var t = this.get_token();
               var ret = false;
               if (t.get_tokenType() === _.org.kevoree.loader.Type.get_VALUE()) {
-                ret = t.get_value();
+                var tmp$0, tmp$1, tmp$2;
+                for (tmp$1 = 0, tmp$0 = t.get_value(); tmp$1 < 3; ++tmp$1) {
+                  if (tmp$1 === 0)
+                    if (tmp$0 === 'true' || tmp$0 === true) {
+                      tmp$2 = ret = true;
+                      break;
+                    }
+                  if (tmp$1 === 1)
+                    if (tmp$0 === 'false' || tmp$0 === false) {
+                      tmp$2 = ret = false;
+                      break;
+                    }
+                  if (tmp$1 === 2)
+                    tmp$2 = ret = false;
+                }
+                tmp$2;
                 this.set_token(null);
               }
                else {
@@ -23718,6 +23636,46 @@
                 throw new Kotlin.IllegalStateException('Expected VALUE(Name) but was ' + this.peek());
               }
               return ret;
+            }
+          }),
+          JSONResolveCommand: Kotlin.createClass(classes.cp, {
+            initialize: function (context, target, method, ref) {
+              this.$context = context;
+              this.$target = target;
+              this.$method = method;
+              this.$ref = ref;
+            },
+            get_context: function () {
+              return this.$context;
+            },
+            get_target: function () {
+              return this.$target;
+            },
+            get_method: function () {
+              return this.$method;
+            },
+            get_ref: function () {
+              return this.$ref;
+            },
+            run: function () {
+              var referencedElement = this.get_context().get_map().get(this.get_ref());
+              var i = 0;
+              while ((referencedElement === null || referencedElement === undefined) && i < this.get_context().get_loadedRoots().size()) {
+                var tmp$0;
+                referencedElement = (tmp$0 = this.get_context().get_loadedRoots().get(i++)) !== null && tmp$0 !== undefined ? tmp$0.findByPath(this.get_ref()) : null;
+              }
+              if (referencedElement !== null && referencedElement !== undefined) {
+                this.get_target().reflexiveSetters(this.get_method(), referencedElement);
+                return;
+              }
+              if (Kotlin.equals(this.get_ref(), '/0/') || Kotlin.equals(this.get_ref(), '/')) {
+                referencedElement = this.get_context().get_map().get('/0');
+                if (referencedElement !== null && referencedElement !== undefined) {
+                  this.get_target().reflexiveSetters(this.get_method(), referencedElement);
+                  return;
+                }
+              }
+              throw new Kotlin.Exception('KMF Load error : reference ' + this.get_ref() + ' not found in map when trying to ' + this.get_method() + ' on ' + this.get_target().toString());
             }
           }),
           Token: Kotlin.createClass({
@@ -23932,10 +23890,11 @@
               return this.$stats;
             }
           }),
-          ModelLoader: classes.co
+          ModelLoader: classes.co,
+          ResolveCommand: classes.cp
         }),
         serializer: Kotlin.definePackage({
-          JSONModelSerializer: Kotlin.createClass(classes.c14, {
+          JSONModelSerializer: Kotlin.createClass(classes.c15, {
             initialize: function () {
             },
             serialize: function (oMS, ostream) {
@@ -24288,7 +24247,7 @@
             getComponentInstanceJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var i = 0;
               var subdictionary = selfObject.getDictionary();
@@ -24425,7 +24384,7 @@
             getComponentTypeJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var i = 0;
               var subdictionaryType = selfObject.getDictionaryType();
@@ -24695,7 +24654,7 @@
             getContainerNodeJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var i = 0;
               var subdictionary = selfObject.getDictionary();
@@ -24824,7 +24783,7 @@
             getContainerRootJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var i = 0;
               {
@@ -25205,7 +25164,7 @@
             getPortTypeJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var subdictionaryType = selfObject.getDictionaryType();
               if (subdictionaryType !== null && subdictionaryType !== undefined) {
@@ -25357,7 +25316,7 @@
             getPortJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               return subResult;
             },
@@ -25411,7 +25370,7 @@
             getNamespaceJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var i = 0;
               {
@@ -25480,7 +25439,7 @@
             getDictionaryJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var i = 0;
               {
@@ -25531,7 +25490,7 @@
             getDictionaryTypeJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var i = 0;
               {
@@ -25615,7 +25574,7 @@
             getDictionaryAttributeJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               return subResult;
             },
@@ -25687,7 +25646,7 @@
             getDictionaryValueJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               return subResult;
             },
@@ -25734,7 +25693,7 @@
             getCompositeTypeJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var i = 0;
               var subdictionaryType = selfObject.getDictionaryType();
@@ -26042,7 +26001,7 @@
             getPortTypeRefJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var i = 0;
               {
@@ -26121,7 +26080,7 @@
             getWireJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               return subResult;
             },
@@ -26164,7 +26123,7 @@
             getServicePortTypeJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var i = 0;
               var subdictionaryType = selfObject.getDictionaryType();
@@ -26322,7 +26281,7 @@
             getOperationJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var i = 0;
               {
@@ -26391,7 +26350,7 @@
             getParameterJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               return subResult;
             },
@@ -26434,7 +26393,7 @@
             getTypedElementJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var tmp$0, tmp$1, tmp$2;
               for (tmp$1 = 0, tmp$0 = selfObject; tmp$1 < 2; ++tmp$1) {
@@ -26504,7 +26463,7 @@
             getMessagePortTypeJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var subdictionaryType = selfObject.getDictionaryType();
               if (subdictionaryType !== null && subdictionaryType !== undefined) {
@@ -26647,7 +26606,7 @@
             getRepositoryJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               return subResult;
             },
@@ -26697,7 +26656,7 @@
             getDeployUnitJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               return subResult;
             },
@@ -26800,7 +26759,7 @@
             getTypeLibraryJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               return subResult;
             },
@@ -26850,7 +26809,7 @@
             getNamedElementJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var tmp$0, tmp$1, tmp$2;
               for (tmp$1 = 0, tmp$0 = selfObject; tmp$1 < 17; ++tmp$1) {
@@ -27105,7 +27064,7 @@
             getIntegrationPatternJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var i = 0;
               {
@@ -27188,7 +27147,7 @@
             getExtraFonctionalPropertyJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               return subResult;
             },
@@ -27231,7 +27190,7 @@
             getPortTypeMappingJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               return subResult;
             },
@@ -27270,7 +27229,7 @@
             getChannelJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var subdictionary = selfObject.getDictionary();
               if (subdictionary !== null && subdictionary !== undefined) {
@@ -27355,7 +27314,7 @@
             getMBindingJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               return subResult;
             },
@@ -27373,7 +27332,7 @@
             getNodeNetworkJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var i = 0;
               {
@@ -27446,7 +27405,7 @@
             getNodeLinkJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var i = 0;
               {
@@ -27518,7 +27477,7 @@
             getNetworkPropertyJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               return subResult;
             },
@@ -27557,7 +27516,7 @@
             getChannelTypeJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var subdictionaryType = selfObject.getDictionaryType();
               if (subdictionaryType !== null && subdictionaryType !== undefined) {
@@ -27719,7 +27678,7 @@
             getTypeDefinitionJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var subdictionaryType = selfObject.getDictionaryType();
               if (subdictionaryType !== null && subdictionaryType !== undefined) {
@@ -27922,7 +27881,7 @@
             getInstanceJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var subdictionary = selfObject.getDictionary();
               if (subdictionary !== null && subdictionary !== undefined) {
@@ -28044,7 +28003,7 @@
             getLifeCycleTypeDefinitionJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var subdictionaryType = selfObject.getDictionaryType();
               if (subdictionaryType !== null && subdictionaryType !== undefined) {
@@ -28240,7 +28199,7 @@
             getGroupJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var subdictionary = selfObject.getDictionary();
               if (subdictionary !== null && subdictionary !== undefined) {
@@ -28325,7 +28284,7 @@
             getGroupTypeJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var subdictionaryType = selfObject.getDictionaryType();
               if (subdictionaryType !== null && subdictionaryType !== undefined) {
@@ -28459,7 +28418,7 @@
             getNodeTypeJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               var i = 0;
               var subdictionaryType = selfObject.getDictionaryType();
@@ -28651,7 +28610,7 @@
             getAdaptationPrimitiveTypeJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               return subResult;
             },
@@ -28676,7 +28635,7 @@
             getAdaptationPrimitiveTypeRefJsonAddr: function (selfObject, previousAddr) {
               var subResult = new Kotlin.HashMap(0);
               if (Kotlin.equals(previousAddr, '/')) {
-                subResult.put(selfObject, '/');
+                subResult.put(selfObject, '//');
               }
               return subResult;
             },
@@ -28710,13 +28669,13 @@
               tmp$2;
             }
           }),
-          ModelSerializer: classes.c14
+          ModelSerializer: classes.c15
         })
       }),
       w3c: Kotlin.definePackage({
         dom: Kotlin.definePackage({
           events: Kotlin.definePackage({
-            EventListener: classes.c1a
+            EventListener: classes.c1b
           })
         })
       })
@@ -28781,7 +28740,7 @@
     }),
     kotlin: Kotlin.definePackage({
       support: Kotlin.definePackage({
-        AbstractIterator: classes.c1b
+        AbstractIterator: classes.c1c
       }),
       notEmpty_0: function (receiver) {
         return !_.kotlin.isEmpty(receiver);
@@ -28874,7 +28833,7 @@
       iterate: function (nextFunction) {
         return new _.kotlin.FunctionIterator(nextFunction);
       },
-      FilterIterator: Kotlin.createClass(classes.c1b, {
+      FilterIterator: Kotlin.createClass(classes.c1c, {
         initialize: function (iterator, predicate) {
           this.$iterator = iterator;
           this.$predicate = predicate;
@@ -28897,7 +28856,7 @@
           this.done();
         }
       }),
-      FilterNotNullIterator: Kotlin.createClass(classes.c1b, {
+      FilterNotNullIterator: Kotlin.createClass(classes.c1c, {
         initialize: function (iterator) {
           this.$iterator = iterator;
           this.super_init();
@@ -28918,7 +28877,7 @@
           this.done();
         }
       }),
-      MapIterator: Kotlin.createClass(classes.c1b, {
+      MapIterator: Kotlin.createClass(classes.c1c, {
         initialize: function (iterator, transform) {
           this.$iterator = iterator;
           this.$transform = transform;
@@ -28939,7 +28898,7 @@
           }
         }
       }),
-      FlatMapIterator: Kotlin.createClass(classes.c1b, {
+      FlatMapIterator: Kotlin.createClass(classes.c1c, {
         initialize: function (iterator, transform) {
           this.$iterator = iterator;
           this.$transform = transform;
@@ -28976,7 +28935,7 @@
           }
         }
       }),
-      TakeWhileIterator: Kotlin.createClass(classes.c1b, {
+      TakeWhileIterator: Kotlin.createClass(classes.c1c, {
         initialize: function (iterator, predicate) {
           this.$iterator = iterator;
           this.$predicate = predicate;
@@ -28999,7 +28958,7 @@
           this.done();
         }
       }),
-      FunctionIterator: Kotlin.createClass(classes.c1b, {
+      FunctionIterator: Kotlin.createClass(classes.c1c, {
         initialize: function (nextFunction) {
           this.$nextFunction = nextFunction;
           this.super_init();
@@ -29017,7 +28976,7 @@
           }
         }
       }),
-      CompositeIterator: Kotlin.createClass(classes.c1b, {
+      CompositeIterator: Kotlin.createClass(classes.c1c, {
         initialize: function (iterators) {
           this.super_init();
           this.$iteratorsIter = Kotlin.arrayIterator(iterators);
@@ -29056,7 +29015,7 @@
           }
         }
       }),
-      SingleIterator: Kotlin.createClass(classes.c1b, {
+      SingleIterator: Kotlin.createClass(classes.c1c, {
         initialize: function (value) {
           this.$value = value;
           this.super_init();
@@ -33366,7 +33325,7 @@
         nextSiblings: function (receiver) {
           return new _.kotlin.dom.NextSiblingIterator(receiver);
         },
-        NextSiblingIterator: Kotlin.createClass(classes.c1b, {
+        NextSiblingIterator: Kotlin.createClass(classes.c1c, {
           initialize: function (node) {
             this.$node = node;
             this.super_init();
@@ -33391,7 +33350,7 @@
         previousSiblings: function (receiver) {
           return new _.kotlin.dom.PreviousSiblingIterator(receiver);
         },
-        PreviousSiblingIterator: Kotlin.createClass(classes.c1b, {
+        PreviousSiblingIterator: Kotlin.createClass(classes.c1c, {
           initialize: function (node) {
             this.$node = node;
             this.super_init();
@@ -33519,7 +33478,7 @@
         eventHandler: function (handler) {
           return new _.kotlin.dom.EventListenerHandler(handler);
         },
-        EventListenerHandler: Kotlin.createClass(classes.c1a, {
+        EventListenerHandler: Kotlin.createClass(classes.c1b, {
           initialize: function (handler) {
             this.$handler = handler;
           },
@@ -33645,7 +33604,7 @@
             return e;
           }
         },
-        Asserter: classes.c1c,
+        Asserter: classes.c1d,
         todo: function (block) {
           Kotlin.println('TODO at ' + block);
         },
@@ -33655,7 +33614,7 @@
         set_asserter: function (tmp$0) {
           this.$asserter = tmp$0;
         },
-        QUnitAsserter: Kotlin.createClass(classes.c1c, {
+        QUnitAsserter: Kotlin.createClass(classes.c1d, {
           initialize: function () {
           },
           assertTrue: function (message, actual) {

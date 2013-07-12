@@ -68,7 +68,7 @@ public abstract class Connection {
 		if (magicNumber != MAGIC_NUMBER) {
 			throw new InvalidProtocolException("Bad magic number: " + magicNumber);
 		}
-		int len = ByteBuffer.wrap(headerInput).getInt(4);
+        int len = ByteBuffer.wrap(headerInput).getInt(4);
 		byte[] data = new byte[len];
 		int count = 0;
 		while (count < len) {

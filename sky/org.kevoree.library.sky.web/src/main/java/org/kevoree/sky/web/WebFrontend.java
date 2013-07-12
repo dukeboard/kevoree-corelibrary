@@ -5,7 +5,6 @@ import org.kevoree.framework.AbstractComponentType;
 import org.kevoree.log.Log;
 import org.webbitserver.WebServer;
 import org.webbitserver.WebServers;
-import org.webbitserver.handler.EmbeddedResourceHandler;
 import org.webbitserver.handler.StaticFileHandler;
 
 /**
@@ -34,8 +33,8 @@ public class WebFrontend extends AbstractComponentType {
             webServer = WebServers.createWebServer(port)
                     .add(new MetaDataHandler(this.getModelService()))
                     .add("/model/service", mhandler)
-                   // .add(new StaticFileHandler("/Users/duke/Documents/dev/dukeboard/kevoree-corelibrary/sky/org.kevoree.library.sky.web/src/main/resources")) // path to web content
-                    .add(new EmbedHandler()) // path to web content
+                     .add(new StaticFileHandler("/Users/duke/Documents/dev/dukeboard/kevoree-corelibrary/sky/org.kevoree.library.sky.web/src/main/resources")) // path to web content
+                    //.add(new EmbedHandler()) // path to web content
                     .start()
                     .get();
         } catch (Exception e) {

@@ -42,7 +42,7 @@ public class ModelServiceSocketHandler extends BaseWebSocketHandler implements M
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             jsonSaver.serialize(modelService.getLastModel(), outputStream);
-            connection.send(outputStream.toString("UTF-8"));
+            connection.send("model="+outputStream.toString("UTF-8"));
         } catch (UnsupportedEncodingException e) {
             Log.error("Can't send base model", e);
         }
@@ -55,10 +55,11 @@ public class ModelServiceSocketHandler extends BaseWebSocketHandler implements M
     public void onMessage(WebSocketConnection connection, String message) {
         try {
             ContainerRoot model = (ContainerRoot) jsonLoader.loadModelFromString(message).get(0);
+            broadcastMessage("event=update");
             modelService.updateModel(model, new ModelUpdateCallback() {
                 @Override
                 public void modelProcessed(ModelUpdateCallBackReturn modelUpdateCallBackReturn) {
-
+                    broadcastMessage("event=done");
                 }
             });  //send model to platform
         } catch (Exception e) {
@@ -92,7 +93,7 @@ public class ModelServiceSocketHandler extends BaseWebSocketHandler implements M
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             jsonSaver.serialize(modelService.getLastModel(), outputStream);
-            broadcastMessage(outputStream.toString("UTF-8"));
+            broadcastMessage("model="+outputStream.toString("UTF-8"));
         } catch (Exception e) {
             Log.error("Can't send base model", e);
         }
