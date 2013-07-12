@@ -86,9 +86,10 @@ public abstract class AWebSocketGroup extends AbstractGroupType implements Deplo
     // Protocol related fields
     //========================
     protected static final byte PUSH = 1;
-    protected static final byte PULL = 2;
+    protected static final byte PULL = 0;
     protected static final byte REGISTER = 3;
     protected static final byte UPDATED = 4;
+    protected static final byte PULL_JSON = 42;
 
     //========================
     // Client related fields
@@ -365,11 +366,11 @@ public abstract class AWebSocketGroup extends AbstractGroupType implements Deplo
             wsClientHandler.setHandler(new ConnectionTask.Handler() {
                 @Override
                 public void onMessage(ByteBuffer bytes) {
-                    Log.debug("Compressed model given by master server: loading...");
+                    Log.debug("Model given by master server: loading...");
                     ByteArrayInputStream bais = new ByteArrayInputStream(bytes.array());
-                    ContainerRoot model = KevoreeXmiHelper.instance$.loadCompressedStream(bais);
+                    ContainerRoot model = KevoreeXmiHelper.instance$.loadStream(bais);
                     updateLocalModel(model);
-                    Log.debug("Model loaded from XMI compressed bytes");
+                    Log.debug("Model loaded from XMI bytes");
                 }
 
                 @Override
@@ -610,6 +611,7 @@ public abstract class AWebSocketGroup extends AbstractGroupType implements Deplo
     protected void onServerUpdateLocalModelDone() {}
     protected void onMasterServerPushEvent(WebSocketConnection conn, byte[] msg) {}
     protected void onMasterServerPullEvent(WebSocketConnection conn, byte[] msg) {}
+    protected void onMasterServerPullJsonEvent(WebSocketConnection conn, byte[] msg) {}
     protected void onMasterServerRegisterEvent(WebSocketConnection conn, String nodeToRegister) {}
     protected void onMasterServerUpdatedEvent(WebSocketConnection conn) {}
     protected void onMasterServerOpenEvent(WebSocketConnection conn) {}
@@ -641,6 +643,9 @@ public abstract class AWebSocketGroup extends AbstractGroupType implements Deplo
                     onMasterServerPullEvent(connection, cleanMsg);
                     break;
 
+                case PULL_JSON:
+                    onMasterServerPullJsonEvent(connection, cleanMsg);
+
                 case REGISTER:
                     onMasterServerRegisterEvent(connection, new String(cleanMsg));
                     break;
@@ -650,7 +655,7 @@ public abstract class AWebSocketGroup extends AbstractGroupType implements Deplo
                     break;
 
                 default:
-                    Log.debug("Receiving {} as msg[0]: I do NOT know this control byte! Known control bytes are {}",msg[0]+"", new Byte[]{PUSH, PULL, REGISTER, UPDATED}+"");
+                    Log.debug("Received control byte at data[0]: I do NOT know this control byte! Known control bytes are {}, {}, {}, {}, {}", PUSH, PULL, PULL_JSON, REGISTER, UPDATED);
                     break;
             }
         }
