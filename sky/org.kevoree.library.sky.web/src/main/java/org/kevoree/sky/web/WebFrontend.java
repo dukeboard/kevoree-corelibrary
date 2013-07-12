@@ -1,9 +1,6 @@
 package org.kevoree.sky.web;
 
-import org.kevoree.annotation.ComponentType;
-import org.kevoree.annotation.Library;
-import org.kevoree.annotation.Start;
-import org.kevoree.annotation.Stop;
+import org.kevoree.annotation.*;
 import org.kevoree.framework.AbstractComponentType;
 import org.kevoree.log.Log;
 import org.webbitserver.WebServer;
@@ -19,6 +16,9 @@ import org.webbitserver.handler.StaticFileHandler;
  */
 
 @Library(name = "Sky")
+@DictionaryType({
+        @DictionaryAttribute(name = "port", defaultValue = "80", optional = false)
+})
 @ComponentType
 public class WebFrontend extends AbstractComponentType {
 
@@ -29,7 +29,9 @@ public class WebFrontend extends AbstractComponentType {
     public void startServer() {
         try {
             mhandler = new ModelServiceSocketHandler(this.getModelService());
-            webServer = WebServers.createWebServer(8080)
+            int port = Integer.parseInt(getDictionary().get("port").toString());
+
+            webServer = WebServers.createWebServer(port)
                     .add(new MetaDataHandler(this.getModelService()))
                     .add("/model/service", mhandler)
                    // .add(new StaticFileHandler("/Users/duke/Documents/dev/dukeboard/kevoree-corelibrary/sky/org.kevoree.library.sky.web/src/main/resources")) // path to web content
