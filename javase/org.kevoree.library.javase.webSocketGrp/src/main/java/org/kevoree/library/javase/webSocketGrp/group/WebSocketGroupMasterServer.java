@@ -9,6 +9,7 @@ import org.kevoree.library.javase.webSocketGrp.exception.MultipleMasterServerExc
 import org.kevoree.library.javase.webSocketGrp.exception.NoMasterServerFoundException;
 import org.kevoree.library.javase.webSocketGrp.exception.NotAMasterServerException;
 import org.kevoree.log.Log;
+import org.kevoree.serializer.JSONModelSerializer;
 import org.webbitserver.WebSocketConnection;
 
 import java.io.ByteArrayInputStream;
@@ -53,7 +54,7 @@ public class WebSocketGroupMasterServer extends AWebSocketGroup {
             // serialize model into an OutputStream
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             baos.write(PUSH);
-            KevoreeXmiHelper.instance$.saveCompressedStream(baos, model);
+            KevoreeXmiHelper.instance$.saveStream(baos, model);
             // send push request
             byte[] data = baos.toByteArray();
             for (URI uri : addresses) {
@@ -84,9 +85,9 @@ public class WebSocketGroupMasterServer extends AWebSocketGroup {
             WebSocketClient client = new WebSocketClient(uri) {
                 @Override
                 public void onMessage(ByteBuffer bytes) {
-                    Log.debug("Receiving compressed model...");
+                    Log.debug("Receiving model...");
                     ByteArrayInputStream bais = new ByteArrayInputStream(bytes.array());
-                    final ContainerRoot root = KevoreeXmiHelper.instance$.loadCompressedStream(bais);
+                    final ContainerRoot root = KevoreeXmiHelper.instance$.loadStream(bais);
                     try {
                         exchanger.exchange(root);
                     } catch (InterruptedException e) {
@@ -127,7 +128,7 @@ public class WebSocketGroupMasterServer extends AWebSocketGroup {
     protected void onMasterServerPushEvent(WebSocketConnection conn, byte[] msg) {
         Log.debug("PUSH: " + conn.httpRequest().remoteAddress() + " asked for a PUSH");
         ByteArrayInputStream bais = new ByteArrayInputStream(msg, 1, msg.length - 1);
-        ContainerRoot model = KevoreeXmiHelper.instance$.loadCompressedStream(bais);
+        ContainerRoot model = KevoreeXmiHelper.instance$.loadStream(bais);
         updateLocalModel(model);
 
         Log.debug("Master websocket server is going to broadcast model over {} clients", clients.size()+"");
@@ -169,10 +170,19 @@ public class WebSocketGroupMasterServer extends AWebSocketGroup {
     @Override
     protected void onMasterServerPullEvent(WebSocketConnection conn, byte[] msg) {
         Log.debug("PULL: Client " + conn.httpRequest().remoteAddress()
-                + " ask for a pull");
+                + " ask for a pull in XMI");
         ByteArrayOutputStream output = new ByteArrayOutputStream();
-        KevoreeXmiHelper.instance$.saveCompressedStream(output,
-                getModelService().getLastModel());
+        KevoreeXmiHelper.instance$.saveStream(output, getModelService().getLastModel());
+        conn.send(output.toByteArray());
+    }
+
+    @Override
+    protected void onMasterServerPullJsonEvent(WebSocketConnection conn, byte[] msg) {
+        Log.debug("PULL: Client " + conn.httpRequest().remoteAddress()
+                + " ask for a pull in JSON");
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        JSONModelSerializer serializer = new JSONModelSerializer();
+        serializer.serialize(getModelService().getLastModel(), output);
         conn.send(output.toByteArray());
     }
 

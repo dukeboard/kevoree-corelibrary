@@ -15,6 +15,7 @@ import org.kevoree.framework.AbstractGroupType;
 import org.kevoree.framework.KevoreePropertyHelper;
 import org.kevoree.framework.KevoreeXmiHelper;
 import org.kevoree.log.Log;
+import org.kevoree.serializer.JSONModelSerializer;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -46,6 +47,7 @@ Changelog
 public class BasicGroup extends AbstractGroupType implements ConnectionListener {
 
     private final byte getModel = 0;
+    private final byte getJSONModel = 42;
     private final byte pushModel = 1;
     private final byte pushModelInternal = 3;
 
@@ -297,6 +299,14 @@ public class BasicGroup extends AbstractGroupType implements ConnectionListener 
                         from.send(output.toByteArray(), Delivery.RELIABLE);
                     }
                     break;
+
+                    case getJSONModel:
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        JSONModelSerializer serializer = new JSONModelSerializer();
+                        serializer.serialize(getModelService().getLastModel(), baos);
+                        from.send(baos.toByteArray(), Delivery.RELIABLE);
+                        break;
+
                     case pushModel: {
                         ByteArrayInputStream inputStream = new ByteArrayInputStream(data);
                         inputStream.read();
