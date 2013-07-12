@@ -31,16 +31,16 @@ protected static final byte PULL_JSON = 42;
 ```
 
 ### Push process
-When a push is requested on a node. This group compresses the given model and try to send it to the targeted node on :
+When a push is requested on a node. This group tries to send it to the targeted node on :
 
 *   ws://host:port/
 
 The targeted node will then process the model  
 ```java
 case PUSH:
-    logger.debug("Compressed model received from "+ connection.httpRequest().header("Host") + ": loading...");
+    logger.debug("Model received from "+ connection.httpRequest().header("Host") + ": loading...");
     ByteArrayInputStream bais = new ByteArrayInputStream(msg, 1, msg.length-1);
-    ContainerRoot model = KevoreeXmiHelper.instance$.loadCompressedStream(bais);
+    ContainerRoot model = KevoreeXmiHelper.instance$.loadStream(bais);
     updateLocalModel(model);
     logger.debug("Model loaded from XMI String");
     break;
@@ -56,7 +56,7 @@ The targeted node will then process the model
 case PULL:
     logger.debug("Pull request received from "+ connection.httpRequest().header("Host") + ": loading...");
     ByteArrayOutputStream output = new ByteArrayOutputStream();
-    KevoreeXmiHelper.instance$.saveCompressedStream(output, getModelService().getLastModel());
+    KevoreeXmiHelper.instance$.saveStream(output, getModelService().getLastModel());
     connection.send(output.toByteArray());
     logger.debug("Compressed model pulled back to "+ connection.httpRequest().header("Host"));
     break;
@@ -105,10 +105,9 @@ Then it will forward the push request to each sub-nodes of the group.
 protected void onMasterServerPushEvent(WebSocketConnection connection, byte[] msg) {
 	logger.debug("PUSH: " + connection.httpRequest().remoteAddress() + " asked for a PUSH");
 	ByteArrayInputStream bais = new ByteArrayInputStream(msg, 1, msg.length - 1);
-	ContainerRoot model = KevoreeXmiHelper.instance$.loadCompressedStream(bais);
+	ContainerRoot model = KevoreeXmiHelper.instance$.loadStream(bais);
 	updateLocalModel(model);
 
-	logger.debug("server knows: " + clients.toString());
 	// broadcasting model to each client
 	for (WebSocketConnection conn : clients.keySet()) {
 		logger.debug("Trying to push model to client " + conn.httpRequest().remoteAddress());
@@ -150,7 +149,7 @@ When this group's master server receives a PUSH request, it will broadcast the m
 protected void onMasterServerPushEvent(WebSocketConnection connection, byte[] msg) {
 	// deserialize the model from msg
 	ByteArrayInputStream bais = new ByteArrayInputStream(msg, 1, msg.length - 1); // offset is for the control byte
-	ContainerRoot model = KevoreeXmiHelper.instance$.loadCompressedStream(bais);
+	ContainerRoot model = KevoreeXmiHelper.instance$.loadStream(bais);
 	updateLocalModel(model);
 	
 	// for each node in this group
