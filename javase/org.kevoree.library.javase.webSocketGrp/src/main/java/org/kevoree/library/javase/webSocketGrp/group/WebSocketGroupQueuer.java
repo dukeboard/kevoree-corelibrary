@@ -13,7 +13,10 @@ import org.webbitserver.WebSocketConnection;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -56,7 +59,7 @@ public class WebSocketGroupQueuer extends WebSocketGroupEchoer {
                                            byte[] msg) {
         // deserialize the model from msg
         ByteArrayInputStream bais = new ByteArrayInputStream(msg, 1, msg.length - 1); // offset is for the control byte
-        ContainerRoot model = KevoreeXmiHelper.instance$.loadCompressedStream(bais);
+        ContainerRoot model = KevoreeXmiHelper.instance$.loadStream(bais);
         updateLocalModel(model);
 
         // for each node in this group

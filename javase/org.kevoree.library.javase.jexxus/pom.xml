@@ -22,4 +22,18 @@
         </dependency>
     </dependencies>
        -->
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.kevoree.platform</groupId>
+                <artifactId>org.kevoree.platform.mavenrunner</artifactId>
+                <version>${kevoree.version}</version>
+                <configuration>
+                    <targetNode>node42</targetNode>
+                    <model>./src/main/kevs/main.kevs</model>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

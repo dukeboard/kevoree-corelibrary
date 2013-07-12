@@ -1,8 +1,8 @@
 merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.javaseNode/{kevoree.version}"
 merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.webSocketGrp/{kevoree.version}'
 
-addNode node0:JavaSENode {logLevel = "DEBUG"}
-addNode node1:JavaSENode {logLevel = "DEBUG"}
+addNode node0:JavaSENode {logLevel = "DEBUG", coreLogLevel = "DEBUG"}
+addNode node1:JavaSENode {logLevel = "DEBUG", coreLogLevel = "DEBUG"}
 
 addGroup webSocketGrp : WebSocketGroupQueuer {key = "foo"}
 addToGroup webSocketGrp node1
