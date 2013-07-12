@@ -26,7 +26,8 @@ In order to recognize those requests, WebSocketGroup uses a really simple contro
 
 ```java
 protected static final byte PUSH = 1;
-protected static final byte PULL = 2;
+protected static final byte PULL = 0;
+protected static final byte PULL_JSON = 42;
 ```
 
 ### Push process
