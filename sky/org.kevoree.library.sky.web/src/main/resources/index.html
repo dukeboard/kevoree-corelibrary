@@ -53,6 +53,27 @@
 
                 //look for IP, thanks to maxime
 
+                var newStartNStopBt = $('<a></a>');
+                newStartNStopBt.addClass("btn");
+                newStartNStopBt.addClass("btn-warning");
+                newStartNStopBt.id = 'startnstop' + childName;
+                if (nodes.get(i).getStarted()) {
+                    newStartNStopBt.append("Stop child");
+                } else {
+                    newStartNStopBt.append("Start child");
+                }
+                $('#nodeList').append($('<tr>').append($('<td>').append(nodes.get(i).getName())).append($('<td>')).append($('<td>').append(newStartNStopBt)));
+                newStartNStopBt.click(function (event) {
+                    var currentNode = model.findNodesByID(nodeName);
+                    var currentChildNode = model.findNodesByID(childName);
+                    if (currentChildNode.getStarted()) {
+                     currentChildNode.setStarted(false);
+                    } else {
+                        currentChildNode.setStarted(true);
+                    }
+                    synchModel();
+                });
+
                 var newRemoveBt = $('<a></a>');
                 newRemoveBt.addClass("btn");
                 newRemoveBt.addClass("btn-warning");
