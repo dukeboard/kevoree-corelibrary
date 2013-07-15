@@ -54,7 +54,7 @@ class JailKevoreeNodeRunner(nodeName: String, iaasNode: JailNode, addTimeout: Lo
               flavor = iaasNode.getDefaultFlavor
             }
             // create the new jail
-            if (processExecutor.createJail(flavor, nodeName, newIps, findArchive(nodeName), addTimeout - (System.currentTimeMillis() - beginTimestamp))) {
+            if (processExecutor.createJail(flavor, nodeName, newIps, findArchive(nodeName), findImageSize(nodeName, iaasModel), addTimeout - (System.currentTimeMillis() - beginTimestamp))) {
               true
             } else {
               Log.error("Unable to create a new Jail {}", nodeName)
@@ -128,6 +128,20 @@ class JailKevoreeNodeRunner(nodeName: String, iaasNode: JailNode, addTimeout: Lo
 
 
     None
+  }
+
+  private def findImageSize(nodeName : String, iaasModel : ContainerRoot): Option[Long] = {
+    val node = iaasModel.findNodesByID(nodeName)
+    if (node != null) {
+      val value = KevoreePropertyHelper.instance$.getProperty(node, "DISK_SIZE", false, null)
+      if (value != null) {
+        Some(java.lang.Long.parseLong(value))
+      } else {
+        None
+      }
+    } else {
+      None
+    }
   }
 
   def startNode(iaasModel: ContainerRoot, childBootStrapModel: ContainerRoot): Boolean = {

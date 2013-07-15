@@ -87,7 +87,7 @@ public abstract class KevoreeNodeRunner {
             Log.debug("configure ssh server ip");
             StringBuilder builder = new StringBuilder();
             for (String ip : ips) {
-                builder.append("ListenAddress " + ip + "\n");
+                builder.append("ListenAddress ").append(ip).append("\n");
             }
             try {
                 replaceStringIntoFile("#ListenAddress 0.0.0.0", builder.toString(), path + File.separator + "etc" + File.separator + "ssh" + File.separator + "sshd_config");

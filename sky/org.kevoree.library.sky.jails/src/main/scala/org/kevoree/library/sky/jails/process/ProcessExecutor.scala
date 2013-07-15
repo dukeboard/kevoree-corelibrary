@@ -196,16 +196,21 @@ class ProcessExecutor() {
 
   }
 
-  def createJail(flavor: String, nodeName: String, newIps: List[String], archive: Option[String], timeout: Long): Boolean = {
+  def createJail(flavors: List[String], nodeName: String, newIps: List[String], archive: Option[String], size : Option[Long], timeout: Long): Boolean = {
     var exec = Array[String]()
-    if (flavor == null) {
+    if (flavors.size <= 0) {
       // TODO add archive attribute and use it to save the jail => the archive must be available from all nodes of the network
       Log.debug("Running {} create {} {}", ezjailAdmin, nodeName, newIps.mkString(","))
       exec = Array[String](ezjailAdmin, "create") ++ Array[String](nodeName, newIps.mkString(","))
     } else {
       // TODO add archive attribute and use it to save the jail => the archive must be available from all nodes of the network
-      Log.debug("Running {} create -f {} {} {}", ezjailAdmin, flavor, nodeName, newIps.mkString(","))
-      exec = Array[String](ezjailAdmin, "create", "-f") ++ Array[String](flavor) ++ Array[String](nodeName, newIps.mkString(","))
+      Log.debug("Running {} create -f {} {} {}", ezjailAdmin, flavors.mkString(","), nodeName, newIps.mkString(","))
+      exec = Array[String](ezjailAdmin, "create", "-f") ++ Array[String](flavors.mkString(",")) ++ Array[String](nodeName, newIps.mkString(","))
+    }
+
+    if (size.isDefined) {
+      Log.debug("Add following option to the command line to create the jail: -s {}", size.get)
+      exec = exec ++ Array[String]("-s", size.get + "")
     }
 
     val resultActor = new ResultManagementActor()
