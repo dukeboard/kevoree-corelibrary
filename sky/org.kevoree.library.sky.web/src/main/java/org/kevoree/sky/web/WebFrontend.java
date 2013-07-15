@@ -33,7 +33,7 @@ public class WebFrontend extends AbstractComponentType {
             webServer = WebServers.createWebServer(port)
                     .add(new MetaDataHandler(this.getModelService()))
                     .add("/model/service", mhandler)
-                     .add(new StaticFileHandler("/Users/duke/Documents/dev/dukeboard/kevoree-corelibrary/sky/org.kevoree.library.sky.web/src/main/resources")) // path to web content
+                     .add(new StaticFileHandler("/home/edaubert/workspace/kevoree-corelibrary/sky/org.kevoree.library.sky.web/src/main/resources")) // path to web content
                     //.add(new EmbedHandler()) // path to web content
                     .start()
                     .get();

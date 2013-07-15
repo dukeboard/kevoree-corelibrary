@@ -63,7 +63,15 @@
                 } else {
                     newStartNStopBt.append("Start child");
                 }
-                $('#nodeList').append($('<tr>').append($('<td>').append(nodes.get(i).getName())).append($('<td>')).append($('<td>').append(newStartNStopBt)));
+
+                var newRemoveBt = $('<a></a>');
+                newRemoveBt.addClass("btn");
+                newRemoveBt.addClass("btn-warning");
+                newRemoveBt.id = 'remove' + childName;
+                newRemoveBt.append("Remove child");
+
+                $('#nodeList').append($('<tr>').append($('<td>').append(nodes.get(i).getName())).append($('<td>')).append($('<td>').append(newStartNStopBt).append(" ").append(newRemoveBt)));
+
                 newStartNStopBt.click(function () {
                     var currentNode = model.findNodesByID(nodeName);
                     var currentChildNode = currentNode.findHostsByID(childName);
@@ -74,13 +82,6 @@
                     }
                     synchModel();
                 });
-
-                var newRemoveBt = $('<a></a>');
-                newRemoveBt.addClass("btn");
-                newRemoveBt.addClass("btn-warning");
-                newRemoveBt.id = 'remove' + childName;
-                newRemoveBt.append("Remove child");
-                $('#nodeList').append($('<tr>').append($('<td>').append(nodes.get(i).getName())).append($('<td>')).append($('<td>').append(newRemoveBt)));
                 newRemoveBt.click(function () {
                     var currentNode = model.findNodesByID(nodeName);
                     var currentChildNode = currentNode.findHostsByID(childName);
@@ -162,8 +163,11 @@
                 var dictionaryTypeAttributes = dictionaryType.getAttributes()
                 newChildNode.setDictionary(dictionary);
 
+                var name = jQuery("#nameInput").get(0).value;
+                newChildNode.setName(name);
+
                 jQuery(".control-group").each(function (index, e) {
-                    if (e.id !== "#nameControlGroup") {
+                    if (e.id !== "nameControlGroup") {
                         var id = e.id.substring(0, e.id.length - "ControlGroup".length);
                         // looking for the dictionaryAttribute into the dictionaryType that correspond to this current attribute
                         var dictionaryAttribute;
@@ -193,11 +197,10 @@
                             }
                         }
 
-                    } else {
-                        var name = jQuery("#" + e.id + "Input").get(0).value;
-                        newChildNode.setName(name);
                     }
                 });
+                // to close the modal window
+                $("#closeButton").trigger("click");
                 synchModel();
             }
         });
@@ -206,13 +209,13 @@
 
 <div class="container-fluid">
     <div class="row-fluid">
-        <a class="btn btn-primary" id="btnAddChildGenerate">Add generated child</a>
-        <a class="btn btn-primary" id="btnAddChild" data-toggle="modal" data-target="#add-modal" data-backdrop="true" data-keyboard="true"
+        <a class="btn btn-primary" id="btnAddChildGenerate">Add default child</a>
+        <a class="btn btn-primary" id="btnAddChild" data-toggle="modal" href="#add-modal" data-backdrop="true" data-keyboard="true"
            data-show="false">Add child</a>
 
-        <div class="modal fade" id="add-modal">
+        <div class="modal show fade" id="add-modal">
             <div class="modal-header">
-                <a class="close" data-dismiss="modal">&times;</a>
+                <a id="closeButton" class="close" data-dismiss="modal">&times;</a>
 
                 <h3>Add Child</h3>
             </div>
