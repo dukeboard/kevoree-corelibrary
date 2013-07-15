@@ -1075,6 +1075,7 @@
               this.$internal_recursive_readOnlyElem = false;
               this.$_name = '';
               this.$_metaData = '';
+              this.$_started = true;
               this.$_typeDefinition = null;
               this.$_dictionary = null;
               this.$_bindings_java_cache = null;
@@ -1121,6 +1122,12 @@
             },
             set__metaData: function (tmp$0) {
               this.$_metaData = tmp$0;
+            },
+            get__started: function () {
+              return this.$_started;
+            },
+            set__started: function (tmp$0) {
+              this.$_started = tmp$0;
             },
             get__typeDefinition: function () {
               return this.$_typeDefinition;
@@ -1188,6 +1195,15 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__metaData(metaData);
+            },
+            getStarted: function () {
+              return this.get__started();
+            },
+            setStarted: function (started) {
+              if (this.isReadOnly()) {
+                throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
+              }
+              this.set__started(started);
             },
             getTypeDefinition: function () {
               return this.get__typeDefinition();
@@ -1326,6 +1342,7 @@
               var selfObjectClone = _factories.getKevoreeFactory().createChannel();
               selfObjectClone.setName(this.getName());
               selfObjectClone.setMetaData(this.getMetaData());
+              selfObjectClone.setStarted(this.getStarted());
               subResult.put(this, selfObjectClone);
               var subsubsubsubdictionary = this.getDictionary();
               if (subsubsubsubdictionary !== null && subsubsubsubdictionary !== undefined) {
@@ -1453,6 +1470,9 @@
               if (!Kotlin.equals(this.getMetaData(), similarObjCasted.getMetaData())) {
                 return false;
               }
+              if (!Kotlin.equals(this.getStarted(), similarObjCasted.getStarted())) {
+                return false;
+              }
               if (!Kotlin.equals(this.getDictionary(), similarObjCasted.getDictionary())) {
                 return false;
               }
@@ -1469,7 +1489,7 @@
               this.$_name = '';
               this.$_factoryBean = '';
               this.$_bean = '';
-              this.$_nature = '';
+              this.$_abstract = false;
               this.$_startMethod = '';
               this.$_stopMethod = '';
               this.$_updateMethod = '';
@@ -1531,11 +1551,11 @@
             set__bean: function (tmp$0) {
               this.$_bean = tmp$0;
             },
-            get__nature: function () {
-              return this.$_nature;
+            get__abstract: function () {
+              return this.$_abstract;
             },
-            set__nature: function (tmp$0) {
-              this.$_nature = tmp$0;
+            set__abstract: function (tmp$0) {
+              this.$_abstract = tmp$0;
             },
             get__startMethod: function () {
               return this.$_startMethod;
@@ -1659,14 +1679,14 @@
               }
               this.set__bean(bean);
             },
-            getNature: function () {
-              return this.get__nature();
+            getAbstract: function () {
+              return this.get__abstract();
             },
-            setNature: function (nature) {
+            setAbstract: function (abstract) {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
-              this.set__nature(nature);
+              this.set__abstract(abstract);
             },
             getStartMethod: function () {
               return this.get__startMethod();
@@ -1864,7 +1884,7 @@
               selfObjectClone.setName(this.getName());
               selfObjectClone.setFactoryBean(this.getFactoryBean());
               selfObjectClone.setBean(this.getBean());
-              selfObjectClone.setNature(this.getNature());
+              selfObjectClone.setAbstract(this.getAbstract());
               selfObjectClone.setStartMethod(this.getStartMethod());
               selfObjectClone.setStopMethod(this.getStopMethod());
               selfObjectClone.setUpdateMethod(this.getUpdateMethod());
@@ -2062,7 +2082,7 @@
               if (!Kotlin.equals(this.getBean(), similarObjCasted.getBean())) {
                 return false;
               }
-              if (!Kotlin.equals(this.getNature(), similarObjCasted.getNature())) {
+              if (!Kotlin.equals(this.getAbstract(), similarObjCasted.getAbstract())) {
                 return false;
               }
               if (!Kotlin.equals(this.getStartMethod(), similarObjCasted.getStartMethod())) {
@@ -2101,6 +2121,7 @@
               this.$internal_recursive_readOnlyElem = false;
               this.$_name = '';
               this.$_metaData = '';
+              this.$_started = true;
               this.$_typeDefinition = null;
               this.$_dictionary = null;
               this.$_provided_java_cache = null;
@@ -2150,6 +2171,12 @@
             },
             set__metaData: function (tmp$0) {
               this.$_metaData = tmp$0;
+            },
+            get__started: function () {
+              return this.$_started;
+            },
+            set__started: function (tmp$0) {
+              this.$_started = tmp$0;
             },
             get__typeDefinition: function () {
               return this.$_typeDefinition;
@@ -2260,6 +2287,15 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__metaData(metaData);
+            },
+            getStarted: function () {
+              return this.get__started();
+            },
+            setStarted: function (started) {
+              if (this.isReadOnly()) {
+                throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
+              }
+              this.set__started(started);
             },
             getTypeDefinition: function () {
               return this.get__typeDefinition();
@@ -2450,6 +2486,7 @@
               var selfObjectClone = _factories.getKevoreeFactory().createComponentInstance();
               selfObjectClone.setName(this.getName());
               selfObjectClone.setMetaData(this.getMetaData());
+              selfObjectClone.setStarted(this.getStarted());
               subResult.put(this, selfObjectClone);
               var subsubsubsubdictionary = this.getDictionary();
               if (subsubsubsubdictionary !== null && subsubsubsubdictionary !== undefined) {
@@ -2679,6 +2716,9 @@
               if (!Kotlin.equals(this.getMetaData(), similarObjCasted.getMetaData())) {
                 return false;
               }
+              if (!Kotlin.equals(this.getStarted(), similarObjCasted.getStarted())) {
+                return false;
+              }
               if (!Kotlin.equals(this.getDictionary(), similarObjCasted.getDictionary())) {
                 return false;
               }
@@ -2701,7 +2741,7 @@
               this.$_name = '';
               this.$_factoryBean = '';
               this.$_bean = '';
-              this.$_nature = '';
+              this.$_abstract = false;
               this.$_startMethod = '';
               this.$_stopMethod = '';
               this.$_updateMethod = '';
@@ -2766,11 +2806,11 @@
             set__bean: function (tmp$0) {
               this.$_bean = tmp$0;
             },
-            get__nature: function () {
-              return this.$_nature;
+            get__abstract: function () {
+              return this.$_abstract;
             },
-            set__nature: function (tmp$0) {
-              this.$_nature = tmp$0;
+            set__abstract: function (tmp$0) {
+              this.$_abstract = tmp$0;
             },
             get__startMethod: function () {
               return this.$_startMethod;
@@ -2957,14 +2997,14 @@
               }
               this.set__bean(bean);
             },
-            getNature: function () {
-              return this.get__nature();
+            getAbstract: function () {
+              return this.get__abstract();
             },
-            setNature: function (nature) {
+            setAbstract: function (abstract) {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
-              this.set__nature(nature);
+              this.set__abstract(abstract);
             },
             getStartMethod: function () {
               return this.get__startMethod();
@@ -3396,7 +3436,7 @@
               selfObjectClone.setName(this.getName());
               selfObjectClone.setFactoryBean(this.getFactoryBean());
               selfObjectClone.setBean(this.getBean());
-              selfObjectClone.setNature(this.getNature());
+              selfObjectClone.setAbstract(this.getAbstract());
               selfObjectClone.setStartMethod(this.getStartMethod());
               selfObjectClone.setStopMethod(this.getStopMethod());
               selfObjectClone.setUpdateMethod(this.getUpdateMethod());
@@ -3771,7 +3811,7 @@
               if (!Kotlin.equals(this.getBean(), similarObjCasted.getBean())) {
                 return false;
               }
-              if (!Kotlin.equals(this.getNature(), similarObjCasted.getNature())) {
+              if (!Kotlin.equals(this.getAbstract(), similarObjCasted.getAbstract())) {
                 return false;
               }
               if (!Kotlin.equals(this.getStartMethod(), similarObjCasted.getStartMethod())) {
@@ -3811,7 +3851,7 @@
               this.$_name = '';
               this.$_factoryBean = '';
               this.$_bean = '';
-              this.$_nature = '';
+              this.$_abstract = false;
               this.$_startMethod = '';
               this.$_stopMethod = '';
               this.$_updateMethod = '';
@@ -3880,11 +3920,11 @@
             set__bean: function (tmp$0) {
               this.$_bean = tmp$0;
             },
-            get__nature: function () {
-              return this.$_nature;
+            get__abstract: function () {
+              return this.$_abstract;
             },
-            set__nature: function (tmp$0) {
-              this.$_nature = tmp$0;
+            set__abstract: function (tmp$0) {
+              this.$_abstract = tmp$0;
             },
             get__startMethod: function () {
               return this.$_startMethod;
@@ -4107,14 +4147,14 @@
               }
               this.set__bean(bean);
             },
-            getNature: function () {
-              return this.get__nature();
+            getAbstract: function () {
+              return this.get__abstract();
             },
-            setNature: function (nature) {
+            setAbstract: function (abstract) {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
-              this.set__nature(nature);
+              this.set__abstract(abstract);
             },
             getStartMethod: function () {
               return this.get__startMethod();
@@ -4677,7 +4717,7 @@
               selfObjectClone.setName(this.getName());
               selfObjectClone.setFactoryBean(this.getFactoryBean());
               selfObjectClone.setBean(this.getBean());
-              selfObjectClone.setNature(this.getNature());
+              selfObjectClone.setAbstract(this.getAbstract());
               selfObjectClone.setStartMethod(this.getStartMethod());
               selfObjectClone.setStopMethod(this.getStopMethod());
               selfObjectClone.setUpdateMethod(this.getUpdateMethod());
@@ -5139,7 +5179,7 @@
               if (!Kotlin.equals(this.getBean(), similarObjCasted.getBean())) {
                 return false;
               }
-              if (!Kotlin.equals(this.getNature(), similarObjCasted.getNature())) {
+              if (!Kotlin.equals(this.getAbstract(), similarObjCasted.getAbstract())) {
                 return false;
               }
               if (!Kotlin.equals(this.getStartMethod(), similarObjCasted.getStartMethod())) {
@@ -5181,6 +5221,7 @@
               this.$internal_recursive_readOnlyElem = false;
               this.$_name = '';
               this.$_metaData = '';
+              this.$_started = true;
               this.$_typeDefinition = null;
               this.$_dictionary = null;
               this.$_components_java_cache = null;
@@ -5230,6 +5271,12 @@
             },
             set__metaData: function (tmp$0) {
               this.$_metaData = tmp$0;
+            },
+            get__started: function () {
+              return this.$_started;
+            },
+            set__started: function (tmp$0) {
+              this.$_started = tmp$0;
             },
             get__typeDefinition: function () {
               return this.$_typeDefinition;
@@ -5333,6 +5380,15 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__metaData(metaData);
+            },
+            getStarted: function () {
+              return this.get__started();
+            },
+            setStarted: function (started) {
+              if (this.isReadOnly()) {
+                throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
+              }
+              this.set__started(started);
             },
             getTypeDefinition: function () {
               return this.get__typeDefinition();
@@ -5601,6 +5657,7 @@
               var selfObjectClone = _factories.getKevoreeFactory().createContainerNode();
               selfObjectClone.setName(this.getName());
               selfObjectClone.setMetaData(this.getMetaData());
+              selfObjectClone.setStarted(this.getStarted());
               subResult.put(this, selfObjectClone);
               var subsubsubsubdictionary = this.getDictionary();
               if (subsubsubsubdictionary !== null && subsubsubsubdictionary !== undefined) {
@@ -5853,6 +5910,9 @@
                 return false;
               }
               if (!Kotlin.equals(this.getMetaData(), similarObjCasted.getMetaData())) {
+                return false;
+              }
+              if (!Kotlin.equals(this.getStarted(), similarObjCasted.getStarted())) {
                 return false;
               }
               if (!Kotlin.equals(this.getDictionary(), similarObjCasted.getDictionary())) {
@@ -9755,6 +9815,7 @@
               this.$internal_recursive_readOnlyElem = false;
               this.$_name = '';
               this.$_metaData = '';
+              this.$_started = true;
               this.$_typeDefinition = null;
               this.$_dictionary = null;
               this.$_subNodes_java_cache = null;
@@ -9801,6 +9862,12 @@
             },
             set__metaData: function (tmp$0) {
               this.$_metaData = tmp$0;
+            },
+            get__started: function () {
+              return this.$_started;
+            },
+            set__started: function (tmp$0) {
+              this.$_started = tmp$0;
             },
             get__typeDefinition: function () {
               return this.$_typeDefinition;
@@ -9868,6 +9935,15 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__metaData(metaData);
+            },
+            getStarted: function () {
+              return this.get__started();
+            },
+            setStarted: function (started) {
+              if (this.isReadOnly()) {
+                throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
+              }
+              this.set__started(started);
             },
             getTypeDefinition: function () {
               return this.get__typeDefinition();
@@ -9965,6 +10041,7 @@
               var selfObjectClone = _factories.getKevoreeFactory().createGroup();
               selfObjectClone.setName(this.getName());
               selfObjectClone.setMetaData(this.getMetaData());
+              selfObjectClone.setStarted(this.getStarted());
               subResult.put(this, selfObjectClone);
               var subsubsubsubdictionary = this.getDictionary();
               if (subsubsubsubdictionary !== null && subsubsubsubdictionary !== undefined) {
@@ -10136,6 +10213,9 @@
               if (!Kotlin.equals(this.getMetaData(), similarObjCasted.getMetaData())) {
                 return false;
               }
+              if (!Kotlin.equals(this.getStarted(), similarObjCasted.getStarted())) {
+                return false;
+              }
               if (!Kotlin.equals(this.getDictionary(), similarObjCasted.getDictionary())) {
                 return false;
               }
@@ -10152,7 +10232,7 @@
               this.$_name = '';
               this.$_factoryBean = '';
               this.$_bean = '';
-              this.$_nature = '';
+              this.$_abstract = false;
               this.$_startMethod = '';
               this.$_stopMethod = '';
               this.$_updateMethod = '';
@@ -10210,11 +10290,11 @@
             set__bean: function (tmp$0) {
               this.$_bean = tmp$0;
             },
-            get__nature: function () {
-              return this.$_nature;
+            get__abstract: function () {
+              return this.$_abstract;
             },
-            set__nature: function (tmp$0) {
-              this.$_nature = tmp$0;
+            set__abstract: function (tmp$0) {
+              this.$_abstract = tmp$0;
             },
             get__startMethod: function () {
               return this.$_startMethod;
@@ -10314,14 +10394,14 @@
               }
               this.set__bean(bean);
             },
-            getNature: function () {
-              return this.get__nature();
+            getAbstract: function () {
+              return this.get__abstract();
             },
-            setNature: function (nature) {
+            setAbstract: function (abstract) {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
-              this.set__nature(nature);
+              this.set__abstract(abstract);
             },
             getStartMethod: function () {
               return this.get__startMethod();
@@ -10483,7 +10563,7 @@
               selfObjectClone.setName(this.getName());
               selfObjectClone.setFactoryBean(this.getFactoryBean());
               selfObjectClone.setBean(this.getBean());
-              selfObjectClone.setNature(this.getNature());
+              selfObjectClone.setAbstract(this.getAbstract());
               selfObjectClone.setStartMethod(this.getStartMethod());
               selfObjectClone.setStopMethod(this.getStopMethod());
               selfObjectClone.setUpdateMethod(this.getUpdateMethod());
@@ -10677,7 +10757,7 @@
               if (!Kotlin.equals(this.getBean(), similarObjCasted.getBean())) {
                 return false;
               }
-              if (!Kotlin.equals(this.getNature(), similarObjCasted.getNature())) {
+              if (!Kotlin.equals(this.getAbstract(), similarObjCasted.getAbstract())) {
                 return false;
               }
               if (!Kotlin.equals(this.getStartMethod(), similarObjCasted.getStartMethod())) {
@@ -10704,6 +10784,7 @@
               this.$internal_recursive_readOnlyElem = false;
               this.$_name = '';
               this.$_metaData = '';
+              this.$_started = true;
               this.$_typeDefinition = null;
               this.$_dictionary = null;
             },
@@ -10748,6 +10829,12 @@
             },
             set__metaData: function (tmp$0) {
               this.$_metaData = tmp$0;
+            },
+            get__started: function () {
+              return this.$_started;
+            },
+            set__started: function (tmp$0) {
+              this.$_started = tmp$0;
             },
             get__typeDefinition: function () {
               return this.$_typeDefinition;
@@ -10800,6 +10887,15 @@
               }
               this.set__metaData(metaData);
             },
+            getStarted: function () {
+              return this.get__started();
+            },
+            setStarted: function (started) {
+              if (this.isReadOnly()) {
+                throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
+              }
+              this.set__started(started);
+            },
             getTypeDefinition: function () {
               return this.get__typeDefinition();
             },
@@ -10836,6 +10932,7 @@
               var selfObjectClone = _factories.getKevoreeFactory().createInstance();
               selfObjectClone.setName(this.getName());
               selfObjectClone.setMetaData(this.getMetaData());
+              selfObjectClone.setStarted(this.getStarted());
               subResult.put(this, selfObjectClone);
               var subsubsubsubdictionary = this.getDictionary();
               if (subsubsubsubdictionary !== null && subsubsubsubdictionary !== undefined) {
@@ -10942,6 +11039,9 @@
                 return false;
               }
               if (!Kotlin.equals(this.getMetaData(), similarObjCasted.getMetaData())) {
+                return false;
+              }
+              if (!Kotlin.equals(this.getStarted(), similarObjCasted.getStarted())) {
                 return false;
               }
               if (!Kotlin.equals(this.getDictionary(), similarObjCasted.getDictionary())) {
@@ -11406,7 +11506,7 @@
               this.$_name = '';
               this.$_factoryBean = '';
               this.$_bean = '';
-              this.$_nature = '';
+              this.$_abstract = false;
               this.$_startMethod = '';
               this.$_stopMethod = '';
               this.$_updateMethod = '';
@@ -11464,11 +11564,11 @@
             set__bean: function (tmp$0) {
               this.$_bean = tmp$0;
             },
-            get__nature: function () {
-              return this.$_nature;
+            get__abstract: function () {
+              return this.$_abstract;
             },
-            set__nature: function (tmp$0) {
-              this.$_nature = tmp$0;
+            set__abstract: function (tmp$0) {
+              this.$_abstract = tmp$0;
             },
             get__startMethod: function () {
               return this.$_startMethod;
@@ -11568,14 +11668,14 @@
               }
               this.set__bean(bean);
             },
-            getNature: function () {
-              return this.get__nature();
+            getAbstract: function () {
+              return this.get__abstract();
             },
-            setNature: function (nature) {
+            setAbstract: function (abstract) {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
-              this.set__nature(nature);
+              this.set__abstract(abstract);
             },
             getStartMethod: function () {
               return this.get__startMethod();
@@ -11737,7 +11837,7 @@
               selfObjectClone.setName(this.getName());
               selfObjectClone.setFactoryBean(this.getFactoryBean());
               selfObjectClone.setBean(this.getBean());
-              selfObjectClone.setNature(this.getNature());
+              selfObjectClone.setAbstract(this.getAbstract());
               selfObjectClone.setStartMethod(this.getStartMethod());
               selfObjectClone.setStopMethod(this.getStopMethod());
               selfObjectClone.setUpdateMethod(this.getUpdateMethod());
@@ -11931,7 +12031,7 @@
               if (!Kotlin.equals(this.getBean(), similarObjCasted.getBean())) {
                 return false;
               }
-              if (!Kotlin.equals(this.getNature(), similarObjCasted.getNature())) {
+              if (!Kotlin.equals(this.getAbstract(), similarObjCasted.getAbstract())) {
                 return false;
               }
               if (!Kotlin.equals(this.getStartMethod(), similarObjCasted.getStartMethod())) {
@@ -12173,7 +12273,7 @@
               this.$_name = '';
               this.$_factoryBean = '';
               this.$_bean = '';
-              this.$_nature = '';
+              this.$_abstract = false;
               this.$_synchrone = false;
               this.$_deployUnits_java_cache = null;
               this.$_deployUnits = new Kotlin.ArrayList(0);
@@ -12231,11 +12331,11 @@
             set__bean: function (tmp$0) {
               this.$_bean = tmp$0;
             },
-            get__nature: function () {
-              return this.$_nature;
+            get__abstract: function () {
+              return this.$_abstract;
             },
-            set__nature: function (tmp$0) {
-              this.$_nature = tmp$0;
+            set__abstract: function (tmp$0) {
+              this.$_abstract = tmp$0;
             },
             get__synchrone: function () {
               return this.$_synchrone;
@@ -12341,14 +12441,14 @@
               }
               this.set__bean(bean);
             },
-            getNature: function () {
-              return this.get__nature();
+            getAbstract: function () {
+              return this.get__abstract();
             },
-            setNature: function (nature) {
+            setAbstract: function (abstract) {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
-              this.set__nature(nature);
+              this.set__abstract(abstract);
             },
             getSynchrone: function () {
               return this.get__synchrone();
@@ -12552,7 +12652,7 @@
               selfObjectClone.setName(this.getName());
               selfObjectClone.setFactoryBean(this.getFactoryBean());
               selfObjectClone.setBean(this.getBean());
-              selfObjectClone.setNature(this.getNature());
+              selfObjectClone.setAbstract(this.getAbstract());
               selfObjectClone.setSynchrone(this.getSynchrone());
               subResult.put(this, selfObjectClone);
               var subsubsubsubdictionaryType = this.getDictionaryType();
@@ -12758,7 +12858,7 @@
               if (!Kotlin.equals(this.getBean(), similarObjCasted.getBean())) {
                 return false;
               }
-              if (!Kotlin.equals(this.getNature(), similarObjCasted.getNature())) {
+              if (!Kotlin.equals(this.getAbstract(), similarObjCasted.getAbstract())) {
                 return false;
               }
               if (!Kotlin.equals(this.getSynchrone(), similarObjCasted.getSynchrone())) {
@@ -13455,6 +13555,7 @@
               this.$_networkType = '';
               this.$_estimatedRate = 0;
               this.$_lastCheck = '';
+              this.$_zoneID = '';
               this.$_networkProperties_java_cache = null;
               this.$_networkProperties = new Kotlin.HashMap(0);
             },
@@ -13505,6 +13606,12 @@
             },
             set__lastCheck: function (tmp$0) {
               this.$_lastCheck = tmp$0;
+            },
+            get__zoneID: function () {
+              return this.$_zoneID;
+            },
+            set__zoneID: function (tmp$0) {
+              this.$_zoneID = tmp$0;
             },
             get__networkProperties_java_cache: function () {
               return this.$_networkProperties_java_cache;
@@ -13567,6 +13674,15 @@
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
               this.set__lastCheck(lastCheck);
+            },
+            getZoneID: function () {
+              return this.get__zoneID();
+            },
+            setZoneID: function (zoneID) {
+              if (this.isReadOnly()) {
+                throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
+              }
+              this.set__zoneID(zoneID);
             },
             getNetworkProperties: function () {
               return _.kotlin.toList(this.get__networkProperties().values());
@@ -13660,6 +13776,7 @@
               selfObjectClone.setNetworkType(this.getNetworkType());
               selfObjectClone.setEstimatedRate(this.getEstimatedRate());
               selfObjectClone.setLastCheck(this.getLastCheck());
+              selfObjectClone.setZoneID(this.getZoneID());
               subResult.put(this, selfObjectClone);
               {
                 var tmp$0 = this.getNetworkProperties().iterator();
@@ -13798,6 +13915,9 @@
                 return false;
               }
               if (!Kotlin.equals(this.getLastCheck(), similarObjCasted.getLastCheck())) {
+                return false;
+              }
+              if (!Kotlin.equals(this.getZoneID(), similarObjCasted.getZoneID())) {
                 return false;
               }
               if (this.getNetworkProperties().size() !== similarObjCasted.getNetworkProperties().size()) {
@@ -14148,7 +14268,7 @@
               this.$_name = '';
               this.$_factoryBean = '';
               this.$_bean = '';
-              this.$_nature = '';
+              this.$_abstract = false;
               this.$_startMethod = '';
               this.$_stopMethod = '';
               this.$_updateMethod = '';
@@ -14210,11 +14330,11 @@
             set__bean: function (tmp$0) {
               this.$_bean = tmp$0;
             },
-            get__nature: function () {
-              return this.$_nature;
+            get__abstract: function () {
+              return this.$_abstract;
             },
-            set__nature: function (tmp$0) {
-              this.$_nature = tmp$0;
+            set__abstract: function (tmp$0) {
+              this.$_abstract = tmp$0;
             },
             get__startMethod: function () {
               return this.$_startMethod;
@@ -14357,14 +14477,14 @@
               }
               this.set__bean(bean);
             },
-            getNature: function () {
-              return this.get__nature();
+            getAbstract: function () {
+              return this.get__abstract();
             },
-            setNature: function (nature) {
+            setAbstract: function (abstract) {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
-              this.set__nature(nature);
+              this.set__abstract(abstract);
             },
             getStartMethod: function () {
               return this.get__startMethod();
@@ -14657,7 +14777,7 @@
               selfObjectClone.setName(this.getName());
               selfObjectClone.setFactoryBean(this.getFactoryBean());
               selfObjectClone.setBean(this.getBean());
-              selfObjectClone.setNature(this.getNature());
+              selfObjectClone.setAbstract(this.getAbstract());
               selfObjectClone.setStartMethod(this.getStartMethod());
               selfObjectClone.setStopMethod(this.getStopMethod());
               selfObjectClone.setUpdateMethod(this.getUpdateMethod());
@@ -14917,7 +15037,7 @@
               if (!Kotlin.equals(this.getBean(), similarObjCasted.getBean())) {
                 return false;
               }
-              if (!Kotlin.equals(this.getNature(), similarObjCasted.getNature())) {
+              if (!Kotlin.equals(this.getAbstract(), similarObjCasted.getAbstract())) {
                 return false;
               }
               if (!Kotlin.equals(this.getStartMethod(), similarObjCasted.getStartMethod())) {
@@ -15799,7 +15919,7 @@
               this.$_name = '';
               this.$_factoryBean = '';
               this.$_bean = '';
-              this.$_nature = '';
+              this.$_abstract = false;
               this.$_synchrone = false;
               this.$_deployUnits_java_cache = null;
               this.$_deployUnits = new Kotlin.ArrayList(0);
@@ -15855,11 +15975,11 @@
             set__bean: function (tmp$0) {
               this.$_bean = tmp$0;
             },
-            get__nature: function () {
-              return this.$_nature;
+            get__abstract: function () {
+              return this.$_abstract;
             },
-            set__nature: function (tmp$0) {
-              this.$_nature = tmp$0;
+            set__abstract: function (tmp$0) {
+              this.$_abstract = tmp$0;
             },
             get__synchrone: function () {
               return this.$_synchrone;
@@ -15947,14 +16067,14 @@
               }
               this.set__bean(bean);
             },
-            getNature: function () {
-              return this.get__nature();
+            getAbstract: function () {
+              return this.get__abstract();
             },
-            setNature: function (nature) {
+            setAbstract: function (abstract) {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
-              this.set__nature(nature);
+              this.set__abstract(abstract);
             },
             getSynchrone: function () {
               return this.get__synchrone();
@@ -16098,7 +16218,7 @@
               selfObjectClone.setName(this.getName());
               selfObjectClone.setFactoryBean(this.getFactoryBean());
               selfObjectClone.setBean(this.getBean());
-              selfObjectClone.setNature(this.getNature());
+              selfObjectClone.setAbstract(this.getAbstract());
               selfObjectClone.setSynchrone(this.getSynchrone());
               subResult.put(this, selfObjectClone);
               var subsubsubsubdictionaryType = this.getDictionaryType();
@@ -16290,7 +16410,7 @@
               if (!Kotlin.equals(this.getBean(), similarObjCasted.getBean())) {
                 return false;
               }
-              if (!Kotlin.equals(this.getNature(), similarObjCasted.getNature())) {
+              if (!Kotlin.equals(this.getAbstract(), similarObjCasted.getAbstract())) {
                 return false;
               }
               if (!Kotlin.equals(this.getSynchrone(), similarObjCasted.getSynchrone())) {
@@ -17055,9 +17175,9 @@
               this.$_name = '';
               this.$_factoryBean = '';
               this.$_bean = '';
-              this.$_nature = '';
+              this.$_abstract = false;
               this.$_synchrone = false;
-              this.$_interfaceService = '';
+              this.$_interface = '';
               this.$_deployUnits_java_cache = null;
               this.$_deployUnits = new Kotlin.ArrayList(0);
               this.$_dictionaryType = null;
@@ -17114,11 +17234,11 @@
             set__bean: function (tmp$0) {
               this.$_bean = tmp$0;
             },
-            get__nature: function () {
-              return this.$_nature;
+            get__abstract: function () {
+              return this.$_abstract;
             },
-            set__nature: function (tmp$0) {
-              this.$_nature = tmp$0;
+            set__abstract: function (tmp$0) {
+              this.$_abstract = tmp$0;
             },
             get__synchrone: function () {
               return this.$_synchrone;
@@ -17126,11 +17246,11 @@
             set__synchrone: function (tmp$0) {
               this.$_synchrone = tmp$0;
             },
-            get__interfaceService: function () {
-              return this.$_interfaceService;
+            get__interface: function () {
+              return this.$_interface;
             },
-            set__interfaceService: function (tmp$0) {
-              this.$_interfaceService = tmp$0;
+            set__interface: function (tmp$0) {
+              this.$_interface = tmp$0;
             },
             get__deployUnits_java_cache: function () {
               return this.$_deployUnits_java_cache;
@@ -17237,14 +17357,14 @@
               }
               this.set__bean(bean);
             },
-            getNature: function () {
-              return this.get__nature();
+            getAbstract: function () {
+              return this.get__abstract();
             },
-            setNature: function (nature) {
+            setAbstract: function (abstract) {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
-              this.set__nature(nature);
+              this.set__abstract(abstract);
             },
             getSynchrone: function () {
               return this.get__synchrone();
@@ -17255,14 +17375,14 @@
               }
               this.set__synchrone(synchrone);
             },
-            getInterfaceService: function () {
-              return this.get__interfaceService();
+            getInterface: function () {
+              return this.get__interface();
             },
-            setInterfaceService: function (interfaceService) {
+            setInterface: function (interface) {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
-              this.set__interfaceService(interfaceService);
+              this.set__interface(interface);
             },
             getDeployUnits: function () {
               return this.get__deployUnits();
@@ -17481,9 +17601,9 @@
               selfObjectClone.setName(this.getName());
               selfObjectClone.setFactoryBean(this.getFactoryBean());
               selfObjectClone.setBean(this.getBean());
-              selfObjectClone.setNature(this.getNature());
+              selfObjectClone.setAbstract(this.getAbstract());
               selfObjectClone.setSynchrone(this.getSynchrone());
-              selfObjectClone.setInterfaceService(this.getInterfaceService());
+              selfObjectClone.setInterface(this.getInterface());
               subResult.put(this, selfObjectClone);
               var subsubsubsubdictionaryType = this.getDictionaryType();
               if (subsubsubsubdictionaryType !== null && subsubsubsubdictionaryType !== undefined) {
@@ -17712,13 +17832,13 @@
               if (!Kotlin.equals(this.getBean(), similarObjCasted.getBean())) {
                 return false;
               }
-              if (!Kotlin.equals(this.getNature(), similarObjCasted.getNature())) {
+              if (!Kotlin.equals(this.getAbstract(), similarObjCasted.getAbstract())) {
                 return false;
               }
               if (!Kotlin.equals(this.getSynchrone(), similarObjCasted.getSynchrone())) {
                 return false;
               }
-              if (!Kotlin.equals(this.getInterfaceService(), similarObjCasted.getInterfaceService())) {
+              if (!Kotlin.equals(this.getInterface(), similarObjCasted.getInterface())) {
                 return false;
               }
               if (!Kotlin.equals(this.getDictionaryType(), similarObjCasted.getDictionaryType())) {
@@ -17740,7 +17860,7 @@
               this.$_name = '';
               this.$_factoryBean = '';
               this.$_bean = '';
-              this.$_nature = '';
+              this.$_abstract = false;
               this.$_deployUnits_java_cache = null;
               this.$_deployUnits = new Kotlin.ArrayList(0);
               this.$_dictionaryType = null;
@@ -17795,11 +17915,11 @@
             set__bean: function (tmp$0) {
               this.$_bean = tmp$0;
             },
-            get__nature: function () {
-              return this.$_nature;
+            get__abstract: function () {
+              return this.$_abstract;
             },
-            set__nature: function (tmp$0) {
-              this.$_nature = tmp$0;
+            set__abstract: function (tmp$0) {
+              this.$_abstract = tmp$0;
             },
             get__deployUnits_java_cache: function () {
               return this.$_deployUnits_java_cache;
@@ -17886,14 +18006,14 @@
               }
               this.set__bean(bean);
             },
-            getNature: function () {
-              return this.get__nature();
+            getAbstract: function () {
+              return this.get__abstract();
             },
-            setNature: function (nature) {
+            setAbstract: function (abstract) {
               if (this.isReadOnly()) {
                 throw new Kotlin.Exception('This model is ReadOnly. Elements are not modifiable.');
               }
-              this.set__nature(nature);
+              this.set__abstract(abstract);
             },
             getDeployUnits: function () {
               return this.get__deployUnits();
@@ -18028,7 +18148,7 @@
               selfObjectClone.setName(this.getName());
               selfObjectClone.setFactoryBean(this.getFactoryBean());
               selfObjectClone.setBean(this.getBean());
-              selfObjectClone.setNature(this.getNature());
+              selfObjectClone.setAbstract(this.getAbstract());
               subResult.put(this, selfObjectClone);
               var subsubsubsubdictionaryType = this.getDictionaryType();
               if (subsubsubsubdictionaryType !== null && subsubsubsubdictionaryType !== undefined) {
@@ -18219,7 +18339,7 @@
               if (!Kotlin.equals(this.getBean(), similarObjCasted.getBean())) {
                 return false;
               }
-              if (!Kotlin.equals(this.getNature(), similarObjCasted.getNature())) {
+              if (!Kotlin.equals(this.getAbstract(), similarObjCasted.getAbstract())) {
                 return false;
               }
               if (!Kotlin.equals(this.getDictionaryType(), similarObjCasted.getDictionaryType())) {
@@ -19450,7 +19570,7 @@
               while (reader.hasNext()) {
                 var nextName = reader.nextName();
                 var tmp$0, tmp$1, tmp$2;
-                for (tmp$1 = 0, tmp$0 = nextName; tmp$1 < 9; ++tmp$1) {
+                for (tmp$1 = 0, tmp$0 = nextName; tmp$1 < 10; ++tmp$1) {
                   if (tmp$1 === 0)
                     if (tmp$0 === 'name') {
                       {
@@ -19468,6 +19588,13 @@
                       break;
                     }
                   if (tmp$1 === 2)
+                    if (tmp$0 === 'started') {
+                      {
+                        tmp$2 = modelElem.setStarted(reader.nextBoolean());
+                      }
+                      break;
+                    }
+                  if (tmp$1 === 3)
                     if (tmp$0 === 'typeDefinition') {
                       {
                         var tmp$5, tmp$6;
@@ -19489,7 +19616,7 @@
                       }
                       break;
                     }
-                  if (tmp$1 === 3)
+                  if (tmp$1 === 4)
                     if (tmp$0 === 'dictionary') {
                       {
                         reader.beginObject();
@@ -19500,7 +19627,7 @@
                       }
                       break;
                     }
-                  if (tmp$1 === 4)
+                  if (tmp$1 === 5)
                     if (tmp$0 === 'provided') {
                       {
                         reader.beginArray();
@@ -19517,7 +19644,7 @@
                       }
                       break;
                     }
-                  if (tmp$1 === 5)
+                  if (tmp$1 === 6)
                     if (tmp$0 === 'required') {
                       {
                         reader.beginArray();
@@ -19534,7 +19661,7 @@
                       }
                       break;
                     }
-                  if (tmp$1 === 6)
+                  if (tmp$1 === 7)
                     if (tmp$0 === 'namespace') {
                       {
                         var tmp$7, tmp$8;
@@ -19556,14 +19683,14 @@
                       }
                       break;
                     }
-                  if (tmp$1 === 7)
+                  if (tmp$1 === 8)
                     if (tmp$0 === 'eClass') {
                       {
                         tmp$2 = reader.nextString();
                       }
                       break;
                     }
-                  if (tmp$1 === 8) {
+                  if (tmp$1 === 9) {
                     tmp$2 = Kotlin.println('Tag unrecognized: ' + nextName + ' in ComponentInstance');
                   }
                 }
@@ -19603,34 +19730,33 @@
                       break;
                     }
                   if (tmp$1 === 3)
-                    if (tmp$0 === 'nature') {
+                    if (tmp$0 === 'abstract') {
                       {
-                        var tmp$6;
-                        tmp$2 = modelElem.setNature(this.unescapeJSON((tmp$6 = reader.nextString()) !== null && tmp$6 !== undefined ? tmp$6 : Kotlin.throwNPE()));
+                        tmp$2 = modelElem.setAbstract(reader.nextBoolean());
                       }
                       break;
                     }
                   if (tmp$1 === 4)
                     if (tmp$0 === 'startMethod') {
                       {
-                        var tmp$7;
-                        tmp$2 = modelElem.setStartMethod(this.unescapeJSON((tmp$7 = reader.nextString()) !== null && tmp$7 !== undefined ? tmp$7 : Kotlin.throwNPE()));
+                        var tmp$6;
+                        tmp$2 = modelElem.setStartMethod(this.unescapeJSON((tmp$6 = reader.nextString()) !== null && tmp$6 !== undefined ? tmp$6 : Kotlin.throwNPE()));
                       }
                       break;
                     }
                   if (tmp$1 === 5)
                     if (tmp$0 === 'stopMethod') {
                       {
-                        var tmp$8;
-                        tmp$2 = modelElem.setStopMethod(this.unescapeJSON((tmp$8 = reader.nextString()) !== null && tmp$8 !== undefined ? tmp$8 : Kotlin.throwNPE()));
+                        var tmp$7;
+                        tmp$2 = modelElem.setStopMethod(this.unescapeJSON((tmp$7 = reader.nextString()) !== null && tmp$7 !== undefined ? tmp$7 : Kotlin.throwNPE()));
                       }
                       break;
                     }
                   if (tmp$1 === 6)
                     if (tmp$0 === 'updateMethod') {
                       {
-                        var tmp$9;
-                        tmp$2 = modelElem.setUpdateMethod(this.unescapeJSON((tmp$9 = reader.nextString()) !== null && tmp$9 !== undefined ? tmp$9 : Kotlin.throwNPE()));
+                        var tmp$8;
+                        tmp$2 = modelElem.setUpdateMethod(this.unescapeJSON((tmp$8 = reader.nextString()) !== null && tmp$8 !== undefined ? tmp$8 : Kotlin.throwNPE()));
                       }
                       break;
                     }
@@ -19639,15 +19765,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$10, tmp$11;
-                          var xmiRef = (tmp$10 = reader.nextString()) !== null && tmp$10 !== undefined ? tmp$10 : Kotlin.throwNPE();
+                          var tmp$9, tmp$10;
+                          var xmiRef = (tmp$9 = reader.nextString()) !== null && tmp$9 !== undefined ? tmp$9 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef, '//')) {
-                            tmp$11 = '/0' + xmiRef.substring(1);
+                            tmp$10 = '/0' + xmiRef.substring(1);
                           }
                            else {
-                            tmp$11 = xmiRef;
+                            tmp$10 = xmiRef;
                           }
-                          var adjustedRef = tmp$11;
+                          var adjustedRef = tmp$10;
                           var ref = context.get_map().get(adjustedRef);
                           if (ref !== null && ref !== undefined) {
                             modelElem.addDeployUnits(ref);
@@ -19676,15 +19802,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$12, tmp$13;
-                          var xmiRef_0 = (tmp$12 = reader.nextString()) !== null && tmp$12 !== undefined ? tmp$12 : Kotlin.throwNPE();
+                          var tmp$11, tmp$12;
+                          var xmiRef_0 = (tmp$11 = reader.nextString()) !== null && tmp$11 !== undefined ? tmp$11 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef_0, '//')) {
-                            tmp$13 = '/0' + xmiRef_0.substring(1);
+                            tmp$12 = '/0' + xmiRef_0.substring(1);
                           }
                            else {
-                            tmp$13 = xmiRef_0;
+                            tmp$12 = xmiRef_0;
                           }
-                          var adjustedRef_0 = tmp$13;
+                          var adjustedRef_0 = tmp$12;
                           var ref_0 = context.get_map().get(adjustedRef_0);
                           if (ref_0 !== null && ref_0 !== undefined) {
                             modelElem.addSuperTypes(ref_0);
@@ -19780,7 +19906,7 @@
               while (reader.hasNext()) {
                 var nextName = reader.nextName();
                 var tmp$0, tmp$1, tmp$2;
-                for (tmp$1 = 0, tmp$0 = nextName; tmp$1 < 9; ++tmp$1) {
+                for (tmp$1 = 0, tmp$0 = nextName; tmp$1 < 10; ++tmp$1) {
                   if (tmp$1 === 0)
                     if (tmp$0 === 'name') {
                       {
@@ -19798,6 +19924,13 @@
                       break;
                     }
                   if (tmp$1 === 2)
+                    if (tmp$0 === 'started') {
+                      {
+                        tmp$2 = modelElem.setStarted(reader.nextBoolean());
+                      }
+                      break;
+                    }
+                  if (tmp$1 === 3)
                     if (tmp$0 === 'typeDefinition') {
                       {
                         var tmp$5, tmp$6;
@@ -19819,7 +19952,7 @@
                       }
                       break;
                     }
-                  if (tmp$1 === 3)
+                  if (tmp$1 === 4)
                     if (tmp$0 === 'dictionary') {
                       {
                         reader.beginObject();
@@ -19830,7 +19963,7 @@
                       }
                       break;
                     }
-                  if (tmp$1 === 4)
+                  if (tmp$1 === 5)
                     if (tmp$0 === 'components') {
                       {
                         reader.beginArray();
@@ -19847,7 +19980,7 @@
                       }
                       break;
                     }
-                  if (tmp$1 === 5)
+                  if (tmp$1 === 6)
                     if (tmp$0 === 'hosts') {
                       {
                         reader.beginArray();
@@ -19873,7 +20006,7 @@
                       }
                       break;
                     }
-                  if (tmp$1 === 6)
+                  if (tmp$1 === 7)
                     if (tmp$0 === 'host') {
                       {
                         var tmp$9, tmp$10;
@@ -19895,14 +20028,14 @@
                       }
                       break;
                     }
-                  if (tmp$1 === 7)
+                  if (tmp$1 === 8)
                     if (tmp$0 === 'eClass') {
                       {
                         tmp$2 = reader.nextString();
                       }
                       break;
                     }
-                  if (tmp$1 === 8) {
+                  if (tmp$1 === 9) {
                     tmp$2 = Kotlin.println('Tag unrecognized: ' + nextName + ' in ContainerNode');
                   }
                 }
@@ -20247,10 +20380,9 @@
                       break;
                     }
                   if (tmp$1 === 3)
-                    if (tmp$0 === 'nature') {
+                    if (tmp$0 === 'abstract') {
                       {
-                        var tmp$6;
-                        tmp$2 = modelElem.setNature(this.unescapeJSON((tmp$6 = reader.nextString()) !== null && tmp$6 !== undefined ? tmp$6 : Kotlin.throwNPE()));
+                        tmp$2 = modelElem.setAbstract(reader.nextBoolean());
                       }
                       break;
                     }
@@ -20266,15 +20398,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$7, tmp$8;
-                          var xmiRef = (tmp$7 = reader.nextString()) !== null && tmp$7 !== undefined ? tmp$7 : Kotlin.throwNPE();
+                          var tmp$6, tmp$7;
+                          var xmiRef = (tmp$6 = reader.nextString()) !== null && tmp$6 !== undefined ? tmp$6 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef, '//')) {
-                            tmp$8 = '/0' + xmiRef.substring(1);
+                            tmp$7 = '/0' + xmiRef.substring(1);
                           }
                            else {
-                            tmp$8 = xmiRef;
+                            tmp$7 = xmiRef;
                           }
-                          var adjustedRef = tmp$8;
+                          var adjustedRef = tmp$7;
                           var ref = context.get_map().get(adjustedRef);
                           if (ref !== null && ref !== undefined) {
                             modelElem.addDeployUnits(ref);
@@ -20303,15 +20435,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$9, tmp$10;
-                          var xmiRef_0 = (tmp$9 = reader.nextString()) !== null && tmp$9 !== undefined ? tmp$9 : Kotlin.throwNPE();
+                          var tmp$8, tmp$9;
+                          var xmiRef_0 = (tmp$8 = reader.nextString()) !== null && tmp$8 !== undefined ? tmp$8 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef_0, '//')) {
-                            tmp$10 = '/0' + xmiRef_0.substring(1);
+                            tmp$9 = '/0' + xmiRef_0.substring(1);
                           }
                            else {
-                            tmp$10 = xmiRef_0;
+                            tmp$9 = xmiRef_0;
                           }
-                          var adjustedRef_0 = tmp$10;
+                          var adjustedRef_0 = tmp$9;
                           var ref_0 = context.get_map().get(adjustedRef_0);
                           if (ref_0 !== null && ref_0 !== undefined) {
                             modelElem.addSuperTypes(ref_0);
@@ -20764,34 +20896,33 @@
                       break;
                     }
                   if (tmp$1 === 3)
-                    if (tmp$0 === 'nature') {
+                    if (tmp$0 === 'abstract') {
                       {
-                        var tmp$6;
-                        tmp$2 = modelElem.setNature(this.unescapeJSON((tmp$6 = reader.nextString()) !== null && tmp$6 !== undefined ? tmp$6 : Kotlin.throwNPE()));
+                        tmp$2 = modelElem.setAbstract(reader.nextBoolean());
                       }
                       break;
                     }
                   if (tmp$1 === 4)
                     if (tmp$0 === 'startMethod') {
                       {
-                        var tmp$7;
-                        tmp$2 = modelElem.setStartMethod(this.unescapeJSON((tmp$7 = reader.nextString()) !== null && tmp$7 !== undefined ? tmp$7 : Kotlin.throwNPE()));
+                        var tmp$6;
+                        tmp$2 = modelElem.setStartMethod(this.unescapeJSON((tmp$6 = reader.nextString()) !== null && tmp$6 !== undefined ? tmp$6 : Kotlin.throwNPE()));
                       }
                       break;
                     }
                   if (tmp$1 === 5)
                     if (tmp$0 === 'stopMethod') {
                       {
-                        var tmp$8;
-                        tmp$2 = modelElem.setStopMethod(this.unescapeJSON((tmp$8 = reader.nextString()) !== null && tmp$8 !== undefined ? tmp$8 : Kotlin.throwNPE()));
+                        var tmp$7;
+                        tmp$2 = modelElem.setStopMethod(this.unescapeJSON((tmp$7 = reader.nextString()) !== null && tmp$7 !== undefined ? tmp$7 : Kotlin.throwNPE()));
                       }
                       break;
                     }
                   if (tmp$1 === 6)
                     if (tmp$0 === 'updateMethod') {
                       {
-                        var tmp$9;
-                        tmp$2 = modelElem.setUpdateMethod(this.unescapeJSON((tmp$9 = reader.nextString()) !== null && tmp$9 !== undefined ? tmp$9 : Kotlin.throwNPE()));
+                        var tmp$8;
+                        tmp$2 = modelElem.setUpdateMethod(this.unescapeJSON((tmp$8 = reader.nextString()) !== null && tmp$8 !== undefined ? tmp$8 : Kotlin.throwNPE()));
                       }
                       break;
                     }
@@ -20800,15 +20931,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$10, tmp$11;
-                          var xmiRef = (tmp$10 = reader.nextString()) !== null && tmp$10 !== undefined ? tmp$10 : Kotlin.throwNPE();
+                          var tmp$9, tmp$10;
+                          var xmiRef = (tmp$9 = reader.nextString()) !== null && tmp$9 !== undefined ? tmp$9 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef, '//')) {
-                            tmp$11 = '/0' + xmiRef.substring(1);
+                            tmp$10 = '/0' + xmiRef.substring(1);
                           }
                            else {
-                            tmp$11 = xmiRef;
+                            tmp$10 = xmiRef;
                           }
-                          var adjustedRef = tmp$11;
+                          var adjustedRef = tmp$10;
                           var ref = context.get_map().get(adjustedRef);
                           if (ref !== null && ref !== undefined) {
                             modelElem.addDeployUnits(ref);
@@ -20837,15 +20968,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$12, tmp$13;
-                          var xmiRef_0 = (tmp$12 = reader.nextString()) !== null && tmp$12 !== undefined ? tmp$12 : Kotlin.throwNPE();
+                          var tmp$11, tmp$12;
+                          var xmiRef_0 = (tmp$11 = reader.nextString()) !== null && tmp$11 !== undefined ? tmp$11 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef_0, '//')) {
-                            tmp$13 = '/0' + xmiRef_0.substring(1);
+                            tmp$12 = '/0' + xmiRef_0.substring(1);
                           }
                            else {
-                            tmp$13 = xmiRef_0;
+                            tmp$12 = xmiRef_0;
                           }
-                          var adjustedRef_0 = tmp$13;
+                          var adjustedRef_0 = tmp$12;
                           var ref_0 = context.get_map().get(adjustedRef_0);
                           if (ref_0 !== null && ref_0 !== undefined) {
                             modelElem.addSuperTypes(ref_0);
@@ -20925,15 +21056,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$14, tmp$15;
-                          var xmiRef_1 = (tmp$14 = reader.nextString()) !== null && tmp$14 !== undefined ? tmp$14 : Kotlin.throwNPE();
+                          var tmp$13, tmp$14;
+                          var xmiRef_1 = (tmp$13 = reader.nextString()) !== null && tmp$13 !== undefined ? tmp$13 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef_1, '//')) {
-                            tmp$15 = '/0' + xmiRef_1.substring(1);
+                            tmp$14 = '/0' + xmiRef_1.substring(1);
                           }
                            else {
-                            tmp$15 = xmiRef_1;
+                            tmp$14 = xmiRef_1;
                           }
-                          var adjustedRef_1 = tmp$15;
+                          var adjustedRef_1 = tmp$14;
                           var ref_1 = context.get_map().get(adjustedRef_1);
                           if (ref_1 !== null && ref_1 !== undefined) {
                             modelElem.addChilds(ref_1);
@@ -21141,10 +21272,9 @@
                       break;
                     }
                   if (tmp$1 === 3)
-                    if (tmp$0 === 'nature') {
+                    if (tmp$0 === 'abstract') {
                       {
-                        var tmp$6;
-                        tmp$2 = modelElem.setNature(this.unescapeJSON((tmp$6 = reader.nextString()) !== null && tmp$6 !== undefined ? tmp$6 : Kotlin.throwNPE()));
+                        tmp$2 = modelElem.setAbstract(reader.nextBoolean());
                       }
                       break;
                     }
@@ -21156,10 +21286,10 @@
                       break;
                     }
                   if (tmp$1 === 5)
-                    if (tmp$0 === 'interfaceService') {
+                    if (tmp$0 === 'interface') {
                       {
-                        var tmp$7;
-                        tmp$2 = modelElem.setInterfaceService(this.unescapeJSON((tmp$7 = reader.nextString()) !== null && tmp$7 !== undefined ? tmp$7 : Kotlin.throwNPE()));
+                        var tmp$6;
+                        tmp$2 = modelElem.setInterface(this.unescapeJSON((tmp$6 = reader.nextString()) !== null && tmp$6 !== undefined ? tmp$6 : Kotlin.throwNPE()));
                       }
                       break;
                     }
@@ -21168,15 +21298,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$8, tmp$9;
-                          var xmiRef = (tmp$8 = reader.nextString()) !== null && tmp$8 !== undefined ? tmp$8 : Kotlin.throwNPE();
+                          var tmp$7, tmp$8;
+                          var xmiRef = (tmp$7 = reader.nextString()) !== null && tmp$7 !== undefined ? tmp$7 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef, '//')) {
-                            tmp$9 = '/0' + xmiRef.substring(1);
+                            tmp$8 = '/0' + xmiRef.substring(1);
                           }
                            else {
-                            tmp$9 = xmiRef;
+                            tmp$8 = xmiRef;
                           }
-                          var adjustedRef = tmp$9;
+                          var adjustedRef = tmp$8;
                           var ref = context.get_map().get(adjustedRef);
                           if (ref !== null && ref !== undefined) {
                             modelElem.addDeployUnits(ref);
@@ -21205,15 +21335,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$10, tmp$11;
-                          var xmiRef_0 = (tmp$10 = reader.nextString()) !== null && tmp$10 !== undefined ? tmp$10 : Kotlin.throwNPE();
+                          var tmp$9, tmp$10;
+                          var xmiRef_0 = (tmp$9 = reader.nextString()) !== null && tmp$9 !== undefined ? tmp$9 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef_0, '//')) {
-                            tmp$11 = '/0' + xmiRef_0.substring(1);
+                            tmp$10 = '/0' + xmiRef_0.substring(1);
                           }
                            else {
-                            tmp$11 = xmiRef_0;
+                            tmp$10 = xmiRef_0;
                           }
-                          var adjustedRef_0 = tmp$11;
+                          var adjustedRef_0 = tmp$10;
                           var ref_0 = context.get_map().get(adjustedRef_0);
                           if (ref_0 !== null && ref_0 !== undefined) {
                             modelElem.addSuperTypes(ref_0);
@@ -21474,10 +21604,9 @@
                       break;
                     }
                   if (tmp$1 === 3)
-                    if (tmp$0 === 'nature') {
+                    if (tmp$0 === 'abstract') {
                       {
-                        var tmp$6;
-                        tmp$2 = modelElem.setNature(this.unescapeJSON((tmp$6 = reader.nextString()) !== null && tmp$6 !== undefined ? tmp$6 : Kotlin.throwNPE()));
+                        tmp$2 = modelElem.setAbstract(reader.nextBoolean());
                       }
                       break;
                     }
@@ -21493,15 +21622,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$7, tmp$8;
-                          var xmiRef = (tmp$7 = reader.nextString()) !== null && tmp$7 !== undefined ? tmp$7 : Kotlin.throwNPE();
+                          var tmp$6, tmp$7;
+                          var xmiRef = (tmp$6 = reader.nextString()) !== null && tmp$6 !== undefined ? tmp$6 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef, '//')) {
-                            tmp$8 = '/0' + xmiRef.substring(1);
+                            tmp$7 = '/0' + xmiRef.substring(1);
                           }
                            else {
-                            tmp$8 = xmiRef;
+                            tmp$7 = xmiRef;
                           }
-                          var adjustedRef = tmp$8;
+                          var adjustedRef = tmp$7;
                           var ref = context.get_map().get(adjustedRef);
                           if (ref !== null && ref !== undefined) {
                             modelElem.addDeployUnits(ref);
@@ -21530,15 +21659,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$9, tmp$10;
-                          var xmiRef_0 = (tmp$9 = reader.nextString()) !== null && tmp$9 !== undefined ? tmp$9 : Kotlin.throwNPE();
+                          var tmp$8, tmp$9;
+                          var xmiRef_0 = (tmp$8 = reader.nextString()) !== null && tmp$8 !== undefined ? tmp$8 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef_0, '//')) {
-                            tmp$10 = '/0' + xmiRef_0.substring(1);
+                            tmp$9 = '/0' + xmiRef_0.substring(1);
                           }
                            else {
-                            tmp$10 = xmiRef_0;
+                            tmp$9 = xmiRef_0;
                           }
-                          var adjustedRef_0 = tmp$10;
+                          var adjustedRef_0 = tmp$9;
                           var ref_0 = context.get_map().get(adjustedRef_0);
                           if (ref_0 !== null && ref_0 !== undefined) {
                             modelElem.addSuperTypes(ref_0);
@@ -21556,15 +21685,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$11, tmp$12;
-                          var xmiRef_1 = (tmp$11 = reader.nextString()) !== null && tmp$11 !== undefined ? tmp$11 : Kotlin.throwNPE();
+                          var tmp$10, tmp$11;
+                          var xmiRef_1 = (tmp$10 = reader.nextString()) !== null && tmp$10 !== undefined ? tmp$10 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef_1, '//')) {
-                            tmp$12 = '/0' + xmiRef_1.substring(1);
+                            tmp$11 = '/0' + xmiRef_1.substring(1);
                           }
                            else {
-                            tmp$12 = xmiRef_1;
+                            tmp$11 = xmiRef_1;
                           }
-                          var adjustedRef_1 = tmp$12;
+                          var adjustedRef_1 = tmp$11;
                           var ref_1 = context.get_map().get(adjustedRef_1);
                           if (ref_1 !== null && ref_1 !== undefined) {
                             modelElem.addFilters(ref_1);
@@ -22033,7 +22162,7 @@
               while (reader.hasNext()) {
                 var nextName = reader.nextName();
                 var tmp$0, tmp$1, tmp$2;
-                for (tmp$1 = 0, tmp$0 = nextName; tmp$1 < 7; ++tmp$1) {
+                for (tmp$1 = 0, tmp$0 = nextName; tmp$1 < 8; ++tmp$1) {
                   if (tmp$1 === 0)
                     if (tmp$0 === 'name') {
                       {
@@ -22051,6 +22180,13 @@
                       break;
                     }
                   if (tmp$1 === 2)
+                    if (tmp$0 === 'started') {
+                      {
+                        tmp$2 = modelElem.setStarted(reader.nextBoolean());
+                      }
+                      break;
+                    }
+                  if (tmp$1 === 3)
                     if (tmp$0 === 'typeDefinition') {
                       {
                         var tmp$5, tmp$6;
@@ -22072,7 +22208,7 @@
                       }
                       break;
                     }
-                  if (tmp$1 === 3)
+                  if (tmp$1 === 4)
                     if (tmp$0 === 'dictionary') {
                       {
                         reader.beginObject();
@@ -22083,7 +22219,7 @@
                       }
                       break;
                     }
-                  if (tmp$1 === 4)
+                  if (tmp$1 === 5)
                     if (tmp$0 === 'bindings') {
                       {
                         reader.beginArray();
@@ -22109,14 +22245,14 @@
                       }
                       break;
                     }
-                  if (tmp$1 === 5)
+                  if (tmp$1 === 6)
                     if (tmp$0 === 'eClass') {
                       {
                         tmp$2 = reader.nextString();
                       }
                       break;
                     }
-                  if (tmp$1 === 6) {
+                  if (tmp$1 === 7) {
                     tmp$2 = Kotlin.println('Tag unrecognized: ' + nextName + ' in Channel');
                   }
                 }
@@ -22279,7 +22415,7 @@
               while (reader.hasNext()) {
                 var nextName = reader.nextName();
                 var tmp$0, tmp$1, tmp$2;
-                for (tmp$1 = 0, tmp$0 = nextName; tmp$1 < 6; ++tmp$1) {
+                for (tmp$1 = 0, tmp$0 = nextName; tmp$1 < 7; ++tmp$1) {
                   if (tmp$1 === 0)
                     if (tmp$0 === 'networkType') {
                       {
@@ -22304,6 +22440,14 @@
                       break;
                     }
                   if (tmp$1 === 3)
+                    if (tmp$0 === 'zoneID') {
+                      {
+                        var tmp$5;
+                        tmp$2 = modelElem.setZoneID(this.unescapeJSON((tmp$5 = reader.nextString()) !== null && tmp$5 !== undefined ? tmp$5 : Kotlin.throwNPE()));
+                      }
+                      break;
+                    }
+                  if (tmp$1 === 4)
                     if (tmp$0 === 'networkProperties') {
                       {
                         reader.beginArray();
@@ -22320,14 +22464,14 @@
                       }
                       break;
                     }
-                  if (tmp$1 === 4)
+                  if (tmp$1 === 5)
                     if (tmp$0 === 'eClass') {
                       {
                         tmp$2 = reader.nextString();
                       }
                       break;
                     }
-                  if (tmp$1 === 5) {
+                  if (tmp$1 === 6) {
                     tmp$2 = Kotlin.println('Tag unrecognized: ' + nextName + ' in NodeLink');
                   }
                 }
@@ -22413,34 +22557,33 @@
                       break;
                     }
                   if (tmp$1 === 3)
-                    if (tmp$0 === 'nature') {
+                    if (tmp$0 === 'abstract') {
                       {
-                        var tmp$6;
-                        tmp$2 = modelElem.setNature(this.unescapeJSON((tmp$6 = reader.nextString()) !== null && tmp$6 !== undefined ? tmp$6 : Kotlin.throwNPE()));
+                        tmp$2 = modelElem.setAbstract(reader.nextBoolean());
                       }
                       break;
                     }
                   if (tmp$1 === 4)
                     if (tmp$0 === 'startMethod') {
                       {
-                        var tmp$7;
-                        tmp$2 = modelElem.setStartMethod(this.unescapeJSON((tmp$7 = reader.nextString()) !== null && tmp$7 !== undefined ? tmp$7 : Kotlin.throwNPE()));
+                        var tmp$6;
+                        tmp$2 = modelElem.setStartMethod(this.unescapeJSON((tmp$6 = reader.nextString()) !== null && tmp$6 !== undefined ? tmp$6 : Kotlin.throwNPE()));
                       }
                       break;
                     }
                   if (tmp$1 === 5)
                     if (tmp$0 === 'stopMethod') {
                       {
-                        var tmp$8;
-                        tmp$2 = modelElem.setStopMethod(this.unescapeJSON((tmp$8 = reader.nextString()) !== null && tmp$8 !== undefined ? tmp$8 : Kotlin.throwNPE()));
+                        var tmp$7;
+                        tmp$2 = modelElem.setStopMethod(this.unescapeJSON((tmp$7 = reader.nextString()) !== null && tmp$7 !== undefined ? tmp$7 : Kotlin.throwNPE()));
                       }
                       break;
                     }
                   if (tmp$1 === 6)
                     if (tmp$0 === 'updateMethod') {
                       {
-                        var tmp$9;
-                        tmp$2 = modelElem.setUpdateMethod(this.unescapeJSON((tmp$9 = reader.nextString()) !== null && tmp$9 !== undefined ? tmp$9 : Kotlin.throwNPE()));
+                        var tmp$8;
+                        tmp$2 = modelElem.setUpdateMethod(this.unescapeJSON((tmp$8 = reader.nextString()) !== null && tmp$8 !== undefined ? tmp$8 : Kotlin.throwNPE()));
                       }
                       break;
                     }
@@ -22477,15 +22620,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$10, tmp$11;
-                          var xmiRef = (tmp$10 = reader.nextString()) !== null && tmp$10 !== undefined ? tmp$10 : Kotlin.throwNPE();
+                          var tmp$9, tmp$10;
+                          var xmiRef = (tmp$9 = reader.nextString()) !== null && tmp$9 !== undefined ? tmp$9 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef, '//')) {
-                            tmp$11 = '/0' + xmiRef.substring(1);
+                            tmp$10 = '/0' + xmiRef.substring(1);
                           }
                            else {
-                            tmp$11 = xmiRef;
+                            tmp$10 = xmiRef;
                           }
-                          var adjustedRef = tmp$11;
+                          var adjustedRef = tmp$10;
                           var ref = context.get_map().get(adjustedRef);
                           if (ref !== null && ref !== undefined) {
                             modelElem.addDeployUnits(ref);
@@ -22514,15 +22657,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$12, tmp$13;
-                          var xmiRef_0 = (tmp$12 = reader.nextString()) !== null && tmp$12 !== undefined ? tmp$12 : Kotlin.throwNPE();
+                          var tmp$11, tmp$12;
+                          var xmiRef_0 = (tmp$11 = reader.nextString()) !== null && tmp$11 !== undefined ? tmp$11 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef_0, '//')) {
-                            tmp$13 = '/0' + xmiRef_0.substring(1);
+                            tmp$12 = '/0' + xmiRef_0.substring(1);
                           }
                            else {
-                            tmp$13 = xmiRef_0;
+                            tmp$12 = xmiRef_0;
                           }
-                          var adjustedRef_0 = tmp$13;
+                          var adjustedRef_0 = tmp$12;
                           var ref_0 = context.get_map().get(adjustedRef_0);
                           if (ref_0 !== null && ref_0 !== undefined) {
                             modelElem.addSuperTypes(ref_0);
@@ -22582,10 +22725,9 @@
                       break;
                     }
                   if (tmp$1 === 3)
-                    if (tmp$0 === 'nature') {
+                    if (tmp$0 === 'abstract') {
                       {
-                        var tmp$6;
-                        tmp$2 = modelElem.setNature(this.unescapeJSON((tmp$6 = reader.nextString()) !== null && tmp$6 !== undefined ? tmp$6 : Kotlin.throwNPE()));
+                        tmp$2 = modelElem.setAbstract(reader.nextBoolean());
                       }
                       break;
                     }
@@ -22594,15 +22736,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$7, tmp$8;
-                          var xmiRef = (tmp$7 = reader.nextString()) !== null && tmp$7 !== undefined ? tmp$7 : Kotlin.throwNPE();
+                          var tmp$6, tmp$7;
+                          var xmiRef = (tmp$6 = reader.nextString()) !== null && tmp$6 !== undefined ? tmp$6 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef, '//')) {
-                            tmp$8 = '/0' + xmiRef.substring(1);
+                            tmp$7 = '/0' + xmiRef.substring(1);
                           }
                            else {
-                            tmp$8 = xmiRef;
+                            tmp$7 = xmiRef;
                           }
-                          var adjustedRef = tmp$8;
+                          var adjustedRef = tmp$7;
                           var ref = context.get_map().get(adjustedRef);
                           if (ref !== null && ref !== undefined) {
                             modelElem.addDeployUnits(ref);
@@ -22631,15 +22773,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$9, tmp$10;
-                          var xmiRef_0 = (tmp$9 = reader.nextString()) !== null && tmp$9 !== undefined ? tmp$9 : Kotlin.throwNPE();
+                          var tmp$8, tmp$9;
+                          var xmiRef_0 = (tmp$8 = reader.nextString()) !== null && tmp$8 !== undefined ? tmp$8 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef_0, '//')) {
-                            tmp$10 = '/0' + xmiRef_0.substring(1);
+                            tmp$9 = '/0' + xmiRef_0.substring(1);
                           }
                            else {
-                            tmp$10 = xmiRef_0;
+                            tmp$9 = xmiRef_0;
                           }
-                          var adjustedRef_0 = tmp$10;
+                          var adjustedRef_0 = tmp$9;
                           var ref_0 = context.get_map().get(adjustedRef_0);
                           if (ref_0 !== null && ref_0 !== undefined) {
                             modelElem.addSuperTypes(ref_0);
@@ -22673,7 +22815,7 @@
               while (reader.hasNext()) {
                 var nextName = reader.nextName();
                 var tmp$0, tmp$1, tmp$2;
-                for (tmp$1 = 0, tmp$0 = nextName; tmp$1 < 6; ++tmp$1) {
+                for (tmp$1 = 0, tmp$0 = nextName; tmp$1 < 7; ++tmp$1) {
                   if (tmp$1 === 0)
                     if (tmp$0 === 'name') {
                       {
@@ -22691,6 +22833,13 @@
                       break;
                     }
                   if (tmp$1 === 2)
+                    if (tmp$0 === 'started') {
+                      {
+                        tmp$2 = modelElem.setStarted(reader.nextBoolean());
+                      }
+                      break;
+                    }
+                  if (tmp$1 === 3)
                     if (tmp$0 === 'typeDefinition') {
                       {
                         var tmp$5, tmp$6;
@@ -22712,7 +22861,7 @@
                       }
                       break;
                     }
-                  if (tmp$1 === 3)
+                  if (tmp$1 === 4)
                     if (tmp$0 === 'dictionary') {
                       {
                         reader.beginObject();
@@ -22723,14 +22872,14 @@
                       }
                       break;
                     }
-                  if (tmp$1 === 4)
+                  if (tmp$1 === 5)
                     if (tmp$0 === 'eClass') {
                       {
                         tmp$2 = reader.nextString();
                       }
                       break;
                     }
-                  if (tmp$1 === 5) {
+                  if (tmp$1 === 6) {
                     tmp$2 = Kotlin.println('Tag unrecognized: ' + nextName + ' in Instance');
                   }
                 }
@@ -22770,34 +22919,33 @@
                       break;
                     }
                   if (tmp$1 === 3)
-                    if (tmp$0 === 'nature') {
+                    if (tmp$0 === 'abstract') {
                       {
-                        var tmp$6;
-                        tmp$2 = modelElem.setNature(this.unescapeJSON((tmp$6 = reader.nextString()) !== null && tmp$6 !== undefined ? tmp$6 : Kotlin.throwNPE()));
+                        tmp$2 = modelElem.setAbstract(reader.nextBoolean());
                       }
                       break;
                     }
                   if (tmp$1 === 4)
                     if (tmp$0 === 'startMethod') {
                       {
-                        var tmp$7;
-                        tmp$2 = modelElem.setStartMethod(this.unescapeJSON((tmp$7 = reader.nextString()) !== null && tmp$7 !== undefined ? tmp$7 : Kotlin.throwNPE()));
+                        var tmp$6;
+                        tmp$2 = modelElem.setStartMethod(this.unescapeJSON((tmp$6 = reader.nextString()) !== null && tmp$6 !== undefined ? tmp$6 : Kotlin.throwNPE()));
                       }
                       break;
                     }
                   if (tmp$1 === 5)
                     if (tmp$0 === 'stopMethod') {
                       {
-                        var tmp$8;
-                        tmp$2 = modelElem.setStopMethod(this.unescapeJSON((tmp$8 = reader.nextString()) !== null && tmp$8 !== undefined ? tmp$8 : Kotlin.throwNPE()));
+                        var tmp$7;
+                        tmp$2 = modelElem.setStopMethod(this.unescapeJSON((tmp$7 = reader.nextString()) !== null && tmp$7 !== undefined ? tmp$7 : Kotlin.throwNPE()));
                       }
                       break;
                     }
                   if (tmp$1 === 6)
                     if (tmp$0 === 'updateMethod') {
                       {
-                        var tmp$9;
-                        tmp$2 = modelElem.setUpdateMethod(this.unescapeJSON((tmp$9 = reader.nextString()) !== null && tmp$9 !== undefined ? tmp$9 : Kotlin.throwNPE()));
+                        var tmp$8;
+                        tmp$2 = modelElem.setUpdateMethod(this.unescapeJSON((tmp$8 = reader.nextString()) !== null && tmp$8 !== undefined ? tmp$8 : Kotlin.throwNPE()));
                       }
                       break;
                     }
@@ -22806,15 +22954,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$10, tmp$11;
-                          var xmiRef = (tmp$10 = reader.nextString()) !== null && tmp$10 !== undefined ? tmp$10 : Kotlin.throwNPE();
+                          var tmp$9, tmp$10;
+                          var xmiRef = (tmp$9 = reader.nextString()) !== null && tmp$9 !== undefined ? tmp$9 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef, '//')) {
-                            tmp$11 = '/0' + xmiRef.substring(1);
+                            tmp$10 = '/0' + xmiRef.substring(1);
                           }
                            else {
-                            tmp$11 = xmiRef;
+                            tmp$10 = xmiRef;
                           }
-                          var adjustedRef = tmp$11;
+                          var adjustedRef = tmp$10;
                           var ref = context.get_map().get(adjustedRef);
                           if (ref !== null && ref !== undefined) {
                             modelElem.addDeployUnits(ref);
@@ -22843,15 +22991,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$12, tmp$13;
-                          var xmiRef_0 = (tmp$12 = reader.nextString()) !== null && tmp$12 !== undefined ? tmp$12 : Kotlin.throwNPE();
+                          var tmp$11, tmp$12;
+                          var xmiRef_0 = (tmp$11 = reader.nextString()) !== null && tmp$11 !== undefined ? tmp$11 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef_0, '//')) {
-                            tmp$13 = '/0' + xmiRef_0.substring(1);
+                            tmp$12 = '/0' + xmiRef_0.substring(1);
                           }
                            else {
-                            tmp$13 = xmiRef_0;
+                            tmp$12 = xmiRef_0;
                           }
-                          var adjustedRef_0 = tmp$13;
+                          var adjustedRef_0 = tmp$12;
                           var ref_0 = context.get_map().get(adjustedRef_0);
                           if (ref_0 !== null && ref_0 !== undefined) {
                             modelElem.addSuperTypes(ref_0);
@@ -22885,7 +23033,7 @@
               while (reader.hasNext()) {
                 var nextName = reader.nextName();
                 var tmp$0, tmp$1, tmp$2;
-                for (tmp$1 = 0, tmp$0 = nextName; tmp$1 < 7; ++tmp$1) {
+                for (tmp$1 = 0, tmp$0 = nextName; tmp$1 < 8; ++tmp$1) {
                   if (tmp$1 === 0)
                     if (tmp$0 === 'name') {
                       {
@@ -22903,6 +23051,13 @@
                       break;
                     }
                   if (tmp$1 === 2)
+                    if (tmp$0 === 'started') {
+                      {
+                        tmp$2 = modelElem.setStarted(reader.nextBoolean());
+                      }
+                      break;
+                    }
+                  if (tmp$1 === 3)
                     if (tmp$0 === 'typeDefinition') {
                       {
                         var tmp$5, tmp$6;
@@ -22924,7 +23079,7 @@
                       }
                       break;
                     }
-                  if (tmp$1 === 3)
+                  if (tmp$1 === 4)
                     if (tmp$0 === 'dictionary') {
                       {
                         reader.beginObject();
@@ -22935,7 +23090,7 @@
                       }
                       break;
                     }
-                  if (tmp$1 === 4)
+                  if (tmp$1 === 5)
                     if (tmp$0 === 'subNodes') {
                       {
                         reader.beginArray();
@@ -22961,14 +23116,14 @@
                       }
                       break;
                     }
-                  if (tmp$1 === 5)
+                  if (tmp$1 === 6)
                     if (tmp$0 === 'eClass') {
                       {
                         tmp$2 = reader.nextString();
                       }
                       break;
                     }
-                  if (tmp$1 === 6) {
+                  if (tmp$1 === 7) {
                     tmp$2 = Kotlin.println('Tag unrecognized: ' + nextName + ' in Group');
                   }
                 }
@@ -23008,34 +23163,33 @@
                       break;
                     }
                   if (tmp$1 === 3)
-                    if (tmp$0 === 'nature') {
+                    if (tmp$0 === 'abstract') {
                       {
-                        var tmp$6;
-                        tmp$2 = modelElem.setNature(this.unescapeJSON((tmp$6 = reader.nextString()) !== null && tmp$6 !== undefined ? tmp$6 : Kotlin.throwNPE()));
+                        tmp$2 = modelElem.setAbstract(reader.nextBoolean());
                       }
                       break;
                     }
                   if (tmp$1 === 4)
                     if (tmp$0 === 'startMethod') {
                       {
-                        var tmp$7;
-                        tmp$2 = modelElem.setStartMethod(this.unescapeJSON((tmp$7 = reader.nextString()) !== null && tmp$7 !== undefined ? tmp$7 : Kotlin.throwNPE()));
+                        var tmp$6;
+                        tmp$2 = modelElem.setStartMethod(this.unescapeJSON((tmp$6 = reader.nextString()) !== null && tmp$6 !== undefined ? tmp$6 : Kotlin.throwNPE()));
                       }
                       break;
                     }
                   if (tmp$1 === 5)
                     if (tmp$0 === 'stopMethod') {
                       {
-                        var tmp$8;
-                        tmp$2 = modelElem.setStopMethod(this.unescapeJSON((tmp$8 = reader.nextString()) !== null && tmp$8 !== undefined ? tmp$8 : Kotlin.throwNPE()));
+                        var tmp$7;
+                        tmp$2 = modelElem.setStopMethod(this.unescapeJSON((tmp$7 = reader.nextString()) !== null && tmp$7 !== undefined ? tmp$7 : Kotlin.throwNPE()));
                       }
                       break;
                     }
                   if (tmp$1 === 6)
                     if (tmp$0 === 'updateMethod') {
                       {
-                        var tmp$9;
-                        tmp$2 = modelElem.setUpdateMethod(this.unescapeJSON((tmp$9 = reader.nextString()) !== null && tmp$9 !== undefined ? tmp$9 : Kotlin.throwNPE()));
+                        var tmp$8;
+                        tmp$2 = modelElem.setUpdateMethod(this.unescapeJSON((tmp$8 = reader.nextString()) !== null && tmp$8 !== undefined ? tmp$8 : Kotlin.throwNPE()));
                       }
                       break;
                     }
@@ -23044,15 +23198,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$10, tmp$11;
-                          var xmiRef = (tmp$10 = reader.nextString()) !== null && tmp$10 !== undefined ? tmp$10 : Kotlin.throwNPE();
+                          var tmp$9, tmp$10;
+                          var xmiRef = (tmp$9 = reader.nextString()) !== null && tmp$9 !== undefined ? tmp$9 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef, '//')) {
-                            tmp$11 = '/0' + xmiRef.substring(1);
+                            tmp$10 = '/0' + xmiRef.substring(1);
                           }
                            else {
-                            tmp$11 = xmiRef;
+                            tmp$10 = xmiRef;
                           }
-                          var adjustedRef = tmp$11;
+                          var adjustedRef = tmp$10;
                           var ref = context.get_map().get(adjustedRef);
                           if (ref !== null && ref !== undefined) {
                             modelElem.addDeployUnits(ref);
@@ -23081,15 +23235,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$12, tmp$13;
-                          var xmiRef_0 = (tmp$12 = reader.nextString()) !== null && tmp$12 !== undefined ? tmp$12 : Kotlin.throwNPE();
+                          var tmp$11, tmp$12;
+                          var xmiRef_0 = (tmp$11 = reader.nextString()) !== null && tmp$11 !== undefined ? tmp$11 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef_0, '//')) {
-                            tmp$13 = '/0' + xmiRef_0.substring(1);
+                            tmp$12 = '/0' + xmiRef_0.substring(1);
                           }
                            else {
-                            tmp$13 = xmiRef_0;
+                            tmp$12 = xmiRef_0;
                           }
-                          var adjustedRef_0 = tmp$13;
+                          var adjustedRef_0 = tmp$12;
                           var ref_0 = context.get_map().get(adjustedRef_0);
                           if (ref_0 !== null && ref_0 !== undefined) {
                             modelElem.addSuperTypes(ref_0);
@@ -23149,34 +23303,33 @@
                       break;
                     }
                   if (tmp$1 === 3)
-                    if (tmp$0 === 'nature') {
+                    if (tmp$0 === 'abstract') {
                       {
-                        var tmp$6;
-                        tmp$2 = modelElem.setNature(this.unescapeJSON((tmp$6 = reader.nextString()) !== null && tmp$6 !== undefined ? tmp$6 : Kotlin.throwNPE()));
+                        tmp$2 = modelElem.setAbstract(reader.nextBoolean());
                       }
                       break;
                     }
                   if (tmp$1 === 4)
                     if (tmp$0 === 'startMethod') {
                       {
-                        var tmp$7;
-                        tmp$2 = modelElem.setStartMethod(this.unescapeJSON((tmp$7 = reader.nextString()) !== null && tmp$7 !== undefined ? tmp$7 : Kotlin.throwNPE()));
+                        var tmp$6;
+                        tmp$2 = modelElem.setStartMethod(this.unescapeJSON((tmp$6 = reader.nextString()) !== null && tmp$6 !== undefined ? tmp$6 : Kotlin.throwNPE()));
                       }
                       break;
                     }
                   if (tmp$1 === 5)
                     if (tmp$0 === 'stopMethod') {
                       {
-                        var tmp$8;
-                        tmp$2 = modelElem.setStopMethod(this.unescapeJSON((tmp$8 = reader.nextString()) !== null && tmp$8 !== undefined ? tmp$8 : Kotlin.throwNPE()));
+                        var tmp$7;
+                        tmp$2 = modelElem.setStopMethod(this.unescapeJSON((tmp$7 = reader.nextString()) !== null && tmp$7 !== undefined ? tmp$7 : Kotlin.throwNPE()));
                       }
                       break;
                     }
                   if (tmp$1 === 6)
                     if (tmp$0 === 'updateMethod') {
                       {
-                        var tmp$9;
-                        tmp$2 = modelElem.setUpdateMethod(this.unescapeJSON((tmp$9 = reader.nextString()) !== null && tmp$9 !== undefined ? tmp$9 : Kotlin.throwNPE()));
+                        var tmp$8;
+                        tmp$2 = modelElem.setUpdateMethod(this.unescapeJSON((tmp$8 = reader.nextString()) !== null && tmp$8 !== undefined ? tmp$8 : Kotlin.throwNPE()));
                       }
                       break;
                     }
@@ -23185,15 +23338,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$10, tmp$11;
-                          var xmiRef = (tmp$10 = reader.nextString()) !== null && tmp$10 !== undefined ? tmp$10 : Kotlin.throwNPE();
+                          var tmp$9, tmp$10;
+                          var xmiRef = (tmp$9 = reader.nextString()) !== null && tmp$9 !== undefined ? tmp$9 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef, '//')) {
-                            tmp$11 = '/0' + xmiRef.substring(1);
+                            tmp$10 = '/0' + xmiRef.substring(1);
                           }
                            else {
-                            tmp$11 = xmiRef;
+                            tmp$10 = xmiRef;
                           }
-                          var adjustedRef = tmp$11;
+                          var adjustedRef = tmp$10;
                           var ref = context.get_map().get(adjustedRef);
                           if (ref !== null && ref !== undefined) {
                             modelElem.addDeployUnits(ref);
@@ -23222,15 +23375,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$12, tmp$13;
-                          var xmiRef_0 = (tmp$12 = reader.nextString()) !== null && tmp$12 !== undefined ? tmp$12 : Kotlin.throwNPE();
+                          var tmp$11, tmp$12;
+                          var xmiRef_0 = (tmp$11 = reader.nextString()) !== null && tmp$11 !== undefined ? tmp$11 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef_0, '//')) {
-                            tmp$13 = '/0' + xmiRef_0.substring(1);
+                            tmp$12 = '/0' + xmiRef_0.substring(1);
                           }
                            else {
-                            tmp$13 = xmiRef_0;
+                            tmp$12 = xmiRef_0;
                           }
-                          var adjustedRef_0 = tmp$13;
+                          var adjustedRef_0 = tmp$12;
                           var ref_0 = context.get_map().get(adjustedRef_0);
                           if (ref_0 !== null && ref_0 !== undefined) {
                             modelElem.addSuperTypes(ref_0);
@@ -23248,15 +23401,15 @@
                       {
                         reader.beginArray();
                         while (reader.hasNext()) {
-                          var tmp$14, tmp$15;
-                          var xmiRef_1 = (tmp$14 = reader.nextString()) !== null && tmp$14 !== undefined ? tmp$14 : Kotlin.throwNPE();
+                          var tmp$13, tmp$14;
+                          var xmiRef_1 = (tmp$13 = reader.nextString()) !== null && tmp$13 !== undefined ? tmp$13 : Kotlin.throwNPE();
                           if (_.js.startsWith_0(xmiRef_1, '//')) {
-                            tmp$15 = '/0' + xmiRef_1.substring(1);
+                            tmp$14 = '/0' + xmiRef_1.substring(1);
                           }
                            else {
-                            tmp$15 = xmiRef_1;
+                            tmp$14 = xmiRef_1;
                           }
-                          var adjustedRef_1 = tmp$15;
+                          var adjustedRef_1 = tmp$14;
                           var ref_1 = context.get_map().get(adjustedRef_1);
                           if (ref_1 !== null && ref_1 !== undefined) {
                             modelElem.addManagedPrimitiveTypes(ref_1);
@@ -24314,6 +24467,11 @@
                     this.escapeJson(ostream, selfObject.getMetaData());
                     ostream.print_0('"');
                   }
+                  if (!Kotlin.equals(selfObject.getStarted().toString(), '')) {
+                    ostream.println_1(',');
+                    ostream.print(' "started":');
+                    ostream.print_2(selfObject.getStarted());
+                  }
                   var subsubtypeDefinition = selfObject.getTypeDefinition();
                   if (subsubtypeDefinition !== null && subsubtypeDefinition !== undefined) {
                     var subsubsubtypeDefinition = addrs.get(subsubtypeDefinition);
@@ -24505,12 +24663,10 @@
                     this.escapeJson(ostream, selfObject.getBean());
                     ostream.print_0('"');
                   }
-                  if (!Kotlin.equals(selfObject.getNature().toString(), '')) {
+                  if (!Kotlin.equals(selfObject.getAbstract().toString(), '')) {
                     ostream.println_1(',');
-                    ostream.print(' "nature":');
-                    ostream.print('"');
-                    this.escapeJson(ostream, selfObject.getNature());
-                    ostream.print_0('"');
+                    ostream.print(' "abstract":');
+                    ostream.print_2(selfObject.getAbstract());
                   }
                   if (!Kotlin.equals(selfObject.getStartMethod().toString(), '')) {
                     ostream.println_1(',');
@@ -24704,6 +24860,11 @@
                     ostream.print('"');
                     this.escapeJson(ostream, selfObject.getMetaData());
                     ostream.print_0('"');
+                  }
+                  if (!Kotlin.equals(selfObject.getStarted().toString(), '')) {
+                    ostream.println_1(',');
+                    ostream.print(' "started":');
+                    ostream.print_2(selfObject.getStarted());
                   }
                   var subsubtypeDefinition = selfObject.getTypeDefinition();
                   if (subsubtypeDefinition !== null && subsubtypeDefinition !== undefined) {
@@ -25240,12 +25401,10 @@
                     this.escapeJson(ostream, selfObject.getBean());
                     ostream.print_0('"');
                   }
-                  if (!Kotlin.equals(selfObject.getNature().toString(), '')) {
+                  if (!Kotlin.equals(selfObject.getAbstract().toString(), '')) {
                     ostream.println_1(',');
-                    ostream.print(' "nature":');
-                    ostream.print('"');
-                    this.escapeJson(ostream, selfObject.getNature());
-                    ostream.print_0('"');
+                    ostream.print(' "abstract":');
+                    ostream.print_2(selfObject.getAbstract());
                   }
                   if (!Kotlin.equals(selfObject.getSynchrone().toString(), '')) {
                     ostream.println_1(',');
@@ -25810,12 +25969,10 @@
                     this.escapeJson(ostream, selfObject.getBean());
                     ostream.print_0('"');
                   }
-                  if (!Kotlin.equals(selfObject.getNature().toString(), '')) {
+                  if (!Kotlin.equals(selfObject.getAbstract().toString(), '')) {
                     ostream.println_1(',');
-                    ostream.print(' "nature":');
-                    ostream.print('"');
-                    this.escapeJson(ostream, selfObject.getNature());
-                    ostream.print_0('"');
+                    ostream.print(' "abstract":');
+                    ostream.print_2(selfObject.getAbstract());
                   }
                   if (!Kotlin.equals(selfObject.getStartMethod().toString(), '')) {
                     ostream.println_1(',');
@@ -26181,23 +26338,21 @@
                     this.escapeJson(ostream, selfObject.getBean());
                     ostream.print_0('"');
                   }
-                  if (!Kotlin.equals(selfObject.getNature().toString(), '')) {
+                  if (!Kotlin.equals(selfObject.getAbstract().toString(), '')) {
                     ostream.println_1(',');
-                    ostream.print(' "nature":');
-                    ostream.print('"');
-                    this.escapeJson(ostream, selfObject.getNature());
-                    ostream.print_0('"');
+                    ostream.print(' "abstract":');
+                    ostream.print_2(selfObject.getAbstract());
                   }
                   if (!Kotlin.equals(selfObject.getSynchrone().toString(), '')) {
                     ostream.println_1(',');
                     ostream.print(' "synchrone":');
                     ostream.print_2(selfObject.getSynchrone());
                   }
-                  if (!Kotlin.equals(selfObject.getInterfaceService().toString(), '')) {
+                  if (!Kotlin.equals(selfObject.getInterface().toString(), '')) {
                     ostream.println_1(',');
-                    ostream.print(' "interfaceService":');
+                    ostream.print(' "interface":');
                     ostream.print('"');
-                    this.escapeJson(ostream, selfObject.getInterfaceService());
+                    this.escapeJson(ostream, selfObject.getInterface());
                     ostream.print_0('"');
                   }
                   if (selfObject.getDeployUnits().size() > 0) {
@@ -26505,12 +26660,10 @@
                     this.escapeJson(ostream, selfObject.getBean());
                     ostream.print_0('"');
                   }
-                  if (!Kotlin.equals(selfObject.getNature().toString(), '')) {
+                  if (!Kotlin.equals(selfObject.getAbstract().toString(), '')) {
                     ostream.println_1(',');
-                    ostream.print(' "nature":');
-                    ostream.print('"');
-                    this.escapeJson(ostream, selfObject.getNature());
-                    ostream.print_0('"');
+                    ostream.print(' "abstract":');
+                    ostream.print_2(selfObject.getAbstract());
                   }
                   if (!Kotlin.equals(selfObject.getSynchrone().toString(), '')) {
                     ostream.println_1(',');
@@ -27264,6 +27417,11 @@
                     this.escapeJson(ostream, selfObject.getMetaData());
                     ostream.print_0('"');
                   }
+                  if (!Kotlin.equals(selfObject.getStarted().toString(), '')) {
+                    ostream.println_1(',');
+                    ostream.print(' "started":');
+                    ostream.print_2(selfObject.getStarted());
+                  }
                   var subsubtypeDefinition = selfObject.getTypeDefinition();
                   if (subsubtypeDefinition !== null && subsubtypeDefinition !== undefined) {
                     var subsubsubtypeDefinition = addrs.get(subsubtypeDefinition);
@@ -27452,6 +27610,13 @@
                     this.escapeJson(ostream, selfObject.getLastCheck());
                     ostream.print_0('"');
                   }
+                  if (!Kotlin.equals(selfObject.getZoneID().toString(), '')) {
+                    ostream.println_1(',');
+                    ostream.print(' "zoneID":');
+                    ostream.print('"');
+                    this.escapeJson(ostream, selfObject.getZoneID());
+                    ostream.print_0('"');
+                  }
                   if (selfObject.getNetworkProperties().size() > 0) {
                     ostream.println_1(',');
                     ostream.println_0('"networkProperties": [');
@@ -27558,12 +27723,10 @@
                     this.escapeJson(ostream, selfObject.getBean());
                     ostream.print_0('"');
                   }
-                  if (!Kotlin.equals(selfObject.getNature().toString(), '')) {
+                  if (!Kotlin.equals(selfObject.getAbstract().toString(), '')) {
                     ostream.println_1(',');
-                    ostream.print(' "nature":');
-                    ostream.print('"');
-                    this.escapeJson(ostream, selfObject.getNature());
-                    ostream.print_0('"');
+                    ostream.print(' "abstract":');
+                    ostream.print_2(selfObject.getAbstract());
                   }
                   if (!Kotlin.equals(selfObject.getStartMethod().toString(), '')) {
                     ostream.println_1(',');
@@ -27810,12 +27973,10 @@
                     this.escapeJson(ostream, selfObject.getBean());
                     ostream.print_0('"');
                   }
-                  if (!Kotlin.equals(selfObject.getNature().toString(), '')) {
+                  if (!Kotlin.equals(selfObject.getAbstract().toString(), '')) {
                     ostream.println_1(',');
-                    ostream.print(' "nature":');
-                    ostream.print('"');
-                    this.escapeJson(ostream, selfObject.getNature());
-                    ostream.print_0('"');
+                    ostream.print(' "abstract":');
+                    ostream.print_2(selfObject.getAbstract());
                   }
                   if (selfObject.getDeployUnits().size() > 0) {
                     ostream.println_1(',');
@@ -27978,6 +28139,11 @@
                     this.escapeJson(ostream, selfObject.getMetaData());
                     ostream.print_0('"');
                   }
+                  if (!Kotlin.equals(selfObject.getStarted().toString(), '')) {
+                    ostream.println_1(',');
+                    ostream.print(' "started":');
+                    ostream.print_2(selfObject.getStarted());
+                  }
                   var subsubtypeDefinition = selfObject.getTypeDefinition();
                   if (subsubtypeDefinition !== null && subsubtypeDefinition !== undefined) {
                     var subsubsubtypeDefinition = addrs.get(subsubtypeDefinition);
@@ -28107,12 +28273,10 @@
                     this.escapeJson(ostream, selfObject.getBean());
                     ostream.print_0('"');
                   }
-                  if (!Kotlin.equals(selfObject.getNature().toString(), '')) {
+                  if (!Kotlin.equals(selfObject.getAbstract().toString(), '')) {
                     ostream.println_1(',');
-                    ostream.print(' "nature":');
-                    ostream.print('"');
-                    this.escapeJson(ostream, selfObject.getNature());
-                    ostream.print_0('"');
+                    ostream.print(' "abstract":');
+                    ostream.print_2(selfObject.getAbstract());
                   }
                   if (!Kotlin.equals(selfObject.getStartMethod().toString(), '')) {
                     ostream.println_1(',');
@@ -28234,6 +28398,11 @@
                     this.escapeJson(ostream, selfObject.getMetaData());
                     ostream.print_0('"');
                   }
+                  if (!Kotlin.equals(selfObject.getStarted().toString(), '')) {
+                    ostream.println_1(',');
+                    ostream.print(' "started":');
+                    ostream.print_2(selfObject.getStarted());
+                  }
                   var subsubtypeDefinition = selfObject.getTypeDefinition();
                   if (subsubtypeDefinition !== null && subsubtypeDefinition !== undefined) {
                     var subsubsubtypeDefinition = addrs.get(subsubtypeDefinition);
@@ -28326,12 +28495,10 @@
                     this.escapeJson(ostream, selfObject.getBean());
                     ostream.print_0('"');
                   }
-                  if (!Kotlin.equals(selfObject.getNature().toString(), '')) {
+                  if (!Kotlin.equals(selfObject.getAbstract().toString(), '')) {
                     ostream.println_1(',');
-                    ostream.print(' "nature":');
-                    ostream.print('"');
-                    this.escapeJson(ostream, selfObject.getNature());
-                    ostream.print_0('"');
+                    ostream.print(' "abstract":');
+                    ostream.print_2(selfObject.getAbstract());
                   }
                   if (!Kotlin.equals(selfObject.getStartMethod().toString(), '')) {
                     ostream.println_1(',');
@@ -28476,12 +28643,10 @@
                     this.escapeJson(ostream, selfObject.getBean());
                     ostream.print_0('"');
                   }
-                  if (!Kotlin.equals(selfObject.getNature().toString(), '')) {
+                  if (!Kotlin.equals(selfObject.getAbstract().toString(), '')) {
                     ostream.println_1(',');
-                    ostream.print(' "nature":');
-                    ostream.print('"');
-                    this.escapeJson(ostream, selfObject.getNature());
-                    ostream.print_0('"');
+                    ostream.print(' "abstract":');
+                    ostream.print_2(selfObject.getAbstract());
                   }
                   if (!Kotlin.equals(selfObject.getStartMethod().toString(), '')) {
                     ostream.println_1(',');
