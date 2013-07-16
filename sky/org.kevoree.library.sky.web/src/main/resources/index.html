@@ -94,25 +94,18 @@ $(function () {
     }
 
     function lookingForIPs(nodeName) {
-        console.log("looking for ips...");
         var nodeNetworks = model.getNodeNetworks();
         var ips = "";
-        console.log(nodeNetworks.$size);
         for (var i = 0; i < nodeNetworks.$size; i++) {
             var nodeNetwork = nodeNetworks.get(i);
-            console.log("initBy = " + nodeNetwork.getInitBy().getName());
-            console.log("tagret = " + nodeNetwork.getTarget().getName());
             if (nodeNetwork.getTarget().getName() === nodeName) {
                 var links = nodeNetwork.getLink();
-                console.log(links.$size);
                 for (var j = 0; j < links.$size; j++) {
                     var link = links.get(j);
                     var networkProperties = link.getNetworkProperties();
                     for (var k = 0; k < networkProperties.$size; k++) {
                         var networkProperty = networkProperties.get(k);
-                        console.log(networkProperty.getName());
                         if (networkProperty.getName() === "KEVOREE.remote.node.ip") {
-                            console.log("one ip found");
                             if (ips === "") {
                                 ips = networkProperty.getValue();
                             } else {
@@ -156,7 +149,6 @@ $(function () {
             refreshEvent(msg.data.substring(6));
         }
     };
-
 
 
     /* UI Bt actions */
@@ -265,95 +257,84 @@ $(function () {
             </table>
         </div>
 
-        <div class="modal fade" id="add-modal" style="display: none;"> <!-- display: none; is needed to avoid bug in bootstrap which forbid to click on start/stop and remove buttons -->
+        <div class="modal fade" id="add-modal" style="display: none;">
+            <!-- display: none; is needed to avoid bug in bootstrap which forbid to click on start/stop and remove buttons -->
             <div class="modal-header">
                 <a id="closeButton" class="close" data-dismiss="modal">&times;</a>
-
                 <h3>Add Child</h3>
             </div>
             <div class="modal-body form-horizontal" style="max-height: 600px;">
-                <form id="formNodeType" class="form-horizontal" action="" method="post">
-                    <div class="control-group" id="nameControlGroup">
-                        <label class="control-label mandatory" id="nameLabel">name</label>
+                <div class="control-group" id="nameControlGroup">
+                    <label class="control-label mandatory" id="nameLabel">name</label>
 
-                        <div class="controls" id="nameControls"><input id="nameInput"></div>
-                    </div>
+                    <div class="controls" id="nameControls"><input id="nameInput"></div>
+                </div>
 
-                    <div class="control-group" id="coreLogLevelControlGroup">
-                        <label class="control-label" id="coreLogLevelLabel">coreLogLevel</label>
+                <div class="control-group" id="coreLogLevelControlGroup">
+                    <label class="control-label" id="coreLogLevelLabel">coreLogLevel</label>
 
-                        <div class="controls" id="coreLogLevelControls">
-                            <select id="coreLogLevelInput">
-                                <option value="ERROR">ERROR</option>
-                                <option value="WARN">WARN</option>
-                                <option value="INFO" selected>INFO</option>
-                                <option value="DEBUG">DEBUG</option>
-                                <option value="FINE">FINE</option>
-                            </select></div>
-                    </div>
-                    <div class="control-group" id="logLevelControlGroup">
-                        <label class="control-label" id="logLevelLabel">logLevel</label>
-
-                        <div class="controls" id="logLevelControls"><select id="logLevelInput">
+                    <div class="controls" id="coreLogLevelControls">
+                        <select id="coreLogLevelInput">
                             <option value="ERROR">ERROR</option>
                             <option value="WARN">WARN</option>
                             <option value="INFO" selected>INFO</option>
                             <option value="DEBUG">DEBUG</option>
                             <option value="FINE">FINE</option>
                         </select></div>
-                    </div>
-                    <div class="control-group" id="WALLCLOCKTIMEControlGroup">
-                        <label class="control-label" id="WALLCLOCKTIMELabel">WALLCLOCKTIME</label>
+                </div>
+                <div class="control-group" id="logLevelControlGroup">
+                    <label class="control-label" id="logLevelLabel">logLevel</label>
 
-                        <div class="controls" id="WALLCLOCKTIMEControls"><input id="WALLCLOCKTIMEInput"></div>
-                    </div>
-                    <div class="control-group" id="RAMControlGroup">
-                        <label class="control-label" id="RAMLabel">RAM</label>
+                    <div class="controls" id="logLevelControls"><select id="logLevelInput">
+                        <option value="ERROR">ERROR</option>
+                        <option value="WARN">WARN</option>
+                        <option value="INFO" selected>INFO</option>
+                        <option value="DEBUG">DEBUG</option>
+                        <option value="FINE">FINE</option>
+                    </select></div>
+                </div>
+                <div class="control-group" id="WALLCLOCKTIMEControlGroup">
+                    <label class="control-label" id="WALLCLOCKTIMELabel">WALLCLOCKTIME</label>
 
-                        <div class="controls" id="RAMControls"><input id="RAMInput"></div>
-                    </div>
-                    <div class="control-group" id="DISK_SIZEControlGroup">
-                        <label class="control-label" id="DISK_SIZELabel">DISK_SIZE</label>
+                    <div class="controls" id="WALLCLOCKTIMEControls"><input id="WALLCLOCKTIMEInput"></div>
+                </div>
+                <div class="control-group" id="RAMControlGroup">
+                    <label class="control-label" id="RAMLabel">RAM</label>
 
-                        <div class="controls" id="DISK_SIZEControls"><input id="DISK_SIZEInput"></div>
-                    </div>
-                    <div class="control-group" id="CPU_COREControlGroup">
-                        <label class="control-label" id="CPU_CORELabel">CPU_CORE</label>
+                    <div class="controls" id="RAMControls"><input id="RAMInput"></div>
+                </div>
+                <div class="control-group" id="DISK_SIZEControlGroup">
+                    <label class="control-label" id="DISK_SIZELabel">DISK_SIZE</label>
 
-                        <div class="controls" id="CPU_COREControls"><input id="CPU_COREInput"></div>
-                    </div>
-                    <div class="control-group" id="ARCHControlGroup">
-                        <label class="control-label" id="ARCHLabel">ARCH</label>
+                    <div class="controls" id="DISK_SIZEControls"><input id="DISK_SIZEInput"></div>
+                </div>
+                <div class="control-group" id="CPU_COREControlGroup">
+                    <label class="control-label" id="CPU_CORELabel">CPU_CORE</label>
+                    <div class="controls" id="CPU_COREControls"><input id="CPU_COREInput"></div>
+                </div>
+                <div class="control-group" id="ARCHControlGroup">
+                    <label class="control-label" id="ARCHLabel">ARCH</label>
+                    <div class="controls" id="ARCHControls"><input id="ARCHInput"></div>
+                </div>
 
-                        <div class="controls" id="ARCHControls"><input id="ARCHInput"></div>
-                    </div>
 
-
-                    <div class="control-group" id="JVMARGSControlGroup">
-                        <label class="control-label" id="JVMARGSLabel">JVMARGS</label>
-
-                        <div class="controls" id="JVMARGSControls"><input id="JVMARGSInput"></div>
-                    </div>
-                    <div class="control-group" id="CPU_FREQUENCYControlGroup">
-                        <label class="control-label" id="CPU_FREQUENCYLabel">CPU_FREQUENCY</label>
-
-                        <div class="controls" id="CPU_FREQUENCYControls"><input id="CPU_FREQUENCYInput"></div>
-                    </div>
-                    <div class="control-group" id="OSControlGroup">
-                        <label class="control-label" id="OSLabel">OS</label>
-
-                        <div class="controls" id="OSControls"><input id="OSInput"></div>
-                    </div>
-
-                    <div class="model-footer control-group">
-                        <label class="control-label"></label>
-
-                        <div class="controls"><input id="submitAddChild" class="btn" type="submit" value="Submit"></div>
-                    </div>
-                </form>
+                <div class="control-group" id="JVMARGSControlGroup">
+                    <label class="control-label" id="JVMARGSLabel">JVMARGS</label>
+                    <div class="controls" id="JVMARGSControls"><input id="JVMARGSInput"></div>
+                </div>
+                <div class="control-group" id="CPU_FREQUENCYControlGroup">
+                    <label class="control-label" id="CPU_FREQUENCYLabel">CPU_FREQUENCY</label>
+                    <div class="controls" id="CPU_FREQUENCYControls"><input id="CPU_FREQUENCYInput"></div>
+                </div>
+                <div class="control-group" id="OSControlGroup">
+                    <label class="control-label" id="OSLabel">OS</label>
+                    <div class="controls" id="OSControls"><input id="OSInput"></div>
+                </div>
+                <div style="text-align:center"><a id="submitAddChild" class="btn">Submit</a><br/></div>
             </div>
         </div>
-        <div class="modal fade" id="unavailable-modal" style="display: none;"> <!-- display: none; is needed to avoid bug in bootstrap which forbid to click on start/stop and remove buttons -->
+        <div class="modal fade" id="unavailable-modal" style="display: none;">
+            <!-- display: none; is needed to avoid bug in bootstrap which forbid to click on start/stop and remove buttons -->
             <div class="modal-header">
                 <h3>Unavailable service.<br/>Please wait reconnection ...</h3>
             </div>
