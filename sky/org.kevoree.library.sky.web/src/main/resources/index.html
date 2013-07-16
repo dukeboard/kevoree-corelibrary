@@ -66,7 +66,7 @@
 
                 var newRemoveBt = $('<a></a>');
                 newRemoveBt.addClass("btn");
-                newRemoveBt.addClass("btn-warning");
+                newRemoveBt.addClass("btn-danger");
                 newRemoveBt.id = 'remove' + childName;
                 newRemoveBt.append("Remove child");
 
@@ -209,8 +209,8 @@
 
 <div class="container-fluid">
     <div class="row-fluid">
-        <a class="btn btn-primary" id="btnAddChildGenerate">Add default child</a>
-        <a class="btn btn-primary" id="btnAddChild" data-toggle="modal" data-target="#add-modal">Add child</a>
+        <a class="btn btn-primary" id="btnAddChildGenerate" title="Create a child with a random name and the default properties">Add default child</a>
+        <a class="btn btn-primary" id="btnAddChild" data-toggle="modal" data-target="#add-modal" title="Create a child specifying the name and the properties">Add child</a>
 
         <div class="modal fade" id="add-modal">
             <div class="modal-header">
@@ -220,7 +220,6 @@
             </div>
             <div class="modal-body form-horizontal" style="max-height: 600px;">
 
-                <!--<form method=" " class="form-horizontal" action=" " id="formNodeType">-->
                 <div class="control-group" id="nameControlGroup">
                     <label class="control-label mandatory" id="nameLabel">name</label>
 
@@ -252,53 +251,43 @@
                 </div>
                 <div class="control-group" id="WALLCLOCKTIMEControlGroup">
                     <label class="control-label" id="WALLCLOCKTIMELabel">WALLCLOCKTIME</label>
-
                     <div class="controls" id="WALLCLOCKTIMEControls"><input id="WALLCLOCKTIMEInput"></div>
                 </div>
                 <div class="control-group" id="RAMControlGroup">
                     <label class="control-label" id="RAMLabel">RAM</label>
-
                     <div class="controls" id="RAMControls"><input id="RAMInput"></div>
                 </div>
                 <div class="control-group" id="DISK_SIZEControlGroup">
                     <label class="control-label" id="DISK_SIZELabel">DISK_SIZE</label>
-
                     <div class="controls" id="DISK_SIZEControls"><input id="DISK_SIZEInput"></div>
                 </div>
                 <div class="control-group" id="CPU_COREControlGroup">
                     <label class="control-label" id="CPU_CORELabel">CPU_CORE</label>
-
                     <div class="controls" id="CPU_COREControls"><input id="CPU_COREInput"></div>
                 </div>
                 <div class="control-group" id="ARCHControlGroup">
                     <label class="control-label" id="ARCHLabel">ARCH</label>
-
                     <div class="controls" id="ARCHControls"><input id="ARCHInput"></div>
                 </div>
 
 
                 <div class="control-group" id="JVMARGSControlGroup">
                     <label class="control-label" id="JVMARGSLabel">JVMARGS</label>
-
                     <div class="controls" id="JVMARGSControls"><input id="JVMARGSInput"></div>
                 </div>
                 <div class="control-group" id="CPU_FREQUENCYControlGroup">
                     <label class="control-label" id="CPU_FREQUENCYLabel">CPU_FREQUENCY</label>
-
                     <div class="controls" id="CPU_FREQUENCYControls"><input id="CPU_FREQUENCYInput"></div>
                 </div>
                 <div class="control-group" id="OSControlGroup">
                     <label class="control-label" id="OSLabel">OS</label>
-
                     <div class="controls" id="OSControls"><input id="OSInput"></div>
                 </div>
 
                 <div class="model-footer control-group">
                     <label class="control-label"></label>
-
                     <div class="controls"><input id="submitAddChild" class="btn" type="submit" value="Submit"></div>
                 </div>
-                <!--</form>-->
             </div>
 
         </div>
