@@ -13,6 +13,10 @@ import org.kevoree.library.sky.jails.JailKevoreeNodeRunner;
 import org.kevoree.library.sky.jails.JailsReasoner;
 import org.kevoree.log.Log;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
  * Date: 15/09/11
@@ -124,11 +128,11 @@ public class JailNode extends JavaSENode implements CloudNode {
         return aliasMask;
     }
 
-    public String getDefaultFlavor() {
+    public List<String> getDefaultFlavors() {
         if (this.getDictionary().get("defaultFlavor") != null) {
-            return this.getDictionary().get("defaultFlavor").toString();
+            return Arrays.asList(this.getDictionary().get("defaultFlavor").toString().trim().split(","));
         }
-        return null;
+        return new ArrayList<String>(0);
     }
 
     public String[] getAvailableFlavors() {
