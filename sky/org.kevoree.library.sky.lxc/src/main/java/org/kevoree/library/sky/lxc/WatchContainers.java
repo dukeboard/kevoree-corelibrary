@@ -68,9 +68,8 @@ public class WatchContainers implements Runnable {
 
         Log.debug("WatchContainers is Scanning and monitoring the containers");
 
-        for( ContainerNode containerNode : model.getNodes()  ){
 
-            if(!containerNode.getName().equals(lxcHostNode.getNodeName())){
+        for( ContainerNode containerNode :   lxcHostNode.getModelElement().getHosts()){
 
                 if(LxcManager.isRunning(containerNode.getName())){
 
@@ -124,7 +123,6 @@ public class WatchContainers implements Runnable {
                     }
 
                 }
-            }
 
         }
     }
