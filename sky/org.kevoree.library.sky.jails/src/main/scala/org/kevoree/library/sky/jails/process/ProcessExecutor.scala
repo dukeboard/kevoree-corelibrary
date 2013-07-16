@@ -10,6 +10,7 @@ import org.kevoree.framework.AbstractNodeType
 import org.kevoree.library.sky.api.helper.{PropertyConversionHelper, SubnetUtils}
 import org.kevoree.library.sky.api.execution.KevoreeNodeRunner
 import org.kevoree.log.Log
+import scala.collection.JavaConversions._
 
 
 /**
@@ -196,7 +197,7 @@ class ProcessExecutor() {
 
   }
 
-  def createJail(flavors: List[String], nodeName: String, newIps: List[String], archive: Option[String], size : Option[Long], timeout: Long): Boolean = {
+  def createJail(flavors: java.util.List[String], nodeName: String, newIps: List[String], archive: Option[String], size : Option[Long], timeout: Long): Boolean = {
     var exec = Array[String]()
     if (flavors.size <= 0) {
       // TODO add archive attribute and use it to save the jail => the archive must be available from all nodes of the network

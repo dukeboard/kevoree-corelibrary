@@ -5,9 +5,9 @@ import process.ProcessExecutor
 import java.io._
 import org.kevoree.{ContainerNode, ContainerRoot}
 import org.kevoree.framework.{KevoreeXmiHelper, Constants, KevoreePropertyHelper}
-import scala.collection.JavaConversions._
 import org.kevoree.library.sky.api.execution.KevoreeNodeRunner
 import org.kevoree.log.Log
+import scala.collection.JavaConversions._
 
 
 /**
@@ -51,7 +51,7 @@ class JailKevoreeNodeRunner(nodeName: String, iaasNode: JailNode, addTimeout: Lo
             var flavor = lookingForFlavors(iaasModel, node)
 
             if (flavor == null) {
-              flavor = iaasNode.getDefaultFlavor
+              flavor = iaasNode.getDefaultFlavors
             }
             // create the new jail
             if (processExecutor.createJail(flavor, nodeName, newIps, findArchive(nodeName), findImageSize(nodeName, iaasModel), addTimeout - (System.currentTimeMillis() - beginTimestamp))) {
@@ -109,17 +109,21 @@ class JailKevoreeNodeRunner(nodeName: String, iaasNode: JailNode, addTimeout: Lo
     }
   }
 
-  private def lookingForFlavors(iaasModel: ContainerRoot, node: ContainerNode): String = {
-    Log.debug("Looking for specific flavor")
+  private def lookingForFlavors(iaasModel: ContainerRoot, node: ContainerNode): java.util.List[String] = {
+    Log.debug("Looking for specific flavors")
+    var flavors = List[String]()
     val flavorsOption = KevoreePropertyHelper.instance$.getProperty(node, "flavor", false, "")
-    if (flavorsOption != null && iaasNode.getAvailableFlavors.contains(flavorsOption)) {
-      flavorsOption
-    } else if (flavorsOption != null && !iaasNode.getAvailableFlavors.contains(flavorsOption)) {
-      Log.warn("Unknown flavor ({}) or unavailable flavor on {}", flavorsOption, iaasNode.getName)
-      null
-    } else {
-      null
+    if (flavorsOption != null ) {
+      flavorsOption.trim.split(",").foreach {
+        flavor =>
+          if (iaasNode.getAvailableFlavors.contains(flavor)) {
+            flavors = flavors ++ List[String](flavor)
+          } else {
+            Log.warn("Unknown flavor ({}) or unavailable flavor on {}", flavorsOption, iaasNode.getName)
+          }
+      }
     }
+    flavors
   }
 
   private def findArchive(nodName: String): Option[String] = {
