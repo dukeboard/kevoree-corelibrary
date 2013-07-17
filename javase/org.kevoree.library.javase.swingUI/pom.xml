@@ -37,7 +37,6 @@
                     <artifactId>org.kevoree.model</artifactId>
                 </exclusion>
             </exclusions>
-
         </dependency>
         <dependency>
             <groupId>org.scala-lang</groupId>

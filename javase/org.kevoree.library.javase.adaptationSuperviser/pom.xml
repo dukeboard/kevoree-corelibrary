@@ -31,4 +31,11 @@
         </dependency>
     </dependencies>
 
+    <repositories>
+        <repository>
+            <id>kevoree-extra</id>
+            <url>http://maven.kevoree.org/release/</url>
+        </repository>
+    </repositories>
+
 </project>
