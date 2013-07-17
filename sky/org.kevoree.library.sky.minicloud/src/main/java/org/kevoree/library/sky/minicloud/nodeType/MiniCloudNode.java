@@ -94,7 +94,7 @@ public class MiniCloudNode extends JavaSENode implements CloudNode, PaaSNode {
             List<String> hostIps = KevoreePropertyHelper.instance$.getNetworkProperties(node.getModelService().getLastModel(), nodeInstance.getName(), Constants.instance$.getKEVOREE_PLATFORM_REMOTE_NODE_IP());
 
             if (hostIps.size() > 0) {
-                Log.debug("The host {} has some ips so if its childs don't have at least one, we add all of them as ip of the childs");
+                Log.debug("The host {} has some ips so if its childs don't have at least one, we add all of them as ip of the childs", node.getName());
                 for (ContainerNode child : nodeInstance.getHosts()) {
                     List<String> ips = KevoreePropertyHelper.instance$.getNetworkProperties(node.getModelService().getLastModel(), child.getName(), Constants.instance$.getKEVOREE_PLATFORM_REMOTE_NODE_IP());
                     if (ips.size() <= 0) {
