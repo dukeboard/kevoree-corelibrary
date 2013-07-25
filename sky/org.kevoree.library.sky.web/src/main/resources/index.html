@@ -9,6 +9,7 @@
     <script src="lib/kotlin-lib-ecma3.js"></script>
     <script src="lib/kotlin-lib.js"></script>
     <script src="lib/kotlin-maps.js"></script>
+    <script src="lib/bootbox.min.js"></script>
     <script type="text/javascript" src="lib/org.kevoree.modeling.sample.kevoree.js.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
@@ -84,26 +85,33 @@ $(function () {
                 synchModel();
             });
             newRemoveBt.click(function () {
+
                 var childName = this.id.substring("remove".length);
-                var currentNode = model.findNodesByID(nodeName);
-                var currentChildNode = currentNode.findHostsByID(childName);
-                currentNode.removeHosts(currentChildNode);
-                model.removeNodes(currentChildNode);
 
-                // NodeNetwork must be removed
-                var nodeNetworkToRemove = [];
-                var nodeNetworks = model.getNodeNetworks();
-                for (var i = 0; i < nodeNetworks.$size; i++) {
-                    var nodeNetwork = nodeNetworks.get(i);
-                    if (nodeNetwork.getTarget().getName() === childName || nodeNetwork.getInitBy().getName() === childName) {
-                        nodeNetworkToRemove.push(nodeNetwork)
+                bootbox.confirm("Are you sure to wants to destroy "+childName+" ?", function(result) {
+                    if(result ==true){
+                        var currentNode = model.findNodesByID(nodeName);
+                        var currentChildNode = currentNode.findHostsByID(childName);
+                        currentNode.removeHosts(currentChildNode);
+                        model.removeNodes(currentChildNode);
+
+                        // NodeNetwork must be removed
+                        var nodeNetworkToRemove = [];
+                        var nodeNetworks = model.getNodeNetworks();
+                        for (var i = 0; i < nodeNetworks.$size; i++) {
+                            var nodeNetwork = nodeNetworks.get(i);
+                            if (nodeNetwork.getTarget().getName() === childName || nodeNetwork.getInitBy().getName() === childName) {
+                                nodeNetworkToRemove.push(nodeNetwork)
+                            }
+                        }
+                        for (var i = 0; i < nodeNetworkToRemove.length; i++) {
+                            model.removeNodeNetworks(nodeNetworkToRemove[i]);
+                        }
+                        synchModel();
                     }
-                }
-                for (var i = 0; i < nodeNetworkToRemove.length; i++) {
-                    model.removeNodeNetworks(nodeNetworkToRemove[i]);
-                }
+                });
 
-                synchModel();
+
             });
         }
     }
