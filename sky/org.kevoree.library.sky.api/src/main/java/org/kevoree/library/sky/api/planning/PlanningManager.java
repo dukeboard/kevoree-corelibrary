@@ -88,7 +88,7 @@ public class PlanningManager extends KevoreeKompareBean {
                 for (ContainerNode subNode : currentNode.getHosts()) {
                     Log.debug("add a {} adaptation primitive with {} as parameter", JavaSePrimitive.instance$.getStopInstance(), subNode.getName());
                     AdaptationPrimitive command = factory.createAdaptationPrimitive();
-                    command.setPrimitiveType(removeNodeType);
+                    command.setPrimitiveType(current.findAdaptationPrimitiveTypesByID(JavaSePrimitive.instance$.getStopInstance()));
                     command.setRef(subNode);
                     adaptationModel.addAdaptations(command);
                     processStopInstance(subNode, adaptationModel, current, factory);
