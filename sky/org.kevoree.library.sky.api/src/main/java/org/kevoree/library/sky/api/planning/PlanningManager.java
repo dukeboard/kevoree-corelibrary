@@ -83,9 +83,10 @@ public class PlanningManager extends KevoreeKompareBean {
                 }
 
             } else {
+                // TODO IF HARAKIRI is refactoring, maybe this block must be refactoring too or even removed
                 Log.debug("Unable to find the current node on the target model, We remove all the hosted nodes from the current model");
                 for (ContainerNode subNode : currentNode.getHosts()) {
-                    Log.debug("add a {} adaptation primitive with {} as parameter", CloudNode.REMOVE_NODE, subNode.getName());
+                    Log.debug("add a {} adaptation primitive with {} as parameter", JavaSePrimitive.instance$.getStopInstance(), subNode.getName());
                     AdaptationPrimitive command = factory.createAdaptationPrimitive();
                     command.setPrimitiveType(removeNodeType);
                     command.setRef(subNode);
