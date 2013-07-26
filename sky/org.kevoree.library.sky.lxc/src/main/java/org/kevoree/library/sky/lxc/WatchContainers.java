@@ -50,34 +50,34 @@ public class WatchContainers implements Runnable {
     public void run() {
         ContainerRoot model = lxcHostNode.getModelService().getLastModel();
         UUIDModel uuidModel = null;
-            List<String> lxNodes = lxcManager.getContainers();
-            if (lxNodes.size() > model.getNodes().size()){
-                try {
-                    ContainerRoot  scanned = lxcManager.buildModelCurrentLxcState(lxcHostNode.getKevScriptEngineFactory(), lxcHostNode.getNodeName());
-                    if( scanned.getNodes().size() > model.getNodes().size()){
-                        uuidModel=  lxcHostNode.getModelService().getLastUUIDModel();
-                        lxcHostNode.getModelService().compareAndSwapModel(uuidModel, scanned);
-                        Log.debug("UPDATE Containers");
-                    }
-                    starting = false;
-                } catch (Exception e) {
-                    Log.error("Updating model from lxc-ls");
+        List<String> lxNodes = lxcManager.getContainers();
+        if (lxNodes.size() > model.getNodes().size()){
+            try {
+                ContainerRoot  scanned = lxcManager.buildModelCurrentLxcState(lxcHostNode.getKevScriptEngineFactory(), lxcHostNode.getNodeName());
+                if( scanned.getNodes().size() > model.getNodes().size()){
+                    uuidModel=  lxcHostNode.getModelService().getLastUUIDModel();
+                    lxcHostNode.getModelService().compareAndSwapModel(uuidModel, scanned);
+                    Log.debug("UPDATE Containers");
                 }
-            } else
-            {
+                starting = false;
+            } catch (Exception e) {
+                Log.error("Updating model from lxc-ls");
+            }
+        } else
+        {
 
-             for(ContainerNode n : model.getNodes()){
+            for(ContainerNode n : model.getNodes()){
 
-                 if(!lxNodes.contains(n.getName())){
+                if(!lxNodes.contains(n.getName())){
 
-                         // todo remove
+                    // todo remove
 
-                 }
+                }
 
-
-             }
 
             }
+
+        }
 
 
         Log.debug("WatchContainers is Scanning and monitoring the containers");
@@ -85,58 +85,64 @@ public class WatchContainers implements Runnable {
 
         for( ContainerNode containerNode :   lxcHostNode.getModelElement().getHosts()){
 
-                if(LxcManager.isRunning(containerNode.getName())){
+            if(LxcManager.isRunning(containerNode.getName())){
 
-                    String ip =   LxcManager.getIP(containerNode.getName());
-                    if(ip != null){
+                String ip =   LxcManager.getIP(containerNode.getName());
+                if(ip != null){
 
-                        if(ipvalidator.validate(ip)){
-                            if(!getIPModel(model,containerNode.getName()).contains(ip)){
-                                Log.info("The Container {} has the IP address => {}",containerNode.getName(),ip);
-                                uuidModel=  lxcHostNode.getModelService().getLastUUIDModel();
-                                ModelCloner cloner = new ModelCloner();
-                                ContainerRoot readWriteModel = cloner.clone(lxcHostNode.getModelService().getLastModel());
-                                updateNetworkProperties(readWriteModel, containerNode.getName(), ip);
-                                lxcHostNode.getModelService().compareAndSwapModel(uuidModel, readWriteModel);
-                            }
-                        }
-                        else
-                        {
-                            Log.error("The format of the ip is wrong or not define");
+                    if(ipvalidator.validate(ip)){
+                        if(!getIPModel(model,containerNode.getName()).contains(ip)){
+                            Log.info("The Container {} has the IP address => {}",containerNode.getName(),ip);
+                            uuidModel=  lxcHostNode.getModelService().getLastUUIDModel();
+                            ModelCloner cloner = new ModelCloner();
+                            ContainerRoot readWriteModel = cloner.clone(lxcHostNode.getModelService().getLastModel());
+                            updateNetworkProperties(readWriteModel, containerNode.getName(), ip);
+                            lxcHostNode.getModelService().compareAndSwapModel(uuidModel, readWriteModel);
                         }
                     }
-                    Integer ram= 0;
-                    Integer cpu_core=0;
-                    try
+                    else
                     {
-                        ram = Integer.parseInt(KevoreePropertyHelper.instance$.getProperty(containerNode, "RAM", false, ""));
-                        if(ram != null){
-                            LxcManager.setlimitMemory(containerNode.getName(),ram);
-                        }
-
-                    }catch (Exception e){
-
+                        Log.error("The format of the ip is wrong or not define");
                     }
-
-                    try
-                    {
-                        cpu_core = Integer.parseInt(KevoreePropertyHelper.instance$.getProperty(containerNode, "CPU_CORE", false, ""));
-                        if(cpu_core != null){
-                            LxcManager.setlimitCPU(containerNode.getName(),cpu_core);
-                        }
-
-                    }catch (Exception e){
-
-                    }
-
-                }    else {
-
-                    if(containerNode.getStarted()){
-                        Log.warn("The container {} is not running", containerNode.getName());
-                        lxcManager.start_container(containerNode);
-                    }
-
                 }
+                Integer ram=1024 ,cpu_frequency= 1024;
+                String cpus="0";
+                try
+                {
+                    ram = Integer.parseInt(KevoreePropertyHelper.instance$.getProperty(containerNode, "RAM", false, ""));
+                    LxcManager.setlimitMemory(containerNode.getName(),ram);
+                }catch (Exception e){
+                    Log.warn("RAM Limit is not set for {} ",containerNode.getName());
+                }
+
+                try
+                {
+                    cpu_frequency = Integer.parseInt(KevoreePropertyHelper.instance$.getProperty(containerNode, "CPU_FREQUENCY", false, ""));
+                    LxcManager.setlimitCPU(containerNode.getName(),cpu_frequency);
+                }catch (Exception e){
+                    Log.warn("CPU_FREQUENCY Limit is not set for {} ",containerNode.getName());
+                }
+
+                try
+                {
+                    cpus = KevoreePropertyHelper.instance$.getProperty(containerNode, "CPU_CORE", false, "");
+                    LxcManager.setCPUAffinity(containerNode.getName(),cpus);
+                }catch (Exception e){
+                    Log.warn("CPU_CORE Limit is not set for "+containerNode.getName()+" cpus "+cpus);
+                }
+
+
+            }    else {
+
+                if(containerNode.getStarted()){
+                    Log.warn("The container {} is not running", containerNode.getName());
+                    lxcManager.start_container(containerNode);
+                }
+
+            }
+
+
+
 
         }
     }

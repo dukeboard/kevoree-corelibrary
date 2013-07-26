@@ -85,11 +85,13 @@ fi
 
 do_backup()
 {
-    if [ ! -d /usr/share/kevoree/lxc/backup/$LXC_NAME ] ; then
-       NOW=$(date +"%Y-%m-%d")
+    if [ -d /usr/share/kevoree/lxc/backup/$LXC_NAME ] ; then
+       NOW=$(date +"%Y-%m-%d-%H-%M-%S")
        echo "Backup with same lxc container name"
+       mkdir /usr/share/kevoree/lxc/backup/$LXC_NAME-$NOW
        mv /usr/share/kevoree/lxc/backup/$LXC_NAME  /usr/share/kevoree/lxc/backup/$LXC_NAME-$NOW
     fi
+
     mkdir -p /usr/share/kevoree/lxc/backup/$LXC_NAME
     mv /var/lib/lxc/$LXC_NAME /usr/share/kevoree/lxc/backup
 }

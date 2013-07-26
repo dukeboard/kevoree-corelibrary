@@ -92,18 +92,42 @@ public class LxcManager {
 
     public static  void setlimitMemory(String id,int limit_in_bytes) throws InterruptedException, IOException
     {
-        //  lxc-cgroup -n node0 300000000           300M
-        Process processcreate = new ProcessBuilder(lxccgroup, "-n", id, "memory.limit_in_bytes", ""+limit_in_bytes).redirectErrorStream(true).start();
-        FileManager.display_message_process(processcreate.getInputStream());
-        processcreate.waitFor();
+        if(id != null && id.length() > 0){
+            Process processcreate = new ProcessBuilder(lxccgroup, "-n", id, "memory.limit_in_bytes", ""+limit_in_bytes).redirectErrorStream(true).start();
+            FileManager.display_message_process(processcreate.getInputStream());
+            processcreate.waitFor();
+        }  else {
+            Log.error("setlimitMemory container id is not set");
+        }
+    }
+
+
+
+    public static  void setCPUAffinity(String id,String cpus) throws InterruptedException, IOException
+    {
+        if(cpus != null && id != null && cpus.length() > 0 && id.length() > 0){
+                //  lxc-cgroup -n node0 300000000           300M
+                Process processcreate = new ProcessBuilder(lxccgroup, "-n", id, "cpuset.cpus", ""+cpus).redirectErrorStream(true).start();
+                FileManager.display_message_process(processcreate.getInputStream());
+                processcreate.waitFor();
+        }  else {
+            Log.error("setCPUAffinity container id is not set");
+        }
     }
 
     public static void setlimitCPU(String id,int cpu_shares) throws InterruptedException, IOException
     {
-        //  lxc-cgroup -n node0 300000000           300M
-        Process processcreate = new ProcessBuilder(lxccgroup, "-n", id, "cpu.shares", ""+cpu_shares).redirectErrorStream(true).start();
-        FileManager.display_message_process(processcreate.getInputStream());
-        processcreate.waitFor();
+        if(id != null && id.length() > 0){
+            if(cpu_shares < 1024){
+                // minimum
+                cpu_shares = 1024;
+            }
+            Process processcreate = new ProcessBuilder(lxccgroup, "-n", id, "cpu.shares", ""+cpu_shares).redirectErrorStream(true).start();
+            FileManager.display_message_process(processcreate.getInputStream());
+            processcreate.waitFor();
+        }  else {
+            Log.error("setlimitCPU container id is not set");
+        }
     }
 
     public boolean create_container(String id, LxcHostNode service,ContainerNode node, ContainerRoot iaasModel) {
@@ -130,7 +154,8 @@ public class LxcManager {
     public boolean start_container(ContainerNode node) {
         try {
             Integer ram= 0;
-            Integer cpu_core=0;
+            Integer cpu_frequency=0;
+            String cpus ="0";
             Log.debug("Starting container " + node.getName());
             Process lxcstartprocess = new ProcessBuilder(lxcstart, "-n", node.getName(), "-d").start();
             FileManager.display_message_process(lxcstartprocess.getInputStream());
@@ -146,22 +171,39 @@ public class LxcManager {
                 }
 
             }catch (Exception e){
-                Log.warn("Memory limit_in_bytes is not set for {}",node.getName());
+                Log.warn("RAM Limit is not set for {}",node.getName());
             }
 
             try
             {
-                cpu_core = Integer.parseInt(KevoreePropertyHelper.instance$.getProperty(node, "CPU_CORE", false, ""));
-                if(cpu_core != null){
-                    setlimitCPU(node.getName(),cpu_core);
+                cpu_frequency = Integer.parseInt(KevoreePropertyHelper.instance$.getProperty(node, "CPU_FREQUENCY", false, ""));
+                if(cpu_frequency != null){
+                    setlimitCPU(node.getName(),cpu_frequency);
                 } else
                 {
                     Log.info("cpu shares is not set for {}",node.getName());
                 }
 
             }catch (Exception e){
-                Log.warn("CPU Limit is not set for {} ",node.getName());
+                Log.warn("CPU_FREQUENCY Limit is not set for {} ",node.getName());
             }
+
+            try
+            {
+                cpus = KevoreePropertyHelper.instance$.getProperty(node, "CPU_CORE", false, "");
+                if(cpus != null){
+                    setCPUAffinity(node.getName(),cpus);
+                } else
+                {
+                    Log.info("cpu core is not set for {}",node.getName());
+                }
+
+            }catch (Exception e){
+                Log.warn("CPU_CORE Limit is not set for {} ",node.getName());
+            }
+
+
+
 
 
         } catch (Exception e) {
