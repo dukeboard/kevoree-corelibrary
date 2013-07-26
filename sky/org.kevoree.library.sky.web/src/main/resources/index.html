@@ -280,8 +280,8 @@ $(function () {
             </table>
         </div>
 
-        <div class="modal fade" id="add-modal" style="display: none;">
-            <!-- display: none; is needed to avoid bug in bootstrap which forbid to click on start/stop and remove buttons -->
+        <div class="modal hide fade" id="add-modal">
+            <!-- class hide : is used to hide the modal when the page is loaded -->
             <div class="modal-header">
                 <a id="closeButton" class="close" data-dismiss="modal">&times;</a>
 
@@ -362,8 +362,8 @@ $(function () {
                 <div style="text-align:center"><a id="submitAddChild" class="btn">Submit</a><br/></div>
             </div>
         </div>
-        <div class="modal fade" id="unavailable-modal" style="display: none;">
-            <!-- display: none; is needed to avoid bug in bootstrap which forbid to click on start/stop and remove buttons -->
+        <div class="modal hide fade" id="unavailable-modal" data-backdrop="static">
+            <!-- class hide : is used to hide the modal when the page is loaded -->
             <div class="modal-header">
                 <h3>Unavailable service.<br/>Please wait reconnection ...</h3>
             </div>
