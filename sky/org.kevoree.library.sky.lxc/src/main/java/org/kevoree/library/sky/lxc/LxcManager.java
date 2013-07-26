@@ -32,12 +32,13 @@ public class LxcManager {
 
     private final static String lxcstart = "lxc-start";
     private final static String lxcstop = "lxc-stop";
-    private final static String lxcdestroy = "lxc-destroy";
+   // private final static String lxcdestroy = "lxc-destroy";
     private final static String lxcshutdown = "lxc-shutdown";
     private final static String lxcclone = "lxc-clone";
     private final static String lxccreate = "lxc-create";
     private final static String lxccgroup = "lxc-cgroup";
     private final static String lxcinfo = "lxc-info";
+    private final static String lxcbackup ="lxc-backup";
 
     /*
           cgroup.procs,
@@ -173,6 +174,24 @@ public class LxcManager {
 
 
 
+    public List<String> getBackupContainers() {
+        List<String> containers = new ArrayList<String>();
+        Process processcreate = null;
+        try {
+            processcreate = new ProcessBuilder("/bin/lxc-backup-list-containers").redirectErrorStream(true).start();
+
+            BufferedReader input = new BufferedReader(new InputStreamReader(processcreate.getInputStream()));
+            String line;
+            while ((line = input.readLine()) != null) {
+                containers.add(line);
+            }
+            input.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return containers;
+    }
+
     public List<String> getContainers() {
         List<String> containers = new ArrayList<String>();
         Process processcreate = null;
@@ -212,7 +231,6 @@ public class LxcManager {
             }
 
             return engine.interpret();
-
 
         }
         return defaultKevoreeFactory.createContainerRoot();
@@ -265,10 +283,12 @@ public class LxcManager {
         }
         if (destroy) {
             try {
-                Log.debug("Destroying container " + id);
-                Process lxcstartprocess = new ProcessBuilder(lxcdestroy, "-n", id).redirectErrorStream(true).start();
+                Log.debug("Disabling the container " + id);
+
+                Process lxcstartprocess = new ProcessBuilder(lxcbackup, "-n", id).redirectErrorStream(true).start();
                 FileManager.display_message_process(lxcstartprocess.getInputStream());
                 lxcstartprocess.waitFor();
+
             } catch (Exception e) {
                 e.printStackTrace();
                 return false;
@@ -317,10 +337,27 @@ public class LxcManager {
      * @throws IOException
      */
     public void install() throws IOException {
+
+
         copy("lxc-ip", "/bin");
         allow_exec("/bin/lxc-ip");
+
         copy("lxc-list-containers", "/bin");
         allow_exec("/bin/lxc-list-containers");
+
+        copy("lxc-backup", "/bin");
+        allow_exec("/bin/lxc-backup");
+
+        copy("lxc-backup-list-containers", "/bin");
+        allow_exec("/bin/lxc-backup-list-containers");
+
+        copy("lxc-restore", "/bin");
+        allow_exec("/bin/lxc-restore");
+
+        copy("lxc-backup-list-containers", "/bin");
+        allow_exec("/bin/lxc-backup-list-containers");
+
+
         DefaultKevoreeFactory defaultKevoreeFactory = new DefaultKevoreeFactory();
         String version =   defaultKevoreeFactory.getVersion();
 

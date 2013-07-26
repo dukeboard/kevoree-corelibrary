@@ -1,22 +1,17 @@
 package org.kevoree.library.sky.lxc;
 
-import org.kevoree.ContainerRoot;
 import org.kevoree.annotation.*;
-import org.kevoree.api.service.core.handler.ModelHandlerLockCallBack;
-import org.kevoree.api.service.core.handler.ModelListener;
 import org.kevoree.library.defaultNodeTypes.JavaSENode;
 import org.kevoree.library.sky.api.CloudNode;
 import org.kevoree.library.sky.api.KevoreeNodeRunnerFactory;
 import org.kevoree.library.sky.api.execution.CommandMapper;
 import org.kevoree.library.sky.api.execution.KevoreeNodeManager;
 import org.kevoree.library.sky.api.execution.KevoreeNodeRunner;
-import org.kevoree.log.Log;
 
 import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -34,24 +29,24 @@ import java.util.concurrent.TimeUnit;
         @PrimitiveCommand(name = CloudNode.REMOVE_NODE, maxTime = LxcHostNode.REMOVE_TIMEOUT)
 })
 @DictionaryType({
-        @DictionaryAttribute(name = LxcHostNode.MAX_CONCURRENT_ADD_NODE, optional = true, defaultValue = "5")     //crappy !!!!
+        @DictionaryAttribute(name = LxcHostNode.MAX_CONCURRENT_ADD_NODE, optional = true, defaultValue = "5"),     //crappy !!!!
+        @DictionaryAttribute(name = "daysRetentionContainersDestroyed", optional = false, defaultValue ="30")
 })
 public class LxcHostNode extends JavaSENode implements CloudNode {
 
     public static final long ADD_TIMEOUT = 300000l;
     public static final long REMOVE_TIMEOUT = 180000l;
     public static final long CREATE_CLONE_TIMEOUT = 180000l;
-
     static final String MAX_CONCURRENT_ADD_NODE = "MAX_CONCURRENT_ADD_NODE";
-
-    private boolean done = false;
     private LxcManager lxcManager = new LxcManager();
     private WatchContainers watchContainers;
+    private WatchBackupsContainers watchBackupsContainers;
     private KevoreeNodeManager nodeManager;
     private ScheduledThreadPoolExecutor executor = null;
-
     private int maxAddNode;
     private  CreateBaseClone createBaseClone;
+
+
     @Start
     @Override
     public void startNode() {
@@ -64,6 +59,8 @@ public class LxcHostNode extends JavaSENode implements CloudNode {
 
         createBaseClone = new CreateBaseClone(this, lxcManager);
         watchContainers = new WatchContainers(this, lxcManager);
+        watchBackupsContainers = new WatchBackupsContainers(this,lxcManager);
+        watchBackupsContainers.setDaysretentions(getDaysRetentions());
 
         nodeManager = new KevoreeNodeManager(new LXCNodeRunnerFactory());
         maxAddNode = 5;
@@ -80,6 +77,7 @@ public class LxcHostNode extends JavaSENode implements CloudNode {
 
         executor = new ScheduledThreadPoolExecutor(ManagementFactory.getOperatingSystemMXBean().getAvailableProcessors());
         executor.scheduleAtFixedRate(watchContainers, 15, 15, TimeUnit.SECONDS);
+        executor.scheduleAtFixedRate(watchBackupsContainers, 30, 10, TimeUnit.SECONDS);
     }
 
     @Stop
@@ -100,6 +98,19 @@ public class LxcHostNode extends JavaSENode implements CloudNode {
 
     public LxcManager getLxcManager() {
         return lxcManager;
+    }
+
+    public Integer getDaysRetentions(){
+        try {
+            return     Integer.parseInt(getDictionary().get("daysRetentionContainersDestroyed").toString());
+        }   catch (Exception e ){
+            return 30;
+        }
+    }
+
+    @Update
+    public void update(){
+        watchBackupsContainers.setDaysretentions(getDaysRetentions());
     }
 
 
