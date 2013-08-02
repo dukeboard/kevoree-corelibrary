@@ -72,7 +72,7 @@ class StartStopInstance(c: Instance, nodeName: String, val start: Boolean): Life
             //call sub
             return resultAsync
         } else {
-            Log.error("issue while searching TG to stop thread")
+            Log.error("issue while searching TG to start (or stop) thread")
             return false
         }
     }

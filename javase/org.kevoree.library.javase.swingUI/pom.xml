@@ -84,7 +84,7 @@
 
     <repositories>
         <repository>
-            <id>kevoree-release</id>
+            <id>kevoree-extra</id>
             <url>http://maven.kevoree.org/release</url>
         </repository>
     </repositories>
