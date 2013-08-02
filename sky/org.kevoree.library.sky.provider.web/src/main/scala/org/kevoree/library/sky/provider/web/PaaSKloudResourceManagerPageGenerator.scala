@@ -1,8 +1,8 @@
 package org.kevoree.library.sky.provider.web
 
 import org.kevoree.library.javase.webserver.{KevoreeHttpResponse, KevoreeHttpRequest}
+import org.kevoree.library.sky.helper.KloudModelHelper
 import util.matching.Regex
-import org.kevoree.library.sky.api.helper.KloudModelHelper
 import org.json.JSONStringer
 import org.kevoree.Group
 import org.kevoree.library.sky.provider.api.SubmissionException

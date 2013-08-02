@@ -1,10 +1,10 @@
-package org.kevoree.library.sky.api.helper
+package org.kevoree.library.sky.helper
 
 import org.kevoree._
 import core.basechecker.RootChecker
 import scala.collection.JavaConversions._
-import org.kevoree.library.sky.api.checker.NodeNameKloudChecker
 import org.kevoree.log.Log
+import org.kevoree.library.sky.provider.api.checker.NodeNameKloudChecker
 
 
 /**

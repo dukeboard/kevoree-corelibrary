@@ -1,11 +1,11 @@
-package org.kevoree.library.sky.api.checker;
+package org.kevoree.library.sky.provider.api.checker;
 
 import org.kevoree.ContainerNode;
 import org.kevoree.ContainerRoot;
 import org.kevoree.Group;
 import org.kevoree.Instance;
 import org.kevoree.api.service.core.checker.CheckerViolation;
-import org.kevoree.library.sky.api.helper.KloudModelHelper;
+import org.kevoree.library.sky.helper.KloudModelHelper;
 
 import java.util.ArrayList;
 import java.util.List;

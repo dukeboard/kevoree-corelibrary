@@ -1,4 +1,4 @@
-package org.kevoree.library.sky.api.helper
+package org.kevoree.library.sky.helper
 
 import org.kevoree.{ContainerNode, ContainerRoot}
 import org.kevoree.framework.{Constants, KevoreePropertyHelper}

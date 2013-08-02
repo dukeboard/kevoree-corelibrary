@@ -1,8 +1,8 @@
 package org.kevoree.library.sky.provider
 
+import org.kevoree.library.sky.helper.{KloudNetworkHelper, KloudModelHelper}
 import org.kevoree.{ContainerNode, NodeType, ContainerRoot}
 import org.kevoree.api.service.core.script.KevScriptEngine
-import org.kevoree.library.sky.api.helper.{KloudNetworkHelper, KloudModelHelper}
 import org.kevoree.framework.{KevoreePropertyHelper, Constants}
 import scala.collection.JavaConversions._
 import collection.mutable.ListBuffer

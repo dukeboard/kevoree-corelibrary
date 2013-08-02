@@ -9,7 +9,7 @@ import org.kevoree.library.javase.webserver.KevoreeHttpResponse;
 import org.kevoree.library.javase.webserver.ParentAbstractPage;
 import org.kevoree.library.sky.provider.api.PaaSManagerService;
 import org.kevoree.library.sky.provider.api.SubmissionException;
-import org.kevoree.library.sky.api.checker.RootKloudChecker;
+import org.kevoree.library.sky.provider.api.checker.RootKloudChecker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

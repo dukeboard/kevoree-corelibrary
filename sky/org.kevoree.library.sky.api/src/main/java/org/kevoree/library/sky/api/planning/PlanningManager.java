@@ -162,7 +162,7 @@ public class PlanningManager extends KevoreeKompareBean {
             Log.debug("Planning adaptation and defining steps...");
             SchedulingWithTopologicalOrderAlgo scheduling = new SchedulingWithTopologicalOrderAlgo();
             nextStep();
-            adaptationModel.setOrderedPrimitiveSet(getCurrentStep());
+            adaptationModel.setOrderedPrimitiveSet(getCurrentSteps());
 
             // STOP child nodes
             List<AdaptationPrimitive> primitives = new ArrayList<AdaptationPrimitive>();
@@ -189,12 +189,16 @@ public class PlanningManager extends KevoreeKompareBean {
                     primitives.add(primitive);
                 }
             }
-            primitives = scheduling.schedule(primitives, false);
+            ParallelStep stepToInsert = scheduling.schedule(primitives, false);
+            if (stepToInsert != null && !stepToInsert.getAdaptations().isEmpty()) {
+                insertStep(stepToInsert);
+            }
+            /*primitives = scheduling.schedule(primitives, false);
             for (AdaptationPrimitive primitive : primitives) {
                 List<AdaptationPrimitive> primitiveList = new ArrayList<AdaptationPrimitive>(1);
                 primitiveList.add(primitive);
                 createNextStep(JavaSePrimitive.instance$.getStopInstance(), primitiveList);
-            }
+            }*/
 
             // REMOVE BINDINGS
             primitives.clear();
@@ -317,24 +321,28 @@ public class PlanningManager extends KevoreeKompareBean {
             createNextStep(JavaSePrimitive.instance$.getStartInstance(), primitives);
 
             // START INSTANCEs (except child nodes)
-            ParallelStep oldStep = getCurrentStep();
+//            ParallelStep oldStep = getCurrentSteps();
             primitives.clear();
             for (AdaptationPrimitive primitive : adaptationModel.getAdaptations()) {
                 if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getStartInstance()) && !(primitive.getRef() instanceof ContainerNode)) {
                     primitives.add(primitive);
                 }
             }
-            primitives = scheduling.schedule(primitives, true);
+            stepToInsert = scheduling.schedule(primitives, true);
+            if (stepToInsert != null && !stepToInsert.getAdaptations().isEmpty()) {
+                insertStep(stepToInsert);
+            }
+            /*primitives = scheduling.schedule(primitives, true);
             for (AdaptationPrimitive primitive : primitives) {
                 List<AdaptationPrimitive> primitiveList = new ArrayList<AdaptationPrimitive>(1);
                 primitiveList.add(primitive);
                 oldStep = getCurrentStep();
                 createNextStep(JavaSePrimitive.instance$.getStartInstance(), primitiveList);
-            }
+            }*/
             // remove empty step at the end
-            if (getStep() != null && getStep().getAdaptations().isEmpty()) {
+            /*if (getStep() != null && getStep().getAdaptations().isEmpty()) {
                 oldStep.setNextStep(null);
-            }
+            }*/
         } else {
             adaptationModel.setOrderedPrimitiveSet(null);
         }

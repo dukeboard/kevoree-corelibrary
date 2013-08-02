@@ -1,7 +1,7 @@
 package org.kevoree.library.sky.provider
 
+import org.kevoree.library.sky.helper.KloudModelHelper
 import org.kevoree.{DictionaryAttribute, ContainerNode, ContainerRoot}
-import org.kevoree.library.sky.api.helper.KloudModelHelper
 import scala.collection.JavaConversions._
 import org.kevoree.api.service.core.script.KevScriptEngine
 import org.kevoree.log.Log

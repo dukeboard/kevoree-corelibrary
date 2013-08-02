@@ -5,7 +5,7 @@ import org.kevoree.Group;
 import org.kevoree.annotation.*;
 import org.kevoree.api.service.core.script.KevScriptEngine;
 import org.kevoree.framework.AbstractComponentType;
-import org.kevoree.library.sky.api.helper.KloudModelHelper;
+import org.kevoree.library.sky.helper.KloudModelHelper;
 import org.kevoree.library.sky.provider.api.PaaSManagerService;
 import org.kevoree.library.sky.provider.api.PaaSService;
 import org.kevoree.library.sky.provider.api.SubmissionException;

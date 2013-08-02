@@ -2,7 +2,7 @@ package org.kevoree.library.sky.provider
 
 import org.kevoree._
 import org.kevoree.api.service.core.script.KevScriptEngine
-import org.kevoree.library.sky.api.helper.KloudModelHelper
+import org.kevoree.library.sky.helper.KloudModelHelper
 import scala.collection.JavaConversions._
 import scala.Some
 import org.kevoree.log.Log

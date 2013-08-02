@@ -4,7 +4,6 @@ import org.kevoree.ContainerRoot
 import org.kevoree.framework.KevoreeXmiHelper
 import java.net.{URLConnection, URL}
 import java.io._
-import org.kevoree.library.sky.api.helper.KloudModelHelper
 import scala.collection.JavaConversions._
 import org.kevoree.log.Log
 

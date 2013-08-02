@@ -1,12 +1,12 @@
 package org.kevoree.library.sky.provider.web
 
+import org.kevoree.library.sky.helper.KloudModelHelper
 import org.kevoree.{Group, ContainerNode, ContainerRoot, TypeDefinition}
 import org.kevoree.framework.KevoreePropertyHelper
 import java.io.File
 import io.Source
 import xml.Node
 import scala.collection.JavaConversions._
-import org.kevoree.library.sky.api.helper.KloudModelHelper
 import org.kevoree.log.Log
 
 /**

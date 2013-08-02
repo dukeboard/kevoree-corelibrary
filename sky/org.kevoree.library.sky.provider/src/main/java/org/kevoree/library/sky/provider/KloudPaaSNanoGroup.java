@@ -8,7 +8,7 @@ import org.kevoree.framework.FileNIOHelper;
 import org.kevoree.framework.KevoreeXmiHelper;
 import org.kevoree.library.nanohttp.NanoHTTPD;
 import org.kevoree.library.nanohttp.NanoRestGroup;
-import org.kevoree.library.sky.api.helper.KloudModelHelper;
+import org.kevoree.library.sky.helper.KloudModelHelper;
 import org.kevoree.log.Log;
 
 import java.io.ByteArrayInputStream;

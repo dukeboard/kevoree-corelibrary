@@ -1,4 +1,4 @@
-package org.kevoree.library.sky.api.checker;
+package org.kevoree.library.sky.provider.api.checker;
 
 import org.kevoree.api.service.core.checker.CheckerService;
 
