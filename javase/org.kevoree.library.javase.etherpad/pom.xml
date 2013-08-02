@@ -17,7 +17,7 @@
         <dependency>
             <groupId>${parent.groupId}</groupId>
             <artifactId>org.kevoree.library.javase.nodeJS</artifactId>
-            <version>${kevoree.version}</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

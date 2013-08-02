@@ -16,8 +16,6 @@
     </parent>
 
     <properties>
-        <kevoree.version>${project.version}</kevoree.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <android.tools.aapt>${android.home}/build-tools/17.0.0/aapt</android.tools.aapt>
         <android.tools.dx>${android.home}/build-tools/17.0.0/dx</android.tools.dx>
         <kevoree.exclude>com.google.android:*,commons-*:*,org.apache.httpcomponents:*,org.khronos:*,xerces:*,xpp3:*,org.json:*,cglib:*,org.objenesis:*</kevoree.exclude>

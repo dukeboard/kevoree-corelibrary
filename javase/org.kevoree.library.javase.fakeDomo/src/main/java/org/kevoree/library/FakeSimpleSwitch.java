@@ -19,8 +19,7 @@ package org.kevoree.library;
 
 import org.kevoree.annotation.*;
 import org.kevoree.framework.MessagePort;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.kevoree.log.Log;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,7 +39,6 @@ import java.util.HashMap;
 })
 @ComponentType
 public class FakeSimpleSwitch extends AbstractFakeStuffComponent {
-    private static final Logger logger = LoggerFactory.getLogger(FakeSimpleSwitch.class);
 
     private static final int SWITCH_WIDTH = 50;
     private static final int SWITCH_HEIGHT = 100;
@@ -64,7 +62,7 @@ public class FakeSimpleSwitch extends AbstractFakeStuffComponent {
     @Update
     public void update() {
         for (String s : this.getDictionary().keySet()) {
-            logger.debug("Dic => " + s + " - " + this.getDictionary().get(s));
+            Log.debug("Dic => " + s + " - " + this.getDictionary().get(s));
         }
     }
 

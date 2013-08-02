@@ -14,8 +14,7 @@
 package org.kevoree.library;
 
 import org.kevoree.annotation.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.kevoree.log.Log;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,7 +31,6 @@ import java.lang.reflect.InvocationTargetException;
 @ComponentType
 public class FakeSimpleLight extends AbstractFakeStuffComponent {
 
-    private static final Logger logger = LoggerFactory.getLogger(FakeSimpleLight.class);
     private static final int FRAME_WIDTH = 300;
     private static final int FRAME_HEIGHT = 300;
     private MyFrame frame;
@@ -57,7 +55,7 @@ public class FakeSimpleLight extends AbstractFakeStuffComponent {
         frame.setVisible(true);
         state = false;
 
-        logger.debug("Hello from " + this.getName() + " ;-)");
+        Log.debug("Hello from " + this.getName() + " ;-)");
 
     }
 
@@ -70,7 +68,7 @@ public class FakeSimpleLight extends AbstractFakeStuffComponent {
     @Update
     public void update() {
         for (String s : this.getDictionary().keySet()) {
-            logger.debug("Dic => " + s + " - " + this.getDictionary().get(s));
+            Log.debug("Dic => " + s + " - " + this.getDictionary().get(s));
         }
     }
 
@@ -120,14 +118,14 @@ public class FakeSimpleLight extends AbstractFakeStuffComponent {
                 g2d.setColor(c);
                 g2d.fillOval(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
             } else {
-                logger.debug("Graphics are not 2D. Instance of:" + g.getClass());
+                Log.debug("Graphics are not 2D. Instance of:" + g.getClass());
             }
         }
 
         public final void setColor(Color c) {
             this.c = c;
             repaint();
-            logger.debug("SetColor " + c.toString());
+            Log.debug("SetColor " + c.toString());
         }
     }
 }

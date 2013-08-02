@@ -8,11 +8,6 @@
     <name>Kevoree :: CoreLibrary :: Arduino :: Root</name>
     <version>2.0.0-SNAPSHOT</version>
 
-    <properties>
-        <kevoree.version>${project.version}</kevoree.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <parent>
         <artifactId>org.kevoree.library</artifactId>
         <groupId>org.kevoree.corelibrary</groupId>

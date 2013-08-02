@@ -16,8 +16,6 @@
 	</parent>
 
 	<properties>
-		<kevoree.version>${project.version}</kevoree.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <scala.version>2.9.2</scala.version>
 	</properties>
 
@@ -47,11 +45,6 @@
 			<artifactId>org.kevoree.tools.annotation.api</artifactId>
 			<version>${kevoree.version}</version>
 		</dependency>
-        <!--<dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.0.13</version>
-        </dependency>-->
 	</dependencies>
 
 	<build>

@@ -15,11 +15,6 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <properties>
-        <kevoree.version>${project.version}</kevoree.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <modules>
         <module>../org.kevoree.library.javase.swingUI</module>
         <module>../org.kevoree.library.javase.jexxus</module>
