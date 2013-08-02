@@ -1,10 +1,10 @@
-merge "mvn:org.kevoree.corelibrary.model/org.kevoree.library.model.android/{kevoree.version}"
-merge "mvn:org.kevoree.corelibrary.model/org.kevoree.library.model.arduino/{kevoree.version}"
-merge "mvn:org.kevoree.corelibrary.model/org.kevoree.library.model.bootstrap/{kevoree.version}"
-merge "mvn:org.kevoree.corelibrary.model/org.kevoree.library.model.bootstrap.android/{kevoree.version}"
-merge "mvn:org.kevoree.corelibrary.model/org.kevoree.library.model.javase/{kevoree.version}"
-merge "mvn:org.kevoree.corelibrary.model/org.kevoree.library.model.sky/{kevoree.version}"
-merge "mvn:org.kevoree.corelibrary.model/org.kevoree.library.model.javase.webserver/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.model/org.kevoree.library.model.android/{project.version}"
+merge "mvn:org.kevoree.corelibrary.model/org.kevoree.library.model.arduino/{project.version}"
+merge "mvn:org.kevoree.corelibrary.model/org.kevoree.library.model.bootstrap/{project.version}"
+merge "mvn:org.kevoree.corelibrary.model/org.kevoree.library.model.bootstrap.android/{project.version}"
+merge "mvn:org.kevoree.corelibrary.model/org.kevoree.library.model.javase/{project.version}"
+merge "mvn:org.kevoree.corelibrary.model/org.kevoree.library.model.sky/{project.version}"
+merge "mvn:org.kevoree.corelibrary.model/org.kevoree.library.model.javase.webserver/{project.version}"
 
 
 

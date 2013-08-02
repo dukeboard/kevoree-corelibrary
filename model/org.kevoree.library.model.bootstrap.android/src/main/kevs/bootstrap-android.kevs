@@ -1,8 +1,8 @@
-merge "mvn:org.kevoree.corelibrary.android/org.kevoree.library.android.nodeType/{kevoree.version}"
-//merge "mvn:org.kevoree.corelibrary.android/org.kevoree.library.android.nanohttp/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.android/org.kevoree.library.android.nodeType/{project.version}"
+//merge "mvn:org.kevoree.corelibrary.android/org.kevoree.library.android.nanohttp/{project.version}"
 //BasicGroup
-merge "mvn:org.kevoree.corelibrary.android/org.kevoree.library.android.jexxus/{kevoree.version}"
-merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.jexxus/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.android/org.kevoree.library.android.jexxus/{project.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.jexxus/{project.version}"
 //BasicGossiper
-merge "mvn:org.kevoree.corelibrary.android/org.kevoree.library.android.basicGossiper/{kevoree.version}"
-merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.basicGossiper/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.android/org.kevoree.library.android.basicGossiper/{project.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.basicGossiper/{project.version}"
