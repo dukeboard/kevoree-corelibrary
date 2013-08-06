@@ -106,13 +106,13 @@ public class PlanningManager extends KevoreeKompareBean {
                         command.setPrimitiveType(addNodeType);
                         command.setRef(subNode);
                         adaptationModel.addAdaptations(command);
-                        processStartInstance(subNode, adaptationModel, current, factory);
+                        processStartInstance(subNode, adaptationModel, target, factory);
                     } else {
                         if (subNode1.getStarted() != subNode.getStarted()) {
                             if (subNode1.getStarted()) {
                                 processStopInstance(subNode, adaptationModel, current, factory);
                             } else {
-                                processStartInstance(subNode, adaptationModel, current, factory);
+                                processStartInstance(subNode, adaptationModel, target, factory);
                             }
                         }
                     }
@@ -125,7 +125,7 @@ public class PlanningManager extends KevoreeKompareBean {
                     command.setPrimitiveType(addNodeType);
                     command.setRef(subNode);
                     adaptationModel.addAdaptations(command);
-                    processStartInstance(subNode, adaptationModel, current, factory);
+                    processStartInstance(subNode, adaptationModel, target, factory);
                 }
             }
         }
