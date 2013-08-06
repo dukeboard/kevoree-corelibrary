@@ -1,10 +1,10 @@
-merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.webserver.api/{kevoree.version}'
-merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.nanohttp/{kevoree.version}'
-merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.defaultChannels/{kevoree.version}'
-merge 'mvn:org.kevoree.corelibrary.android/org.kevoree.library.android.nanohttp/{kevoree.version}'
-merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.javaseNode/{kevoree.version}'
-merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.webserver.servlet/{kevoree.version}'
-merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.webserver.tjws/{kevoree.version}'
+merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.webserver.api/{project.version}'
+merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.nanohttp/{project.version}'
+merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.defaultChannels/{project.version}'
+merge 'mvn:org.kevoree.corelibrary.android/org.kevoree.library.android.nanohttp/{project.version}'
+merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.javaseNode/{project.version}'
+merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.webserver.servlet/{project.version}'
+merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.webserver.tjws/{project.version}'
 
 addNode node0:JavaSENode {logLevel = "DEBUG"}
 addComponent webserver@node0 : KTinyWebServer

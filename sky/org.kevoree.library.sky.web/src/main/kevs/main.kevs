@@ -1,5 +1,5 @@
-merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.minicloud/{kevoree.version}"
-merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.web/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.minicloud/{project.version}"
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.web/{project.version}"
 
 addNode node0 : MiniCloudNode { coreLogLevel = 'DEBUG', logLevel = 'DEBUG'}
 addComponent webf@node0 : WebFrontend { port = '8080'}

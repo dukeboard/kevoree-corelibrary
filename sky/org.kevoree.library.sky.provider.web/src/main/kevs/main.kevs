@@ -1,17 +1,17 @@
 
-merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.minicloud/{kevoree.version}"
-merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.basicGossiper/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.minicloud/{project.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.basicGossiper/{project.version}"
 
-merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.defaultChannels/{kevoree.version}'
-merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.camel/{kevoree.version}'
+merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.defaultChannels/{project.version}'
+merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.camel/{project.version}'
 
-merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.webserver.api/{kevoree.version}"
-merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.webserver.spray/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.webserver.api/{project.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.webserver.spray/{project.version}"
 
-merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.provider/{kevoree.version}"
-merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.provider.web/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.provider/{project.version}"
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.provider.web/{project.version}"
 
-merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.fakeDomo/{kevoree.version}'
+merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.fakeDomo/{project.version}'
 
 
 addNode node0 : MiniCloudNode { coreLogLevel="DEBUG",logLevel="DEBUG"}

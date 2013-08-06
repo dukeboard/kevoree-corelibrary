@@ -1,8 +1,8 @@
-merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.minicloud/{kevoree.version}"
-merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.javaseNode/{kevoree.version}"
-merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.basicGossiper/{kevoree.version}"
-merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.provider.web/{kevoree.version}"
-merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.defaultChannels/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.minicloud/{project.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.javaseNode/{project.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.basicGossiper/{project.version}"
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.provider.web/{project.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.defaultChannels/{project.version}"
 
 addNode minicloud : MiniCloudNode {logLevel = "INFO"}
 addNode node0 : PJavaSENode {logLevel = "INFO"}

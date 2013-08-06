@@ -1,6 +1,6 @@
-merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.minicloud/{kevoree.version}"
-merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.javaseNode/{kevoree.version}"
-merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.nanohttpAutoDiscovery/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.minicloud/{project.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.javaseNode/{project.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.nanohttpAutoDiscovery/{project.version}"
 
 addNode minicloud : MiniCloudNode {logLevel = "WARN"}
 

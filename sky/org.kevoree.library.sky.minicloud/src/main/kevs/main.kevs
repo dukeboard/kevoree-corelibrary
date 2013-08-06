@@ -1,6 +1,6 @@
 
-merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.minicloud/{kevoree.version}"
-merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.nanohttp/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.minicloud/{project.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.nanohttp/{project.version}"
 
 addNode node0 : MiniCloudNode { coreLogLevel="DEBUG",logLevel="DEBUG"}
 addGroup sync : NanoRestGroup

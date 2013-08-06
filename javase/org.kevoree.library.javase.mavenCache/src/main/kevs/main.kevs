@@ -1,6 +1,6 @@
-merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.javaseNode/{kevoree.version}"
-merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.mavenCache/{kevoree.version}"
-merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.jexxus/{kevoree.version}'
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.javaseNode/{project.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.mavenCache/{project.version}"
+merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.jexxus/{project.version}'
 
 
 addNode node0 : JavaSENode

@@ -1,5 +1,5 @@
 
-merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.MonitoredJavaSENode/{kevoree.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.MonitoredJavaSENode/{project.version}"
 
 addNode node0 : MonitoredJavaSENode
 addComponent probes@node0 : ThreadGroupStatsPrinter { period='500' }
