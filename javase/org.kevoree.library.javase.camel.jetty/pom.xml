@@ -15,6 +15,7 @@
 
     <properties>
         <camel.version>2.9.2</camel.version>
+        <kevoree.exclude>javax.servlet:servlet-api</kevoree.exclude>
     </properties>
 
     <dependencies>
