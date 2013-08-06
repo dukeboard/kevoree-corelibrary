@@ -2,7 +2,7 @@ package org.kevoree.library;
 
 import org.kevoree.ContainerRoot;
 import org.kevoree.api.service.core.script.KevScriptEngineFactory;
-import org.kevoree.cloner.ModelCloner;
+import org.kevoree.cloner.DefaultModelCloner;
 import org.kevoree.framework.AbstractGroupType;
 import org.kevoree.framework.KevoreePlatformHelper;
 import org.kevoree.log.Log;
@@ -54,7 +54,7 @@ public class NodeNetworkHelper {
         return model;
     }
 
-    private static ModelCloner cloner = new ModelCloner();
+    private static DefaultModelCloner cloner = new DefaultModelCloner();
 
     public static ContainerRoot updateModelWithNetworkProperty (AbstractGroupType group) {
         Object ipObject = group.getDictionary().get("ip");

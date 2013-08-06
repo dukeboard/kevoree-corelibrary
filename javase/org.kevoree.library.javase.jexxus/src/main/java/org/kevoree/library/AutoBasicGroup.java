@@ -5,7 +5,7 @@ import org.kevoree.ContainerRoot;
 import org.kevoree.annotation.GroupType;
 import org.kevoree.annotation.Start;
 import org.kevoree.api.service.core.handler.UUIDModel;
-import org.kevoree.cloner.ModelCloner;
+import org.kevoree.cloner.DefaultModelCloner;
 import org.kevoree.framework.KevoreePropertyHelper;
 import org.kevoree.log.Log;
 
@@ -62,7 +62,7 @@ public class AutoBasicGroup extends BasicGroup {
         outs.close();
     }
 
-    private static ModelCloner cloner = new ModelCloner();
+    private static DefaultModelCloner cloner = new DefaultModelCloner();
    // private static KevoreeMergerComponent merger = new KevoreeMergerComponent();
 
 

@@ -25,7 +25,7 @@ import org.kevoree.api.service.core.handler.{ModelListener, KevoreeModelHandlerS
 import org.kevoree.ContainerRoot
 import org.kevoree.api.service.core.script.KevScriptEngineFactory
 import org.kevoree.tools.marShell.interpreter.KevsInterpreterContext
-import org.kevoree.cloner.ModelCloner
+import org.kevoree.cloner.DefaultModelCloner
 
 
 class LocalKevsShell(mhs: KevoreeModelHandlerService, kevsfact: KevScriptEngineFactory) extends JPanel {
@@ -71,7 +71,7 @@ class LocalKevsShell(mhs: KevoreeModelHandlerService, kevsfact: KevScriptEngineF
       if (script != null) {
         import org.kevoree.tools.marShell.interpreter.KevsInterpreterAspects._
         val ghostModel = mhs.getLastUUIDModel
-        val modelClone = new ModelCloner
+        val modelClone = new DefaultModelCloner
         val cloneModel = modelClone.clone(ghostModel.getModel)
 
         val result = script.interpret(KevsInterpreterContext(cloneModel))

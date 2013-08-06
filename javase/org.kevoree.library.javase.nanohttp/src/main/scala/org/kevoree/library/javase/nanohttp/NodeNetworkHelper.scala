@@ -5,7 +5,7 @@ import scala.collection.JavaConversions._
 import java.net.{SocketException, NetworkInterface}
 import org.kevoree.api.service.core.script.KevScriptEngineFactory
 import org.kevoree.framework.{KevoreePlatformHelper, AbstractGroupType}
-import org.kevoree.cloner.ModelCloner
+import org.kevoree.cloner.DefaultModelCloner
 import org.kevoree.log.Log
 
 /**
@@ -19,7 +19,7 @@ import org.kevoree.log.Log
 
 object NodeNetworkHelper {
 
-  val cloner = new ModelCloner
+  val cloner = new DefaultModelCloner
 
   def updateModelWithNetworkProperty (group: AbstractGroupType) : Option[ContainerRoot] = {
     val readWriteModel = cloner.clone(group.getModelService.getLastModel)

@@ -6,7 +6,7 @@ import org.kevoree.tools.marShell.interpreter.KevsInterpreterContext
 import org.kevoree.tools.marShellTransform.KevScriptWrapper
 import org.kevoree.extra.kserial.{KevoreeSharedCom, ContentListener}
 import org.slf4j.LoggerFactory
-import org.kevoree.cloner.ModelCloner
+import org.kevoree.cloner.DefaultModelCloner
 import org.kevoree.extra.kserial.SerialPort._
 import scala.collection.JavaConversions._
 
@@ -26,20 +26,20 @@ object ArduinoModelGetHelper {
   {
     var cscript_pulled :String = null
     var found : Boolean = false
-    var  scriptRaw = new StringBuilder()
+    val scriptRaw = new StringBuilder()
 
     KevoreeSharedCom.addObserver(boardPortName, new ContentListener
     {
       def recContent(p1: String) {
         scriptRaw.append(p1.trim())
-        if(scriptRaw.contains('{') && scriptRaw.contains('}')&& scriptRaw.contains('@')&& scriptRaw.contains('$')&& scriptRaw.contains(':')&& scriptRaw.contains('+')&& scriptRaw.contains('!') && found != true) {
+        if(scriptRaw.contains('{') && scriptRaw.contains('}')&& scriptRaw.contains('@')&& scriptRaw.contains('$')&& scriptRaw.contains(':')&& scriptRaw.contains('+')&& scriptRaw.contains('!') && !found) {
           // extract cscript
           try {
             cscript_pulled = scriptRaw.subSequence(scriptRaw.indexOf('$')+1, scriptRaw.indexOf('!')+1).toString
             // verify checksum
-            if(KevScriptWrapper.checksum_csript(cscript_pulled) == true)
+            if(KevScriptWrapper.checksum_csript(cscript_pulled))
             {
-              found = true;
+              found = true
             } else
             {
               logger.warn("The checksum is not correct "+cscript_pulled)
@@ -57,15 +57,15 @@ object ArduinoModelGetHelper {
     try
     {
       scriptRaw.clear()
-      var timer : Int =0;
+      var timer : Int =0
       do
       {
         scriptRaw.clear()
 
         KevoreeSharedCom.send(boardPortName,"$g")
         Thread.sleep(500)
-        timer +=1;
-      } while(found == false && timer < timeout)
+        timer +=1
+      } while(!found && timer < timeout)
 
       if(found)
       {
@@ -105,7 +105,7 @@ object ArduinoModelGetHelper {
       //APPLY TO BUILD A CURRENT MODEL
       import org.kevoree.tools.marShell.interpreter.KevsInterpreterAspects._
 
-      val cc = new ModelCloner
+      val cc = new DefaultModelCloner
       var current = cc.clone(targetNewModel)
 
       current.removeAllGroups()

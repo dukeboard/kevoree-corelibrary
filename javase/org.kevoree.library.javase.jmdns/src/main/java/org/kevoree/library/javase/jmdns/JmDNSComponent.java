@@ -3,7 +3,7 @@ package org.kevoree.library.javase.jmdns;
 import org.kevoree.*;
 import org.kevoree.Dictionary;
 import org.kevoree.api.service.core.handler.UUIDModel;
-import org.kevoree.cloner.ModelCloner;
+import org.kevoree.cloner.DefaultModelCloner;
 import org.kevoree.framework.AbstractGroupType;
 import org.kevoree.framework.KevoreePlatformHelper;
 import org.kevoree.impl.DefaultKevoreeFactory;
@@ -35,7 +35,7 @@ public class JmDNSComponent {
     List<String> nodeAlreadyDiscovered = new ArrayList<String>();
 
     KevoreeFactory factory = new DefaultKevoreeFactory();
-    ModelCloner modelCloner = new ModelCloner();
+    DefaultModelCloner modelCloner = new DefaultModelCloner();
 
     private String inet;
     private AbstractGroupType group;

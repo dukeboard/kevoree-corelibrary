@@ -3,18 +3,13 @@ package org.kevoree.library.sky.lxc;
 import org.kevoree.ContainerNode;
 import org.kevoree.ContainerRoot;
 import org.kevoree.api.service.core.handler.UUIDModel;
-import org.kevoree.api.service.core.script.KevScriptEngineException;
-import org.kevoree.cloner.ModelCloner;
 import org.kevoree.framework.KevoreePlatformHelper;
 import org.kevoree.framework.KevoreePropertyHelper;
 import org.kevoree.library.sky.lxc.utils.IPAddressValidator;
 import org.kevoree.log.Log;
+import org.kevoree.cloner.DefaultModelCloner;
 
-import java.io.IOException;
-import java.lang.management.ManagementFactory;
 import java.util.List;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -94,7 +89,7 @@ public class WatchContainers implements Runnable {
                         if(!getIPModel(model,containerNode.getName()).contains(ip)){
                             Log.info("The Container {} has the IP address => {}",containerNode.getName(),ip);
                             uuidModel=  lxcHostNode.getModelService().getLastUUIDModel();
-                            ModelCloner cloner = new ModelCloner();
+                            DefaultModelCloner cloner = new DefaultModelCloner();
                             ContainerRoot readWriteModel = cloner.clone(lxcHostNode.getModelService().getLastModel());
                             updateNetworkProperties(readWriteModel, containerNode.getName(), ip);
                             lxcHostNode.getModelService().compareAndSwapModel(uuidModel, readWriteModel);

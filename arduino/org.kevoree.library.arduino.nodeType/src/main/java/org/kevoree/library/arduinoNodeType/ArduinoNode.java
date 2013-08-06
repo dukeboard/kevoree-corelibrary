@@ -4,7 +4,7 @@ package org.kevoree.library.arduinoNodeType;
 import org.kevoree.*;
 import org.kevoree.KevoreeFactory;
 import org.kevoree.api.service.core.checker.CheckerViolation;
-import org.kevoree.cloner.ModelCloner;
+import org.kevoree.cloner.DefaultModelCloner;
 import org.kevoree.extra.kserial.KevoreeSharedCom;
 import org.kevoree.extra.kserial.Utils.KHelpers;
 import org.kevoree.framework.AbstractNodeType;
@@ -55,6 +55,8 @@ public class ArduinoNode extends AbstractNodeType {
     protected  ArduinoDeploy arduinoDeploy=null;
     protected  Sketch sketch=null;
     protected Target target= null;
+
+    private static DefaultModelCloner cloner = new DefaultModelCloner();
 
     public void setForceUpdate(Boolean f) {
         forceUpdate = f;
@@ -128,7 +130,6 @@ public class ArduinoNode extends AbstractNodeType {
 
             if (lastVersionModel == null || lastVersionModel.getNodes().size() == 0) {
                 logger.info("No Previous Model , Init one from targetModel");
-                ModelCloner cloner = new ModelCloner();
                 lastVersionModel = cloner.clone(root);
                 for (ContainerNode node : lastVersionModel.getNodes()) {
                     node.removeAllComponents();
@@ -139,8 +140,7 @@ public class ArduinoNode extends AbstractNodeType {
             }
             tempRoot = root;
 
-            ModelCloner cc = new ModelCloner();
-            ContainerRoot cloned = cc.clone(root);
+            ContainerRoot cloned = cloner.clone(root);
             cloned.removeAllGroups();
 
 
@@ -205,7 +205,6 @@ public class ArduinoNode extends AbstractNodeType {
 
         KevoreeKompareBean kompare = new KevoreeKompareBean();
 
-        ModelCloner cloner = new ModelCloner();
         ContainerRoot lastVersionModel = cloner.clone(rootModel);
         for (ContainerNode node : lastVersionModel.getNodes()) {
             node.removeAllComponents();
