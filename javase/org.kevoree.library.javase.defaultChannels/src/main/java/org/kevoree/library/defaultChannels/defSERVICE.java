@@ -29,7 +29,7 @@ import org.kevoree.log.Log;
  * @author ffouquet
  */
 @Library(name = "JavaSE")
-@ChannelTypeFragment(theadStrategy = ThreadStrategy.SCALA_ACTOR)
+@ChannelTypeFragment
 public class defSERVICE extends AbstractChannelFragment {
 
 
