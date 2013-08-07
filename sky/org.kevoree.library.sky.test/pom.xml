@@ -121,17 +121,9 @@
             <id>kevoree-oss</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
-        <repository>
-            <id>jetbrains-release</id>
-            <url>http://repository.jetbrains.com/all</url>
-        </repository>
     </repositories>
 
     <pluginRepositories>
-        <pluginRepository>
-            <id>jetbrains-release</id>
-            <url>http://repository.jetbrains.com/all</url>
-        </pluginRepository>
         <pluginRepository>
             <id>plugin.kevoree-oss</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>

@@ -4,7 +4,7 @@ import org.kevoree.ContainerNode;
 import org.kevoree.ContainerRoot;
 import org.kevoree.annotation.*;
 import org.kevoree.api.service.core.handler.UUIDModel;
-import org.kevoree.cloner.ModelCloner;
+import org.kevoree.cloner.DefaultModelCloner;
 import org.kevoree.framework.Constants;
 import org.kevoree.framework.KevoreePlatformHelper;
 import org.kevoree.framework.KevoreePropertyHelper;
@@ -85,7 +85,7 @@ public class MiniCloudNode extends JavaSENode implements CloudNode, PaaSNode {
 
         public synchronized void run() {
             UUIDModel uuidModel = node.getModelService().getLastUUIDModel();
-            ModelCloner cloner = new ModelCloner();
+            DefaultModelCloner cloner = new DefaultModelCloner();
             ContainerRoot readWriteModel = cloner.clone(node.getModelService().getLastModel());
 
             boolean update = false;
