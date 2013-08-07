@@ -1,7 +1,6 @@
  {
 addRepo "http://maven.kevoree.org/release"
 addRepo "http://repo.maven.apache.org/maven2"
-addRepo "http://repository.jetbrains.com/all"
 addRepo "http://maven.kevoree.org/archiva/repository/snapshots/"
 addRepo "http://maven.kevoree.org/snapshots"
 merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.javaseNode/2.0.0-SNAPSHOT'

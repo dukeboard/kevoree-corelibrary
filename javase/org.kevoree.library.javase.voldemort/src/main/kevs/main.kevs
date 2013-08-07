@@ -1,7 +1,6 @@
  {
 addRepo "http://maven.kevoree.org/release"
 addRepo "http://repo.maven.apache.org/maven2"
-addRepo "http://repository.jetbrains.com/all"
 addRepo "https://oss.sonatype.org/content/groups/public/"
 addRepo "https://oss.sonatype.org/content/repositories/snapshots"
 addRepo "http://maven.kevoree.org/snapshots"
