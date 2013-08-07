@@ -41,9 +41,8 @@ $(function () {
 
     function synchModel() {
         //send to node
-        var oo3 = new kevoreeJSModule.java.io.OutputStream();
-        saver.serialize(model, oo3);
-        ws.send(oo3.$result)
+        var serializedModel = saver.serialize(model);
+        ws.send(serializedModel)
     }
 
     /* WS connection set */
