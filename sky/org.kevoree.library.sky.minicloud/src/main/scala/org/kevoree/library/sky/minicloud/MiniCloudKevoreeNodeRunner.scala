@@ -59,7 +59,7 @@ class MiniCloudKevoreeNodeRunner(nodeName: String, iaasNode: AbstractNodeType) e
         // if classpath is null then we download the jar with aether
         // else we start the child node with the same classpath as its parent.
         // main class  = org.kevoree.platform.standalone.app.Main
-        Log.debug(System.getProperty("java.class.path"))
+//        Log.debug(System.getProperty("java.class.path"))
         if (System.getProperty("java.class.path") != null) {
           Log.debug("trying to start child node with parent's classpath")
           if (!startWithClassPath(childBootstrapModel)) {
