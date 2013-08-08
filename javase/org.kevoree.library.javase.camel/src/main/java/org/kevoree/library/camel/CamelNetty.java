@@ -28,7 +28,7 @@ public class CamelNetty extends AbstractKevoreeCamelChannelType {
 
     protected int port;
 
-    /* found a solution to remobe */
+    /* found a solution to remove */
     @Start
     @Override
     public void startCamelChannel() throws Exception {

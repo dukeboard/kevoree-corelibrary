@@ -76,8 +76,7 @@ class AddInstance(val c: Instance, val nodeName: String, val modelservice: Kevor
                     //ignore killing thread
                 }
             }
-            val message = "Could not start the instance " + c.getName() + ":" + c.getTypeDefinition()!!.getName() + "\n"/*+ " maybe because one of its dependencies is missing.\n"
-        message += "Please check that all dependencies of your components are marked with a 'bundle' type (or 'kjar' type) in the pom of the component/channel's project.\n"*/
+            val message = "Could not start the instance " + c.getName() + ":" + c.getTypeDefinition()!!.getName()
             Log.error(message, e)
             return false
         }

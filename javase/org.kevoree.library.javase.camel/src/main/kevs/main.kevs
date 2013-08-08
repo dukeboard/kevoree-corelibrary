@@ -1,32 +1,45 @@
 // use to test camel netty (service + message) using multiple node
-addRepo "http://repo.maven.apache.org/maven2"
+addRepo "https://oss.sonatype.org/content/groups/public/"
+
 merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.javaseNode/2.0.0-SNAPSHOT'
 merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.fakeDomo/2.0.0-SNAPSHOT'
 merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.camel/2.0.0-SNAPSHOT'
+
 merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.webserver.tjws/2.0.0-SNAPSHOT'
 merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.jexxus/2.0.0-SNAPSHOT'
 merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.basicGossiper/2.0.0-SNAPSHOT'
 merge 'mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.minicloud/2.0.0-SNAPSHOT'
 
-addNode node0:MiniCloudNode { logLevel = "DEBUG", coreLogLevel = "DEBUG" }
-addNode node1:JavaSENode { logLevel = "DEBUG", coreLogLevel = "DEBUG" }
-addNode node2:JavaSENode { logLevel = "DEBUG", coreLogLevel = "DEBUG" }
+addNode node0:MiniCloudNode
+//{ logLevel = "DEBUG", coreLogLevel = "DEBUG" }
+addNode node1:JavaSENode
+//{ logLevel = "DEBUG", coreLogLevel = "DEBUG" }
+addNode node2:JavaSENode
+//{ logLevel = "DEBUG", coreLogLevel = "DEBUG" }
+
 addChild node1@node0
 addChild node2@node0
+
 addComponent FakeSimpl269@node1 : FakeSimpleSwitch
+
 addChannel CamelNett280 : CamelNettyService
 addChannel CamelNett433 : CamelNetty
 addChannel CamelNett833 : CamelNetty
+
 bind FakeSimpl269.toggle@node1 => CamelNett280
 bind FakeSimpl269.off@node1 => CamelNett433
 bind FakeSimpl269.on@node1 => CamelNett833
+
 addComponent FakeSimpl65@node2 : FakeSimpleLight
+
 bind FakeSimpl65.toggle@node2 => CamelNett280
 bind FakeSimpl65.off@node2 => CamelNett433
 bind FakeSimpl65.on@node2 => CamelNett833
+
 updateDictionary CamelNett280 {port='10000'}@node1,{port='10001'}@node2
 updateDictionary CamelNett433 {port='10010'}@node1,{port='10011'}@node2
 updateDictionary CamelNett833 {port='10020'}@node1,{port='10021'}@node2
-updateDictionary FakeSimpl65@node2
-addGroup sync:BasicGossiperGroup
-addToGroup sync node0
+updateDictionary FakeSimpl65@node2 
+
+//addGroup sync:BasicGossiperGroup
+//addToGroup sync node0
