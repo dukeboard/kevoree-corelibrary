@@ -18,4 +18,6 @@
 
 export MAVEN_OPTS="-Xms2048m -Xmx2048m -XX:PermSize=512m -XX:MaxPermSize=1024m"
 export JAVA_HOME=$(/usr/libexec/java_home)
-mvn release:clean release:prepare release:perform -Dgoals=deploy
+mvn release:clean 
+mvn release:prepare 
+mvn release:perform
