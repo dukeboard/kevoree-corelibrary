@@ -1,0 +1,91 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.kevoree.corelibrary.android</groupId>
+    <artifactId>org.kevoree.library.android.root</artifactId>
+    <packaging>pom</packaging>
+    <name>Kevoree :: CoreLibrary :: Android :: Root</name>
+    <version>2.0.0-SNAPSHOT</version>
+
+    <parent>
+        <artifactId>org.kevoree.library</artifactId>
+        <groupId>org.kevoree.corelibrary</groupId>
+        <version>2.0.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+
+    <properties>
+        <android.tools.aapt>${android.home}/build-tools/17.0.0/aapt</android.tools.aapt>
+        <android.tools.dx>${android.home}/build-tools/17.0.0/dx</android.tools.dx>
+        <kevoree.exclude>com.google.android:*,commons-*:*,org.apache.httpcomponents:*,org.khronos:*,xerces:*,xpp3:*,org.json:*,cglib:*,org.objenesis:*</kevoree.exclude>
+    </properties>
+
+    <modules>
+        <module>../org.kevoree.library.android.nodeType</module>
+        <module>../org.kevoree.library.android.authentication</module>
+        <module>../org.kevoree.library.android.logger</module>
+        <module>../org.kevoree.library.android.fakeDomo</module>
+        <module>../org.kevoree.library.android.nanohttp</module>
+        <module>../org.kevoree.library.android.defaultChannels</module>
+        <module>../org.kevoree.library.android.p2pSock</module>
+        <module>../org.kevoree.library.android.nioChannels</module>
+        <module>../org.kevoree.library.android.agrapher</module>
+		<module>../org.kevoree.library.android.jexxus</module>
+        <module>../org.kevoree.library.android.basicGossiper</module>
+		<module>../org.kevoree.library.android.mavenCache</module>
+        <module>../org.kevoree.library.android.nfcdemo</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.kevoree.tools</groupId>
+            <artifactId>org.kevoree.tools.annotation.api</artifactId>
+            <version>${kevoree.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.android</groupId>
+            <artifactId>android</artifactId>
+            <version>4.0.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kevoree.tools</groupId>
+            <artifactId>org.kevoree.tools.android.framework</artifactId>
+            <version>${kevoree.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.kevoree.tools</groupId>
+                <artifactId>org.kevoree.tools.annotation.mavenplugin</artifactId>
+                <extensions>true</extensions>
+                <version>${kevoree.version}</version>
+                <configuration>
+                    <nodeTypeNames>AndroidNode</nodeTypeNames>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Java compiler plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

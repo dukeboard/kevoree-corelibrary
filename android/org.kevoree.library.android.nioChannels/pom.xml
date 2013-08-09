@@ -43,6 +43,16 @@
     <build>
         <sourceDirectory>../../javase/org.kevoree.library.javase.nioChannels/src</sourceDirectory>
         <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <sourcepath>../../javase/org.kevoree.library.javase.nioChannels/src</sourcepath>
+                </configuration>
+            </plugin>
+
+
             <plugin>
                 <groupId>org.scala-tools</groupId>
                 <artifactId>maven-scala-plugin</artifactId>

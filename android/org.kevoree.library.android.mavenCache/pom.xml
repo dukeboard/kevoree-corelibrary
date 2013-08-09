@@ -16,6 +16,16 @@
     <build>
         <sourceDirectory>../../javase/org.kevoree.library.javase.mavenCache/src</sourceDirectory>
         <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <sourcepath>../../javase/org.kevoree.library.javase.mavenCache/src</sourcepath>
+                </configuration>
+            </plugin>
+
+
             <!-- android dex phase -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

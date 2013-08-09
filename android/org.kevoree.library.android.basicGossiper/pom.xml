@@ -48,6 +48,15 @@
         <sourceDirectory>../../javase/org.kevoree.library.javase.basicGossiper/src</sourceDirectory>
         <plugins>
 
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <sourcepath>../../javase/org.kevoree.library.javase.basicGossiper/src</sourcepath>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>com.google.protobuf.tools</groupId>
                 <artifactId>maven-protoc-plugin</artifactId>

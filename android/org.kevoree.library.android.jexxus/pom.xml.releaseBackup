@@ -2,8 +2,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>org.kevoree.library.android.authentication</artifactId>
-    <name>Kevoree :: CoreLibrary :: Android :: Authentication</name>
+    <artifactId>org.kevoree.library.android.jexxus</artifactId>
+    <name>Kevoree :: CoreLibrary :: Android :: Jexxus</name>
+    <version>2.0.0-SNAPSHOT</version>
 
     <parent>
         <artifactId>org.kevoree.library.android.root</artifactId>
@@ -13,18 +14,8 @@
     </parent>
 
     <build>
-        <sourceDirectory>../../javase/org.kevoree.library.javase.authentication/src</sourceDirectory>
+        <sourceDirectory>../../javase/org.kevoree.library.javase.jexxus/src</sourceDirectory>
         <plugins>
-
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <sourcepath>../../javase/org.kevoree.library.javase.authentication/src</sourcepath>
-                </configuration>
-            </plugin>
-
             <!-- android dex phase -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
