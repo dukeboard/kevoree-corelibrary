@@ -14,7 +14,6 @@
     <name>Kevoree :: CoreLibrary :: Sky :: Test</name>
 
     <properties>
-        <kevoree.version>2.0.0-SNAPSHOT</kevoree.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
