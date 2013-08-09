@@ -53,29 +53,29 @@ class MiniCloudKevoreeNodeRunner(nodeName: String, iaasNode: AbstractNodeType) e
       Log.debug("Start " + nodeName)
       val version = findVersionForChildNode(nodeName, childBootstrapModel, iaasModel.getNodes.find(n => n.getName == iaasNode.getNodeName).get)
 
-      if (version == factory.getVersion) {
-        Log.debug("try to start child node with the same Kevoree version")
+//      if (version == factory.getVersion) {
+//        Log.debug("try to start child node with the same Kevoree version")
         // find the classpath of the current node
         // if classpath is null then we download the jar with aether
         // else we start the child node with the same classpath as its parent.
         // main class  = org.kevoree.platform.standalone.app.Main
 //        Log.debug(System.getProperty("java.class.path"))
-        if (System.getProperty("java.class.path") != null) {
+       /* if (System.getProperty("java.class.path") != null) {
           Log.debug("trying to start child node with parent's classpath")
-          if (!startWithClassPath(childBootstrapModel)) {
-            Log.debug("Unable to start child node with parent's classpath, try to use aether bootstrap")
+          if (!startWithClassPath(childBootstrapModel)) {*/
+//            Log.debug("Unable to start child node with parent's classpath, try to use aether bootstrap")
             startWithAether(childBootstrapModel, version)
-          } else {
+          /*} else {
             true
-          }
-        } else {
+          }*/
+        /*} else {
           Log.debug("trying to start child node with aether bootstrap")
           startWithAether(childBootstrapModel, version)
-        }
-      } else {
+        }*/
+      /*} else {
         Log.debug("try to start child node with {} as Kevoree version", version)
         startWithAether(childBootstrapModel, version)
-      }
+      }*/
     } catch {
       case e: IOException => {
         Log.error("Unexpected error while trying to start " + nodeName, e)
@@ -109,7 +109,7 @@ class MiniCloudKevoreeNodeRunner(nodeName: String, iaasNode: AbstractNodeType) e
     java_home + File.separator + "bin" + File.separator + "java"
   }
 
-  private def startWithClassPath(childBootStrapModel: ContainerRoot): Boolean = {
+  /*private def startWithClassPath(childBootStrapModel: ContainerRoot): Boolean = {
     try {
       val java: String = getJava
       val tempFile = File.createTempFile("bootModel" + nodeName, ".kev")
@@ -158,7 +158,7 @@ class MiniCloudKevoreeNodeRunner(nodeName: String, iaasNode: AbstractNodeType) e
         false
       }
     }
-  }
+  }*/
 
   private def startWithAether(childBootStrapModel: ContainerRoot, kevoreeVersion: String): Boolean = {
     try {
@@ -186,13 +186,17 @@ class MiniCloudKevoreeNodeRunner(nodeName: String, iaasNode: AbstractNodeType) e
         nodePlatformProcess.exitValue
         false
       } else {
-        Log.error("Unable to start node because the platform jar file is not available")
+        Log.info("Unable to start node because the platform jar file is not available")
         false
       }
     } catch {
       case e: IllegalThreadStateException => {
         Log.info("platform " + nodeName + " is started")
         true
+      }
+      case e: Throwable => {
+        Log.info("platform " + nodeName + " is not started", e)
+        false
       }
     }
   }

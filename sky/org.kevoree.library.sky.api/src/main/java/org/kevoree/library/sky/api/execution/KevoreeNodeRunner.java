@@ -99,7 +99,7 @@ public abstract class KevoreeNodeRunner {
 
     private boolean isASubType(TypeDefinition nodeType, String typeName) {
         for (TypeDefinition superType : nodeType.getSuperTypes()) {
-            if (superType.getName() == typeName || isASubType(superType, typeName)) {
+            if (superType.getName().equals(typeName) || isASubType(superType, typeName)) {
                 return true;
             }
         }
@@ -108,7 +108,7 @@ public abstract class KevoreeNodeRunner {
 
     //  @throws(classOf[Exception])
     private void copyStringToFile(String data, String outputFile) throws Exception {
-        if (data != null && data != "") {
+        if (data != null && !data.equals("")) {
             if (new File(outputFile).exists()) {
                 new File(outputFile).delete();
             }
@@ -151,7 +151,7 @@ public abstract class KevoreeNodeRunner {
 
     //  @throws(classOf[java.lang.StringIndexOutOfBoundsException])
     private void replaceStringIntoFile(String dataToReplace, String newData, String file) throws Exception {
-        if (dataToReplace != null && dataToReplace != "" && newData != null && newData != "") {
+        if (dataToReplace != null && !dataToReplace.equals("") && newData != null && !newData.equals("")) {
             if (new File(file).exists()) {
                 StringBuilder stringBuilder = new StringBuilder();
                 DataInputStream reader = new DataInputStream(new FileInputStream(new File(file)));
@@ -189,10 +189,10 @@ public abstract class KevoreeNodeRunner {
         if (node != null) {
             Log.debug("looking for deploy unit");
             for (DeployUnit dp : node.getTypeDefinition().getDeployUnits()) {
-                if (dp.getTargetNodeType().getName() == iaasNode.getTypeDefinition().getName() || isASubType(iaasNode.getTypeDefinition(), dp.getTargetNodeType().getName())) {
+                if (dp.getTargetNodeType().getName().equals(iaasNode.getTypeDefinition().getName()) || isASubType(iaasNode.getTypeDefinition(), dp.getTargetNodeType().getName())) {
                     Log.debug("looking for version of kevoree framework for the found deploy unit");
                     for (DeployUnit dep : dp.getRequiredLibs()) {
-                        if (dp.getUnitName() == "org.kevoree" && dep.getGroupName() == "org.kevoree.framework") {
+                        if (dp.getUnitName().equals("org.kevoree") && dep.getGroupName().equals("org.kevoree.framework")) {
                             dep.getVersion();
                         }
                     }
@@ -209,9 +209,11 @@ public abstract class KevoreeNodeRunner {
         }
         String logFile = logFolder + File.separator + nodeName + ".log";
         outFile = new File(logFile + ".out");
+        outFile.deleteOnExit();
         Log.info("writing logs about {} on {}", nodeName, outFile.getAbsolutePath());
         new Thread(new ProcessStreamFileLogger(process.getInputStream(), outFile)).start();
         errFile = new File(logFile + ".err");
+        errFile.deleteOnExit();
         Log.info("writing logs about {} on {}", nodeName, errFile.getAbsolutePath());
         new Thread(new ProcessStreamFileLogger(process.getErrorStream(), errFile)).start();
     }

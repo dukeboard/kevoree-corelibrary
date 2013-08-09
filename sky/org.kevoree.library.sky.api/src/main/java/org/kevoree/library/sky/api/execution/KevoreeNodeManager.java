@@ -18,7 +18,7 @@ import java.util.List;
 public class KevoreeNodeManager {
 
 
-    List<KevoreeNodeRunner> runners = new ArrayList<KevoreeNodeRunner>();
+    protected final List<KevoreeNodeRunner> runners = new ArrayList<KevoreeNodeRunner>();
 
     private KevoreeNodeRunnerFactory kevoreeNodeRunnerFactory;
 
@@ -38,8 +38,11 @@ public class KevoreeNodeManager {
     public boolean addNode(ContainerRoot iaasModel, String targetChildName, ContainerRoot targetChildModel) {
         Log.debug("try to add {}", targetChildName);
 
-        KevoreeNodeRunner newRunner = kevoreeNodeRunnerFactory.createKevoreeNodeRunner(targetChildName);
-        runners.add(newRunner);
+        KevoreeNodeRunner newRunner;
+        synchronized (runners) {
+            newRunner = kevoreeNodeRunnerFactory.createKevoreeNodeRunner(targetChildName);
+            runners.add(newRunner);
+        }
 
         return newRunner.addNode(iaasModel, targetChildModel);
     }
@@ -54,11 +57,7 @@ public class KevoreeNodeManager {
                 runner = r;
             }
         }
-        if (runner != null) {
-            return runner.startNode(iaasModel, targetChildModel);
-        } else {
-            return true;
-        }
+        return runner == null || runner.startNode(iaasModel, targetChildModel);
     }
 
     public boolean stopNode(ContainerRoot iaasModel, String targetChildName) {
@@ -70,11 +69,7 @@ public class KevoreeNodeManager {
                 runner = r;
             }
         }
-        if (runner != null) {
-            return runner.stopNode();
-        } else {
-            return true;
-        }
+        return runner == null || runner.stopNode();
     }
 
     public boolean removeNode(ContainerRoot iaasModel, String targetChildName) {
@@ -87,7 +82,13 @@ public class KevoreeNodeManager {
             }
         }
         if (runner != null) {
-            return runner.removeNode();
+            boolean removed = runner.removeNode();
+            if (removed) {
+                synchronized (runners) {
+                    runners.remove(runner);
+                }
+            }
+            return removed;
         } else {
             return true;
         }
