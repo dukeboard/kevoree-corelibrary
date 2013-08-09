@@ -41,7 +41,7 @@
         <dependency>
             <groupId>org.kevoree.corelibrary.sky</groupId>
             <artifactId>org.kevoree.library.sky.provider.api</artifactId>
-            <version>${project.version}</version>
+            <version>${kevoree.version}</version>
         </dependency>
     </dependencies>
     <build>
