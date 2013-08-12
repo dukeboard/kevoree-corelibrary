@@ -92,7 +92,7 @@
        <!-- <module>./daum/org.daum.library.javase.root</module>
         <module>./daum/org.daum.library.android.root</module>
         -->
-        <module>./model/org.kevoree.library.model.root</module>
+       <!-- <module>./model/org.kevoree.library.model.root</module> -->
     </modules>
 
     <repositories>

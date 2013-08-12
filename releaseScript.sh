@@ -21,3 +21,10 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 mvn release:clean 
 mvn release:prepare
 mvn release:perform
+
+
+cd model
+cd org.kevoree.library.model.root
+mvn release:clean 
+mvn release:prepare
+mvn release:perform
