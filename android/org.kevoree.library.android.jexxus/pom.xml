@@ -12,6 +12,14 @@
         <relativePath>../org.kevoree.library.android.root/pom.xml</relativePath>
     </parent>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.kevoree.corelibrary.android</groupId>
+            <artifactId>org.kevoree.library.android.javaseNode</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <sourceDirectory>../../javase/org.kevoree.library.javase.jexxus/src</sourceDirectory>
         <plugins>
