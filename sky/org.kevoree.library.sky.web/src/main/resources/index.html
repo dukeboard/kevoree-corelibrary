@@ -6,11 +6,8 @@
     <script src="lib/jquery.js"></script>
     <script src="lib/bootstrap.min.js"></script>
     <script src="lib/bootstrap-notify.js"></script>
-    <script src="lib/kotlin-lib-ecma3.js"></script>
-    <script src="lib/kotlin-lib.js"></script>
-    <script src="lib/kotlin-maps.js"></script>
     <script src="lib/bootbox.min.js"></script>
-    <script type="text/javascript" src="lib/org.kevoree.modeling.sample.kevoree.js.js"></script>
+    <script type="text/javascript" src="lib/org.kevoree.modeling.sample.kevoree.js.min.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="css/bootstrap-notify.css" rel="stylesheet">
@@ -194,6 +191,7 @@ $(function () {
     });
 
     $("#submitAddChild").click(function () {
+//        try {
         var currentNode = model.findNodesByID(nodeName);
         var paasType = model.findTypeDefinitionsByID("PJavaSENode");
         if (!paasType) {
@@ -205,6 +203,10 @@ $(function () {
         if (currentNode != undefined && paasType != undefined) {
             var newChildNode = factory.createContainerNode();
             newChildNode.setTypeDefinition(paasType);
+
+            var name = jQuery("#nameInput").get(0).value;
+            newChildNode.setName(name);
+
             currentNode.addHosts(newChildNode);
             model.addNodes(newChildNode);
 
@@ -214,8 +216,6 @@ $(function () {
             var dictionaryTypeAttributes = dictionaryType.getAttributes();
             newChildNode.setDictionary(dictionary);
 
-            var name = jQuery("#nameInput").get(0).value;
-            newChildNode.setName(name);
 
             jQuery(".control-group").each(function (index, e) {
                 if (e.id !== "nameControlGroup") {
@@ -253,7 +253,11 @@ $(function () {
             // to close the modal window
             $("#closeButton").trigger("click");
             synchModel();
-        }
+    }
+        /*} catch (e) {
+            console.log(e.message);
+
+        }*/
     });
 });
 </script>
