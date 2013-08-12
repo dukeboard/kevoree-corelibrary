@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>org.kevoree.corelibrary.android</groupId>
-            <artifactId>org.kevoree.library.android.javaseNode</artifactId>
+            <artifactId>org.kevoree.library.android.nodeType</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
