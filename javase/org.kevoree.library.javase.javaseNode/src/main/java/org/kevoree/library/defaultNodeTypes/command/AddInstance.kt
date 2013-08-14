@@ -76,7 +76,7 @@ class AddInstance(val c: Instance, val nodeName: String, val modelservice: Kevor
                     //ignore killing thread
                 }
             }
-            val message = "Could not start the instance " + c.getName() + ":" + c.getTypeDefinition()!!.getName()
+            val message = "Could not add the instance " + c.getName() + ":" + c.getTypeDefinition()!!.getName()
             Log.error(message, e)
             return false
         }
