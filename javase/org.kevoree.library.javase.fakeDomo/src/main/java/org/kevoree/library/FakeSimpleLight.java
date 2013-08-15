@@ -125,6 +125,7 @@ public class FakeSimpleLight extends AbstractFakeStuffComponent {
         public final void setColor(Color c) {
             this.c = c;
             repaint();
+            revalidate();
             Log.debug("SetColor " + c.toString());
         }
     }

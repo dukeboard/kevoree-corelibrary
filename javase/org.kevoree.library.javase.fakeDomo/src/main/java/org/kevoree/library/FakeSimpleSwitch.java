@@ -132,6 +132,7 @@ public class FakeSimpleSwitch extends AbstractFakeStuffComponent {
             on.setText(onText);
             off.setText(offText);
             super.repaint();
+            super.revalidate();
         }
 
         /**
