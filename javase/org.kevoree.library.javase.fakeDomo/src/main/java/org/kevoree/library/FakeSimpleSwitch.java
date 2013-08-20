@@ -48,7 +48,7 @@ public class FakeSimpleSwitch extends AbstractFakeStuffComponent {
     public void start() {
         frame = new MyFrame("on", "off");
         frame.setVisible(true);
-       if (this.isPortBinded("toggle")) {
+        if (this.isPortBinded("toggle")) {
 //            this.getPortByName("toggle", ToggleLightService.class).toggle();
         }
     }
@@ -106,7 +106,13 @@ public class FakeSimpleSwitch extends AbstractFakeStuffComponent {
                 public void actionPerformed(ActionEvent e) {
                     if (isPortBinded("toggle")) {
                         String state = getPortByName("toggle", ToggleLightService.class).toggle();
-                        toogle.setText(state);
+                        if (state.equalsIgnoreCase("true")) {
+                            toogle.setText("on");
+                        } else if (state.equalsIgnoreCase("false")) {
+                            toogle.setText("off");
+                        } else {
+                            toogle.setText(state);
+                        }
                     }
 
                 }
