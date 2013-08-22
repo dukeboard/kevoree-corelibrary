@@ -83,9 +83,14 @@ public class FakeSimpleSwitch extends AbstractFakeStuffComponent {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if (isPortBinded("on")) {
-                        getPortByName("on", MessagePort.class).process(new HashMap<String, String>());
-                    }
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (isPortBinded("on")) {
+                                getPortByName("on", MessagePort.class).process(new HashMap<String, String>());
+                            }
+                        }
+                    });
                 }
             });
 
@@ -94,9 +99,14 @@ public class FakeSimpleSwitch extends AbstractFakeStuffComponent {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if (isPortBinded("off")) {
-                        getPortByName("off", MessagePort.class).process(new HashMap<String, String>());
-                    }
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (isPortBinded("off")) {
+                                getPortByName("off", MessagePort.class).process(new HashMap<String, String>());
+                            }
+                        }
+                    });
                 }
             });
             toogle = new JButton("-?-");
@@ -104,16 +114,21 @@ public class FakeSimpleSwitch extends AbstractFakeStuffComponent {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if (isPortBinded("toggle")) {
-                        String state = getPortByName("toggle", ToggleLightService.class).toggle();
-                        if (state.equalsIgnoreCase("true")) {
-                            toogle.setText("on");
-                        } else if (state.equalsIgnoreCase("false")) {
-                            toogle.setText("off");
-                        } else {
-                            toogle.setText(state);
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (isPortBinded("toggle")) {
+                                String state = getPortByName("toggle", ToggleLightService.class).toggle();
+                                if (state.equalsIgnoreCase("true")) {
+                                    toogle.setText("on");
+                                } else if (state.equalsIgnoreCase("false")) {
+                                    toogle.setText("off");
+                                } else {
+                                    toogle.setText(state);
+                                }
+                            }
                         }
-                    }
+                    });
 
                 }
             });

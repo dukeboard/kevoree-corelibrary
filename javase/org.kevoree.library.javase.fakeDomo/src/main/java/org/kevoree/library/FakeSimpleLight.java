@@ -76,12 +76,12 @@ public class FakeSimpleLight extends AbstractFakeStuffComponent {
             @Port(name = "on")
     })
     public void lightOn(Object o) throws InvocationTargetException, InterruptedException {
+        state = true;
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 frame.setColor(Color.green);
                 //frame.revalidate();
-                state = true;
             }
         });
     }
@@ -90,12 +90,12 @@ public class FakeSimpleLight extends AbstractFakeStuffComponent {
             @Port(name = "off")
     })
     public void lightOff(Object o) throws InvocationTargetException, InterruptedException {
+        state = false;
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 frame.setColor(Color.red);
                 //frame.revalidate();
-                state = false;
             }
         });
     }
