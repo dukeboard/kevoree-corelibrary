@@ -42,7 +42,7 @@ public class WebSocketGroup extends AbstractGroupType {
     // Protocol related fields
     //========================
     protected static final byte PUSH = 1;
-    protected static final byte PULL = 2;
+    protected static final byte PULL = 0;
 	private WebServer server;
 	private int port;
 	private boolean isStarted = false;
