@@ -201,7 +201,7 @@ public class BasicGroup extends AbstractGroupType implements ConnectionListener 
             }
         }
         if (!success) {
-            throw new Exception("Unable to pull model on " + targetNodeName);
+            throw new Exception("Unable to push model on " + targetNodeName);
         }
     }
 
