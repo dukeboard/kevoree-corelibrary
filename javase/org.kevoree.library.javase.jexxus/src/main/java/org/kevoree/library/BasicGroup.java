@@ -176,9 +176,10 @@ public class BasicGroup extends AbstractGroupType implements ConnectionListener 
                 }
             }
         }
+
+        boolean success;
         List<String> ips = KevoreePropertyHelper.instance$.getNetworkProperties(model, targetNodeName, org.kevoree.framework.Constants.instance$.getKEVOREE_PLATFORM_REMOTE_NODE_IP());
         if (ips.size() > 0) {
-            boolean success;
             int i = 0;
             do {
                 try {
@@ -190,15 +191,17 @@ public class BasicGroup extends AbstractGroupType implements ConnectionListener 
                 }
                 i++;
             } while (!success && i < ips.size());
-
-
         } else {
             Log.debug("Try to send the model using the localhost ip for {}", targetNodeName);
             try {
-                sendModel("127.0.0.1", PORT, output);
+                success = sendModel("127.0.0.1", PORT, output);
             } catch (IOException e) {
                 Log.debug("Unable to push model on {} using {}", e, targetNodeName, "127.0.0.1:" + PORT);
+                success = false;
             }
+        }
+        if (!success) {
+            throw new Exception("Unable to pull model on " + targetNodeName);
         }
     }
 
@@ -217,27 +220,36 @@ public class BasicGroup extends AbstractGroupType implements ConnectionListener 
                 }
             }
         }
+        boolean success;
+        ContainerRoot newModel = null;
         List<String> ips = KevoreePropertyHelper.instance$.getNetworkProperties(model, targetNodeName, org.kevoree.framework.Constants.instance$.getKEVOREE_PLATFORM_REMOTE_NODE_IP());
         if (ips.size() > 0) {
-            boolean success;
             int i = 0;
             do {
                 try {
-                    success = requestModel(ips.get(i), PORT, targetNodeName) != null;
+                    newModel = requestModel(ips.get(i), PORT, targetNodeName);
+                    success =  newModel != null;
                 } catch (IOException e) {
                     Log.debug("Unable to request model on {} using {}", e, targetNodeName, ips.get(i) + ":" + PORT);
                     success = false;
                 }
                 i++;
             } while (!success && i < ips.size());
+
         } else {
             try {
-                return requestModel("127.0.0.1", PORT, targetNodeName);
+                newModel = requestModel("127.0.0.1", PORT, targetNodeName);
+                success =  newModel != null;
             } catch (Exception e) {
                 Log.debug("Unable to request model on {} using {}", e, targetNodeName, "127.0.0.1:" + PORT);
+                success = false;
             }
         }
-        throw new Exception("Unable to pull model on " + targetNodeName);
+        if (!success) {
+            throw new Exception("Unable to pull model on " + targetNodeName);
+        } else {
+            return newModel;
+        }
     }
 
     protected ContainerRoot requestModel(String ip, int port, final String targetNodeName) throws IOException, TimeoutException, InterruptedException {
