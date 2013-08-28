@@ -4,6 +4,9 @@ import org.kevoree.log.Log;
 
 import java.net.URI;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -20,12 +23,13 @@ public class WebSocketClientHandler {
     private static final long DEFAULT_LOOP_TIME = 5000;
     private long loopTime;
     private ConnectionTask.Handler handler;
-    private ScheduledExecutorService pool;
+    private List<ScheduledExecutorService> pool;
+    private WebSocketClient connectedClient = null;
 
     public WebSocketClientHandler(long loopTime) {
         this.loopTime = loopTime;
         this.handler = defaultHandler;
-        this.pool = Executors.newScheduledThreadPool(10);
+        this.pool = Collections.synchronizedList(new ArrayList<ScheduledExecutorService>());
     }
 
     public WebSocketClientHandler(ConnectionTask.Handler handler) {
@@ -41,12 +45,40 @@ public class WebSocketClientHandler {
         this.handler = handler;
     }
 
-    public void startConnectionTask(URI uri) {
-        pool.scheduleWithFixedDelay(new ConnectionTask(uri, handler), 0, loopTime, TimeUnit.MILLISECONDS);
+    public void startConnectionTasks(final List<URI> uris) {
+        for (URI uri : uris) {
+            final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+            this.pool.add(executor);
+            executor.scheduleWithFixedDelay(new ConnectionTask(uri, new ConnectionTask.Handler() {
+                @Override
+                public void onMessage(ByteBuffer bytes) {
+                    handler.onMessage(bytes);
+                }
+
+                @Override
+                public void onConnectionSucceeded(WebSocketClient client) {
+                    connectedClient = client;
+                    handler.onConnectionSucceeded(client);
+                    stopAllTasks();
+                }
+
+                @Override
+                public void onConnectionClosed(WebSocketClient client) {
+                    handler.onConnectionClosed(client);
+                    if (connectedClient.equals(client)) {
+                        // restart connection tasks
+                        startConnectionTasks(uris);
+                    }
+                }
+            }), 0, loopTime, TimeUnit.MILLISECONDS);
+        }
     }
 
     public void stopAllTasks() {
-        this.pool.shutdownNow();
+        for (ScheduledExecutorService executor : this.pool) {
+            executor.shutdownNow();
+            this.pool.remove(executor);
+        }
     }
 
     private ConnectionTask.Handler defaultHandler = new ConnectionTask.Handler() {

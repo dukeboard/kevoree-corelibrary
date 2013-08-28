@@ -6,7 +6,10 @@ import java.net.URI;
 import java.nio.ByteBuffer;
 
 /**
- * Created with IntelliJ IDEA.
+ * Thread that creates a WebSocket client to connect to the given URI.
+ * When the client connection is initiated, this handler onConnectionSucceeded(WebSocketClient) method will be called.
+ * Otherwise, if client's connection is closed, onConnectionClosed(WebSocketClient) method from handler will be called.
+ * For each messages received by the WebSocket client, this handler onMessage(ByteBuffer) method will be called.
  * User: leiko
  * Date: 3/26/13
  * Time: 9:56 AM
@@ -37,9 +40,7 @@ public class ConnectionTask implements Runnable {
                 }
             };
 
-            boolean connSucceeded = client.connectBlocking();
-
-            if (connSucceeded) {
+            if (client.connectBlocking()) {
                 handler.onConnectionSucceeded(client);
                 return;
             } else {

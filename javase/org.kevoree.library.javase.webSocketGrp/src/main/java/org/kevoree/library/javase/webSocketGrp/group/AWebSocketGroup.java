@@ -27,7 +27,6 @@ import javax.swing.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.net.URI;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -349,7 +348,7 @@ public /*abstract*/ class AWebSocketGroup extends AbstractGroupType implements D
      * in a loop delayed with the given "reconnectDelay" property)
      */
     private void localStartClient() {
-        Map<String, Integer> serverAddresses = getMasterServerAddresses();
+        final Map<String, Integer> serverAddresses = getMasterServerAddresses();
         if (serverAddresses.isEmpty()) {
             throw new IllegalArgumentException(
                     "There is no master server node in "
@@ -379,16 +378,13 @@ public /*abstract*/ class AWebSocketGroup extends AbstractGroupType implements D
                     Log.debug("Client {} on {} connected to master server.", client.getURI().toString(), getNodeName());
 
                     try {
+                        // send REGISTER request to master server
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         baos.write(REGISTER);
                         baos.write(getNodeName().getBytes());
                         client.send(baos.toByteArray());
 
-                        // connection has been made with master server
-                        // we can stop the connection task that was looping to reach this connection state
-                        wsClientHandler.stopAllTasks();
-
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         Log.error("Something went wrong while trying to send REGISTER message", e);
                     }
                 }
@@ -396,17 +392,18 @@ public /*abstract*/ class AWebSocketGroup extends AbstractGroupType implements D
                 @Override
                 public void onConnectionClosed(WebSocketClient cli) {
                     if (cli.equals(client)) {
+                        // drop closed client reference
                         client = null;
                     }
                 }
             });
 
             // start a connection task in the WebSocketClientHandler for each IP found for master server
+            List<URI> uris = new ArrayList<URI>();
             for (Map.Entry<String, Integer> address : serverAddresses.entrySet()) {
-                String ip = address.getKey();
-                Integer port = address.getValue();
-                wsClientHandler.startConnectionTask(URI.create("ws://" + ip + ":" + port + "/"));
+                uris.add(URI.create("ws://" + address.getKey() + ":" + address.getValue() + "/"));
             }
+            wsClientHandler.startConnectionTasks(uris);
         }
     }
 
