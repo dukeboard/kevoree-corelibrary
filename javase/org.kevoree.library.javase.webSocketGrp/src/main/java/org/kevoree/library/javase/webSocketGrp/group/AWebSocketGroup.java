@@ -27,6 +27,7 @@ import javax.swing.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -127,39 +128,37 @@ public /*abstract*/ class AWebSocketGroup extends AbstractGroupType implements D
         // check whether this node wants to be a server or a client
         Object portVal = getDictionary().get("port");
         if (portVal != null) {
-            String strPort = getDictionary().get("port").toString().trim();
-            if (strPort.isEmpty()) {
-                // there is no port set for this node => client
-                isClient = true;
+            String strPort = portVal.toString().trim();
+            // there is a port set for this node => server
+            port = Integer.parseInt(strPort);
 
-                // retrieve client-specific properties
-                reconnectDelay = Long.parseLong(getDictionary().get("reconnectDelay").toString());
+            // process local server start
+            localStartServer();
 
-                // process local client start
-                localStartClient();
+            // dispatch server start event
+            onServerStart();
 
-                // dispatch client start event
-                onClientStart();
+            // process to do if maven is requested
+            if (mvnRepo) {
+                localServerMavenStart();
+            }
 
-                // process to do if maven is requested
-                if (mvnRepo) {
-                    localClientMavenStart();
-                }
+        } else {
+            // there is no port set for this node => client
+            isClient = true;
 
-            } else {
-                // there is a port set for this node => server
-                port = Integer.parseInt(strPort);
+            // retrieve client-specific properties
+            reconnectDelay = Long.parseLong(getDictionary().get("reconnectDelay").toString());
 
-                // process local server start
-                localStartServer();
+            // process local client start
+            localStartClient();
 
-                // dispatch server start event
-                onServerStart();
+            // dispatch client start event
+            onClientStart();
 
-                // process to do if maven is requested
-                if (mvnRepo) {
-                    localServerMavenStart();
-                }
+            // process to do if maven is requested
+            if (mvnRepo) {
+                localClientMavenStart();
             }
         }
     }
@@ -333,6 +332,7 @@ public /*abstract*/ class AWebSocketGroup extends AbstractGroupType implements D
      * Resets the map that keeps active client connections
      */
     private void localStartServer() {
+        Log.debug("localStartServer");
         // this node is good to go : this is the master server
         clients = new HashMap<WebSocketConnection, String>();
 
@@ -381,11 +381,14 @@ public /*abstract*/ class AWebSocketGroup extends AbstractGroupType implements D
                     try {
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         baos.write(REGISTER);
-                        byte[] byteName = getNodeName().getBytes();
-                        baos.write(byteName, 1, byteName.length);
+                        baos.write(getNodeName().getBytes());
                         client.send(baos.toByteArray());
 
-                    } catch (Exception e) {
+                        // connection has been made with master server
+                        // we can stop the connection task that was looping to reach this connection state
+                        wsClientHandler.stopAllTasks();
+
+                    } catch (IOException e) {
                         Log.error("Something went wrong while trying to send REGISTER message", e);
                     }
                 }

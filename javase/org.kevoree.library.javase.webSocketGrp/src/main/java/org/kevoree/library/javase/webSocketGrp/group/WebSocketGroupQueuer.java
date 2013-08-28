@@ -100,13 +100,14 @@ public class WebSocketGroupQueuer extends WebSocketGroupEchoer {
         super.onMasterServerRegisterEvent(connection, nodeName);
 
         if (waitingQueueContainsNode(nodeName)) {
-            // if we ends up here, it means that this node wasn't connected
+            // if we end up here, it means that this node wasn't connected
             // when a push request was initiated earlier and though it has
             // to get the new model back
             Log.debug(nodeName+" is in the waiting queue, meaning that we have to send the model back to him");
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             KevoreeXmiHelper.instance$.saveStream(baos, getAndRemoveModelFromQueue(nodeName));
             connection.send(baos.toByteArray());
+            Log.debug("Model sent to {} (was in waiting queue).", nodeName);
         }
     }
 
