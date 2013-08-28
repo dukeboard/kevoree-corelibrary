@@ -23,7 +23,6 @@ import java.io.IOException;
 @Requires({
 		@RequiredPort(name = "out", type = PortType.MESSAGE, optional = true)
 })
-@GroupType
 @Library(name = "Android")
 public class Random extends AbstractComponentType implements Runnable {
 
