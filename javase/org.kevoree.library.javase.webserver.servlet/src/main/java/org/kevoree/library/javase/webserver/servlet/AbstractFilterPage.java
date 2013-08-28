@@ -7,8 +7,13 @@ import org.kevoree.library.javase.webserver.KevoreeHttpRequest;
 import org.kevoree.library.javase.webserver.KevoreeHttpResponse;
 import org.kevoree.log.Log;
 
-import javax.servlet.*;
-import java.util.*;
+import javax.servlet.Filter;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
@@ -18,7 +23,7 @@ import java.util.*;
  * @author Erwan Daubert
  * @version 1.0
  */
-@ComponentFragment
+@ComponentType
 @Provides({
 		@ProvidedPort(name = "filteredResponse", type = PortType.MESSAGE)
 })

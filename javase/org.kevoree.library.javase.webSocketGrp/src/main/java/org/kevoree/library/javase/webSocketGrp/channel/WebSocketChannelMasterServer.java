@@ -34,7 +34,7 @@ import java.util.concurrent.TimeUnit;
         @DictionaryAttribute(name = "use_queue", defaultValue = "true", vals = {"true", "false"}),
         @DictionaryAttribute(name = "maxQueued", defaultValue = "42")
 })
-@ChannelTypeFragment
+@ChannelType
 public class WebSocketChannelMasterServer extends AbstractChannelFragment {
 
     private static final int DEFAULT_MAX_QUEUED = 42;

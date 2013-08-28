@@ -36,7 +36,7 @@ import java.util.concurrent.Executors;
  */
 
 @Library(name = "JavaSE", names = {"Android"})
-@ChannelTypeFragment
+@ChannelType
 @DictionaryType({
 		@DictionaryAttribute(name = "port", defaultValue = "9000", optional = true, fragmentDependant = true),
 		@DictionaryAttribute(name = "type", defaultValue = "nio", optional = true, vals = {"nio", "oio"})

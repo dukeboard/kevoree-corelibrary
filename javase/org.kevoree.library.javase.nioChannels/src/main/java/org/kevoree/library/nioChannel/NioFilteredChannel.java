@@ -1,6 +1,6 @@
 package org.kevoree.library.nioChannel;
 
-import org.kevoree.annotation.ChannelTypeFragment;
+import org.kevoree.annotation.ChannelType;
 import org.kevoree.annotation.Library;
 import org.kevoree.framework.KevoreeChannelFragment;
 import org.kevoree.framework.KevoreePort;
@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
  * @version 1.0
  */
 @Library(name = "JavaSE")
-@ChannelTypeFragment
+@ChannelType
 public class NioFilteredChannel extends NioChannel {
 
 	private static final Logger logger = LoggerFactory.getLogger(NioFilteredChannel.class);

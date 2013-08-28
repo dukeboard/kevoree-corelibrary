@@ -22,7 +22,7 @@ import org.kevoree.framework.AbstractChannelFragment;
 import org.kevoree.framework.ChannelFragmentSender;
 import org.kevoree.framework.KevoreeChannelFragment;
 import org.kevoree.framework.NoopChannelFragmentSender;
-import org.kevoree.framework.message.*;
+import org.kevoree.framework.message.Message;
 import org.kevoree.log.Log;
 
 /**
@@ -30,7 +30,7 @@ import org.kevoree.log.Log;
  * @author ffouquet
  */
 @Library(name = "JavaSE")
-@ChannelTypeFragment
+@ChannelType
 public class defMSG extends AbstractChannelFragment {
 
     @Override

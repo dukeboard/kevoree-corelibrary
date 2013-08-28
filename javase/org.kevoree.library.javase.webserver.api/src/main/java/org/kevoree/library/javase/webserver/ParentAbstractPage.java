@@ -1,6 +1,6 @@
 package org.kevoree.library.javase.webserver;
 
-import org.kevoree.annotation.ComponentFragment;
+import org.kevoree.annotation.ComponentType;
 import org.kevoree.annotation.Library;
 import org.kevoree.annotation.Start;
 import org.kevoree.annotation.Update;
@@ -15,7 +15,7 @@ import org.kevoree.log.Log;
  * @version 1.0
  */
 @Library(name = "JavaSE")
-@ComponentFragment
+@ComponentType
 public abstract class ParentAbstractPage extends AbstractPage {
 
     @Override

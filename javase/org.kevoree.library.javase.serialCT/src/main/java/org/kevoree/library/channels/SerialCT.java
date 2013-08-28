@@ -10,7 +10,6 @@ import org.kevoree.framework.KevoreePropertyHelper;
 import org.kevoree.framework.message.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import scala.Option;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +22,7 @@ import java.util.List;
 @DictionaryType({
 		@DictionaryAttribute(name = "serialport", fragmentDependant = true, optional = true, defaultValue = "*")
 })
-@ChannelTypeFragment
+@ChannelType
 public class SerialCT extends AbstractChannelFragment {
 	private static final Logger logger = LoggerFactory.getLogger(SerialCT.class);
 

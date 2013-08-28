@@ -32,7 +32,7 @@ import java.util.concurrent.atomic.AtomicReference;
 @DictionaryType({
         @DictionaryAttribute(name = "interval", defaultValue = "30000", optional = true)
 })
-@ChannelTypeFragment
+@ChannelType
 public class BasicGossiperChannel extends AbstractChannelFragment implements ModelListener, GossiperComponent {
 
     private DataManagerForChannel dataManager;

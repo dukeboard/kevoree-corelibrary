@@ -17,11 +17,14 @@
  */
 package org.kevoree.library.defaultChannels;
 
-import org.kevoree.annotation.*;
+import org.kevoree.annotation.ChannelType;
+import org.kevoree.annotation.Library;
+import org.kevoree.annotation.Start;
+import org.kevoree.annotation.Stop;
 import org.kevoree.framework.AbstractChannelFragment;
 import org.kevoree.framework.ChannelFragmentSender;
 import org.kevoree.framework.NoopChannelFragmentSender;
-import org.kevoree.framework.message.*;
+import org.kevoree.framework.message.Message;
 import org.kevoree.log.Log;
 
 /**
@@ -29,7 +32,7 @@ import org.kevoree.log.Log;
  * @author ffouquet
  */
 @Library(name = "JavaSE")
-@ChannelTypeFragment
+@ChannelType
 public class defSERVICE extends AbstractChannelFragment {
 
 

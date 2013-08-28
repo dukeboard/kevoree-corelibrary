@@ -1,6 +1,6 @@
 package org.kevoree.library.javase.webserver.servlet;
 
-import org.kevoree.annotation.ComponentFragment;
+import org.kevoree.annotation.ComponentType;
 import org.kevoree.library.javase.webserver.AbstractPage;
 import org.kevoree.library.javase.webserver.KevoreeHttpRequest;
 import org.kevoree.library.javase.webserver.KevoreeHttpResponse;
@@ -10,7 +10,9 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,7 +20,7 @@ import java.util.*;
  * Date: 07/12/11
  * Time: 12:50
  */
-@ComponentFragment
+@ComponentType
 public abstract class AbstractHttpServletPage extends AbstractPage {
 
 	protected HttpServlet legacyServlet;

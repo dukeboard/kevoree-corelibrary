@@ -3,7 +3,6 @@ package org.kevoree.library.channels;
 import org.kevoree.annotation.*;
 import org.kevoree.framework.AbstractChannelFragment;
 import org.kevoree.framework.ChannelFragmentSender;
-import org.kevoree.framework.NoopChannelFragmentSender;
 import org.kevoree.framework.message.Message;
 
 
@@ -13,7 +12,7 @@ import org.kevoree.framework.message.Message;
  * Time: 08:57
  */
 @Library(name = "Arduino")
-@ChannelTypeFragment
+@ChannelType
 @DictionaryType({
         @DictionaryAttribute(name = "serialport", fragmentDependant = true, optional = true, defaultValue = "*")
 })
