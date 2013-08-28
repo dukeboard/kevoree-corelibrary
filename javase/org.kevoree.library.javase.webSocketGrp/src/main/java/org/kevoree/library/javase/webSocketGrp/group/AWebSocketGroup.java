@@ -27,7 +27,6 @@ import javax.swing.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.net.URI;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -80,16 +79,16 @@ import java.util.concurrent.atomic.AtomicReference;
         @DictionaryAttribute(name = "reconnectDelay", defaultValue = "5000", optional = false, fragmentDependant = true)
 })
 @GroupType
-public abstract class AWebSocketGroup extends AbstractGroupType implements DeployUnitResolver {
+public /*abstract*/ class AWebSocketGroup extends AbstractGroupType implements DeployUnitResolver {
 
     //========================
     // Protocol related fields
     //========================
-    protected static final byte PUSH = 1;
-    protected static final byte PULL = 0;
-    protected static final byte REGISTER = 3;
-    protected static final byte UPDATED = 4;
-    protected static final byte PULL_JSON = 42;
+    protected static final byte PUSH        = 1;
+    protected static final byte PULL        = 0;
+    protected static final byte REGISTER    = 3;
+    protected static final byte UPDATED     = 4;
+    protected static final byte PULL_JSON   = 42;
 
     //========================
     // Client related fields
@@ -382,11 +381,12 @@ public abstract class AWebSocketGroup extends AbstractGroupType implements Deplo
                     try {
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         baos.write(REGISTER);
-                        baos.write(getNodeName().getBytes());
+                        byte[] byteName = getNodeName().getBytes();
+                        baos.write(byteName, 1, byteName.length);
                         client.send(baos.toByteArray());
 
-                    } catch (IOException e) {
-                        Log.error("", e);
+                    } catch (Exception e) {
+                        Log.error("Something went wrong while trying to send REGISTER message", e);
                     }
                 }
 
@@ -594,10 +594,10 @@ public abstract class AWebSocketGroup extends AbstractGroupType implements Deplo
         return true;
     }
     protected void onClientUpdateLocalModelDone() {}
-    protected abstract void onClientPush(ContainerRoot model, String targetNodeName)
-            throws MultipleMasterServerException, NoMasterServerFoundException, NotAMasterServerException;
-    protected abstract ContainerRoot onClientPull(String targetNodeName) throws Exception;
-    protected abstract void onClientTriggerModelUpdate();
+    protected /*abstract*/ void onClientPush(ContainerRoot model, String targetNodeName)
+            throws MultipleMasterServerException, NoMasterServerFoundException, NotAMasterServerException {}
+    protected /*abstract*/ ContainerRoot onClientPull(String targetNodeName) throws Exception { return null; }
+    protected /*abstract*/ void onClientTriggerModelUpdate() {}
 
     //========================================
     // Server's context group-related methods
@@ -616,11 +616,11 @@ public abstract class AWebSocketGroup extends AbstractGroupType implements Deplo
     protected void onMasterServerUpdatedEvent(WebSocketConnection conn) {}
     protected void onMasterServerOpenEvent(WebSocketConnection conn) {}
     protected void onMasterServerCloseEvent(WebSocketConnection conn) {}
-    protected abstract void onServerPush(ContainerRoot model, String masterServerNodeName, List<URI> addresses)
-            throws MultipleMasterServerException, NoMasterServerFoundException;
-    protected abstract ContainerRoot onServerPull(String masterServerNodeName, List<URI> addresses)
-            throws Exception;
-    protected abstract void onServerTriggerModelUpdate();
+    protected /*abstract*/ void onServerPush(ContainerRoot model, String masterServerNodeName, List<URI> addresses)
+            throws MultipleMasterServerException, NoMasterServerFoundException {}
+    protected /*abstract*/ ContainerRoot onServerPull(String masterServerNodeName, List<URI> addresses)
+            throws Exception { return null; }
+    protected /*abstract*/ void onServerTriggerModelUpdate() {}
 
     //========================================
     // Handlers
@@ -645,6 +645,7 @@ public abstract class AWebSocketGroup extends AbstractGroupType implements Deplo
 
                 case PULL_JSON:
                     onMasterServerPullJsonEvent(connection, cleanMsg);
+                    break;
 
                 case REGISTER:
                     onMasterServerRegisterEvent(connection, new String(cleanMsg));

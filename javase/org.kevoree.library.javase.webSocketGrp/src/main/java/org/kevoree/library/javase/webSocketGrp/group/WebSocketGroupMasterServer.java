@@ -126,8 +126,8 @@ public class WebSocketGroupMasterServer extends AWebSocketGroup {
 
     @Override
     protected void onMasterServerPushEvent(WebSocketConnection conn, byte[] msg) {
-        Log.debug("PUSH: " + conn.httpRequest().remoteAddress() + " asked for a PUSH");
-        ByteArrayInputStream bais = new ByteArrayInputStream(msg, 1, msg.length - 1);
+        Log.debug("PUSH: " + conn.httpRequest().remoteAddress() + " asked for a PUSH ");
+        ByteArrayInputStream bais = new ByteArrayInputStream(msg);
         ContainerRoot model = KevoreeXmiHelper.instance$.loadStream(bais);
         updateLocalModel(model);
 
@@ -135,7 +135,7 @@ public class WebSocketGroupMasterServer extends AWebSocketGroup {
         // broadcasting model to each client
         for (WebSocketConnection wsConn : clients.keySet()) {
             Log.debug("Trying to push model to client " + conn.httpRequest().remoteAddress());
-            wsConn.send(msg, 1, msg.length - 1); // offset is for the control byte
+            wsConn.send(msg);
         }
     }
 
@@ -192,6 +192,7 @@ public class WebSocketGroupMasterServer extends AWebSocketGroup {
         WebSocketClient client = new WebSocketClient(address);
         try {
             if (client.connectBlocking()) {
+                Log.debug("pushTo {}", address.toString());
                 client.send(data);
                 modelSent = true;
             }

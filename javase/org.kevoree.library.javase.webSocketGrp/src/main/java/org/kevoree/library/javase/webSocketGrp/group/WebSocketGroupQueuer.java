@@ -58,7 +58,7 @@ public class WebSocketGroupQueuer extends WebSocketGroupEchoer {
     protected void onMasterServerPushEvent(WebSocketConnection connection,
                                            byte[] msg) {
         // deserialize the model from msg
-        ByteArrayInputStream bais = new ByteArrayInputStream(msg, 1, msg.length - 1); // offset is for the control byte
+        ByteArrayInputStream bais = new ByteArrayInputStream(msg);
         ContainerRoot model = KevoreeXmiHelper.instance$.loadStream(bais);
         updateLocalModel(model);
 
@@ -72,7 +72,7 @@ public class WebSocketGroupQueuer extends WebSocketGroupEchoer {
                 if (containsNode(subNodeName)) {
                     // we already have an active connection with this client
                     // so lets send the model back
-                    getSocketFromNode(subNodeName).send(msg, 1, msg.length - 1); // offset is for the control byte
+                    getSocketFromNode(subNodeName).send(msg); // offset is for the control byte
 
                 } else {
                     // we do not have an active connection with this client
