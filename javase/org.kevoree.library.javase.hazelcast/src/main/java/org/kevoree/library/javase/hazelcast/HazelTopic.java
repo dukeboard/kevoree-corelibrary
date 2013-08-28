@@ -1,8 +1,11 @@
 package org.kevoree.library.javase.hazelcast;
 
 import com.hazelcast.config.Config;
-import com.hazelcast.core.*;
-import org.kevoree.annotation.ChannelTypeFragment;
+import com.hazelcast.core.Hazelcast;
+import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.core.ITopic;
+import com.hazelcast.core.MessageListener;
+import org.kevoree.annotation.ChannelType;
 import org.kevoree.annotation.Library;
 import org.kevoree.annotation.Start;
 import org.kevoree.annotation.Stop;
@@ -24,7 +27,7 @@ import java.util.concurrent.Executors;
  */
 
 @Library(name = "JavaSE")
-@ChannelTypeFragment
+@ChannelType
 public class HazelTopic extends AbstractChannelFragment implements MessageListener<Object> {
 
     HazelcastInstance hazelInstance = null;

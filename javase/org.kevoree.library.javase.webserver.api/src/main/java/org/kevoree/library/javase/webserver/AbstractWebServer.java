@@ -10,7 +10,7 @@ import org.kevoree.framework.AbstractComponentType;
  * Time: 17:58
  */
 @Library(name = "JavaSE")
-@ComponentFragment
+@ComponentType
 @DictionaryType({
         @DictionaryAttribute(name = "port" , defaultValue = "8080"),
         @DictionaryAttribute(name = "timeout" , defaultValue = "5000", optional = true)

@@ -18,7 +18,7 @@
 
 package org.kevoree.library;
 
-import org.kevoree.annotation.ComponentFragment;
+import org.kevoree.annotation.ComponentType;
 import org.kevoree.annotation.Library;
 import org.kevoree.annotation.Start;
 import org.kevoree.annotation.Stop;
@@ -30,7 +30,7 @@ import org.kevoree.framework.AbstractComponentType;
  */
 
 @Library(name = "JavaSE")
-@ComponentFragment
+@ComponentType
 public abstract class AbstractFakeStuffComponent extends AbstractComponentType {
 
     @Start

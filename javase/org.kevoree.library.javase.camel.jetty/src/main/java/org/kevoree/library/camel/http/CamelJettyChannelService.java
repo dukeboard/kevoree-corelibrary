@@ -3,7 +3,7 @@ package org.kevoree.library.camel.http;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-import org.kevoree.annotation.ChannelTypeFragment;
+import org.kevoree.annotation.ChannelType;
 import org.kevoree.annotation.DictionaryAttribute;
 import org.kevoree.annotation.DictionaryType;
 import org.kevoree.annotation.Library;
@@ -24,7 +24,7 @@ import java.util.Random;
  */
 
 @Library(name = "JavaSE")
-@ChannelTypeFragment
+@ChannelType
 @DictionaryType({
         @DictionaryAttribute(name = "port", defaultValue = "10000", optional = true, fragmentDependant = true)
 })

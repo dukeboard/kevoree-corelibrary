@@ -8,12 +8,9 @@ merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.jexxus/{pro
 merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.basicGossiper/{project.version}'
 merge 'mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.minicloud/{project.version}'
 
-addNode node0:MiniCloudNode
-//{ logLevel = "DEBUG", coreLogLevel = "DEBUG" }
-addNode node1:JavaSENode
-//{ logLevel = "DEBUG", coreLogLevel = "DEBUG" }
-addNode node2:JavaSENode
-//{ logLevel = "DEBUG", coreLogLevel = "DEBUG" }
+addNode node0:MiniCloudNode { logLevel = "DEBUG", coreLogLevel = "DEBUG" }
+addNode node1:JavaSENode { logLevel = "DEBUG", coreLogLevel = "DEBUG" }
+addNode node2:JavaSENode { logLevel = "DEBUG", coreLogLevel = "DEBUG" }
 
 addChild node1@node0
 addChild node2@node0

@@ -1,6 +1,6 @@
 package org.kevoree.library.sky.provider.web;
 
-import org.kevoree.annotation.ComponentFragment;
+import org.kevoree.annotation.ComponentType;
 import org.kevoree.annotation.Library;
 import org.kevoree.library.javase.webserver.KevoreeHttpRequest;
 import org.kevoree.library.javase.webserver.KevoreeHttpResponse;
@@ -15,7 +15,7 @@ import org.kevoree.library.javase.webserver.ParentAbstractPage;
  * @version 1.0
  */
 @Library(name = "SKY")
-@ComponentFragment
+@ComponentType
 public abstract class KloudResourceManagerPage extends ParentAbstractPage {
 	KloudResourceManagerPageGenerator generator;
 

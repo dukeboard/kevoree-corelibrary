@@ -3,9 +3,6 @@ merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.fakeDomo/{p
 merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.defaultChannels/{project.version}"
 merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.jexxus/{project.version}"
 
-
-
-
 addNode node0 : JavaSENode { logLevel="INFO" }
 addComponent light@node0 : FakeSimpleLight
 addComponent sw@node0 : FakeSimpleSwitch
@@ -21,7 +18,6 @@ bind sw.off@node0 => offQ
 
 bind sw.toggle@node0 => toggleQ
 bind light.toggle@node0 => toggleQ
-
 
 addGroup sync : BasicGroup
 addToGroup sync node0

@@ -20,7 +20,7 @@ import java.util.Random;
  * Time: 22:59
  */
 @Library(name = "JavaSE")
-@ComponentFragment
+@ComponentType
 public abstract class AbstractNodeJSComponentType extends AbstractComponentType {
 
     public abstract String getMainFile();

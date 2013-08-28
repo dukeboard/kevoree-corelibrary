@@ -25,7 +25,6 @@ import java.util.Map;
  * User: leiko
  * Date: 3/21/13
  * Time: 3:10 PM
- * To change this template use File | Settings | File Templates.
  */
 @Library(name = "JavaSE", names = "Android")
 @DictionaryType({
@@ -33,7 +32,7 @@ import java.util.Map;
         @DictionaryAttribute(name = "replay", defaultValue = "true", vals = {"true", "false"}),
         @DictionaryAttribute(name = "maxQueued", defaultValue = "42")
 })
-@ChannelTypeFragment
+@ChannelType
 public class WebSocketChannel extends AbstractChannelFragment {
 
     private static final String RES_TAG = "/channel/";

@@ -20,7 +20,7 @@ import java.util.List;
  */
 
 @Library(name = "JavaSE")
-@ChannelTypeFragment
+@ChannelType
 @DictionaryType({
         @DictionaryAttribute(name = "port", defaultValue = "10000", optional = true, fragmentDependant = true)
 })
@@ -72,14 +72,14 @@ public class CamelNetty extends AbstractKevoreeCamelChannelType {
                                             getContext().createProducerTemplate().sendBody("netty:tcp://" + address + ":" + parsePortNumber(cf.getNodeName()), exchange.getIn().getBody());
                                             break;
                                         } catch (Exception e) {
-                                            Log.debug("Unable to send data to components on {} using {} as address",e, cf.getNodeName(), "netty:tcp://" + address + ":" + parsePortNumber(cf.getNodeName()));
+                                            Log.debug("Unable to send data to components on {} using {} as address", e, cf.getNodeName(), "netty:tcp://" + address + ":" + parsePortNumber(cf.getNodeName()));
                                         }
                                     }
                                 } else {
                                     try {
                                         getContext().createProducerTemplate().sendBody("netty:tcp://127.0.0.1:" + parsePortNumber(cf.getNodeName()), exchange.getIn().getBody());
                                     } catch (Exception e) {
-                                        Log.debug("Unable to send data to components on {} using {} as address",e, cf.getNodeName(), "netty:tcp://127.0.0.1:" + parsePortNumber(cf.getNodeName()));
+                                        Log.debug("Unable to send data to components on {} using {} as address", e, cf.getNodeName(), "netty:tcp://127.0.0.1:" + parsePortNumber(cf.getNodeName()));
                                     }
                                 }
                             }
@@ -103,7 +103,7 @@ public class CamelNetty extends AbstractKevoreeCamelChannelType {
                                 }
                             });
                 } catch (Exception e) {
-                    Log.debug("Fail to manage route {}",e, "netty:tcp://" + address + ":" + port + "?sync=true");
+                    Log.debug("Fail to manage route {}", e, "netty:tcp://" + address + ":" + port + "?sync=true");
                 }
             }
         } else {
@@ -120,7 +120,7 @@ public class CamelNetty extends AbstractKevoreeCamelChannelType {
                             }
                         });
             } catch (Exception e) {
-                Log.debug("Fail to manage route {}",e, "netty:tcp://127.0.0.1:" + port + "?sync=true");
+                Log.debug("Fail to manage route {}", e, "netty:tcp://127.0.0.1:" + port + "?sync=true");
             }
         }
     }
@@ -137,7 +137,7 @@ public class CamelNetty extends AbstractKevoreeCamelChannelType {
             try {
                 port = Integer.parseInt(portOption);
             } catch (NumberFormatException e) {
-                Log.warn("Attribute \"port\" of {} is not an Integer, Default value ({}) is returned", getName(), port+"");
+                Log.warn("Attribute \"port\" of {} is not an Integer, Default value ({}) is returned", getName(), port + "");
             }
         } else {
             Log.info("Attribute \"port\" of {} is not set for {}, Default value ({}) is returned", getName(), nodeName, port + "");

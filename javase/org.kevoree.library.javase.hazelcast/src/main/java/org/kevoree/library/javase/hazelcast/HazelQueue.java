@@ -1,7 +1,8 @@
 package org.kevoree.library.javase.hazelcast;
 
 import com.hazelcast.config.Config;
-import com.hazelcast.core.*;
+import com.hazelcast.core.Hazelcast;
+import com.hazelcast.core.HazelcastInstance;
 import org.kevoree.annotation.*;
 import org.kevoree.framework.AbstractChannelFragment;
 import org.kevoree.framework.ChannelFragmentSender;
@@ -18,7 +19,7 @@ import java.util.concurrent.BlockingQueue;
  * Time: 11:41
  */
 @Library(name = "JavaSE")
-@ChannelTypeFragment
+@ChannelType
 public class HazelQueue extends AbstractChannelFragment implements Runnable {
 
     HazelcastInstance hazelInstance = null;

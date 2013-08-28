@@ -3,7 +3,7 @@ package org.kevoree.library.camel;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-import org.kevoree.annotation.ChannelTypeFragment;
+import org.kevoree.annotation.ChannelType;
 import org.kevoree.annotation.Library;
 import org.kevoree.framework.KevoreeChannelFragment;
 import org.kevoree.framework.message.Message;
@@ -19,7 +19,7 @@ import java.util.Random;
  * Time: 15:25
  */
 @Library(name = "JavaSE")
-@ChannelTypeFragment
+@ChannelType
 public class CamelNettyService extends CamelNetty {
 
     private Random random = new Random();

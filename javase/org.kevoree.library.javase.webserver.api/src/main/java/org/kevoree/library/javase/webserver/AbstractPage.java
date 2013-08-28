@@ -15,7 +15,7 @@ import org.kevoree.log.Log;
 
 
 @Library(name = "JavaSE")
-@ComponentFragment
+@ComponentType
 @Provides({
         @ProvidedPort(name = "request", type = PortType.MESSAGE)
 })

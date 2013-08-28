@@ -20,7 +20,7 @@ import java.util.List;
  */
 
 @Library(name = "JavaSE")
-@ChannelTypeFragment
+@ChannelType
 @DictionaryType({
         @DictionaryAttribute(name = "port", defaultValue = "10000", optional = true, fragmentDependant = true)
 })
