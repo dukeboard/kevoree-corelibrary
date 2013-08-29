@@ -2,7 +2,6 @@ package org.kevoree.library.javase.webSocketGrp.group;
 
 import org.kevoree.ContainerRoot;
 import org.kevoree.annotation.GroupType;
-import org.kevoree.annotation.Library;
 import org.kevoree.framework.KevoreeXmiHelper;
 import org.kevoree.library.javase.webSocketGrp.client.WebSocketClient;
 import org.kevoree.library.javase.webSocketGrp.exception.MultipleMasterServerException;
@@ -34,7 +33,6 @@ import java.util.concurrent.TimeUnit;
  * connected node (so if a node hasn't established a connection to this server
  * he will not get notified)
  */
-@Library(name = "JavaSE", names = "Android")
 @GroupType
 public class WebSocketGroupMasterServer extends AWebSocketGroup {
 

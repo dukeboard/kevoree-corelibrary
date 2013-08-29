@@ -35,7 +35,6 @@ import java.util.concurrent.TimeUnit;
 @DictionaryType({
 		@DictionaryAttribute(name = "port", defaultValue = "8000", optional = true, fragmentDependant = true)})
 @GroupType
-@Library(name = "JavaSE", names = "Android")
 public class WebSocketGroup extends AbstractGroupType {
 
     //========================

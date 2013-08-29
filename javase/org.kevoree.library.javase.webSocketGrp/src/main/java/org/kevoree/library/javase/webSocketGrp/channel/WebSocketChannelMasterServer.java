@@ -28,7 +28,6 @@ import java.util.concurrent.TimeUnit;
  * Time: 10:41 AM
  * To change this template use File | Settings | File Templates.
  */
-@Library(name = "JavaSE", names = "Android")
 @DictionaryType({
         @DictionaryAttribute(name = "port", fragmentDependant = true, optional = true),
         @DictionaryAttribute(name = "use_queue", defaultValue = "true", vals = {"true", "false"}),
@@ -147,11 +146,7 @@ public class WebSocketChannelMasterServer extends AbstractChannelFragment {
                 public void onConnectionClosed(WebSocketClient cli) {
                     Log.debug("Connection has been closed");
                     if (cli.equals(client)) {
-                        Log.debug("Gonna try to reconnect to server...");
                         client = null;
-                        for (URI uri : getMasterServerURIs()) {
-                            wsClientHandler.startConnectionTask(uri);
-                        }
                     }
                 }
 
@@ -163,10 +158,9 @@ public class WebSocketChannelMasterServer extends AbstractChannelFragment {
                     remoteDispatchByte(bytes.array());
                 }
             });
-            for (URI uri : uris) {
-                Log.debug("Add {} to WebSocketClientHandler", uri.toString());
-                wsClientHandler.startConnectionTask(uri);
-            }
+
+            // start connection tasks
+            wsClientHandler.startConnectionTasks(uris);
         }
     }
 

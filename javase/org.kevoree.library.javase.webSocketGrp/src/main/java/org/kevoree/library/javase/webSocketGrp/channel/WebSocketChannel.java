@@ -26,7 +26,6 @@ import java.util.Map;
  * Date: 3/21/13
  * Time: 3:10 PM
  */
-@Library(name = "JavaSE", names = "Android")
 @DictionaryType({
         @DictionaryAttribute(name = "port", defaultValue = "8000", fragmentDependant = true),
         @DictionaryAttribute(name = "replay", defaultValue = "true", vals = {"true", "false"}),

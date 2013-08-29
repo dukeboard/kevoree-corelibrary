@@ -2,7 +2,6 @@ package org.kevoree.library.javase.webSocketGrp.group;
 
 import org.kevoree.ContainerRoot;
 import org.kevoree.annotation.GroupType;
-import org.kevoree.annotation.Library;
 import org.kevoree.library.javase.webSocketGrp.exception.MultipleMasterServerException;
 import org.kevoree.library.javase.webSocketGrp.exception.NoMasterServerFoundException;
 import org.kevoree.library.javase.webSocketGrp.exception.NotAMasterServerException;
@@ -19,7 +18,6 @@ import org.kevoree.library.javase.webSocketGrp.exception.NotAMasterServerExcepti
  * process the request: if the node is just a client it will forward the push request to the master server
  * and then get the result as an echo back to update its own model.
  */
-@Library(name = "JavaSE", names = "Android")
 @GroupType
 public class WebSocketGroupEchoer extends WebSocketGroupMasterServer {
 

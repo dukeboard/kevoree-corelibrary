@@ -6,7 +6,6 @@ import org.kevoree.Group;
 import org.kevoree.annotation.DictionaryAttribute;
 import org.kevoree.annotation.DictionaryType;
 import org.kevoree.annotation.GroupType;
-import org.kevoree.annotation.Library;
 import org.kevoree.framework.KevoreeXmiHelper;
 import org.kevoree.log.Log;
 import org.webbitserver.WebSocketConnection;
@@ -31,7 +30,6 @@ import java.util.Map;
 @DictionaryType({
         @DictionaryAttribute(name = "max_queued_model", defaultValue = "150", optional = true, fragmentDependant = false)
 })
-@Library(name = "JavaSE", names = "Android")
 @GroupType
 public class WebSocketGroupQueuer extends WebSocketGroupEchoer {
 
