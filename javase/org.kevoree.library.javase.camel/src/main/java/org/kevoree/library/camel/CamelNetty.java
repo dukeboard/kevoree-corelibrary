@@ -18,8 +18,6 @@ import java.util.List;
  * Date: 10/05/12
  * Time: 15:25
  */
-
-@Library(name = "JavaSE")
 @ChannelType
 @DictionaryType({
         @DictionaryAttribute(name = "port", defaultValue = "10000", optional = true, fragmentDependant = true)

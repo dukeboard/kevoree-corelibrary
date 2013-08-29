@@ -32,7 +32,6 @@ import java.util.concurrent.TimeUnit;
  * @author Erwan Daubert
  * @version 1.0
  */
-@Library(name = "SKY")
 @DictionaryType({
         @DictionaryAttribute(name = "VMARGS", optional = true)
 })

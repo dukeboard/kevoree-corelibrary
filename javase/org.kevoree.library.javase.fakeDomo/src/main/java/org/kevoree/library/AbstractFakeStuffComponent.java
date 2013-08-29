@@ -19,7 +19,6 @@
 package org.kevoree.library;
 
 import org.kevoree.annotation.ComponentType;
-import org.kevoree.annotation.Library;
 import org.kevoree.annotation.Start;
 import org.kevoree.annotation.Stop;
 import org.kevoree.framework.AbstractComponentType;
@@ -28,8 +27,6 @@ import org.kevoree.framework.AbstractComponentType;
  *
  * @author gnain
  */
-
-@Library(name = "JavaSE")
 @ComponentType
 public abstract class AbstractFakeStuffComponent extends AbstractComponentType {
 

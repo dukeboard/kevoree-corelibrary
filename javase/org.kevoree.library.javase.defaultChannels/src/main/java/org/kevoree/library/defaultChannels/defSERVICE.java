@@ -18,7 +18,6 @@
 package org.kevoree.library.defaultChannels;
 
 import org.kevoree.annotation.ChannelType;
-import org.kevoree.annotation.Library;
 import org.kevoree.annotation.Start;
 import org.kevoree.annotation.Stop;
 import org.kevoree.framework.AbstractChannelFragment;
@@ -31,7 +30,6 @@ import org.kevoree.log.Log;
  *
  * @author ffouquet
  */
-@Library(name = "JavaSE")
 @ChannelType
 public class defSERVICE extends AbstractChannelFragment {
 

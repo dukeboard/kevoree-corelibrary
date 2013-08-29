@@ -27,7 +27,6 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * @author Erwan Daubert
  */
-@Library(name = "JavaSE", names = "Android")
 @GroupType
 public class BasicGossiperGroup extends BasicGroup implements GossiperComponent {
 

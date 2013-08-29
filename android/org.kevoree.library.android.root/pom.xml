@@ -63,6 +63,9 @@
                 <version>${kevoree.version}</version>
                 <configuration>
                     <nodeTypeNames>AndroidNode</nodeTypeNames>
+                    <libraries>
+                        <library>Android</library>
+                    </libraries>
                 </configuration>
                 <executions>
                     <execution>

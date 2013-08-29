@@ -34,7 +34,6 @@ import java.util.concurrent.Executors;
         @DictionaryAttribute(name = "ip", defaultValue = "0.0.0.0", optional = true, fragmentDependant = true)
 })
 @GroupType
-@Library(name = "JavaSE", names = "Android")
 public class NanoRestGroup extends AbstractGroupType {
 
     protected NanoHTTPD server = null;

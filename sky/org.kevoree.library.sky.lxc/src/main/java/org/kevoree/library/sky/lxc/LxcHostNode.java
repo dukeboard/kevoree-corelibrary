@@ -22,7 +22,6 @@ import java.util.concurrent.TimeUnit;
  * Time: 13:48
  */
 
-@Library(name = "SKY")
 @NodeType
 @PrimitiveCommands(value = {
         @PrimitiveCommand(name = CloudNode.ADD_NODE, maxTime = LxcHostNode.ADD_TIMEOUT),

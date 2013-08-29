@@ -1,7 +1,6 @@
 package org.kevoree.library.nioChannel;
 
 import org.kevoree.annotation.ChannelType;
-import org.kevoree.annotation.Library;
 import org.kevoree.framework.message.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +12,6 @@ import scala.util.Random;
  * Date: 16/11/11
  * Time: 22:54
  */
-@Library(name = "JavaSE", names = {"Android"})
 @ChannelType
 public class NioRoundRobin extends NioChannel {
 	protected Logger logger = LoggerFactory.getLogger(NioRoundRobin.class);

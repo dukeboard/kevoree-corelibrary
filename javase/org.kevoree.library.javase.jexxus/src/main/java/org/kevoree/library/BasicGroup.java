@@ -43,7 +43,7 @@ Changelog
         @DictionaryAttribute(name = "ssl", defaultValue = "false", vals = {"true", "false"})
 })
 @GroupType
-@Library(name = "JavaSE", names = "Android")
+//@Library(name = "JavaSE", names = "Android")
 public class BasicGroup extends AbstractGroupType implements ConnectionListener {
 
     private final byte getModel = 0;

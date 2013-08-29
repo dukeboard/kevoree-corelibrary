@@ -2,7 +2,6 @@ package org.kevoree.library.sky.api;
 
 import org.kevoree.annotation.DictionaryAttribute;
 import org.kevoree.annotation.DictionaryType;
-import org.kevoree.annotation.Library;
 import org.kevoree.annotation.NodeType;
 import org.kevoree.library.defaultNodeTypes.JavaSENode;
 
@@ -14,7 +13,6 @@ import org.kevoree.library.defaultNodeTypes.JavaSENode;
  * @author Erwan Daubert
  * @version 1.0
  */
-@Library(name = "SKY")
 @NodeType
 @DictionaryType({
         @DictionaryAttribute(name = "JVMARGS", optional = true)

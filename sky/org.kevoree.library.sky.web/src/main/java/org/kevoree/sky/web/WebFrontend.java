@@ -13,7 +13,6 @@ import org.webbitserver.WebServers;
  * Time: 11:52
  */
 
-@Library(name = "Sky")
 @DictionaryType({
         @DictionaryAttribute(name = "port", defaultValue = "80", optional = false)
 })

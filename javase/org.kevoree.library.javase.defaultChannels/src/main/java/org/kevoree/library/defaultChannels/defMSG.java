@@ -29,7 +29,6 @@ import org.kevoree.log.Log;
  *
  * @author ffouquet
  */
-@Library(name = "JavaSE")
 @ChannelType
 public class defMSG extends AbstractChannelFragment {
 

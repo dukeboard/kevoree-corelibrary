@@ -19,11 +19,8 @@ package org.kevoree.library.javase.adaptationsuperviser;
 
 import com.rendion.jchrome.JChromeTabbedPane;
 import com.rendion.jchrome.Tab;
-import org.kevoree.annotation.*;
-//import org.kevoree.framework.KevoreeMessage;
-//import org.kevoree.framework.MessagePort;
-import org.kevoree.ContainerNode;
 import org.kevoree.ContainerRoot;
+import org.kevoree.annotation.*;
 import org.kevoree.api.service.core.handler.ModelListener;
 import org.kevoree.framework.AbstractComponentType;
 import org.kevoree.library.javase.adaptationsuperviser.modelview.KevoreeModelViewerPanel;
@@ -33,6 +30,9 @@ import org.slf4j.LoggerFactory;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
+
+//import org.kevoree.framework.KevoreeMessage;
+//import org.kevoree.framework.MessagePort;
 
 
 /**
