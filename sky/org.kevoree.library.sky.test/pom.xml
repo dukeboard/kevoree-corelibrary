@@ -18,16 +18,6 @@
     <dependencies>
         <dependency>
             <groupId>org.kevoree.tools</groupId>
-            <artifactId>org.kevoree.tools.javase.framework</artifactId>
-            <version>${kevoree.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kevoree.tools</groupId>
-            <artifactId>org.kevoree.tools.annotation.api</artifactId>
-            <version>${kevoree.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kevoree.tools</groupId>
             <artifactId>org.kevoree.tools.marShell</artifactId>
             <version>${kevoree.version}</version>
         </dependency>

@@ -86,6 +86,9 @@
                 <extensions>true</extensions>
                 <configuration>
                     <nodeTypeNames>JavaSENode</nodeTypeNames>
+                    <libraries>
+                        <library>JavaSE</library>
+                    </libraries>
                 </configuration>
                 <executions>
                     <execution>

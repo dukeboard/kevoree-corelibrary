@@ -26,7 +26,6 @@ import java.util.List;
  * @version 1.0
  */
 
-@Library(name = "SKY")
 @DictionaryType({
         @DictionaryAttribute(name = "inet", optional = true),
         @DictionaryAttribute(name = "subnet", optional = true),

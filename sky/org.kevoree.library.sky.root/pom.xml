@@ -56,6 +56,9 @@
 				<configuration>
 					<nodeTypeNames>JavaSENode</nodeTypeNames>
 					<!-- TODO: Replace by IaaSNode -->
+                    <libraries>
+                        <library>SKY</library>
+                    </libraries>
 				</configuration>
 				<executions>
 					<execution>

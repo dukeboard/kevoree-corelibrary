@@ -17,7 +17,6 @@ import java.io.InputStreamReader;
  * @author Erwan Daubert
  * @version 1.0
  */
-@Library(name = "SKY")
 @ComponentType
 @DictionaryType({
 		@DictionaryAttribute(name = "START_COMMAND", optional = false),

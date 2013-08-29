@@ -1,7 +1,6 @@
 package org.kevoree.library.javase.system;
 
 import org.kevoree.annotation.ComponentType;
-import org.kevoree.annotation.Library;
 import org.kevoree.annotation.Start;
 import org.kevoree.annotation.Stop;
 
@@ -13,7 +12,6 @@ import org.kevoree.annotation.Stop;
  * @author Erwan Daubert
  * @version 1.0
  */
-@Library(name = "SKY")
 @ComponentType
 public class APTInstaller extends SystemCommand {
 

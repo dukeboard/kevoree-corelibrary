@@ -35,7 +35,6 @@ import java.util.concurrent.Executors;
  * Time: 16:32
  */
 
-@Library(name = "JavaSE", names = {"Android"})
 @ChannelType
 @DictionaryType({
 		@DictionaryAttribute(name = "port", defaultValue = "9000", optional = true, fragmentDependant = true),

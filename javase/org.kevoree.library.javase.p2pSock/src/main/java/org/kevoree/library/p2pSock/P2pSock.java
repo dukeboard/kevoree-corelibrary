@@ -19,7 +19,6 @@ import java.util.concurrent.Semaphore;
  * Time: 11:42
  */
 
-@Library(name = "JavaSE", names = {"Android"})
 @ChannelType(theadStrategy = ThreadStrategy.SHARED_THREAD )
 @DictionaryType({
         @DictionaryAttribute(name = "port", defaultValue = "", optional = true, fragmentDependant = true) ,

@@ -4,7 +4,6 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.kevoree.annotation.ChannelType;
-import org.kevoree.annotation.Library;
 import org.kevoree.framework.KevoreeChannelFragment;
 import org.kevoree.framework.message.Message;
 import org.kevoree.log.Log;
@@ -18,7 +17,6 @@ import java.util.Random;
  * Date: 10/05/12
  * Time: 15:25
  */
-@Library(name = "JavaSE")
 @ChannelType
 public class CamelNettyService extends CamelNetty {
 

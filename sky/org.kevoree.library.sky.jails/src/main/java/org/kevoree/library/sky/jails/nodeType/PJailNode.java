@@ -2,7 +2,6 @@ package org.kevoree.library.sky.jails.nodeType;
 
 import org.kevoree.annotation.DictionaryAttribute;
 import org.kevoree.annotation.DictionaryType;
-import org.kevoree.annotation.Library;
 import org.kevoree.annotation.NodeType;
 import org.kevoree.library.sky.api.PJavaSENode;
 
@@ -15,7 +14,6 @@ import org.kevoree.library.sky.api.PJavaSENode;
  * @version 1.0
  */
 
-@Library(name = "SKY")
 @NodeType
 @DictionaryType({
 		@DictionaryAttribute(name = "archive", defaultValue = "false", vals = {"false", "true"}, optional = true),

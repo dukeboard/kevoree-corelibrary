@@ -21,7 +21,6 @@ import java.util.Hashtable;
  * @author Erwan Daubert
  * @version 1.0
  */
-@Library(name = "JavaSE")
 @ComponentType
 @DictionaryType({
 		@DictionaryAttribute(name = "host", optional = false),

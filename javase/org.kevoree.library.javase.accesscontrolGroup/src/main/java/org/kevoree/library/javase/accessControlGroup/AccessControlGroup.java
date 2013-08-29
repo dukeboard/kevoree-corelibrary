@@ -47,7 +47,6 @@ import java.util.concurrent.TimeoutException;
         @DictionaryAttribute(name = "ssl", defaultValue = "false", vals = {"true", "false"})
 })
 @GroupType
-@Library(name = "JavaSE", names = "Android")
 public class AccessControlGroup extends AbstractAccessControlGroupType  implements ConnectionListener
 {
 

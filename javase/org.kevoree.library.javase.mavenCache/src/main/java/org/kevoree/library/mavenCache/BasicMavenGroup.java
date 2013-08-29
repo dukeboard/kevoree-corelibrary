@@ -29,7 +29,6 @@ import java.util.concurrent.atomic.AtomicReference;
         @DictionaryAttribute(name = "server", defaultValue = "false", optional = true, fragmentDependant = true)
 })
 @GroupType
-@Library(name = "JavaSE", names = "Android")
 public class BasicMavenGroup extends BasicGroup implements Runnable, DeployUnitResolver {
 
     NanoHTTPD srv = null;
