@@ -656,7 +656,9 @@ public /*abstract*/ class AWebSocketGroup extends AbstractGroupType implements D
                     break;
 
                 default:
-                    Log.debug("Received control byte at data[0]: I do NOT know this control byte! Known control bytes are {}, {}, {}, {}, {}", PUSH, PULL, PULL_JSON, REGISTER, UPDATED);
+                    byte[] controlByte = {msg[0]};
+                    String allowedBytes = PUSH+", "+PULL+", "+PULL_JSON+", "+REGISTER+", "+UPDATED;
+                    Log.debug("Received control byte '{}': I do NOT know this control byte! Known control bytes are {}", new String(controlByte), allowedBytes);
                     break;
             }
         }

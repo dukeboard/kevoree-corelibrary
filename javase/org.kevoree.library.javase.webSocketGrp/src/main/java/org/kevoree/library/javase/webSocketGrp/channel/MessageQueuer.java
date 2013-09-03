@@ -46,7 +46,9 @@ public class MessageQueuer {
                             };
                             try {
                                 if (client.connectBlocking()) {
+                                    // once connection is made, send message to remove client
                                     client.send(msg.getData());
+                                    // keep a ref on that client in order to send next messages without recreate client
                                     clients.put(msg.getNodeName(), client);
 
                                     strURI = uri.toString();

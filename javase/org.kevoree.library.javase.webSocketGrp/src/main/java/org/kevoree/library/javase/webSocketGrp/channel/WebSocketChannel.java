@@ -83,7 +83,7 @@ public class WebSocketChannel extends AbstractChannelFragment {
         server.add(RES_TAG+getNodeName(), serverHandler);
         server.start();
 
-        Log.debug("WebSocket server started on {}", server.getUri()+RES_TAG+getNodeName());
+        Log.debug("WebSocket server started on {} for channel", server.getUri()+RES_TAG+getNodeName());
 
         getModelService().registerModelListener(modelListener);
     }
