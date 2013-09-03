@@ -29,9 +29,6 @@ import java.util.concurrent.atomic.AtomicReference;
  *         TODO add a DictionaryAttribute to define the number of uuids sent by response when a VectorClockUUIDsRequest is sent
  */
 @Library(name = "JavaSE")
-@DictionaryType({
-        @DictionaryAttribute(name = "interval", defaultValue = "30000", optional = true)
-})
 @ChannelType
 public class BasicGossiperChannel extends AbstractChannelFragment implements ModelListener, GossiperComponent {
 
