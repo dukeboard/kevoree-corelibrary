@@ -22,11 +22,15 @@
             <artifactId>org.kevoree.tools.camel.framework</artifactId>
             <version>${kevoree.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-netty</artifactId>
             <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kevoree.corelibrary.javase</groupId>
+            <artifactId>org.kevoree.library.javase.javaseNode</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
     </dependencies>

@@ -104,6 +104,11 @@
             <artifactId>scala-library</artifactId>
             <version>${scala.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.kevoree.corelibrary.android</groupId>
+            <artifactId>org.kevoree.library.android.nodeType</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
 </project>

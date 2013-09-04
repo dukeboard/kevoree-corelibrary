@@ -16,6 +16,14 @@
         <kevoree.exclude>org.scalastuff*:*,com.fasterxml*:*,com.google.android:*,commons-*:*,org.apache.httpcomponents:*,org.khronos:*,xerces:*,xpp3:*,org.json:*,cglib:*,org.objenesis:*</kevoree.exclude>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.kevoree.corelibrary.android</groupId>
+            <artifactId>org.kevoree.library.android.nodeType</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <sourceDirectory>../../javase/org.kevoree.library.javase.defaultChannels/src</sourceDirectory>
         <plugins>

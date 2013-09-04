@@ -18,6 +18,11 @@
             <artifactId>de.flapdoodle.embed.nodejs</artifactId>
             <version>1.22</version>
         </dependency>
+        <dependency>
+            <groupId>org.kevoree.corelibrary.javase</groupId>
+            <artifactId>org.kevoree.library.javase.javaseNode</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
 

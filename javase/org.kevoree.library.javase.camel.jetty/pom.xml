@@ -28,6 +28,11 @@
             <artifactId>camel-jetty</artifactId>
             <version>${camel.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.kevoree.corelibrary.javase</groupId>
+            <artifactId>org.kevoree.library.javase.javaseNode</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
     </dependencies>
 

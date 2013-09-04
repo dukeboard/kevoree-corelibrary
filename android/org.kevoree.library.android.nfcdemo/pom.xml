@@ -10,12 +10,15 @@
     <artifactId>org.kevoree.library.android.nfcdemo</artifactId>
     <name>Kevoree :: CoreLibrary :: Android :: NFC Demo</name>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.kevoree.corelibrary.android</groupId>
+            <artifactId>org.kevoree.library.android.nodeType</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
-
-
-
-
             <!-- android dex phase -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

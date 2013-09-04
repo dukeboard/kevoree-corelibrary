@@ -54,7 +54,7 @@
 				<version>${kevoree.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-					<nodeTypeNames>JavaSENode</nodeTypeNames>
+					<nodeTypeNames>IaaSNode</nodeTypeNames>
 					<!-- TODO: Replace by IaaSNode -->
                     <libraries>
                         <library>SKY</library>

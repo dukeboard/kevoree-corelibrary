@@ -11,5 +11,12 @@
     <artifactId>org.kevoree.library.sky.system</artifactId>
     <name>Kevoree :: CoreLibrary :: Sky :: System</name>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.kevoree.corelibrary.sky</groupId>
+            <artifactId>org.kevoree.library.sky.api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>
