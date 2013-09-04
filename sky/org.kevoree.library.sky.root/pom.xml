@@ -54,8 +54,7 @@
 				<version>${kevoree.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-					<nodeTypeNames>IaaSNode</nodeTypeNames>
-					<!-- TODO: Replace by IaaSNode -->
+					<nodeTypeNames>CloudNode</nodeTypeNames>
                     <libraries>
                         <library>SKY</library>
                     </libraries>
