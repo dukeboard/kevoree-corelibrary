@@ -1,22 +1,22 @@
 package org.kevoree.sky.web;
 
+import org.kevoree.framework.AbstractComponentType;
 import org.webbitserver.HttpControl;
 import org.webbitserver.HttpRequest;
 import org.webbitserver.HttpResponse;
 import org.webbitserver.handler.AbstractResourceHandler;
 import org.webbitserver.handler.TemplateEngine;
+
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 import java.util.concurrent.Executor;
 
 import static java.util.concurrent.Executors.newFixedThreadPool;
 
 // Maybe http://www.uofr.net/~greg/java/get-resource-listing.html
 public class EmbedHandler extends AbstractResourceHandler {
+
+    private AbstractComponentType origin;
 
     public EmbedHandler(Executor ioThread, TemplateEngine templateEngine) {
         super(ioThread, templateEngine);
@@ -26,8 +26,9 @@ public class EmbedHandler extends AbstractResourceHandler {
         super(ioThread);
     }
 
-    public EmbedHandler() {
+    public EmbedHandler(AbstractComponentType origin) {
         super(newFixedThreadPool(4));
+        this.origin = origin;
     }
 
 
@@ -54,9 +55,12 @@ public class EmbedHandler extends AbstractResourceHandler {
         protected boolean exists() throws IOException {
             String path2 = path;
             if(path2.equals("/")){
-                path2 = "/index.html";
+                path2 = "index.html";
             }
-            return this.getClass().getResource(path2) != null;
+            if (path2.startsWith("/")) {
+                path2 = path2.substring(1);
+            }
+            return origin.getClass().getClassLoader().getResource(path2) != null;
         }
 
         @Override
@@ -76,14 +80,17 @@ public class EmbedHandler extends AbstractResourceHandler {
         protected byte[] fileBytes() throws IOException {
             String path2 = path;
             if(path2.equals("/")){
-                path2 = "/index.html";
+                path2 = "index.html";
             }
-            return read(this.getClass().getResourceAsStream(path2));
+            if (path2.startsWith("/")) {
+                path2 = path2.substring(1);
+            }
+            return read(origin.getClass().getClassLoader().getResourceAsStream(path2));
         }
 
         @Override
         protected byte[] welcomeBytes() throws IOException {
-            read(this.getClass().getResourceAsStream("/index.html"));
+            read(origin.getClass().getClassLoader().getResourceAsStream("index.html"));
             return null;
         }
 

@@ -32,7 +32,7 @@ public class WebFrontend extends AbstractComponentType {
                     .add(new MetaDataHandler(this.getModelService()))
                     .add("/model/service", mhandler)
 //                     .add(new StaticFileHandler("/home/edaubert/workspace/kevoree-corelibrary/sky/org.kevoree.library.sky.web/src/main/resources")) // path to web content
-                    .add(new EmbedHandler()) // path to web content
+                    .add(new EmbedHandler(this)) // path to web content
                     .start()
                     .get();
         } catch (Exception e) {
