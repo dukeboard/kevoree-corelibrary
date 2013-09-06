@@ -27,10 +27,10 @@
             <artifactId>webbit</artifactId>
             <version>0.4.15</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.kevoree</groupId>
             <artifactId>org.kevoree.model.js</artifactId>
             <version>${kevoree.version}</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
 </project>
