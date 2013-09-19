@@ -78,6 +78,9 @@ public abstract class AbstractPage extends AbstractComponentType {
             } else {
                 Log.debug("Status code correspond to tea pot: No response returns!");
             }
+        }  else {
+            // url pattern check fail --> forward request
+            forward(param);
         }
     }
 
@@ -87,23 +90,12 @@ public abstract class AbstractPage extends AbstractComponentType {
         return response;
     }*/
 
-    public KevoreeHttpResponse forward(KevoreeHttpRequest request, KevoreeHttpResponse response) {
-        // remove already used pattern => / + getLastParam(...)
-        String previousUrl = request.getUrl();
-        String url = getLastParam(previousUrl);
-        if (!url.startsWith("/")) {
-            url = "/" + url;
-        }
-        request.setUrl(url);
+    public void forward(Object request ) {
         if (isPortBinded("forward")) {
-            Log.debug("forward request for url = {} with completeURL = {}", url, request.getCompleteUrl());
             getPortByName("forward", MessagePort.class).process(request);
-            response.setStatus(NO_RETURN_RESPONSE);
         } else {
             Log.debug("Unable to forward request because the forward port is not bind for {}", getName());
-            response.setContent("Unable to forward request because the forward port is not bound for " + getName() + "@" + getNodeName());
         }
-        return response;
     }
 
 }
