@@ -261,7 +261,7 @@ public class LxcManager {
 
             Log.debug("ADD => " + getContainers() + " in current model");
 
-            engine.append("merge 'mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.lxc/" + defaultKevoreeFactory.getVersion() + "'");
+        //    engine.append("merge 'mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.lxc/" + defaultKevoreeFactory.getVersion() + "'");
             engine.append("addNode " + nodename + ":LxcHostNode");
 
             for (String node_child_id : getContainers()) {
