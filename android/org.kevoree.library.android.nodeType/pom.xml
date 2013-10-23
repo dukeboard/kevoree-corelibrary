@@ -18,9 +18,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.kevoree</groupId>
-            <artifactId>org.kevoree.kompare</artifactId>
-            <version>${kevoree.version}</version>
+            <groupId>org.jgrapht</groupId>
+            <artifactId>jgrapht-jdk1.5</artifactId>
+            <version>0.7.3</version>
         </dependency>
     </dependencies>
 

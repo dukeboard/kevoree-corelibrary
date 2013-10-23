@@ -5,7 +5,6 @@ import org.kevoree.ContainerRoot
 import org.kevoree.Instance
 import org.kevoree.api.PrimitiveCommand
 import org.kevoree.framework.KInstance
-import org.kevoree.library.defaultNodeTypes.context.KevoreeDeployManager
 
 /**
  * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 3, 29 June 2007;
@@ -21,7 +20,7 @@ import org.kevoree.library.defaultNodeTypes.context.KevoreeDeployManager
  * limitations under the License.
  */
 
-class UpdateDictionary(val c: Instance, val nodeName: String): PrimitiveCommand {
+class UpdateDictionary(val c: Instance, val nodeName: String, val registry: MutableMap<String, Any>) : PrimitiveCommand {
 
     private var lastDictioanry: Map<String, Any>? = null
 
@@ -29,35 +28,33 @@ class UpdateDictionary(val c: Instance, val nodeName: String): PrimitiveCommand 
     override fun execute(): Boolean {
         //BUILD MAP
         val dictionary = HashMap<String, Any>()
-        if (c.getTypeDefinition()!!.getDictionaryType() != null) {
-            if (c.getTypeDefinition()!!.getDictionaryType()!!.getDefaultValues() != null) {
-                for(dv in c.getTypeDefinition()!!.getDictionaryType()!!.getDefaultValues()) {
-                    dictionary.put(dv.getAttribute()!!.getName(), dv.getValue())
-                }
+        if (c.typeDefinition!!.dictionaryType != null) {
+            for(dv in c.typeDefinition!!.dictionaryType!!.defaultValues) {
+                dictionary.put(dv.attribute!!.name!!, dv.value!!)
             }
         }
 
-        if (c.getDictionary() != null) {
-            for(v in c.getDictionary()!!.getValues()){
-                if (v.getAttribute()!!.getFragmentDependant()) {
-                    val tn = v.getTargetNode()
+        if (c.dictionary != null) {
+            for(v in c.dictionary!!.values){
+                if (v.attribute!!.fragmentDependant!!) {
+                    val tn = v.targetNode
                     if (tn != null) {
-                        if (tn.getName() == nodeName) {
-                            dictionary.put(v.getAttribute()!!.getName(), v!!.getValue())
+                        if (tn.name == nodeName) {
+                            dictionary.put(v.attribute!!.name!!, v.value!!)
                         }
                     }
                 } else {
-                    dictionary.put(v.getAttribute()!!.getName(), v!!.getValue())
+                    dictionary.put(v.attribute!!.name!!, v.value!!)
                 }
             }
         }
 
-        val reffound = KevoreeDeployManager.getRef(c.javaClass.getName() + "_wrapper", c.getName())
+        val reffound = registry.get(c.path()!!)
         if(reffound != null && reffound is KInstance){
             val iact = reffound as KInstance
             val previousCL = Thread.currentThread().getContextClassLoader()
             Thread.currentThread().setContextClassLoader(iact.javaClass.getClassLoader())
-            lastDictioanry = iact.kUpdateDictionary(dictionary, c.getTypeDefinition()!!.eContainer() as ContainerRoot)
+            lastDictioanry = iact.kUpdateDictionary(dictionary, c.typeDefinition!!.eContainer() as ContainerRoot)
             Thread.currentThread().setContextClassLoader(previousCL)
             return lastDictioanry != null
         } else {
@@ -67,7 +64,7 @@ class UpdateDictionary(val c: Instance, val nodeName: String): PrimitiveCommand 
     }
 
     override fun undo() {
-        val mapFound = KevoreeDeployManager.getRef(c.javaClass.getName() + "_wrapper", c.getName())
+        val mapFound = registry.get(c.path()!!)
         val tempHash = HashMap<String, Any>()
         if (lastDictioanry != null) {
             tempHash.putAll(lastDictioanry!!);
@@ -76,13 +73,13 @@ class UpdateDictionary(val c: Instance, val nodeName: String): PrimitiveCommand 
             val iact = mapFound as KInstance
             val previousCL = Thread.currentThread().getContextClassLoader()
             Thread.currentThread().setContextClassLoader(iact.javaClass.getClassLoader())
-            lastDictioanry = iact.kUpdateDictionary(tempHash, c.getTypeDefinition()!!.eContainer() as ContainerRoot)
+            lastDictioanry = iact.kUpdateDictionary(tempHash, c.typeDefinition!!.eContainer() as ContainerRoot)
             Thread.currentThread().setContextClassLoader(previousCL)
         }
     }
 
     fun toString(): String {
-        return "UpdateDictionary "+c.getName()
+        return "UpdateDictionary " + c.name
     }
 
 }

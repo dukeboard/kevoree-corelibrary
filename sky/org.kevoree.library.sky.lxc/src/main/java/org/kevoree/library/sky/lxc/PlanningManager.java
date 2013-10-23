@@ -6,6 +6,7 @@ import org.kevoreeadaptation.AdaptationPrimitive;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
@@ -19,8 +20,8 @@ class PlanningManager extends org.kevoree.library.sky.api.planning.PlanningManag
 
     private int maxAddNode;
 
-    public PlanningManager(AbstractNodeType skyNode, int maxAddNode) {
-        super(skyNode);
+    public PlanningManager(AbstractNodeType skyNode, int maxAddNode, Map<String, Object> registry) {
+        super(skyNode, registry);
     }
 
     public void createNextStep(String primitiveType, List commands) {

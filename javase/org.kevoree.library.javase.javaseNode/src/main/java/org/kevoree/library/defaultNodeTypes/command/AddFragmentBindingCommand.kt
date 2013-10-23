@@ -1,5 +1,10 @@
 package org.kevoree.library.defaultNodeTypes.command
 
+import org.kevoree.Channel
+import org.kevoree.api.PrimitiveCommand
+import org.kevoree.framework.message.FragmentBindMessage
+import org.kevoree.framework.KevoreeChannelFragment
+
 /**
  * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 3, 29 June 2007;
  * you may not use this file except in compliance with the License.
@@ -13,20 +18,13 @@ package org.kevoree.library.defaultNodeTypes.command
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import org.kevoree.Channel
-import org.kevoree.api.PrimitiveCommand
-import org.kevoree.library.defaultNodeTypes.context.KevoreeDeployManager
-import org.kevoree.framework.message.FragmentBindMessage
-import org.kevoree.framework.KevoreeChannelFragment
-
-class AddFragmentBindingCommand(val c: Channel, val remoteNodeName: String, val nodeName: String): PrimitiveCommand {
+class AddFragmentBindingCommand(val c: Channel, val remoteNodeName: String, val nodeName: String, val registry:MutableMap<String, Any>): PrimitiveCommand {
 
     override fun execute(): Boolean {
 
-        val kevoreeChannelFound = KevoreeDeployManager.getRef(c.javaClass.getName()+"_wrapper", c.getName()) as KevoreeChannelFragment
+        val kevoreeChannelFound = registry.get(c.path()!!) as KevoreeChannelFragment?
         if(kevoreeChannelFound != null){
-            val bindmsg = FragmentBindMessage(kevoreeChannelFound,c.getName(),remoteNodeName)
+            val bindmsg = FragmentBindMessage(kevoreeChannelFound,c.name!!,remoteNodeName)
             return (kevoreeChannelFound.processAdminMsg(bindmsg))
         } else {
             return false
@@ -34,11 +32,11 @@ class AddFragmentBindingCommand(val c: Channel, val remoteNodeName: String, val 
     }
 
     override fun undo() {
-        RemoveFragmentBindingCommand(c, remoteNodeName, nodeName).execute()
+        RemoveFragmentBindingCommand(c, remoteNodeName, nodeName, registry).execute()
     }
 
     public fun toString() : String {
-        return "AddFragmentBindingCommand " + c.getName()
+        return "AddFragmentBindingCommand " + c.name
     }
 
 }

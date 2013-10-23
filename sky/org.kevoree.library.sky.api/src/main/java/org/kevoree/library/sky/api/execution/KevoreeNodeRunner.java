@@ -192,7 +192,7 @@ public abstract class KevoreeNodeRunner {
                 if (dp.getTargetNodeType().getName().equals(iaasNode.getTypeDefinition().getName()) || isASubType(iaasNode.getTypeDefinition(), dp.getTargetNodeType().getName())) {
                     Log.debug("looking for version of kevoree framework for the found deploy unit");
                     for (DeployUnit dep : dp.getRequiredLibs()) {
-                        if (dp.getUnitName().equals("org.kevoree") && dep.getGroupName().equals("org.kevoree.framework")) {
+                        if (dp.getName().equals("org.kevoree") && dep.getGroupName().equals("org.kevoree.framework")) {
                             dep.getVersion();
                         }
                     }

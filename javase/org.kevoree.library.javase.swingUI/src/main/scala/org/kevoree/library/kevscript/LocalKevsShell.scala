@@ -72,7 +72,7 @@ class LocalKevsShell(mhs: KevoreeModelHandlerService, kevsfact: KevScriptEngineF
         import org.kevoree.tools.marShell.interpreter.KevsInterpreterAspects._
         val ghostModel = mhs.getLastUUIDModel
         val modelClone = new DefaultModelCloner
-        val cloneModel = modelClone.clone(ghostModel.getModel)
+        val cloneModel = modelClone.clone(ghostModel.getModel).asInstanceOf[ContainerRoot]
 
         val result = script.interpret(KevsInterpreterContext(cloneModel))
         logger.info("Interpreter Result : " + result)

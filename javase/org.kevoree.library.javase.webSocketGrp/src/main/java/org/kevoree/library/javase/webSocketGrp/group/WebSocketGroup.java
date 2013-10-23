@@ -172,7 +172,7 @@ public class WebSocketGroup extends AbstractGroupType {
 	}
 
 	@Override
-	public void triggerModelUpdate() {
+	public void modelUpdated() {
 		Log.debug("trigger model update");
 		if (isStarted) {
 			final ContainerRoot modelOption = NodeNetworkHelper.updateModelWithNetworkProperty(this);

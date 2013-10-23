@@ -1,5 +1,8 @@
 package org.kevoree.library.defaultNodeTypes.command
 
+import org.kevoree.Instance
+import org.kevoree.api.PrimitiveCommand
+
 /**
  * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 3, 29 June 2007;
  * you may not use this file except in compliance with the License.
@@ -13,14 +16,6 @@ package org.kevoree.library.defaultNodeTypes.command
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-import org.kevoree.Instance
-import org.kevoree.api.PrimitiveCommand
-
 abstract class LifeCycleCommand(val c: Instance, val nodeName: String): PrimitiveCommand {
 
     fun getInstance(): Instance {

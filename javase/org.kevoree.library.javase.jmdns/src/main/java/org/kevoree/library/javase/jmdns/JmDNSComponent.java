@@ -156,7 +156,7 @@ public class JmDNSComponent {
     }
 
     private ContainerRoot updateModel(ContainerRoot currentModel, String nodeName, String nodeTypeName, String groupName, String groupTypeName, InetAddress[] addresses, int port) {
-        ContainerRoot model = modelCloner.clone(currentModel);
+        ContainerRoot model = (ContainerRoot)modelCloner.clone(currentModel);
         addNode(model, nodeName, nodeTypeName);
         updateNetworkProperties(model, nodeName, addresses);
         if (groupName.equals(group.getName()) && groupTypeName.equals(group.getModelElement().getTypeDefinition().getName())) {

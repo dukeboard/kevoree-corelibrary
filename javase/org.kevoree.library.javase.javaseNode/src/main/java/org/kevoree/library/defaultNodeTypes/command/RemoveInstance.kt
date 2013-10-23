@@ -1,5 +1,13 @@
 package org.kevoree.library.defaultNodeTypes.command
 
+import org.kevoree.*
+import org.kevoree.api.service.core.handler.KevoreeModelHandlerService
+import org.kevoree.api.service.core.script.KevScriptEngineFactory
+import org.kevoree.api.PrimitiveCommand
+import org.kevoree.framework.kaspects.TypeDefinitionAspect
+import org.kevoree.log.Log
+import org.kevoree.framework.AbstractNodeType
+
 /**
  * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 3, 29 June 2007;
  * you may not use this file except in compliance with the License.
@@ -13,31 +21,20 @@ package org.kevoree.library.defaultNodeTypes.command
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import org.kevoree.library.defaultNodeTypes.context.KevoreeDeployManager
-import org.kevoree.*
-import org.kevoree.api.service.core.handler.KevoreeModelHandlerService
-import org.kevoree.api.service.core.script.KevScriptEngineFactory
-import org.kevoree.api.PrimitiveCommand
-import org.kevoree.framework.KevoreeGeneratorHelper
-import org.kevoree.framework.kaspects.TypeDefinitionAspect
-import org.kevoree.log.Log
-import org.kevoree.framework.AbstractNodeType
-
-class RemoveInstance(val c: Instance, val nodeName: String, val modelservice: KevoreeModelHandlerService, val kscript: KevScriptEngineFactory, val bs: org.kevoree.api.Bootstraper, val nt : AbstractNodeType): PrimitiveCommand {
+class RemoveInstance(val c: Instance, val nodeName: String, val modelservice: KevoreeModelHandlerService, val kscript: KevScriptEngineFactory, val bs: org.kevoree.api.Bootstraper, val nt: AbstractNodeType, val registry: MutableMap<String, Any>) : PrimitiveCommand {
 
     private val typeDefinitionAspect = TypeDefinitionAspect()
 
     override fun undo() {
         try {
-            AddInstance(c, nodeName, modelservice, kscript, bs,nt).execute()
-            UpdateDictionary(c, nodeName).execute()
+            AddInstance(c, nodeName, modelservice, kscript, bs, nt, registry).execute()
+            UpdateDictionary(c, nodeName, registry).execute()
         } catch(e: Exception) {
         }
     }
 
     override fun execute(): Boolean {
-        Log.debug("CMD REMOVE INSTANCE EXECUTION  - " + c.getName() + " - type - " + c.getTypeDefinition()!!.getName())
+        Log.debug("CMD REMOVE INSTANCE EXECUTION  - " + c.name!! + " - type - " + c.typeDefinition!!.name!!)
         try {
             /*
             val instanceRef = KevoreeDeployManager.getRef(c.javaClass.getName(), c.getName())
@@ -60,18 +57,20 @@ class RemoveInstance(val c: Instance, val nodeName: String, val modelservice: Ke
                 return false
             } */
 
-            KevoreeDeployManager.clearRef(c.javaClass.getName()+"_tg", c.getName())
-            KevoreeDeployManager.clearRef(c.javaClass.getName()+"_wrapper", c.getName())
-            KevoreeDeployManager.clearRef(c.javaClass.getName(), c.getName())
+
+            registry.remove(c.path()!!)
+//            KevoreeDeployManager.clearRef(c.javaClass.getName() + "_tg", c.name!!)
+//            KevoreeDeployManager.clearRef(c.javaClass.getName() + "_wrapper", c.name!!)
+//            KevoreeDeployManager.clearRef(c.javaClass.getName(), c.name!!)
             return true
         } catch(e: Exception){
-            Log.error("RemoveInstance "+c.getName() + " - type - " + c.getTypeDefinition()!!.getName()+" ",e)
+            Log.error("RemoveInstance " + c.name!! + " - type - " + c.typeDefinition!!.name!! + " ", e)
             return false
         }
     }
 
     fun toString(): String {
-        return "RemoveInstance "+c.getName()
+        return "RemoveInstance " + c.name!!
     }
 
 }

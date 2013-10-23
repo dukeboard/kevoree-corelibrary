@@ -1,5 +1,7 @@
+/*
 package org.kevoree.library.defaultNodeTypes.context
 
+*/
 /**
  * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 3, 29 June 2007;
  * you may not use this file except in compliance with the License.
@@ -12,7 +14,8 @@ package org.kevoree.library.defaultNodeTypes.context
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *//*
+
 
 import org.kevoree.DeployUnit
 import org.kevoree.framework.AbstractNodeType
@@ -44,7 +47,7 @@ object KevoreeDeployManager {
                 val old_du =o  as DeployUnit
                 //CLEANUP KCL CONTEXT
                 if (nodeType.getBootStrapperService()!!.getKevoreeClassLoaderHandler().getKevoreeClassLoader(old_du) != null) {
-                    Log.debug("Force cleanup unitName {}", old_du.getUnitName())
+                    Log.debug("Force cleanup unitName {}", old_du.name)
                 }
             }
         }
@@ -53,3 +56,4 @@ object KevoreeDeployManager {
 }
 
 
+*/

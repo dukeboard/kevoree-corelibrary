@@ -1,0 +1,24 @@
+merge "mvn:org.kevoree.corelibrary.sky/org.kevoree.library.sky.minicloud/{project.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.javaseNode/{project.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.basicGossiper/{project.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.fakeDomo/{project.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.defaultChannels/{project.version}"
+
+addNode minicloud : MiniCloudNode {logLevel = "INFO"}
+addNode node0 : PJavaSENode {logLevel = "DEBUG"}
+addNode node1 : PJavaSENode {logLevel = "DEBUG"}
+
+addChild node0@minicloud
+addChild node1@minicloud
+
+addComponent console0@node0: FakeConsole
+addComponent console1@node1 : FakeConsole
+
+addChannel channel : BasicGossiperChannel
+
+bind console0.textEntered@node0 => channel
+bind console1.textEntered@node1 => channel
+bind console1.showText@node1 => channel
+bind console0.showText@node0 => channel
+
+updateDictionary channel {port="8010"}@node0,{port="8011"}@node1

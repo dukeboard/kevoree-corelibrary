@@ -180,7 +180,7 @@ public class WebSocketGroupMasterServer extends AWebSocketGroup {
                 + " ask for a pull in JSON");
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         JSONModelSerializer serializer = new JSONModelSerializer();
-        serializer.serialize(getModelService().getLastModel(), output);
+        serializer.serializeToStream(getModelService().getLastModel(), output);
         conn.send(output.toByteArray());
     }
 

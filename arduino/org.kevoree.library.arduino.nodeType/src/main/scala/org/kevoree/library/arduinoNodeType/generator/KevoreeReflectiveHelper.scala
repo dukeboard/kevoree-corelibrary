@@ -9,7 +9,7 @@ import org.kevoree.{NodeType, ContainerRoot, TypeDefinition}
 import scala.collection.JavaConversions._
 import org.slf4j.{LoggerFactory, Logger}
 import org.kevoree.annotation.{Generate => KGenerate}
-import org.kevoree.framework.{AbstractNodeType, KevoreeGeneratorHelper}
+import org.kevoree.framework.AbstractNodeType
 import org.kevoree.framework.kaspects.TypeDefinitionAspect
 
 trait KevoreeReflectiveHelper {
@@ -61,7 +61,7 @@ trait KevoreeReflectiveHelper {
     val  du = typeDefinitionAspect.foundRelevantDeployUnit(ct, nodeHost)
 
     val resolvedNodeType = typeDefinitionAspect.foundRelevantHostNodeType(nodeTypeName.asInstanceOf[NodeType],ct)
-    val genPackage = new KevoreeGeneratorHelper().getTypeDefinitionGeneratedPackage(ct, resolvedNodeType.getName)
+    val genPackage = getTypeDefinitionGeneratedPackage(ct, resolvedNodeType.getName)
     val activatorName = ct.getName + "Activator"
     val activatorClassName = genPackage + "." + activatorName
 
@@ -132,6 +132,15 @@ trait KevoreeReflectiveHelper {
     } */
 
 
+  }
+
+
+  def getTypeDefinitionGeneratedPackage(td: TypeDefinition, targetNodeType: String): String = {
+    val basePackage = td.getBean.substring(0, td.getBean.lastIndexOf("."))
+    return basePackage + "." + "kevgen" + "." + targetNodeType
+  }
+  def getTypeDefinitionBasePackage(td: TypeDefinition): String = {
+    return td.getBean.substring(0, td.getBean.lastIndexOf("."))
   }
 
 }

@@ -58,7 +58,7 @@ public class NodeNetworkHelper {
 
     public static ContainerRoot updateModelWithNetworkProperty (AbstractGroupType group) {
         Object ipObject = group.getDictionary().get("ip");
-        ContainerRoot readWriteModel = cloner.clone(group.getModelService().getLastModel());
+        ContainerRoot readWriteModel = (ContainerRoot)cloner.clone(group.getModelService().getLastModel());
         if (ipObject != null && !ipObject.toString().equals("") && !ipObject.toString().equals("0.0.0.0")) {
             java.util.HashMap<String,String> addresses = new java.util.HashMap<String,String>();
             addresses.put(ipObject.toString(),"unknown-" + ipObject.toString());

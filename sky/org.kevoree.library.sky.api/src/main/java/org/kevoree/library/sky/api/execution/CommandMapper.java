@@ -3,7 +3,7 @@ package org.kevoree.library.sky.api.execution;
 import org.kevoree.ContainerNode;
 import org.kevoree.ContainerRoot;
 import org.kevoree.api.PrimitiveCommand;
-import org.kevoree.kompare.JavaSePrimitive;
+import org.kevoree.library.defaultNodeTypes.planning.JavaSePrimitive;
 import org.kevoree.library.sky.api.CloudNode;
 import org.kevoree.library.sky.api.execution.command.AddNodeCommand;
 import org.kevoree.library.sky.api.execution.command.RemoveNodeCommand;
@@ -11,6 +11,8 @@ import org.kevoree.library.sky.api.execution.command.StartNodeCommand;
 import org.kevoree.library.sky.api.execution.command.StopNodeCommand;
 import org.kevoree.log.Log;
 import org.kevoreeadaptation.AdaptationPrimitive;
+
+import java.util.Map;
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
@@ -24,7 +26,8 @@ public class CommandMapper extends org.kevoree.library.defaultNodeTypes.CommandM
 
     private KevoreeNodeManager nodeManager;
 
-    public CommandMapper(KevoreeNodeManager nodeManager) {
+    public CommandMapper(KevoreeNodeManager nodeManager, Map<String, Object> registry) {
+        super(registry);
         this.nodeManager = nodeManager;
     }
 
@@ -37,25 +40,25 @@ public class CommandMapper extends org.kevoree.library.defaultNodeTypes.CommandM
 
             ContainerNode targetNode = (ContainerNode) adaptationPrimitive.getRef();
             ContainerRoot targetNodeRoot = (ContainerRoot) ((ContainerNode) adaptationPrimitive.getRef()).eContainer();
-            command = new RemoveNodeCommand(targetNodeRoot, targetNode.getName(), nodeManager);
+            command = new RemoveNodeCommand(targetNodeRoot, targetNode.getName(), nodeManager, registry);
         } else if (adaptationPrimitive.getPrimitiveType().getName().equals(CloudNode.ADD_NODE)) {
             Log.debug("add ADD_NODE command on {}", ((ContainerNode) adaptationPrimitive.getRef()).getName());
 
             ContainerNode targetNode = (ContainerNode) adaptationPrimitive.getRef();
             ContainerRoot targetNodeRoot = (ContainerRoot) ((ContainerNode) adaptationPrimitive.getRef()).eContainer();
-            command = new AddNodeCommand(targetNodeRoot, targetNode.getName(), nodeManager);
+            command = new AddNodeCommand(targetNodeRoot, targetNode.getName(), nodeManager, registry);
         } else if (adaptationPrimitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getStartInstance()) && adaptationPrimitive.getRef() instanceof ContainerNode) {
             Log.debug("add START_NODE command on {}", ((ContainerNode) adaptationPrimitive.getRef()).getName());
 
             ContainerNode targetNode = (ContainerNode) adaptationPrimitive.getRef();
             ContainerRoot targetNodeRoot = (ContainerRoot) ((ContainerNode) adaptationPrimitive.getRef()).eContainer();
-            command = new StartNodeCommand(targetNodeRoot, targetNode.getName(), nodeManager);
+            command = new StartNodeCommand(targetNodeRoot, targetNode.getName(), nodeManager, registry);
         } else if (adaptationPrimitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getStopInstance()) && adaptationPrimitive.getRef() instanceof ContainerNode) {
             Log.debug("add STOP_NODE command on {}", ((ContainerNode) adaptationPrimitive.getRef()).getName());
 
             ContainerNode targetNode = (ContainerNode) adaptationPrimitive.getRef();
             ContainerRoot targetNodeRoot = (ContainerRoot) ((ContainerNode) adaptationPrimitive.getRef()).eContainer();
-            command = new StopNodeCommand(targetNodeRoot, targetNode.getName(), nodeManager);
+            command = new StopNodeCommand(targetNodeRoot, targetNode.getName(), nodeManager, registry);
         }
         if (command == null) {
             Log.debug("AdaptationPrimitive is not managed by CloudNode, asking to JavaSeNode...");

@@ -3,8 +3,10 @@ package org.kevoree.library.defaultNodeTypes.command
 import org.kevoree.ContainerRoot
 import org.kevoree.Instance
 import org.kevoree.framework.KInstance
-import org.kevoree.library.defaultNodeTypes.context.KevoreeDeployManager
 import org.kevoree.log.Log
+import org.kevoree.framework.KevoreeComponent
+import org.kevoree.framework.ChannelTypeFragmentThread
+import org.kevoree.framework.KevoreeGroup
 
 /**
  * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 3, 29 June 2007;
@@ -20,7 +22,7 @@ import org.kevoree.log.Log
  * limitations under the License.
  */
 
-class StartStopInstance(c: Instance, nodeName: String, val start: Boolean): LifeCycleCommand(c, nodeName), Runnable {
+class StartStopInstance(c: Instance, nodeName: String, val start: Boolean, val registry: MutableMap<String, Any>) : LifeCycleCommand(c, nodeName), Runnable {
 
     var t: Thread? = null
     var resultAsync = false
@@ -32,10 +34,10 @@ class StartStopInstance(c: Instance, nodeName: String, val start: Boolean): Life
 
         Thread.currentThread().setContextClassLoader(iact.javaClass.getClassLoader())
         if(start){
-            Thread.currentThread().setName("KevoreeStartInstance" + c.getName())
+            Thread.currentThread().setName("KevoreeStartInstance" + c.name!!)
             resultAsync = iact!!.kInstanceStart(root!!)
         } else {
-            Thread.currentThread().setName("KevoreeStopInstance" + c.getName())
+            Thread.currentThread().setName("KevoreeStopInstance" + c.name!!)
             val res = iact!!.kInstanceStop(root!!)
             Thread.currentThread().setContextClassLoader(null)
             resultAsync = res
@@ -43,23 +45,31 @@ class StartStopInstance(c: Instance, nodeName: String, val start: Boolean): Life
     }
 
     override fun undo() {
-        StartStopInstance(c, nodeName, !start).execute()
+        StartStopInstance(c, nodeName, !start, registry).execute()
     }
 
     override fun execute(): Boolean {
 
         //Look thread group
-        root = c.getTypeDefinition()!!.eContainer() as ContainerRoot
-        val ref = KevoreeDeployManager.getRef(c.javaClass.getName() + "_wrapper", c.getName())
-        tg = KevoreeDeployManager.getRef(c.javaClass.getName() + "_tg", c.getName()) as? ThreadGroup
-        if(tg != null && ref != null && ref is KInstance){
+        root = c.typeDefinition!!.eContainer() as ContainerRoot
+        val ref = registry.get(c.path()!!)
+        if(ref != null && ref is KInstance){
+            if (ref is KevoreeComponent) {
+                tg = ref.tg
+            } else if (ref is ChannelTypeFragmentThread) {
+                tg = ref.tg
+            } else if (ref is KevoreeGroup) {
+                tg = ref.tg
+            }
+
             iact = ref as KInstance
+
             t = Thread(tg, this)
             t!!.start()
             t!!.join()
             if(!start){
                 //kill subthread
-                val subThread: Array<Thread> = Array<Thread>(tg!!.activeCount(), { i-> Thread.currentThread() })
+                val subThread: Array<Thread> = Array<Thread>(tg!!.activeCount(), { i -> Thread.currentThread() })
                 tg!!.enumerate(subThread)
                 for(subT in subThread){
                     try {
@@ -69,6 +79,7 @@ class StartStopInstance(c: Instance, nodeName: String, val start: Boolean): Life
                     }
                 }
             }
+
             //call sub
             return resultAsync
         } else {
@@ -78,7 +89,7 @@ class StartStopInstance(c: Instance, nodeName: String, val start: Boolean): Life
     }
 
     override fun toString(): String {
-        var s = "StartStopInstance " + c.getName()
+        var s = "StartStopInstance " + c.name
         if (start) {
             s += " start"
         } else {

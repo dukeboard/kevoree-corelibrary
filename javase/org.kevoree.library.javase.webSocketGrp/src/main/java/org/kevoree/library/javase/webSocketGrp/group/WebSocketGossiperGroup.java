@@ -130,7 +130,7 @@ public class WebSocketGossiperGroup extends BasicGossiperGroup {
     }
 
     @Override
-    public void triggerModelUpdate() {
+    public void modelUpdated() {
         if (isRunning) {
             final ContainerRoot modelOption = org.kevoree.library.NodeNetworkHelper.updateModelWithNetworkProperty(this);
             if (modelOption != null) {

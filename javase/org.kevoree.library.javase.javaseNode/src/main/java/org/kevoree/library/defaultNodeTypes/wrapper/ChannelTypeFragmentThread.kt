@@ -182,7 +182,7 @@ class ChannelTypeFragmentThread(val target: AbstractChannelFragment, val _nodeNa
     public override fun forward(delegate: KevoreeChannelFragment?, inmsg: Message?): Any? {
         val msg = inmsg!!.clone()
         msg.setDestChannelName(delegate!!.getName())
-        msg.setDestNodeName(delegate!!.getNodeName())
+        msg.setDestNodeName(delegate.getNodeName())
         if (msg.getInOut()) {
             return delegate.sendWait(msg)
         } else {

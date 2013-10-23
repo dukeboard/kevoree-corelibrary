@@ -10,8 +10,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <scala.version>2.9.2</scala.version>
-        <kotlin.version>0.6.31</kotlin.version>
-        <kevoree.version>2.0.13</kevoree.version>
+        <kotlin.version>0.6.602</kotlin.version>
+        <kevoree.version>2.1-SNAPSHOT</kevoree.version>
+        <kcl.version>2</kcl.version>
         <slf4j.version>1.7.5</slf4j.version>
     </properties>
 

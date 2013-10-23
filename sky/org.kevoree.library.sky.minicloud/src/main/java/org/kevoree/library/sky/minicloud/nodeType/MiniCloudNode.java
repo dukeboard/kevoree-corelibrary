@@ -51,8 +51,8 @@ public class MiniCloudNode extends JavaSENode implements CloudNode, PaaSNode {
         Log.debug("Starting node type of {}", this.getName());
         super.startNode();
         nodeManager = new KevoreeNodeManager(new MiniCloudNodeRunnerFactory());
-        kompareBean = new PlanningManager(this);
-        mapper = new CommandMapper(nodeManager);
+        kompareBean = new PlanningManager(this, registry);
+        mapper = new CommandMapper(nodeManager, registry);
         mapper.setNodeType(this);
 
         executor = new ScheduledThreadPoolExecutor(ManagementFactory.getOperatingSystemMXBean().getAvailableProcessors());
@@ -85,7 +85,7 @@ public class MiniCloudNode extends JavaSENode implements CloudNode, PaaSNode {
         public synchronized void run() {
             UUIDModel uuidModel = node.getModelService().getLastUUIDModel();
             DefaultModelCloner cloner = new DefaultModelCloner();
-            ContainerRoot readWriteModel = cloner.clone(node.getModelService().getLastModel());
+            ContainerRoot readWriteModel = (ContainerRoot)cloner.clone(node.getModelService().getLastModel());
 
             boolean update = false;
 

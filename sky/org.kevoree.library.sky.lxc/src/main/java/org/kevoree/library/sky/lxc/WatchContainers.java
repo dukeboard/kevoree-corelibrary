@@ -90,7 +90,7 @@ public class WatchContainers implements Runnable {
                             Log.info("The Container {} has the IP address => {}",containerNode.getName(),ip);
                             uuidModel=  lxcHostNode.getModelService().getLastUUIDModel();
                             DefaultModelCloner cloner = new DefaultModelCloner();
-                            ContainerRoot readWriteModel = cloner.clone(lxcHostNode.getModelService().getLastModel());
+                            ContainerRoot readWriteModel = (ContainerRoot)cloner.clone(lxcHostNode.getModelService().getLastModel());
                             updateNetworkProperties(readWriteModel, containerNode.getName(), ip);
                             lxcHostNode.getModelService().compareAndSwapModel(uuidModel, readWriteModel);
                         }

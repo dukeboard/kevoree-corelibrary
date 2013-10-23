@@ -49,8 +49,8 @@ public class MavenP2PResolver extends AbstractComponentType implements DeployUni
 
     @Override
     public File resolve(DeployUnit du) {
-        File resolved = getBootStrapperService().resolveArtifact(du.getUnitName(), du.getGroupName(), du.getVersion(), remoteURLS.get());
-        Log.info("DU " + du.getUnitName() + " from cache resolution " + (resolved != null));
+        File resolved = getBootStrapperService().resolveArtifact(du.getName(), du.getGroupName(), du.getVersion(), remoteURLS.get());
+        Log.info("DU " + du.getName() + " from cache resolution " + (resolved != null));
         return null;
     }
 

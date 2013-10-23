@@ -29,10 +29,6 @@
                 </exclusion>
                 <exclusion>
                     <groupId>org.kevoree</groupId>
-                    <artifactId>org.kevoree.merger</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.kevoree</groupId>
                     <artifactId>org.kevoree.model</artifactId>
                 </exclusion>
             </exclusions>

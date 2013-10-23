@@ -43,7 +43,7 @@ public class ArduinoSerialDelegation extends AbstractGroupType {
     Thread previous = null;
 
     @Override
-    public void triggerModelUpdate() {
+    public void modelUpdated() {
         previous = new Thread() {
             @Override
             public void run() {

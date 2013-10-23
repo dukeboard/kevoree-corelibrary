@@ -36,7 +36,7 @@ public class HazelGroup extends AbstractGroupType implements MembershipListener 
     }
 
     @Override
-    public void triggerModelUpdate() {
+    public void modelUpdated() {
 
     }
 

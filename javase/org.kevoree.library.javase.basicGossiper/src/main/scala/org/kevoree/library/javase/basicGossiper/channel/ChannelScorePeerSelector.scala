@@ -47,7 +47,7 @@ class ChannelScorePeerSelector (timeout: Long, modelHandlerService: KevoreeModel
         var foundNodeName = List[String]()
         var minScore = Long.MaxValue
 
-        model.getMBindings.filter(b => b.getHub.getName.equals(channel.getName))
+        model.getmBindings.filter(b => b.getHub.getName.equals(channel.getName))
           .filter(b => !b.getPort.eContainer.eContainer.asInstanceOf[ContainerNode].getName.equals(nodeName))
           .foreach{
           binding => {
@@ -57,7 +57,7 @@ class ChannelScorePeerSelector (timeout: Long, modelHandlerService: KevoreeModel
             }
           }
         }
-        model.getMBindings.filter(b => b.getHub.getName.equals(channel.getName))
+        model.getmBindings.filter(b => b.getHub.getName.equals(channel.getName))
           .filter(b => !b.getPort.eContainer.eContainer.asInstanceOf[ContainerNode].getName.equals(nodeName))
           .foreach{
           binding => {

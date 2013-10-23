@@ -4,6 +4,8 @@ import org.kevoree.ContainerRoot;
 import org.kevoree.api.PrimitiveCommand;
 import org.kevoree.library.sky.api.execution.KevoreeNodeManager;
 
+import java.util.Map;
+
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
  * Date: 25/06/13
@@ -18,10 +20,13 @@ public class StopNodeCommand implements PrimitiveCommand {
     private String targetChildName;
     private KevoreeNodeManager nodeManager;
 
-    public StopNodeCommand(ContainerRoot iaasModel, String targetChildName, KevoreeNodeManager nodeManager) {
+    private Map<String, Object> registry;
+
+    public StopNodeCommand(ContainerRoot iaasModel, String targetChildName, KevoreeNodeManager nodeManager, Map<String, Object> registry) {
         this.iaasModel = iaasModel;
         this.targetChildName = targetChildName;
         this.nodeManager = nodeManager;
+        this.registry = registry;
     }
 
     public boolean execute() {

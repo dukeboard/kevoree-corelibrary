@@ -6,9 +6,9 @@ import org.kevoree.ContainerNode;
 import org.kevoree.ContainerRoot;
 import org.kevoree.Instance;
 import org.kevoree.framework.AbstractNodeType;
-import org.kevoree.kompare.JavaSePrimitive;
-import org.kevoree.kompare.KevoreeKompareBean;
-import org.kevoree.kompare.scheduling.SchedulingWithTopologicalOrderAlgo;
+import org.kevoree.library.defaultNodeTypes.planning.JavaSePrimitive;
+import org.kevoree.library.defaultNodeTypes.planning.KevoreeKompareBean;
+import org.kevoree.library.defaultNodeTypes.planning.scheduling.SchedulingWithTopologicalOrderAlgo;
 import org.kevoree.library.sky.api.CloudNode;
 import org.kevoree.log.Log;
 import org.kevoreeadaptation.AdaptationModel;
@@ -19,6 +19,7 @@ import org.kevoreeadaptation.impl.DefaultKevoreeAdaptationFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
@@ -32,7 +33,8 @@ import java.util.List;
 public class PlanningManager extends KevoreeKompareBean {
     private AbstractNodeType skyNode;
 
-    public PlanningManager(AbstractNodeType skyNode) {
+    public PlanningManager(AbstractNodeType skyNode, Map<String, Object> registry) {
+        super(registry);
         this.skyNode = skyNode;
     }
 

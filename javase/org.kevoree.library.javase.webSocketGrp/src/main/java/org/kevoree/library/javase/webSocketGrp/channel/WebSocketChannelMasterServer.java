@@ -26,7 +26,6 @@ import java.util.concurrent.TimeUnit;
  * User: leiko
  * Date: 3/25/13
  * Time: 10:41 AM
- * To change this template use File | Settings | File Templates.
  */
 @DictionaryType({
         @DictionaryAttribute(name = "port", fragmentDependant = true, optional = true),

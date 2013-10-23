@@ -27,7 +27,7 @@ import java.lang.reflect.InvocationTargetException
 import org.kevoree.library.defaultNodeTypes.wrapper.KInject
 import org.kevoree.api.dataspace.DataSpaceService
 
-public class KevoreeGroup(val target: AbstractGroupType, val nodeName: String, val name: String, val modelService: KevoreeModelHandlerService, val bootService: Bootstraper, val kevsEngine: KevScriptEngineFactory, val dataSpace : DataSpaceService?): KInstance {
+public class KevoreeGroup(val target: AbstractGroupType, val nodeName: String, val name: String, val modelService: KevoreeModelHandlerService, val bootService: Bootstraper, val kevsEngine: KevScriptEngineFactory, val dataSpace : DataSpaceService?, val tg : ThreadGroup): KInstance {
 
     var isStarted: Boolean = false
     private val resolver = MethodAnnotationResolver(target.javaClass);

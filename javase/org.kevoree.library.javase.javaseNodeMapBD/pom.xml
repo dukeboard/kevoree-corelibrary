@@ -14,9 +14,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.kevoree</groupId>
+            <groupId>org.kevoree.kcl</groupId>
             <artifactId>org.kevoree.kcl</artifactId>
-            <version>${kevoree.version}</version>
+            <version>${kcl.version}</version>
         </dependency>
         <dependency>
             <groupId>org.kevoree.corelibrary.javase</groupId>
