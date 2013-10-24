@@ -11,31 +11,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/**
- * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 3, 29 June 2007;
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package org.kevoree.kompare.tests.ports
 
 import org.junit._
-import org.kevoree.kompare._
-import org.scalatest.junit.AssertionsForJUnit
 import org.kevoree.kompare.tests._
-import org.kevoree.{DeployUnit, NamedElement}
+import org.kevoree.library.defaultNodeTypes.planning.{KevoreeKompareBean, JavaSePrimitive}
 
 class PortsTest extends AssertionsForJUnit with KompareSuite {
 
@@ -58,37 +39,37 @@ class PortsTest extends AssertionsForJUnit with KompareSuite {
      */
 
     //    kompareModel shouldContain(JavaSePrimitive.instance$.UpdateType,"ComponentA")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getRemoveType, "ComponentA")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getAddType, "ComponentA")
+    kompareModel shouldContain(JavaSePrimitive.RemoveType, "ComponentA")
+    kompareModel shouldContain(JavaSePrimitive.AddType, "ComponentA")
 
     //    kompareModel shouldContain(JavaSePrimitive.instance$.UpdateInstance,"ComponentA-1541906386")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getStopInstance, "ComponentA-1541906386")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getRemoveInstance, "ComponentA-1541906386")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getAddInstance, "ComponentA-1541906386")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getUpdateDictionaryInstance, "ComponentA-1541906386")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getStartInstance, "ComponentA-1541906386")
+    kompareModel shouldContain(JavaSePrimitive.StopInstance, "ComponentA-1541906386")
+    kompareModel shouldContain(JavaSePrimitive.RemoveInstance, "ComponentA-1541906386")
+    kompareModel shouldContain(JavaSePrimitive.AddInstance, "ComponentA-1541906386")
+    kompareModel shouldContain(JavaSePrimitive.UpdateDictionaryInstance, "ComponentA-1541906386")
+    kompareModel shouldContain(JavaSePrimitive.StartInstance, "ComponentA-1541906386")
 
     //    kompareModel shouldContain(JavaSePrimitive.instance$.UpdateType,"ComponentB")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getRemoveType, "ComponentB")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getAddType, "ComponentB")
+    kompareModel shouldContain(JavaSePrimitive.RemoveType, "ComponentB")
+    kompareModel shouldContain(JavaSePrimitive.AddType, "ComponentB")
     //    kompareModel shouldContain(JavaSePrimitive.instance$.UpdateInstance,"ComponentB--1886857871")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getStopInstance, "ComponentB--1886857871")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getRemoveInstance, "ComponentB--1886857871")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getAddInstance, "ComponentB--1886857871")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getUpdateDictionaryInstance, "ComponentB--1886857871")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getStartInstance, "ComponentB--1886857871")
+    kompareModel shouldContain(JavaSePrimitive.StopInstance, "ComponentB--1886857871")
+    kompareModel shouldContain(JavaSePrimitive.RemoveInstance, "ComponentB--1886857871")
+    kompareModel shouldContain(JavaSePrimitive.AddInstance, "ComponentB--1886857871")
+    kompareModel shouldContain(JavaSePrimitive.UpdateDictionaryInstance, "ComponentB--1886857871")
+    kompareModel shouldContain(JavaSePrimitive.StartInstance, "ComponentB--1886857871")
 
     //    kompareModel shouldContain(JavaSePrimitive.instance$.UpdateType,"ComponentPrimitiveTypeService")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getRemoveType, "ComponentPrimitiveTypeService")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getAddType, "ComponentPrimitiveTypeService")
+    kompareModel shouldContain(JavaSePrimitive.RemoveType, "ComponentPrimitiveTypeService")
+    kompareModel shouldContain(JavaSePrimitive.AddType, "ComponentPrimitiveTypeService")
     //    kompareModel shouldContain(JavaSePrimitive.instance$.UpdateInstance,"ComponentPrimitiveTypeService--690416444")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getStopInstance, "ComponentPrimitiveTypeService--690416444")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getRemoveInstance, "ComponentPrimitiveTypeService--690416444")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getAddInstance, "ComponentPrimitiveTypeService--690416444")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getUpdateDictionaryInstance, "ComponentPrimitiveTypeService--690416444")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getStartInstance, "ComponentPrimitiveTypeService--690416444")
+    kompareModel shouldContain(JavaSePrimitive.StopInstance, "ComponentPrimitiveTypeService--690416444")
+    kompareModel shouldContain(JavaSePrimitive.RemoveInstance, "ComponentPrimitiveTypeService--690416444")
+    kompareModel shouldContain(JavaSePrimitive.AddInstance, "ComponentPrimitiveTypeService--690416444")
+    kompareModel shouldContain(JavaSePrimitive.UpdateDictionaryInstance, "ComponentPrimitiveTypeService--690416444")
+    kompareModel shouldContain(JavaSePrimitive.StartInstance, "ComponentPrimitiveTypeService--690416444")
 
-    kompareModel shouldContainSize(JavaSePrimitive.instance$.getUpdateDeployUnit, 1)
+    kompareModel shouldContainSize(JavaSePrimitive.UpdateDeployUnit, 1)
     //    kompareModel shouldContainSize(JavaSePrimitive.instance$.RemoveDeployUnit, 1)
     //  kompareModel shouldContainSize(JavaSePrimitive.instance$.AddDeployUnit, 1)
 
@@ -112,36 +93,36 @@ class PortsTest extends AssertionsForJUnit with KompareSuite {
     kompareModel verifySize 22
 
     //    kompareModel shouldContain(JavaSePrimitive.instance$.UpdateType, "ComponentA")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getRemoveType, "ComponentA")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getAddType, "ComponentA")
+    kompareModel shouldContain(JavaSePrimitive.RemoveType, "ComponentA")
+    kompareModel shouldContain(JavaSePrimitive.AddType, "ComponentA")
     //    kompareModel shouldContain(JavaSePrimitive.instance$.UpdateInstance, "ComponentA-1541906386")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getStopInstance, "ComponentA-1541906386")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getRemoveInstance, "ComponentA-1541906386")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getAddInstance, "ComponentA-1541906386")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getUpdateDictionaryInstance, "ComponentA-1541906386")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getStartInstance, "ComponentA-1541906386")
+    kompareModel shouldContain(JavaSePrimitive.StopInstance, "ComponentA-1541906386")
+    kompareModel shouldContain(JavaSePrimitive.RemoveInstance, "ComponentA-1541906386")
+    kompareModel shouldContain(JavaSePrimitive.AddInstance, "ComponentA-1541906386")
+    kompareModel shouldContain(JavaSePrimitive.UpdateDictionaryInstance, "ComponentA-1541906386")
+    kompareModel shouldContain(JavaSePrimitive.StartInstance, "ComponentA-1541906386")
 
     //    kompareModel shouldContain(JavaSePrimitive.instance$.UpdateType, "ComponentB")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getRemoveType, "ComponentB")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getAddType, "ComponentB")
+    kompareModel shouldContain(JavaSePrimitive.RemoveType, "ComponentB")
+    kompareModel shouldContain(JavaSePrimitive.AddType, "ComponentB")
     //    kompareModel shouldContain(JavaSePrimitive.instance$.UpdateInstance, "ComponentB--1886857871")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getStopInstance, "ComponentB--1886857871")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getRemoveInstance, "ComponentB--1886857871")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getAddInstance, "ComponentB--1886857871")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getUpdateDictionaryInstance, "ComponentB--1886857871")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getStartInstance, "ComponentB--1886857871")
+    kompareModel shouldContain(JavaSePrimitive.StopInstance, "ComponentB--1886857871")
+    kompareModel shouldContain(JavaSePrimitive.RemoveInstance, "ComponentB--1886857871")
+    kompareModel shouldContain(JavaSePrimitive.AddInstance, "ComponentB--1886857871")
+    kompareModel shouldContain(JavaSePrimitive.UpdateDictionaryInstance, "ComponentB--1886857871")
+    kompareModel shouldContain(JavaSePrimitive.StartInstance, "ComponentB--1886857871")
 
     //    kompareModel shouldContain(JavaSePrimitive.instance$.UpdateType, "ComponentPrimitiveTypeService")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getRemoveType, "ComponentPrimitiveTypeService")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getAddType, "ComponentPrimitiveTypeService")
+    kompareModel shouldContain(JavaSePrimitive.RemoveType, "ComponentPrimitiveTypeService")
+    kompareModel shouldContain(JavaSePrimitive.AddType, "ComponentPrimitiveTypeService")
     //    kompareModel shouldContain(JavaSePrimitive.instance$.UpdateInstance, "ComponentPrimitiveTypeService--690416444")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getStopInstance, "ComponentPrimitiveTypeService--690416444")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getRemoveInstance, "ComponentPrimitiveTypeService--690416444")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getAddInstance, "ComponentPrimitiveTypeService--690416444")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getUpdateDictionaryInstance, "ComponentPrimitiveTypeService--690416444")
-    kompareModel shouldContain(JavaSePrimitive.instance$.getStartInstance, "ComponentPrimitiveTypeService--690416444")
+    kompareModel shouldContain(JavaSePrimitive.StopInstance, "ComponentPrimitiveTypeService--690416444")
+    kompareModel shouldContain(JavaSePrimitive.RemoveInstance, "ComponentPrimitiveTypeService--690416444")
+    kompareModel shouldContain(JavaSePrimitive.AddInstance, "ComponentPrimitiveTypeService--690416444")
+    kompareModel shouldContain(JavaSePrimitive.UpdateDictionaryInstance, "ComponentPrimitiveTypeService--690416444")
+    kompareModel shouldContain(JavaSePrimitive.StartInstance, "ComponentPrimitiveTypeService--690416444")
 
-    kompareModel shouldContainSize(JavaSePrimitive.instance$.getUpdateDeployUnit, 1)
+    kompareModel shouldContainSize(JavaSePrimitive.UpdateDeployUnit, 1)
     //    kompareModel shouldContainSize(JavaSePrimitive.instance$.RemoveDeployUnit, 1)
     //    kompareModel shouldContainSize(JavaSePrimitive.instance$.AddDeployUnit, 1)
 

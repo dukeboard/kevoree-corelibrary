@@ -27,9 +27,9 @@ public class NodeInstanceBuilder extends InstanceBuilder {
 
     @Override
     protected Instance build() throws Exception {
-        instance = factory.createComponentInstance();
+        instance = factory.createContainerNode();
 //        ((ContainerNode)instance).
-        // TODO set components and child
+        // TODO set components and child (and groups ?)
         return super.build();
     }
 }

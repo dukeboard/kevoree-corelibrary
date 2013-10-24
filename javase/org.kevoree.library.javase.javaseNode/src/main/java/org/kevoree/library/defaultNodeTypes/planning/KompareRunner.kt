@@ -245,7 +245,7 @@ fun main(args: Array<String>) {
 
     val component = KevoreeKompareBean(populateRegistry(currentModel, "node"))
 
-    printAdaptations(component.compareModels(currentModel, targetModel, "node"))
+    AdaptationModelPrinter().printAdaptations(component.compareModels(currentModel, targetModel, "node"))
 //    printAdaptations(Kompare3().compareModels(targetModel, currentModel, "node0"))
 
 //        val currentModel = KevoreeXmiHelper.load("/home/edaubert/secondmodel.kev")!!
@@ -267,42 +267,4 @@ fun populateRegistry(model : ContainerRoot, nodeName : String) : HashMap<String,
     }, true, true, true)
 
     return registry
-}
-
-
-fun printStep(kompareModel: AdaptationModel) {
-    printStep(kompareModel.orderedPrimitiveSet, 0)
-}
-
-fun printStep(step: ParallelStep?, index: Int) {
-    if (step != null && step.adaptations.size() > 0) {
-        System.out.println("Step n° " + index)
-        for (adaptation in step.adaptations) {
-            printAdaptation(adaptation);
-        }
-        printStep(step.nextStep, index + 1)
-    }
-}
-
-fun printAdaptations(kompareModel: AdaptationModel) {
-    for (adaptation in kompareModel.adaptations) {
-        printAdaptation(adaptation)
-    }
-}
-
-fun printAdaptation (adaptation: AdaptationPrimitive) {
-    System.out.print(adaptation.primitiveType!!.name + ": ")
-    if (adaptation.primitiveType!!.name.equals(JavaSePrimitive.AddBinding) || adaptation.primitiveType!!.name.equals(JavaSePrimitive.RemoveBinding)) {
-        val binding = adaptation.ref!! as MBinding
-        System.out.print(binding.hub!!.name + "<->" + (binding.port!!.eContainer() as ComponentInstance).name + "." + binding.port!!.portTypeRef!!.name)
-    } else if (adaptation.primitiveType!!.name.equals(JavaSePrimitive.AddInstance) || adaptation.primitiveType!!.name.equals(JavaSePrimitive.RemoveInstance)
-    || adaptation.primitiveType!!.name.equals(JavaSePrimitive.StartInstance) || adaptation.primitiveType!!.name.equals(JavaSePrimitive.StopInstance)
-    || adaptation.primitiveType!!.name.equals(JavaSePrimitive.AddType) || adaptation.primitiveType!!.name.equals(JavaSePrimitive.RemoveType)) {
-        System.out.print((adaptation.ref!! as NamedElement).name)
-    } else if (adaptation.primitiveType!!.name.equals(JavaSePrimitive.AddDeployUnit) || adaptation.primitiveType!!.name.equals(JavaSePrimitive.RemoveDeployUnit)) {
-        System.out.print((adaptation.ref!! as DeployUnit).groupName + ":" + (adaptation.ref!! as DeployUnit).name + ":" + (adaptation.ref!! as DeployUnit).version + "-" + (adaptation.ref!! as DeployUnit).hashcode)
-    } else if (adaptation.primitiveType!!.name.equals(JavaSePrimitive.UpdateDictionaryInstance)) {
-        System.out.print((adaptation.ref!! as NamedElement).name)
-    }
-    System.out.println()
 }

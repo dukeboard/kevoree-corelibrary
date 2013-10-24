@@ -7,6 +7,7 @@ import org.kevoree.api.service.core.logging.KevoreeLogLevel;
 import org.kevoree.framework.AbstractNodeType;
 import org.kevoree.framework.KevoreeXmiHelper;
 import org.kevoree.kcl.KevoreeJarClassLoader;
+import org.kevoree.library.defaultNodeTypes.planning.JavaSePrimitive;
 import org.kevoree.library.defaultNodeTypes.planning.KevoreeKompareBean;
 import org.kevoree.log.Log;
 import org.kevoreeadaptation.AdaptationModel;
@@ -27,7 +28,7 @@ import java.util.Map;
         @DictionaryAttribute(name = "coreLogLevel", defaultValue = "WARN", optional = true, vals = {"INFO", "WARN", "DEBUG", "ERROR", "FINE"})
 })
 @PrimitiveCommands(
-        values = {"UpdateType", "AddType", "AddThirdParty", "RemoveType", "RemoveDeployUnit", "UpdateInstance", "UpdateBinding", "UpdateDictionaryInstance", "AddInstance", "RemoveInstance", "AddBinding", "RemoveBinding", "AddFragmentBinding", "RemoveFragmentBinding", "UpdateFragmentBinding", "StartInstance", "StopInstance", "StartThirdParty", "RemoveThirdParty"},
+        values = {JavaSePrimitive.AddBinding, JavaSePrimitive.UpdateType, JavaSePrimitive.UpdateDeployUnit, JavaSePrimitive.AddType, JavaSePrimitive.AddDeployUnit, JavaSePrimitive.AddThirdParty, JavaSePrimitive.RemoveThirdParty, JavaSePrimitive.RemoveType, JavaSePrimitive.RemoveDeployUnit, JavaSePrimitive.UpdateInstance, JavaSePrimitive.UpdateBinding, JavaSePrimitive.UpdateDictionaryInstance, JavaSePrimitive.AddInstance, JavaSePrimitive.RemoveInstance, JavaSePrimitive.AddBinding, JavaSePrimitive.RemoveBinding, JavaSePrimitive.AddFragmentBinding, JavaSePrimitive.RemoveFragmentBinding, JavaSePrimitive.UpdateFragmentBinding, JavaSePrimitive.StartInstance, JavaSePrimitive.StopInstance},
         value = {@PrimitiveCommand(name="AddDeployUnit",maxTime = 120000),@PrimitiveCommand(name="UpdateDeployUnit",maxTime = 120000)})
 public class JavaSENode extends AbstractNodeType implements ModelListener {
 

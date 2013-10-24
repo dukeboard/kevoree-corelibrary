@@ -1,4 +1,4 @@
-package org.kevoree.kompare.tests.network;
+package org.kevoree.kompare.tests.model.builder.network;
 
 import org.kevoree.KevoreeFactory;
 import org.kevoree.NetworkProperty;

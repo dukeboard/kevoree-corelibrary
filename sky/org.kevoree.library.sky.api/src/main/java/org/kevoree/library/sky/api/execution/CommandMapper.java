@@ -47,13 +47,13 @@ public class CommandMapper extends org.kevoree.library.defaultNodeTypes.CommandM
             ContainerNode targetNode = (ContainerNode) adaptationPrimitive.getRef();
             ContainerRoot targetNodeRoot = (ContainerRoot) ((ContainerNode) adaptationPrimitive.getRef()).eContainer();
             command = new AddNodeCommand(targetNodeRoot, targetNode.getName(), nodeManager, registry);
-        } else if (adaptationPrimitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getStartInstance()) && adaptationPrimitive.getRef() instanceof ContainerNode) {
+        } else if (adaptationPrimitive.getPrimitiveType().getName().equals(JavaSePrimitive.StartInstance) && adaptationPrimitive.getRef() instanceof ContainerNode) {
             Log.debug("add START_NODE command on {}", ((ContainerNode) adaptationPrimitive.getRef()).getName());
 
             ContainerNode targetNode = (ContainerNode) adaptationPrimitive.getRef();
             ContainerRoot targetNodeRoot = (ContainerRoot) ((ContainerNode) adaptationPrimitive.getRef()).eContainer();
             command = new StartNodeCommand(targetNodeRoot, targetNode.getName(), nodeManager, registry);
-        } else if (adaptationPrimitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getStopInstance()) && adaptationPrimitive.getRef() instanceof ContainerNode) {
+        } else if (adaptationPrimitive.getPrimitiveType().getName().equals(JavaSePrimitive.StopInstance) && adaptationPrimitive.getRef() instanceof ContainerNode) {
             Log.debug("add STOP_NODE command on {}", ((ContainerNode) adaptationPrimitive.getRef()).getName());
 
             ContainerNode targetNode = (ContainerNode) adaptationPrimitive.getRef();
