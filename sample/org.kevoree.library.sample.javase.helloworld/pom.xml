@@ -74,25 +74,4 @@
         </plugins>
     </build>
 
-    <repositories>
-        <repository>
-            <id>kevoree-release</id>
-            <url>http://maven.kevoree.org/release</url>
-        </repository>
-        <repository>
-            <id>kevoree-snapshot</id>
-            <url>http://maven.kevoree.org/snapshots</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>kevoree-release</id>
-            <url>http://maven.kevoree.org/release</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>kevoree-snapshot</id>
-            <url>http://maven.kevoree.org/snapshots</url>
-        </pluginRepository>
-    </pluginRepositories>
-
 </project>
