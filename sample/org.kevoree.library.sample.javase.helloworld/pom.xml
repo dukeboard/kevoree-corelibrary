@@ -4,11 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.kevoree.library.sample</groupId>
     <artifactId>org.kevoree.library.sample.javase.helloworld</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
-    <name>Kevoree Sample default name</name>
+    <version>2.0.6-SNAPSHOT</version>
+    <name>Kevoree Sample</name>
 
     <properties>
-        <kevoree.version>${project.version}</kevoree.version>
+        <!-- version used to define javase dependency -->
+        <kevoree.corelibrary.version>RELEASE</kevoree.corelibrary.version>
+        <!-- version used to define kevoree specific dependencies -->
+        <kevoree.version>RELEASE</kevoree.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -23,44 +26,25 @@
             <artifactId>org.kevoree.tools.annotation.api</artifactId>
             <version>${kevoree.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.kevoree.corelibrary.javase</groupId>
+            <artifactId>org.kevoree.library.javase.javaseNode</artifactId>
+            <version>${kevoree.corelibrary.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.scala-tools</groupId>
-                <artifactId>maven-scala-plugin</artifactId>
-                <version>2.15.2</version>
-                <executions>
-                    <execution>
-                        <id>scala-compile-first</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>scala-test-compile</id>
-                        <phase>process-test-resources</phase>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <jvmArgs>
-                        <jvmArg>-Xmx1024m</jvmArg>
-                    </jvmArgs>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.kevoree.tools</groupId>
                 <artifactId>org.kevoree.tools.annotation.mavenplugin</artifactId>
-                <version>${kevoree.version}</version>
+                <!--<version>${kevoree.version}</version>-->
                 <extensions>true</extensions>
                 <configuration>
                     <nodeTypeNames>JavaSENode</nodeTypeNames>
+                    <libraries>
+                        <library>JavaSE</library>
+                    </libraries>
                 </configuration>
                 <executions>
                     <execution>
@@ -85,7 +69,7 @@
             <plugin>
                 <groupId>org.kevoree.platform</groupId>
                 <artifactId>org.kevoree.platform.mavenrunner</artifactId>
-                <version>${kevoree.version}</version>
+                <!--<version>${kevoree.version}</version>-->
             </plugin>
         </plugins>
     </build>
