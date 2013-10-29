@@ -27,20 +27,7 @@ import java.lang.reflect.InvocationTargetException
 import org.kevoree.library.defaultNodeTypes.wrapper.KInject
 import org.kevoree.api.dataspace.DataSpaceService
 
-/**
- * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 3, 29 June 2007;
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * 	http://www.gnu.org/licenses/lgpl-3.0.txt
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-public class KevoreeComponent(val ct: AbstractComponentType, val nodeName: String, val name: String, val modelService: KevoreeModelHandlerService, val bootService: Bootstraper, val kevsEngine: KevScriptEngineFactory, val dataSpace : DataSpaceService?): KInstance {
+public class KevoreeComponent(val ct: AbstractComponentType, val nodeName: String, val name: String, val modelService: KevoreeModelHandlerService, val bootService: Bootstraper, val kevsEngine: KevScriptEngineFactory, val dataSpace: DataSpaceService?, val tg : ThreadGroup) : KInstance {
 
     fun getKevoreeComponentType(): ComponentType {
         return ct
@@ -52,18 +39,18 @@ public class KevoreeComponent(val ct: AbstractComponentType, val nodeName: Strin
         return ct_started
     }
 
-    public fun initPorts(nodeTypeName: String, modelElement: ComponentInstance, tg: ThreadGroup) {
+    public fun initPorts(nodeTypeName: String, modelElement: ComponentInstance/*, tg: ThreadGroup*/) {
         /* Init Required and Provided Port */
-        val bean = modelElement.getTypeDefinition()!!.getBean()
-        for(providedPort in modelElement.getProvided()){
-            val newPortClazz = ct.javaClass.getClassLoader()!!.loadClass(buildPortBean(bean, nodeTypeName, providedPort.getPortTypeRef()!!.getName()))
+        val bean = modelElement.typeDefinition!!.bean!!
+        for(providedPort in modelElement.provided){
+            val newPortClazz = ct.javaClass.getClassLoader()!!.loadClass(buildPortBean(bean, nodeTypeName, providedPort.portTypeRef!!.name!!))
             //TODO inject pure reflexif port, if class not found exception
             val newPort = newPortClazz!!.getConstructor(ct.getClass()).newInstance(ct) as KevoreePort
             newPort.startPort(tg)
             ct.getHostedPorts()!!.put(newPort.getName()!!, newPort)
         }
-        for(requiredPort in modelElement.getRequired()){
-            val newPortClazz = ct.javaClass.getClassLoader()!!.loadClass(buildPortBean(bean, nodeTypeName, requiredPort.getPortTypeRef()!!.getName()))
+        for(requiredPort in modelElement.required){
+            val newPortClazz = ct.javaClass.getClassLoader()!!.loadClass(buildPortBean(bean, nodeTypeName, requiredPort.portTypeRef!!.name!!))
             //TODO inject pure reflexif port, if class not found exception
             val newPort = newPortClazz!!.getConstructor(ct.getClass()).newInstance(ct) as KevoreePort
             newPort.startPort(tg)
@@ -86,9 +73,7 @@ public class KevoreeComponent(val ct: AbstractComponentType, val nodeName: Strin
     override fun kInstanceStart(tmodel: ContainerRoot): Boolean {
         if (!ct_started){
             try {
-
-
-                val injector = KInject(ct, modelService, bootService, kevsEngine,dataSpace)
+                val injector = KInject(ct, modelService, bootService, kevsEngine, dataSpace)
                 injector.kinject()
 
                 ct.setName(name)
@@ -107,7 +92,7 @@ public class KevoreeComponent(val ct: AbstractComponentType, val nodeName: Strin
                 }
                 ct_started = true
                 return true
-            } catch(e : InvocationTargetException){
+            } catch(e: InvocationTargetException){
                 Log.error("Kevoree Component Instance Start Error !", e.getCause())
                 ct_started = true //WE PUT COMPONENT IN START STATE TO ALLOW ROLLBACK TO UNSET VARIABLE
                 return false
@@ -136,7 +121,7 @@ public class KevoreeComponent(val ct: AbstractComponentType, val nodeName: Strin
                 (getKevoreeComponentType().getModelService() as ModelHandlerServiceProxy).unsetTempModel()
                 ct_started = false
                 return true
-            } catch(e : InvocationTargetException){
+            } catch(e: InvocationTargetException){
                 Log.error("Kevoree Component Instance Stop Error !", e.getCause())
                 return false
 
@@ -162,7 +147,7 @@ public class KevoreeComponent(val ct: AbstractComponentType, val nodeName: Strin
                 (getKevoreeComponentType().getModelService() as ModelHandlerServiceProxy).unsetTempModel()
             }
             return previousDictionary as Map<String, Any>?
-        } catch(e : InvocationTargetException){
+        } catch(e: InvocationTargetException){
             Log.error("Kevoree Component Instance Update Error !", e.getCause())
             return null
         } catch(e: Exception) {

@@ -27,7 +27,7 @@ import java.util.Set;
 		@DictionaryAttribute(name = "basedir", optional = false)
 })
 @ComponentType
-public class BasicFileSystem extends AbstractComponentType implements FileService {
+public abstract class BasicFileSystem extends AbstractComponentType implements FileService {
 
 //	private String baseURL = "";
 	protected File baseFolder = null;

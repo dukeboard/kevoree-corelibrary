@@ -1,5 +1,9 @@
 package org.kevoree.library.defaultNodeTypes.command
 
+import org.kevoree.DeployUnit
+import org.kevoree.api.PrimitiveCommand
+import org.kevoree.log.Log
+
 /**
  * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 3, 29 June 2007;
  * you may not use this file except in compliance with the License.
@@ -13,12 +17,6 @@ package org.kevoree.library.defaultNodeTypes.command
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import org.kevoree.DeployUnit
-import org.kevoree.api.PrimitiveCommand
-import org.kevoree.library.defaultNodeTypes.context.KevoreeDeployManager
-import org.kevoree.log.Log
-
 /**
  * Created by IntelliJ IDEA.
  * User: duke
@@ -26,11 +24,11 @@ import org.kevoree.log.Log
  * Time: 16:35
  */
 
-class AddDeployUnit(val du: DeployUnit, val bs: org.kevoree.api.Bootstraper): PrimitiveCommand {
+class AddDeployUnit(val du: DeployUnit, val bs: org.kevoree.api.Bootstraper, val registry:MutableMap<String, Any>): PrimitiveCommand {
 
     override fun undo() {
         bs.getKevoreeClassLoaderHandler().removeDeployUnitClassLoader(du)
-        KevoreeDeployManager.clearRef(du.javaClass.getName(), CommandHelper.buildKEY(du))
+        registry.remove(du.path()!!)
     }
 
     override fun execute(): Boolean {
@@ -38,7 +36,7 @@ class AddDeployUnit(val du: DeployUnit, val bs: org.kevoree.api.Bootstraper): Pr
             if (bs.getKevoreeClassLoaderHandler().getKevoreeClassLoader(du) == null) {
                 val new_kcl = bs.getKevoreeClassLoaderHandler().installDeployUnit(du)
                 if (new_kcl != null) {
-                    KevoreeDeployManager.putRef(du.javaClass.getName(), CommandHelper.buildKEY(du), new_kcl)
+                    registry.put(du.path()!!, new_kcl)
                     return true
                 } else {
                     return false
@@ -52,7 +50,7 @@ class AddDeployUnit(val du: DeployUnit, val bs: org.kevoree.api.Bootstraper): Pr
     }
 
     fun toString(): String {
-        return "AddDeployUnit "+du.getGroupName() + "/" + du.getUnitName() + "/" + du.getVersion()
+        return "AddDeployUnit "+du.groupName + "/" + du.name + "/" + du.version + "/" + du.hashcode
     }
 
 

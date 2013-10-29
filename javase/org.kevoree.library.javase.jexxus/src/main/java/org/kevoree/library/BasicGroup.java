@@ -98,8 +98,9 @@ public class BasicGroup extends AbstractGroupType implements ConnectionListener 
         }.start();
     }
 
+
     @Override
-    public void triggerModelUpdate() {
+    public void modelUpdated() {
         if (starting) {
             final ContainerRoot modelOption = NodeNetworkHelper.updateModelWithNetworkProperty(this);
             if (modelOption != null) {
@@ -315,7 +316,7 @@ public class BasicGroup extends AbstractGroupType implements ConnectionListener 
                     case getJSONModel:
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         JSONModelSerializer serializer = new JSONModelSerializer();
-                        serializer.serialize(getModelService().getLastModel(), baos);
+                        serializer.serializeToStream(getModelService().getLastModel(), baos);
                         from.send(baos.toByteArray(), Delivery.RELIABLE);
                         break;
 
@@ -355,6 +356,4 @@ public class BasicGroup extends AbstractGroupType implements ConnectionListener 
     public void clientConnected(ServerConnection conn) {
 
     }
-
-
 }

@@ -35,7 +35,7 @@ case class AddThirdPartyCommand(ct: DeployUnit, bs: org.kevoree.api.Bootstraper)
       }*/
       case _@e => {
         //        e.printStackTrace()
-        logger.error("Unable to execute AddThirdPartyCommand with " + ct.getUnitName + "-" + ct.getUrl, e)
+        logger.error("Unable to execute AddThirdPartyCommand with " + ct.getName + "-" + ct.getUrl, e)
         false
       }
     }

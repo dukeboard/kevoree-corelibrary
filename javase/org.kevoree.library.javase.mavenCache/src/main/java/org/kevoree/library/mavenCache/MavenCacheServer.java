@@ -80,7 +80,7 @@ public class MavenCacheServer extends AbstractComponentType implements ModelList
         ContainerRoot model = cachedModel.get();
         if(model != null){
             for(DeployUnit du : model.getDeployUnits()){
-                Log.debug("CacheFile for DU : " + du.getUnitName() + ":" + du.getGroupName() + ":" + du.getVersion());
+                Log.debug("CacheFile for DU : " + du.getName() + ":" + du.getGroupName() + ":" + du.getVersion());
                 File cachedFile = getBootStrapperService().resolveDeployUnit(du);
             }
         }

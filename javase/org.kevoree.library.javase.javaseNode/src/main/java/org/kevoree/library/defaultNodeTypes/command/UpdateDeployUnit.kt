@@ -1,5 +1,10 @@
 package org.kevoree.library.defaultNodeTypes.command
 
+import org.kevoree.DeployUnit
+import java.util.Random
+import org.kevoree.kcl.KevoreeJarClassLoader
+import org.kevoree.log.Log
+
 /**
  * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 3, 29 June 2007;
  * you may not use this file except in compliance with the License.
@@ -13,12 +18,6 @@ package org.kevoree.library.defaultNodeTypes.command
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import org.kevoree.DeployUnit
-import java.util.Random
-import org.kevoree.kcl.KevoreeJarClassLoader
-import org.kevoree.log.Log
-
 /**
  * Created by IntelliJ IDEA.
  * User: duke
@@ -26,7 +25,7 @@ import org.kevoree.log.Log
  * Time: 16:35
  */
 
-class UpdateDeployUnit(val du: DeployUnit, val bs: org.kevoree.api.Bootstraper): EndAwareCommand {
+class UpdateDeployUnit(val du: DeployUnit, val bs: org.kevoree.api.Bootstraper, val registry:MutableMap<String, Any>): EndAwareCommand {
 
     var lastKCL: KevoreeJarClassLoader? = null
     var random = Random()
@@ -54,6 +53,6 @@ class UpdateDeployUnit(val du: DeployUnit, val bs: org.kevoree.api.Bootstraper):
     }
 
     fun toString(): String {
-        return "UpdateDeployUnit "+du.getGroupName() + "/" + du.getUnitName() + "/" + du.getVersion()
+        return "UpdateDeployUnit "+du.groupName + "/" + du.name + "/" + du.version + "/" + du.hashcode
     }
 }

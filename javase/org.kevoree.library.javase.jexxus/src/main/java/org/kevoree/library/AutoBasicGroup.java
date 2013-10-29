@@ -77,7 +77,7 @@ public class AutoBasicGroup extends BasicGroup {
                             if (!KevoreePropertyHelper.instance$.getNetworkProperties(model.getModel(), data[1], org.kevoree.framework.Constants.instance$.getKEVOREE_PLATFORM_REMOTE_NODE_IP()).contains(ip)) {
                                 Log.info("New IP found for node " + data[1] + "->" + ip);
                                 try {
-                                    ContainerRoot modelRW = cloner.clone(model.getModel());
+                                    ContainerRoot modelRW = (ContainerRoot)cloner.clone(model.getModel());
                                    // ContainerRoot newModel = merger.merge(modelRW, requestModel(ip, Integer.parseInt(data[3]), data[0]));
                                   //  getModelService().compareAndSwapModel(model, newModel);
                                 } catch (Exception e) {

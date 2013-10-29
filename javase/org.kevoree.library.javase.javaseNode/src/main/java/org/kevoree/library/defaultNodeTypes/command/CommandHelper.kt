@@ -1,5 +1,7 @@
+/*
 package org.kevoree.library.defaultNodeTypes.command
 
+*/
 /**
  * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 3, 29 June 2007;
  * you may not use this file except in compliance with the License.
@@ -12,14 +14,15 @@ package org.kevoree.library.defaultNodeTypes.command
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *//*
+
 
 import org.kevoree.DeployUnit
 
 object CommandHelper {
 
     fun buildKEY(du: DeployUnit): String {
-        return du.getName() + "/" + buildQuery(du, null)
+        return du.name!! + "/" + buildQuery(du, null)
     }
 
     fun buildQuery(du: DeployUnit, repoUrl: String?): String {
@@ -28,13 +31,15 @@ object CommandHelper {
         if(repoUrl != null){
             query.append(repoUrl); query.append("!")
         }
-        query.append(du.getGroupName())
+        query.append(du.groupName)
         query.append("/")
-        query.append(du.getUnitName())
-        if( !du.getVersion().equals("") && !du.getVersion().equals("default")){
-            query.append("/"); query.append(du.getVersion())
+        query.append(du.name)
+        if( !du.version.equals("") && !du.version.equals("default")){
+            query.append("/"); query.append(du.version)
         }
+        query.append("/").append(du.hashcode)
         return query.toString()
     }
 
 }
+*/

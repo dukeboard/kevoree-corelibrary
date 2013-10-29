@@ -6,9 +6,9 @@ import org.kevoree.ContainerNode;
 import org.kevoree.ContainerRoot;
 import org.kevoree.Instance;
 import org.kevoree.framework.AbstractNodeType;
-import org.kevoree.kompare.JavaSePrimitive;
-import org.kevoree.kompare.KevoreeKompareBean;
-import org.kevoree.kompare.scheduling.SchedulingWithTopologicalOrderAlgo;
+import org.kevoree.library.defaultNodeTypes.planning.JavaSePrimitive;
+import org.kevoree.library.defaultNodeTypes.planning.KevoreeKompareBean;
+import org.kevoree.library.defaultNodeTypes.planning.scheduling.SchedulingWithTopologicalOrderAlgo;
 import org.kevoree.library.sky.api.CloudNode;
 import org.kevoree.log.Log;
 import org.kevoreeadaptation.AdaptationModel;
@@ -19,6 +19,7 @@ import org.kevoreeadaptation.impl.DefaultKevoreeAdaptationFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
@@ -32,7 +33,8 @@ import java.util.List;
 public class PlanningManager extends KevoreeKompareBean {
     private AbstractNodeType skyNode;
 
-    public PlanningManager(AbstractNodeType skyNode) {
+    public PlanningManager(AbstractNodeType skyNode, Map<String, Object> registry) {
+        super(registry);
         this.skyNode = skyNode;
     }
 
@@ -86,9 +88,9 @@ public class PlanningManager extends KevoreeKompareBean {
                 // TODO IF HARAKIRI is refactoring, maybe this block must be refactoring too or even removed
                 Log.debug("Unable to find the current node on the target model, We remove all the hosted nodes from the current model");
                 for (ContainerNode subNode : currentNode.getHosts()) {
-                    Log.debug("add a {} adaptation primitive with {} as parameter", JavaSePrimitive.instance$.getStopInstance(), subNode.getName());
+                    Log.debug("add a {} adaptation primitive with {} as parameter", JavaSePrimitive.StopInstance, subNode.getName());
                     AdaptationPrimitive command = factory.createAdaptationPrimitive();
-                    command.setPrimitiveType(current.findAdaptationPrimitiveTypesByID(JavaSePrimitive.instance$.getStopInstance()));
+                    command.setPrimitiveType(current.findAdaptationPrimitiveTypesByID(JavaSePrimitive.StopInstance));
                     command.setRef(subNode);
                     adaptationModel.addAdaptations(command);
                     processStopInstance(subNode, adaptationModel, current, factory);
@@ -142,7 +144,7 @@ public class PlanningManager extends KevoreeKompareBean {
     private void processStopInstance(Instance actualInstance, AdaptationModel adaptationModel, ContainerRoot actualRoot, KevoreeAdaptationFactory adaptationModelFactory) {
         Log.debug("Process StopInstance on {}", actualInstance.getName());
         AdaptationPrimitive ccmd2 = adaptationModelFactory.createAdaptationPrimitive();
-        ccmd2.setPrimitiveType(actualRoot.findAdaptationPrimitiveTypesByID(JavaSePrimitive.instance$.getStopInstance()));
+        ccmd2.setPrimitiveType(actualRoot.findAdaptationPrimitiveTypesByID(JavaSePrimitive.StopInstance));
         ccmd2.setRef(actualInstance);
         adaptationModel.addAdaptations(ccmd2);
     }
@@ -150,7 +152,7 @@ public class PlanningManager extends KevoreeKompareBean {
     private void processStartInstance(Instance updatedInstance, AdaptationModel adaptationModel, ContainerRoot updateRoot, KevoreeAdaptationFactory adaptationModelFactory) {
         Log.debug("Process StartInstance on {}", updatedInstance.getName());
         AdaptationPrimitive ccmd2 = adaptationModelFactory.createAdaptationPrimitive();
-        ccmd2.setPrimitiveType(updateRoot.findAdaptationPrimitiveTypesByID(JavaSePrimitive.instance$.getStartInstance()));
+        ccmd2.setPrimitiveType(updateRoot.findAdaptationPrimitiveTypesByID(JavaSePrimitive.StartInstance));
         ccmd2.setRef(updatedInstance);
         adaptationModel.addAdaptations(ccmd2);
     }
@@ -167,11 +169,11 @@ public class PlanningManager extends KevoreeKompareBean {
             // STOP child nodes
             List<AdaptationPrimitive> primitives = new ArrayList<AdaptationPrimitive>();
             for (AdaptationPrimitive primitive : adaptationModel.getAdaptations()) {
-                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getStopInstance()) && primitive.getRef() instanceof ContainerNode) {
+                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.StopInstance) && primitive.getRef() instanceof ContainerNode) {
                     primitives.add(primitive);
                 }
             }
-            createNextStep(JavaSePrimitive.instance$.getStopInstance(), primitives);
+            createNextStep(JavaSePrimitive.StopInstance, primitives);
 
             // REMOVE child nodes
             primitives.clear();
@@ -185,7 +187,7 @@ public class PlanningManager extends KevoreeKompareBean {
             //STOP INSTANCEs (except child node)
             primitives.clear();
             for (AdaptationPrimitive primitive : adaptationModel.getAdaptations()) {
-                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getStopInstance()) && !(primitive.getRef() instanceof ContainerNode)) {
+                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.StopInstance) && !(primitive.getRef() instanceof ContainerNode)) {
                     primitives.add(primitive);
                 }
             }
@@ -203,103 +205,103 @@ public class PlanningManager extends KevoreeKompareBean {
             // REMOVE BINDINGS
             primitives.clear();
             for (AdaptationPrimitive primitive : adaptationModel.getAdaptations()) {
-                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getRemoveBinding()) ||
-                        primitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getRemoveFragmentBinding())) {
+                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.RemoveBinding) ||
+                        primitive.getPrimitiveType().getName().equals(JavaSePrimitive.RemoveFragmentBinding)) {
                     primitives.add(primitive);
                 }
             }
-            createNextStep(JavaSePrimitive.instance$.getRemoveBinding(), primitives);
+            createNextStep(JavaSePrimitive.RemoveBinding, primitives);
 
             // REMOVE INSTANCE
             primitives.clear();
             for (AdaptationPrimitive primitive : adaptationModel.getAdaptations()) {
-                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getRemoveInstance())) {
+                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.RemoveInstance)) {
                     primitives.add(primitive);
                 }
             }
-            createNextStep(JavaSePrimitive.instance$.getRemoveInstance(), primitives);
+            createNextStep(JavaSePrimitive.RemoveInstance, primitives);
 
             // REMOVE TYPE
             primitives.clear();
             for (AdaptationPrimitive primitive : adaptationModel.getAdaptations()) {
-                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getRemoveType())) {
+                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.RemoveType)) {
                     primitives.add(primitive);
                 }
             }
-            createNextStep(JavaSePrimitive.instance$.getRemoveType(), primitives);
+            createNextStep(JavaSePrimitive.RemoveType, primitives);
 
             // REMOVE TYPE
             primitives.clear();
             for (AdaptationPrimitive primitive : adaptationModel.getAdaptations()) {
-                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getRemoveDeployUnit())) {
+                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.RemoveDeployUnit)) {
                     primitives.add(primitive);
                 }
             }
-            createNextStep(JavaSePrimitive.instance$.getRemoveDeployUnit(), primitives);
+            createNextStep(JavaSePrimitive.RemoveDeployUnit, primitives);
 
             // REMOVE THIRD PARTY
             primitives.clear();
             for (AdaptationPrimitive primitive : adaptationModel.getAdaptations()) {
-                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getAddThirdParty())) {
+                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.AddThirdParty)) {
                     primitives.add(primitive);
                 }
             }
-            createNextStep(JavaSePrimitive.instance$.getAddThirdParty(), primitives);
+            createNextStep(JavaSePrimitive.AddThirdParty, primitives);
 
             // UPDATE DEPLOYUNITs
             primitives.clear();
             for (AdaptationPrimitive primitive : adaptationModel.getAdaptations()) {
-                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getUpdateDeployUnit())) {
+                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.UpdateDeployUnit)) {
                     primitives.add(primitive);
                 }
             }
-            createNextStep(JavaSePrimitive.instance$.getUpdateDeployUnit(), primitives);
+            createNextStep(JavaSePrimitive.UpdateDeployUnit, primitives);
 
             // ADD DEPLOYUNITs
             primitives.clear();
             for (AdaptationPrimitive primitive : adaptationModel.getAdaptations()) {
-                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getAddDeployUnit())) {
+                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.AddDeployUnit)) {
                     primitives.add(primitive);
                 }
             }
-            createNextStep(JavaSePrimitive.instance$.getAddDeployUnit(), primitives);
+            createNextStep(JavaSePrimitive.AddDeployUnit, primitives);
 
             // ADD TYPEs
             primitives.clear();
             for (AdaptationPrimitive primitive : adaptationModel.getAdaptations()) {
-                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getAddType())) {
+                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.AddType)) {
                     primitives.add(primitive);
                 }
             }
-            createNextStep(JavaSePrimitive.instance$.getAddType(), primitives);
+            createNextStep(JavaSePrimitive.AddType, primitives);
 
             // ADD INSTANCEs
             primitives.clear();
             for (AdaptationPrimitive primitive : adaptationModel.getAdaptations()) {
-                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getAddInstance())) {
+                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.AddInstance)) {
                     primitives.add(primitive);
                 }
             }
-            createNextStep(JavaSePrimitive.instance$.getAddInstance(), primitives);
+            createNextStep(JavaSePrimitive.AddInstance, primitives);
 
             // ADD BINDINGs
             primitives.clear();
             for (AdaptationPrimitive primitive : adaptationModel.getAdaptations()) {
-                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getAddBinding()) ||
-                        primitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getAddFragmentBinding())) {
+                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.AddBinding) ||
+                        primitive.getPrimitiveType().getName().equals(JavaSePrimitive.AddFragmentBinding)) {
                     primitives.add(primitive);
                 }
             }
-            createNextStep(JavaSePrimitive.instance$.getAddBinding(), primitives);
+            createNextStep(JavaSePrimitive.AddBinding, primitives);
 
             // UPDATE DICTIONARY
             primitives.clear();
             for (AdaptationPrimitive primitive : adaptationModel.getAdaptations()) {
-                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getUpdateDictionaryInstance())) {
+                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.UpdateDictionaryInstance)) {
                     primitives.add(primitive);
                 }
             }
-            createNextStep(JavaSePrimitive.instance$.getUpdateDictionaryInstance(), primitives);
+            createNextStep(JavaSePrimitive.UpdateDictionaryInstance, primitives);
 
 
             // ADD child nodes
@@ -314,17 +316,17 @@ public class PlanningManager extends KevoreeKompareBean {
             // START child nodes
             primitives.clear();
             for (AdaptationPrimitive primitive : adaptationModel.getAdaptations()) {
-                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getStartInstance()) && primitive.getRef() instanceof ContainerNode) {
+                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.StartInstance) && primitive.getRef() instanceof ContainerNode) {
                     primitives.add(primitive);
                 }
             }
-            createNextStep(JavaSePrimitive.instance$.getStartInstance(), primitives);
+            createNextStep(JavaSePrimitive.StartInstance, primitives);
 
             // START INSTANCEs (except child nodes)
 //            ParallelStep oldStep = getCurrentSteps();
             primitives.clear();
             for (AdaptationPrimitive primitive : adaptationModel.getAdaptations()) {
-                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getStartInstance()) && !(primitive.getRef() instanceof ContainerNode)) {
+                if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.StartInstance) && !(primitive.getRef() instanceof ContainerNode)) {
                     primitives.add(primitive);
                 }
             }

@@ -43,8 +43,9 @@ public class ArduinoWirelessNode extends ArduinoNode
     }
 
     @Update
-    public void update()
+    public void updateNode()
     {
+        super.updateNode();
         dico();
     }
 

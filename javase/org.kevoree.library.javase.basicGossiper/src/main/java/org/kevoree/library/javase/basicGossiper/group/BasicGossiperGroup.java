@@ -185,7 +185,7 @@ public class BasicGossiperGroup extends BasicGroup implements GossiperComponent 
     }
 
     @Override
-    public void triggerModelUpdate() {
+    public void modelUpdated() {
         if (starting) {
             final ContainerRoot modelOption = org.kevoree.library.NodeNetworkHelper.updateModelWithNetworkProperty(this);
             if (modelOption != null) {

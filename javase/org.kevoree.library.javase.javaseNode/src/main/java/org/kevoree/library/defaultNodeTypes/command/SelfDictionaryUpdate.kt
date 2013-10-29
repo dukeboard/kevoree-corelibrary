@@ -5,7 +5,6 @@ import org.kevoree.framework.AbstractNodeType
 import org.kevoree.api.PrimitiveCommand
 import java.util.HashMap
 
-
 /**
  * Created by IntelliJ IDEA.
  * User: duke
@@ -13,7 +12,7 @@ import java.util.HashMap
  * Time: 15:29
  */
 
-class SelfDictionaryUpdate(val c: Instance, val node: AbstractNodeType): PrimitiveCommand {
+class SelfDictionaryUpdate(val c: Instance, val node: AbstractNodeType, val registry: MutableMap<String, Any>) : PrimitiveCommand {
 
     private var lastDictioanry: HashMap<String, Any>? = null
 
@@ -21,17 +20,15 @@ class SelfDictionaryUpdate(val c: Instance, val node: AbstractNodeType): Primiti
         //BUILD MAP
         //SET DEFAULT VAL
         val dictionary: HashMap<String, Any> = HashMap<String, Any>()
-        if (c.getTypeDefinition()!!.getDictionaryType() != null) {
-            if (c.getTypeDefinition()!!.getDictionaryType()!!.getDefaultValues() != null) {
-                for(dv in c.getTypeDefinition()!!.getDictionaryType()!!.getDefaultValues()) {
-                    dictionary.put(dv.getAttribute()!!.getName(), dv.getValue())
-                }
+        if (c.typeDefinition!!.dictionaryType != null) {
+            for(dv in c.typeDefinition!!.dictionaryType!!.defaultValues) {
+                dictionary.put(dv.attribute!!.name!!, dv.value!!)
             }
         }
         //SET DIC VAL
-        if (c.getDictionary() != null) {
-            for(v in c.getDictionary()!!.getValues()) {
-                dictionary.put(v.getAttribute()!!.getName(), v.getValue())
+        if (c.dictionary != null) {
+            for(v in c.dictionary!!.values) {
+                dictionary.put(v.attribute!!.name!!, v.value!!)
             }
         }
         //SAVE DICTIONARY
@@ -49,7 +46,7 @@ class SelfDictionaryUpdate(val c: Instance, val node: AbstractNodeType): Primiti
     }
 
     fun toString(): String {
-        return "SelfDictionaryUpdate "+c.getName()
+        return "SelfDictionaryUpdate " + c.name!!
     }
 
 }

@@ -4,12 +4,14 @@ import org.kevoree.ContainerRoot;
 import org.kevoree.annotation.*;
 import org.kevoree.api.service.core.logging.KevoreeLogLevel;
 import org.kevoree.framework.AbstractNodeType;
-import org.kevoree.kompare.KevoreeKompareBean;
+import org.kevoree.library.defaultNodeTypes.CommandMapper;
+import org.kevoree.library.defaultNodeTypes.planning.KevoreeKompareBean;
 import org.kevoree.log.Log;
 import org.kevoreeadaptation.AdaptationModel;
 import org.kevoreeadaptation.AdaptationPrimitive;
-import org.kevoree.library.defaultNodeTypes.CommandMapper;
-import org.kevoree.library.defaultNodeTypes.context.KevoreeDeployManager;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -33,12 +35,15 @@ public class AndroidNode extends AbstractNodeType {
 	private CommandMapper mapper = null;
 	private boolean isRunning;
 
+    private Map<String, Object> registry;
+
 	@Start
 	@Override
 	public void startNode () {
 		isRunning = true;
-		kompareBean = new KevoreeKompareBean();
-		mapper = new CommandMapper();
+        registry = new HashMap<String, Object>();
+		kompareBean = new KevoreeKompareBean(registry);
+		mapper = new CommandMapper(registry);
 		mapper.setNodeType(this);
 		setLogLevel();
 	}
@@ -51,7 +56,8 @@ public class AndroidNode extends AbstractNodeType {
 		mapper = null;
 		isRunning = false;
 		//Cleanup the local runtime
-		KevoreeDeployManager.instance$.clearAll(this);
+//		KevoreeDeployManager.instance$.clearAll(this);
+        registry.clear();
 	}
 
 	@Update

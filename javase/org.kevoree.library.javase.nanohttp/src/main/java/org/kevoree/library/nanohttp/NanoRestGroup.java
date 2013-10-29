@@ -184,7 +184,7 @@ public class NanoRestGroup extends AbstractGroupType {
     }
 
     @Override
-    public void triggerModelUpdate() {
+    public void modelUpdated() {
         if (starting) {
             final Option<ContainerRoot> modelOption = NodeNetworkHelper.updateModelWithNetworkProperty(this);
             if (modelOption.isDefined()) {

@@ -5,30 +5,32 @@
 
 package org.kevoree.library.arduinoNodeType
 
+import org.kevoree.library.defaultNodeTypes.planning.JavaSePrimitive
 import org.kevoreeadaptation.AdaptationModel
 import org.kevoree.DeployUnit
-import org.kevoree.kompare.JavaSePrimitive
 import org.kevoree.framework.AbstractNodeType
 import scala.collection.JavaConversions._
 
 object TypeBundleBootstrap {
 
-  def bootstrapTypeBundle(adaptationModel : AdaptationModel,nodeType : AbstractNodeType){
+  def bootstrapTypeBundle(adaptationModel: AdaptationModel, nodeType: AbstractNodeType) {
     //Add All ThirdParty
-    adaptationModel.getAdaptations.filter(adaptation => adaptation.getPrimitiveType.getName == JavaSePrimitive.instance$.getAddDeployUnit).foreach{adaptation=>
-      val cmd = AddThirdPartyCommand(adaptation.getRef.asInstanceOf[DeployUnit],nodeType.getBootStrapperService)
-      cmd.execute()
+    adaptationModel.getAdaptations.filter(adaptation => adaptation.getPrimitiveType.getName == JavaSePrimitive.AddDeployUnit).foreach {
+      adaptation =>
+        val cmd = AddThirdPartyCommand(adaptation.getRef.asInstanceOf[DeployUnit], nodeType.getBootStrapperService)
+        cmd.execute()
     }
     //Add All TypeDefinitionBundle
-    adaptationModel.getAdaptations.filter(adaptation => adaptation.getPrimitiveType.getName == JavaSePrimitive.instance$.getAddDeployUnit).foreach{adaptation=>
-      val cmd = AddThirdPartyCommand(adaptation.getRef.asInstanceOf[DeployUnit],nodeType.getBootStrapperService)
-      cmd.execute()
+    adaptationModel.getAdaptations.filter(adaptation => adaptation.getPrimitiveType.getName == JavaSePrimitive.AddDeployUnit).foreach {
+      adaptation =>
+        val cmd = AddThirdPartyCommand(adaptation.getRef.asInstanceOf[DeployUnit], nodeType.getBootStrapperService)
+        cmd.execute()
     }
 
   }
 
-  def deployUnitKey(dp : DeployUnit) : String = {
-    dp.getGroupName+dp.getUnitName+dp.getVersion+dp.getName
+  def deployUnitKey(dp: DeployUnit): String = {
+    dp.getGroupName + dp.getName + dp.getVersion + dp.getName
   }
-  
+
 }

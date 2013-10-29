@@ -1,8 +1,12 @@
 package org.kevoree.library.arduinoNodeType;
 
 
-import org.kevoree.*;
+import org.kevoree.ContainerNode;
+import org.kevoree.ContainerRoot;
 import org.kevoree.KevoreeFactory;
+import org.kevoree.annotation.Start;
+import org.kevoree.annotation.Stop;
+import org.kevoree.annotation.Update;
 import org.kevoree.api.service.core.checker.CheckerViolation;
 import org.kevoree.cloner.DefaultModelCloner;
 import org.kevoree.extra.kserial.KevoreeSharedCom;
@@ -10,11 +14,11 @@ import org.kevoree.extra.kserial.Utils.KHelpers;
 import org.kevoree.framework.AbstractNodeType;
 import org.kevoree.framework.KevoreeXmiHelper;
 import org.kevoree.impl.DefaultKevoreeFactory;
-import org.kevoree.kompare.JavaSePrimitive;
-import org.kevoree.kompare.KevoreeKompareBean;
 import org.kevoree.library.arduinoNodeType.generator.KevoreeCGenerator;
 import org.kevoree.library.arduinoNodeType.util.ArduinoResourceHelper;
 import org.kevoree.library.arduinoNodeType.utils.ComSender;
+import org.kevoree.library.defaultNodeTypes.planning.JavaSePrimitive;
+import org.kevoree.library.defaultNodeTypes.planning.KevoreeKompareBean;
 import org.kevoree.tools.marShell.ast.Script;
 import org.kevoree.tools.marShellTransform.AdaptationModelWrapper;
 import org.kevoree.tools.marShellTransform.KevScriptWrapper;
@@ -32,6 +36,7 @@ import org.wayoda.ang.project.TargetDirectoryService;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
 
 @org.kevoree.annotation.NodeType
 @org.kevoree.annotation.Library(name = "Arduino")
@@ -62,16 +67,19 @@ public class ArduinoNode extends AbstractNodeType {
         forceUpdate = f;
     }
 
-    @org.kevoree.annotation.Start
+    @Start
     public void startNode() {
         localChecker = new ArduinoChecker(getNodeName());
         ArduinoResourceHelper.setBs(getBootStrapperService());
     }
 
-    @org.kevoree.annotation.Stop
+    @Stop
     public void stopNode() {
         ArduinoResourceHelper.setBs(null);
     }
+
+    @Update
+    public void updateNode() {}
 
     @Override
     public AdaptationModel kompare(ContainerRoot current, ContainerRoot target) {
@@ -99,7 +107,7 @@ public class ArduinoNode extends AbstractNodeType {
                 }
             }
 
-            KevoreeKompareBean kompare = new KevoreeKompareBean();
+            KevoreeKompareBean kompare = new KevoreeKompareBean(new HashMap<String, Object>());
             newdir = new File(System.getProperty("java.io.tmpdir") + File.separator + "arduinoGenerated" + targetNodeName);
             newdir.delete();
             newdir.mkdirs();
@@ -130,7 +138,7 @@ public class ArduinoNode extends AbstractNodeType {
 
             if (lastVersionModel == null || lastVersionModel.getNodes().size() == 0) {
                 logger.info("No Previous Model , Init one from targetModel");
-                lastVersionModel = cloner.clone(root);
+                lastVersionModel = (ContainerRoot)cloner.clone(root);
                 for (ContainerNode node : lastVersionModel.getNodes()) {
                     node.removeAllComponents();
                     node.removeAllHosts();
@@ -140,7 +148,7 @@ public class ArduinoNode extends AbstractNodeType {
             }
             tempRoot = root;
 
-            ContainerRoot cloned = cloner.clone(root);
+            ContainerRoot cloned = (ContainerRoot)cloner.clone(root);
             cloned.removeAllGroups();
 
 
@@ -203,9 +211,9 @@ public class ArduinoNode extends AbstractNodeType {
 
     public boolean compile(ContainerRoot rootModel, String nodeName, String boardPortName){
 
-        KevoreeKompareBean kompare = new KevoreeKompareBean();
+        KevoreeKompareBean kompare = new KevoreeKompareBean(new HashMap<String, Object>());
 
-        ContainerRoot lastVersionModel = cloner.clone(rootModel);
+        ContainerRoot lastVersionModel = (ContainerRoot)cloner.clone(rootModel);
         for (ContainerNode node : lastVersionModel.getNodes()) {
             node.removeAllComponents();
             node.removeAllHosts();
@@ -295,9 +303,9 @@ public class ArduinoNode extends AbstractNodeType {
     public  boolean needAdaptation(AdaptationModel modelIn){
         boolean typeAdaptationFound = false;
         for (AdaptationPrimitive p : modelIn.getAdaptations()) {
-            Boolean addType = p.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getAddType());
-            Boolean removeType = p.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getRemoveType());
-            Boolean updateType = p.getPrimitiveType().getName().equals(JavaSePrimitive.instance$.getUpdateType());
+            Boolean addType = p.getPrimitiveType().getName().equals(JavaSePrimitive.AddType);
+            Boolean removeType = p.getPrimitiveType().getName().equals(JavaSePrimitive.RemoveType);
+            Boolean updateType = p.getPrimitiveType().getName().equals(JavaSePrimitive.UpdateType);
             if (addType || removeType || updateType) {
                 typeAdaptationFound = true;
             }

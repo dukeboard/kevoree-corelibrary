@@ -67,8 +67,8 @@ public class JailNode extends JavaSENode implements CloudNode {
         super.startNode();
         initialization = true;
         nodeManager = new KevoreeNodeManager(new JailNodeRunnerFactory());
-        kompareBean = new PlanningManager(this);
-        mapper = new CommandMapper(nodeManager);
+        kompareBean = new PlanningManager(this, registry);
+        mapper = new CommandMapper(nodeManager, registry);
         mapper.setNodeType(this);
     }
 

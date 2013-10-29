@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package org.kevoree.library.defaultNodeTypes;
 
 import org.kevoree.ContainerRoot;
@@ -12,13 +7,15 @@ import org.kevoree.api.service.core.logging.KevoreeLogLevel;
 import org.kevoree.framework.AbstractNodeType;
 import org.kevoree.framework.KevoreeXmiHelper;
 import org.kevoree.kcl.KevoreeJarClassLoader;
-import org.kevoree.kompare.KevoreeKompareBean;
-import org.kevoree.library.defaultNodeTypes.context.KevoreeDeployManager;
+import org.kevoree.library.defaultNodeTypes.planning.JavaSePrimitive;
+import org.kevoree.library.defaultNodeTypes.planning.KevoreeKompareBean;
 import org.kevoree.log.Log;
 import org.kevoreeadaptation.AdaptationModel;
 import org.kevoreeadaptation.AdaptationPrimitive;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -31,21 +28,23 @@ import java.io.File;
         @DictionaryAttribute(name = "coreLogLevel", defaultValue = "WARN", optional = true, vals = {"INFO", "WARN", "DEBUG", "ERROR", "FINE"})
 })
 @PrimitiveCommands(
-        values = {"UpdateType", "AddType", "AddThirdParty", "RemoveType", "RemoveDeployUnit", "UpdateInstance", "UpdateBinding", "UpdateDictionaryInstance", "AddInstance", "RemoveInstance", "AddBinding", "RemoveBinding", "AddFragmentBinding", "RemoveFragmentBinding", "UpdateFragmentBinding", "StartInstance", "StopInstance", "StartThirdParty", "RemoveThirdParty"},
+        values = {JavaSePrimitive.AddBinding, JavaSePrimitive.UpdateType, JavaSePrimitive.UpdateDeployUnit, JavaSePrimitive.AddType, JavaSePrimitive.AddDeployUnit, JavaSePrimitive.AddThirdParty, JavaSePrimitive.RemoveThirdParty, JavaSePrimitive.RemoveType, JavaSePrimitive.RemoveDeployUnit, JavaSePrimitive.UpdateInstance, JavaSePrimitive.UpdateBinding, JavaSePrimitive.UpdateDictionaryInstance, JavaSePrimitive.AddInstance, JavaSePrimitive.RemoveInstance, JavaSePrimitive.AddBinding, JavaSePrimitive.RemoveBinding, JavaSePrimitive.AddFragmentBinding, JavaSePrimitive.RemoveFragmentBinding, JavaSePrimitive.UpdateFragmentBinding, JavaSePrimitive.StartInstance, JavaSePrimitive.StopInstance},
         value = {@PrimitiveCommand(name="AddDeployUnit",maxTime = 120000),@PrimitiveCommand(name="UpdateDeployUnit",maxTime = 120000)})
 public class JavaSENode extends AbstractNodeType implements ModelListener {
 
     protected KevoreeKompareBean kompareBean = null;
     protected CommandMapper mapper = null;
+    protected Map<String, Object> registry;
 
     @Start
     @Override
     public void startNode() {
         Log.debug("Starting node type of {}", this.getName());
-        mapper = new CommandMapper();
+        registry = new HashMap<String, Object>();
+        mapper = new CommandMapper(registry);
         preTime = System.currentTimeMillis();
         getModelService().registerModelListener(this);
-        kompareBean = new KevoreeKompareBean();
+        kompareBean = new KevoreeKompareBean(registry);
         mapper.setNodeType(this);
         updateNode();
     }
@@ -58,7 +57,7 @@ public class JavaSENode extends AbstractNodeType implements ModelListener {
         kompareBean = null;
         mapper = null;
         //Cleanup the local runtime
-        KevoreeDeployManager.instance$.clearAll(this);
+        registry.clear();
     }
 
     @Update

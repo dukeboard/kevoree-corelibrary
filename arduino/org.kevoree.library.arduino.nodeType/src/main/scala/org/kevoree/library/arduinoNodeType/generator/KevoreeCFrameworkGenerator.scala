@@ -561,9 +561,9 @@ context b "}"
     }
 
 
-    if (initInstances.filter(i => i.isInstanceOf[Channel]).size > 0) {
+    if (initInstances.count(i => i.isInstanceOf[Channel]) > 0) {
       val i0 = initInstances.filter(i => i.isInstanceOf[Channel]).get(0)
-      i0.eContainer.asInstanceOf[ContainerRoot].getMBindings.foreach {
+      i0.eContainer.asInstanceOf[ContainerRoot].getmBindings.foreach {
         binding =>
           if (binding.getPort.eContainer.eContainer.asInstanceOf[ContainerNode].getName == nodeName) {
             context b "save2Memory(sepAdminChar);"

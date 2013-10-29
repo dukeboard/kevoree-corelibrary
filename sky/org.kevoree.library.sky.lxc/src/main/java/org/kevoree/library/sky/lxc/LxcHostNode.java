@@ -68,8 +68,8 @@ public class LxcHostNode extends JavaSENode implements CloudNode {
         } catch (NumberFormatException e) {
 
         }
-        kompareBean = new PlanningManager(this, maxAddNode);
-        mapper = new CommandMapper(nodeManager);
+        kompareBean = new PlanningManager(this, maxAddNode, registry);
+        mapper = new CommandMapper(nodeManager, registry);
         mapper.setNodeType(this);
         Thread clone = new Thread(createBaseClone);
         clone.start();

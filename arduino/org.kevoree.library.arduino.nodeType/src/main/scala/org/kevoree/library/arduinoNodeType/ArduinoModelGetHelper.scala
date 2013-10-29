@@ -99,14 +99,14 @@ object ArduinoModelGetHelper {
       logger.debug("Compressed script from arduino node : "+cscript)
 
       //GET SCRIPT FROM COM PORT
-      var script : Script =  KevScriptWrapper.miniPlanKevScript(KevScriptWrapper.generateKevScriptFromCompressed(cscript.toString,targetNewModel))
+      val script: Script = KevScriptWrapper.miniPlanKevScript(KevScriptWrapper.generateKevScriptFromCompressed(cscript.toString, targetNewModel))
 
       logger.debug("The plan script : "+script)
       //APPLY TO BUILD A CURRENT MODEL
       import org.kevoree.tools.marShell.interpreter.KevsInterpreterAspects._
 
       val cc = new DefaultModelCloner
-      var current = cc.clone(targetNewModel)
+      val current = cc.clone(targetNewModel).asInstanceOf[ContainerRoot]
 
       current.removeAllGroups()
       // current.removeAllHubs()

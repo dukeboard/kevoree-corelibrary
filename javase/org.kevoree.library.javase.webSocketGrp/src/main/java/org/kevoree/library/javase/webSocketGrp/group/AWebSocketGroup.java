@@ -217,7 +217,7 @@ public /*abstract*/ class AWebSocketGroup extends AbstractGroupType implements D
     }
 
     @Override
-    public void triggerModelUpdate() {
+    public void modelUpdated() {
         if (isClient) {
             onClientTriggerModelUpdate();
         } else {
@@ -228,8 +228,8 @@ public /*abstract*/ class AWebSocketGroup extends AbstractGroupType implements D
     @Override
     public File resolve(DeployUnit du) {
         File resolved = getBootStrapperService().resolveArtifact(
-                du.getUnitName(), du.getGroupName(), du.getVersion(), remoteURLS.get());
-        Log.info("DU " + du.getUnitName() + " from cache resolution " + (resolved != null));
+                du.getName(), du.getGroupName(), du.getVersion(), remoteURLS.get());
+        Log.info("DU " + du.getName() + " from cache resolution " + (resolved != null));
         return null;
     }
 
@@ -488,7 +488,7 @@ public /*abstract*/ class AWebSocketGroup extends AbstractGroupType implements D
                     ContainerRoot model = cachedModel.get();
                     if (model != null) {
                         for (DeployUnit du : model.getDeployUnits()) {
-                            Log.debug("CacheFile for DU : " + du.getUnitName() + ":" + du.getGroupName() + ":" + du.getVersion());
+                            Log.debug("CacheFile for DU : " + du.getName() + ":" + du.getGroupName() + ":" + du.getVersion());
                             File cachedFile = getBootStrapperService().resolveDeployUnit(du);
                         }
                     }

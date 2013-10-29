@@ -1,6 +1,6 @@
-merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.javaseNode/{project.version}"
-merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.nanohttp/{project.version}"
-merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.defaultChannels/{project.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.javaseNode/{kevoree.corelibrary.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.nanohttp/{kevoree.corelibrary.version}"
+merge "mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.defaultChannels/{kevoree.corelibrary.version}"
 merge "mvn:org.kevoree.library.sample/org.kevoree.library.sample.javase.helloworld/{project.version}"
 
 addNode node0 : JavaSENode {logLevel="DEBUG"}

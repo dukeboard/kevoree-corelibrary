@@ -7,7 +7,6 @@ import java.io.*;
  * User: leiko
  * Date: 3/25/13
  * Time: 2:52 PM
- * To change this template use File | Settings | File Templates.
  */
 public class MessagePacket implements Serializable {
 

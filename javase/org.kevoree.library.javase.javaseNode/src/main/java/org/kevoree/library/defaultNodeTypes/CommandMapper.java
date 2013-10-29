@@ -6,8 +6,10 @@ import org.kevoree.Instance;
 import org.kevoree.MBinding;
 import org.kevoree.api.PrimitiveCommand;
 import org.kevoree.framework.AbstractNodeType;
-import org.kevoree.kompare.JavaSePrimitive;
 import org.kevoree.library.defaultNodeTypes.command.*;
+import org.kevoree.library.defaultNodeTypes.planning.JavaSePrimitive;
+
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,6 +21,12 @@ public class CommandMapper {
 
     AbstractNodeType nodeType = null;
     java.util.ArrayList<EndAwareCommand> toClean = new java.util.ArrayList<EndAwareCommand>();
+
+    protected Map<String, Object> registry;
+
+    public CommandMapper(Map<String, Object> registry) {
+        this.registry = registry;
+    }
 
     public void setNodeType(AbstractNodeType n) {
         nodeType = n;
@@ -34,62 +42,62 @@ public class CommandMapper {
     public PrimitiveCommand buildPrimitiveCommand(org.kevoreeadaptation.AdaptationPrimitive p, String nodeName) {
 
         String pTypeName = p.getPrimitiveType().getName();
-        if (pTypeName.equals(JavaSePrimitive.instance$.getUpdateDictionaryInstance())) {
+        if (pTypeName.equals(JavaSePrimitive.UpdateDictionaryInstance)) {
             if (((Instance) p.getRef()).getName().equals(nodeName)) {
-                return new SelfDictionaryUpdate((Instance) p.getRef(), nodeType);
+                return new SelfDictionaryUpdate((Instance) p.getRef(), nodeType, registry);
             } else {
-                return new UpdateDictionary((Instance) p.getRef(), nodeName);
+                return new UpdateDictionary((Instance) p.getRef(), nodeName, registry);
             }
 
         }
 
-        if (pTypeName.equals(JavaSePrimitive.instance$.getAddFragmentBinding())) {
-            return new AddFragmentBindingCommand((Channel) p.getRef(), p.getTargetNodeName(), nodeName);
+        if (pTypeName.equals(JavaSePrimitive.AddFragmentBinding)) {
+            return new AddFragmentBindingCommand((Channel) p.getRef(), p.getTargetNodeName(), nodeName, registry);
         }
-        if (pTypeName.equals(JavaSePrimitive.instance$.getRemoveFragmentBinding())) {
-            return new RemoveFragmentBindingCommand((Channel) p.getRef(), p.getTargetNodeName(), nodeName);
-        }
-
-        if (pTypeName.equals(JavaSePrimitive.instance$.getStartInstance())) {
-            return new StartStopInstance((Instance) p.getRef(), nodeName, true);
-        }
-        if (pTypeName.equals(JavaSePrimitive.instance$.getStopInstance())) {
-            return new StartStopInstance((Instance) p.getRef(), nodeName, false);
+        if (pTypeName.equals(JavaSePrimitive.RemoveFragmentBinding)) {
+            return new RemoveFragmentBindingCommand((Channel) p.getRef(), p.getTargetNodeName(), nodeName, registry);
         }
 
-        if (pTypeName.equals(JavaSePrimitive.instance$.getAddBinding())) {
-            return new AddBindingCommand((MBinding) p.getRef(), nodeName);
+        if (pTypeName.equals(JavaSePrimitive.StartInstance)) {
+            return new StartStopInstance((Instance) p.getRef(), nodeName, true, registry);
         }
-        if (pTypeName.equals(JavaSePrimitive.instance$.getRemoveBinding())) {
-            return new RemoveBindingCommand((MBinding) p.getRef(), nodeName);
+        if (pTypeName.equals(JavaSePrimitive.StopInstance)) {
+            return new StartStopInstance((Instance) p.getRef(), nodeName, false, registry);
         }
 
-        if (pTypeName.equals(JavaSePrimitive.instance$.getAddDeployUnit())) {
-            return new AddDeployUnit((DeployUnit) p.getRef(), nodeType.getBootStrapperService());
+        if (pTypeName.equals(JavaSePrimitive.AddBinding)) {
+            return new AddBindingCommand((MBinding) p.getRef(), nodeName, registry);
         }
-        if (pTypeName.equals(JavaSePrimitive.instance$.getRemoveDeployUnit())) {
-            RemoveDeployUnit res = new RemoveDeployUnit((DeployUnit) p.getRef(), nodeType.getBootStrapperService());
+        if (pTypeName.equals(JavaSePrimitive.RemoveBinding)) {
+            return new RemoveBindingCommand((MBinding) p.getRef(), nodeName, registry);
+        }
+
+        if (pTypeName.equals(JavaSePrimitive.AddDeployUnit)) {
+            return new AddDeployUnit((DeployUnit) p.getRef(), nodeType.getBootStrapperService(), registry);
+        }
+        if (pTypeName.equals(JavaSePrimitive.RemoveDeployUnit)) {
+            RemoveDeployUnit res = new RemoveDeployUnit((DeployUnit) p.getRef(), nodeType.getBootStrapperService(), registry);
             toClean.add(res);
             return res;
         }
-        if (pTypeName.equals(JavaSePrimitive.instance$.getUpdateDeployUnit())) {
-            UpdateDeployUnit res = new UpdateDeployUnit((DeployUnit) p.getRef(), nodeType.getBootStrapperService());
+        if (pTypeName.equals(JavaSePrimitive.UpdateDeployUnit)) {
+            UpdateDeployUnit res = new UpdateDeployUnit((DeployUnit) p.getRef(), nodeType.getBootStrapperService(), registry);
             toClean.add(res);
             return res;
         }
 
-        if (pTypeName.equals(JavaSePrimitive.instance$.getAddInstance())) {
-            return new AddInstance((Instance) p.getRef(), nodeName, nodeType.getModelService(), nodeType.getKevScriptEngineFactory(), nodeType.getBootStrapperService(),nodeType);
+        if (pTypeName.equals(JavaSePrimitive.AddInstance)) {
+            return new AddInstance((Instance) p.getRef(), nodeName, nodeType.getModelService(), nodeType.getKevScriptEngineFactory(), nodeType.getBootStrapperService(),nodeType, registry);
         }
-        if (pTypeName.equals(JavaSePrimitive.instance$.getRemoveInstance())) {
-            return new RemoveInstance((Instance) p.getRef(), nodeName, nodeType.getModelService(), nodeType.getKevScriptEngineFactory(), nodeType.getBootStrapperService(),nodeType);
+        if (pTypeName.equals(JavaSePrimitive.RemoveInstance)) {
+            return new RemoveInstance((Instance) p.getRef(), nodeName, nodeType.getModelService(), nodeType.getKevScriptEngineFactory(), nodeType.getBootStrapperService(),nodeType, registry);
         }
 
-        if (pTypeName.equals(JavaSePrimitive.instance$.getAddThirdParty())) {
-            return new AddDeployUnit((DeployUnit) p.getRef(), nodeType.getBootStrapperService());
+        if (pTypeName.equals(JavaSePrimitive.AddThirdParty)) {
+            return new AddDeployUnit((DeployUnit) p.getRef(), nodeType.getBootStrapperService(), registry);
         }
-        if (pTypeName.equals(JavaSePrimitive.instance$.getRemoveThirdParty())) {
-            return new RemoveDeployUnit((DeployUnit) p.getRef(), nodeType.getBootStrapperService());
+        if (pTypeName.equals(JavaSePrimitive.RemoveThirdParty)) {
+            return new RemoveDeployUnit((DeployUnit) p.getRef(), nodeType.getBootStrapperService(), registry);
         }
 
         //LoggerFactory.getLogger(this.getClass()).error("Return Noop command for "+pTypeName);

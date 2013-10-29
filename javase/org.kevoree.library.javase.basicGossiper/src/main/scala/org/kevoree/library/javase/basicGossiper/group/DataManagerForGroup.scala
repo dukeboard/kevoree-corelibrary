@@ -8,9 +8,6 @@ import org.kevoree.api.service.core.handler.KevoreeModelHandlerService
 import java.lang.Math
 import scala.collection.JavaConversions._
 import org.kevoree.library.javase.basicGossiper.{Occured, VersionUtils, VectorClockAspect, DataManager}
-import org.kevoree.merger.KevoreeMergerComponent
-import org.kevoree.framework.{KevoreeXmiHelper, FileNIOHelper}
-import java.io.{File, ByteArrayOutputStream, ByteArrayInputStream}
 import org.kevoree.library.basicGossiper.protocol.version.Version.{ClockEntry, VectorClock}
 import org.kevoree.library.javase.conflictSolver.ConflictSolver
 

@@ -1,5 +1,10 @@
 package org.kevoree.library.defaultNodeTypes.command
 
+import org.kevoree.DeployUnit
+import java.util.Random
+import org.kevoree.kcl.KevoreeJarClassLoader
+import org.kevoree.log.Log
+
 /**
  * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 3, 29 June 2007;
  * you may not use this file except in compliance with the License.
@@ -13,13 +18,6 @@ package org.kevoree.library.defaultNodeTypes.command
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import org.kevoree.DeployUnit
-import java.util.Random
-import org.kevoree.kcl.KevoreeJarClassLoader
-import org.kevoree.library.defaultNodeTypes.context.KevoreeDeployManager
-import org.kevoree.log.Log
-
 /**
  * Created by IntelliJ IDEA.
  * User: duke
@@ -27,7 +25,7 @@ import org.kevoree.log.Log
  * Time: 16:35
  */
 
-class RemoveDeployUnit(val du: DeployUnit, val bootstrap: org.kevoree.api.Bootstraper): EndAwareCommand {
+class RemoveDeployUnit(val du: DeployUnit, val bootstrap: org.kevoree.api.Bootstraper, val registry: MutableMap<String, Any>) : EndAwareCommand {
 
     var random = Random()
     var lastKCL: KevoreeJarClassLoader? = null
@@ -35,7 +33,7 @@ class RemoveDeployUnit(val du: DeployUnit, val bootstrap: org.kevoree.api.Bootst
     override fun undo() {
         if (lastKCL != null) {
             bootstrap.getKevoreeClassLoaderHandler().attachKCL(du, lastKCL)
-            KevoreeDeployManager.putRef(du.javaClass.getName(), CommandHelper.buildKEY(du),lastKCL!!)
+            registry.put(du.path()!!, lastKCL!!)
         }
     }
 
@@ -44,11 +42,12 @@ class RemoveDeployUnit(val du: DeployUnit, val bootstrap: org.kevoree.api.Bootst
         try {
             lastKCL = bootstrap.getKevoreeClassLoaderHandler().getKevoreeClassLoader(du)
             bootstrap.getKevoreeClassLoaderHandler().removeDeployUnitClassLoader(du)
-            KevoreeDeployManager.clearRef(du.javaClass.getName(), CommandHelper.buildKEY(du))
+            registry.remove(du.path())
             return true
 
         }catch (e: Exception) {
-            Log.debug("error ", e); return false
+            Log.debug("error ", e)
+            return false
         }
     }
 
@@ -57,6 +56,6 @@ class RemoveDeployUnit(val du: DeployUnit, val bootstrap: org.kevoree.api.Bootst
     }
 
     fun toString(): String {
-        return "RemoveDeployUnit " + du.getGroupName() + "/" + du.getUnitName() + "/" + du.getVersion()
+        return "RemoveDeployUnit " + du.groupName + "/" + du.name + "/" + du.version + "/" + du.hashcode
     }
 }

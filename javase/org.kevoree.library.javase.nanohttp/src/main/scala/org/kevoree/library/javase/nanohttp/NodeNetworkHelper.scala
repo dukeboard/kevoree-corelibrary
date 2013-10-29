@@ -22,7 +22,7 @@ object NodeNetworkHelper {
   val cloner = new DefaultModelCloner
 
   def updateModelWithNetworkProperty (group: AbstractGroupType) : Option[ContainerRoot] = {
-    val readWriteModel = cloner.clone(group.getModelService.getLastModel)
+    val readWriteModel = cloner.clone(group.getModelService.getLastModel).asInstanceOf[ContainerRoot]
     val ipObject = group.getDictionary.get("ip")
     if (ipObject != null && ipObject.toString != "" && ipObject.toString != "0.0.0.0") {
       addNetworkProperty(readWriteModel, group.getNodeName, Array[(String, String)]((ipObject.toString, "unknown-" + ipObject.toString)), group.getKevScriptEngineFactory)
