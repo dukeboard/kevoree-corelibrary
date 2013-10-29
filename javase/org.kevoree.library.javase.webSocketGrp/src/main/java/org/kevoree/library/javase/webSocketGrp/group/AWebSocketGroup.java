@@ -265,17 +265,15 @@ public /*abstract*/ class AWebSocketGroup extends AbstractGroupType implements D
         Group group = getModelElement();
         int portDefined = 0;
         for (ContainerNode subNode : group.getSubNodes()) {
-            if (group != null) {
-                String portOption = KevoreePropertyHelper.instance$.getProperty(
-                        group, "port", true, subNode.getName());
-                if (portOption != null && !portOption.trim().isEmpty()) {
-                    portDefined++;
-                    if (portDefined > 1) {
-                        // we have more than 1 port defined in this group nodes
-                        throw new MultipleMasterServerException(
-                                "You are not supposed to give multiple master server with this group. " +
-                                        "Just give a port to one and only one node in this group.");
-                    }
+            String portOption = KevoreePropertyHelper.instance$.getProperty(
+                    group, "port", true, subNode.getName());
+            if (portOption != null && !portOption.trim().isEmpty()) {
+                portDefined++;
+                if (portDefined > 1) {
+                    // we have more than 1 port defined in this group nodes
+                    throw new MultipleMasterServerException(
+                            "You are not supposed to give multiple master server with this group. " +
+                                    "Just give a port to one and only one node in this group.");
                 }
             }
         }
