@@ -25,6 +25,7 @@ import org.kevoree.GroupType
 import org.kevoree.ComponentType
 import org.kevoree.ChannelType
 import org.kevoree.NodeType
+import org.kevoree.modeling.api.trace.TraceSequence
 import org.kevoree.log.Log
 
 /**
@@ -45,6 +46,7 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
     private val updatedDictionaryInstances = ArrayList<String>()
     private val updatedTypeDefinition = ArrayList<String>()
     private val alreadyManagedDeployUnit = ArrayList<String>()
+    private val startedInstances = ArrayList<String>()
 
 
     // TODO maybe we must compare the complete model and then filter traces instead of only compare node and doing extra stuff to manage deployUnits, TypeDefinitions, Channels and Groups
@@ -54,6 +56,7 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
         updatedDictionaryInstances.clear()
         updatedTypeDefinition.clear()
         alreadyManagedDeployUnit.clear()
+        startedInstances.clear()
 
         val currentNode = currentModel.findNodesByID(nodeName)
         val targetNode = targetModel.findNodesByID(nodeName)
@@ -83,6 +86,7 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
             var foundChannelsToRemove = HashSet<String>()
             var foundGroupsToRemove = HashSet<String>()
             var alwaysUsedChannels = HashSet<String>()
+            var newAddedChannels = HashSet<String>()
             var alwaysUsedGroups = HashSet<String>()
             currentNode.visit(object : ModelVisitor(){
                 override fun visit(elem: KMFContainer, refNameInParent: String, parent: KMFContainer) {
@@ -112,6 +116,9 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
                     } else if (elem is Channel) {
                         if (foundChannelsToRemove.remove(elem.path()!!)) {
                             alwaysUsedChannels.add(elem.path()!!)
+                        } else {
+                            if (elem.bindings.count { b -> (b.port!!.eContainer()!!.eContainer()!! as ContainerNode).name.equals(targetNode.name) } > 0)
+                                newAddedChannels.add(elem.path()!!)
                         }
                     } else if (elem is Group) {
                         if (foundGroupsToRemove.remove(elem.path()!!)) {
@@ -123,43 +130,84 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
             }, true, true, true)
             //            checkUpdateOfDeployUnit(alwaysUsedDeployUnit, currentNode, currentModel, targetNode, targetModel, adaptationModel)
             checkUpdateOfTypeDefinitions(alwaysUsedTypeDefinitions, currentNode, currentModel, targetNode, targetModel, adaptationModel)
-            checkUpdateOfChannels(alwaysUsedChannels, currentNode, currentModel, targetNode, targetModel, adaptationModel)
+            checkAddOrUpdateOfChannels(alwaysUsedChannels, currentNode, currentModel, targetNode, targetModel, adaptationModel)
             checkUpdateOfGroups(alwaysUsedGroups, currentNode, currentModel, targetNode, targetModel, adaptationModel)
             dropChannels(foundChannelsToRemove, currentModel, adaptationModel)
             dropGroups(foundGroupsToRemove, currentModel, adaptationModel)
             dropTypeDefinitions(foundTypeDefinitionsToRemove, currentModel, adaptationModel)
             dropDeployUnits(foundDeployUnitsToRemove, currentModel, adaptationModel)
+            checkAddOrUpdateOfChannels(newAddedChannels, currentNode, currentModel, targetNode, targetModel, adaptationModel)
 
         } else {
-            // Because Kevoree core does not provide an updated model during bootstrap but only an empty model as the current one
-            // should be better if the Kevoree core always give us a good current model !!
-            Log.warn("One of the model doesn't have the local node: (currentNode = {}, targetNode = {})", currentNode, targetNode)
-            if (currentNode == null && targetNode != null) {
+            // Because Kevoree core does not provide an updated model during bootstrap (or unboostrap but only an empty model as the current (or target) one
+            // should be better if the Kevoree core always give us a good current (or target) model !!
+            /*if (currentNode == null && targetNode != null) {
                 Log.info("Current node is null so we are bootstraping...")
-                val traces = modelCompare.inter(targetNode, targetNode)
-                traces.traces.forEach {
-                    trace ->
-                    System.out.println(trace)
-                    if (trace is ModelAddTrace) {
-                        manageModelAddTrace(trace, targetNode, targetModel, targetNode, targetModel, adaptationModel)
-                    } else if (trace is ModelRemoveTrace) {
-                        manageModelRemoveTrace(trace, targetNode, targetModel, targetNode, targetModel, adaptationModel)
-                    } else if (trace is ModelSetTrace) {
-                        if (!trace.srcPath.equals(targetNode.path()) && !trace.srcPath.startsWith(targetNode.path() + "/dictionary")) {
-                            // we don't care about the local node because we are doing bootstrap and the node is already defined
-                            manageModelSetTrace(trace, targetModel, targetModel, adaptationModel)
-                        }
-                    } else if (trace is ModelAddAllTrace) {
-                        //                    System.out.println(trace);
-                    } else if (trace is ModelRemoveAllTrace) {
-                        //                    System.out.println(trace);
-                    }
-                }
-            }
+                bootstrap(targetNode, targetModel, adaptationModel)
+            } else if (currentNode != null && targetNode == null) {
+                Log.info("target node is null so we are unbootstraping...")
+                unbootstrap(currentNode, currentModel, adaptationModel)
+            }*/
         }
 
         return adaptationModel
     }
+
+    /*protected open fun bootstrap(targetNode: ContainerNode, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
+        val traces = modelCompare.inter(targetNode, targetNode)
+        traces.traces.forEach {
+            trace ->
+            //                                        System.out.println(trace)
+            if (trace is ModelAddTrace) {
+                manageModelAddTrace(trace, targetNode, targetModel, targetNode, targetModel, adaptationModel)
+            } else if (trace is ModelRemoveTrace) {
+                manageModelRemoveTrace(trace, targetNode, targetModel, targetNode, targetModel, adaptationModel)
+            } else if (trace is ModelSetTrace) {
+                if (!trace.srcPath.equals(targetNode.path()) && !trace.srcPath.startsWith(targetNode.path() + "/dictionary")) {
+                    // we don't care about the local node because we are doing bootstrap and the node is already defined
+                    manageModelSetTrace(trace, targetModel, targetModel, adaptationModel)
+                }
+            } else if (trace is ModelAddAllTrace) {
+                //                    System.out.println(trace);
+            } else if (trace is ModelRemoveAllTrace) {
+                //                    System.out.println(trace);
+            }
+        }
+    }
+
+    protected open fun unbootstrap(currentNode: ContainerNode, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
+        registry.keySet().forEach {
+            key ->
+            val element = currentModel.findByPath(key)
+            if (element is Channel) {
+                stopInstance(element, currentModel, adaptationModel)
+                removeInstance(element, currentModel, adaptationModel)
+
+                // removing bindings
+                element.bindings.forEach {
+                    binding ->
+                    if ((binding.port!!.eContainer()!!.eContainer() as ContainerNode).path()!!.equals(currentNode.path()!!)) {
+                        removeBinding(binding, currentModel, adaptationModel)
+                    } else {
+                        removeFragmentBinding(binding, (binding.port!!.eContainer()!!.eContainer() as ContainerNode).path()!!, currentModel, adaptationModel)
+                    }
+                }
+            } else if (element is Group) {
+                stopInstance(element, currentModel, adaptationModel)
+                removeInstance(element, currentModel, adaptationModel)
+            } else if (element is ComponentInstance) {
+                stopInstance(element, currentModel, adaptationModel)
+                removeInstance(element, currentModel, adaptationModel)
+            } else if (element is ContainerNode) {
+                stopInstance(element, currentModel, adaptationModel)
+                removeInstance(element, currentModel, adaptationModel)
+            } else if (element is TypeDefinition) {
+                removeTypeDefinition(element, currentModel, adaptationModel)
+            } else if (element is DeployUnit) {
+                removeDeployUnit(element, currentModel, adaptationModel)
+            }
+        }
+    }*/
 
     protected open fun manageModelAddTrace(trace: ModelAddTrace, currentNode: ContainerNode, currentModel: ContainerRoot, targetNode: ContainerNode, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
         //        System.out.println(trace);
@@ -170,8 +218,14 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
             // Add instance
             addInstance(targetModel.findByPath(trace.previousPath!!, javaClass<Instance>())!!, currentNode, currentModel, targetModel, adaptationModel)
         } else if (trace.refName.equalsIgnoreCase("bindings")) {
-            // Add Binding
-            addBinding(targetModel.findByPath(trace.previousPath!!, javaClass<MBinding>())!!, currentNode, currentModel, targetModel, adaptationModel)
+            val binding = targetModel.findByPath(trace.previousPath!!, javaClass<MBinding>())!!
+            if ((binding.port!!.eContainer()!!.eContainer() as ContainerNode) == targetNode) {
+                // Add Binding
+                addBinding(binding, currentNode, currentModel, targetModel, adaptationModel)
+            } else {
+                // Add FragmentBinding
+                addFragmentBinding(binding, (binding.port!!.eContainer()!!.eContainer() as ContainerNode).name!!, currentModel, adaptationModel)
+            }
         } else if (trace.srcPath.toLowerCase().startsWith("typedefinitions[") && trace.refName.equalsIgnoreCase("deployUnits")) {
             val deployUnit = targetModel.findByPath(trace.previousPath!!, javaClass<DeployUnit>())!!
             if (deployUnit.targetNodeType!!.path()!!.equals(targetNode.typeDefinition!!.path()!!)) {
@@ -197,14 +251,21 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
         if (element != null && (element is Group || element is Channel || element is ComponentInstance || element is ContainerNode)) {
             removeInstance(element as Instance, currentModel, adaptationModel)
         }  else if (trace.refName.equals("bindings")) {
-            removeBinding(element as MBinding, currentModel, adaptationModel)
+            val binding = element as MBinding
+            if ((binding.port!!.eContainer()!!.eContainer() as ContainerNode) == targetNode) {
+                // Remove Binding
+                removeBinding(element as MBinding, currentModel, adaptationModel)
+            } else {
+                // Remove FragmentBinding
+                removeFragmentBinding(binding, (binding.port!!.eContainer()!!.eContainer() as ContainerNode).name!!, currentModel, adaptationModel)
+            }
+
         } else if (trace.srcPath.toLowerCase().startsWith("typedefinitions[") && trace.refName.equalsIgnoreCase("deployUnits")) {
             val deployUnit = currentModel.findByPath(trace.objPath, javaClass<DeployUnit>())!!
             if (deployUnit.targetNodeType!!.path()!!.equals(targetNode.typeDefinition!!.path()!!)) {
                 updateTypeDefinition(currentModel.findByPath(trace.srcPath, javaClass<TypeDefinition>())!!, currentNode, currentModel, targetNode, targetModel, adaptationModel)
             }
         }
-        // FIXME how to manage groups
     }
 
     protected open fun manageModelSetTrace(trace: ModelSetTrace, currentModel: ContainerRoot, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
@@ -274,33 +335,44 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
         }
     }
 
-    protected open fun checkUpdateOfChannels(alwaysUsedChannels: HashSet<String>, currentNode: ContainerNode, currentModel: ContainerRoot, targetNode: ContainerNode, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        alwaysUsedChannels.forEach {
+    protected open fun checkAddOrUpdateOfChannels(channels: HashSet<String>, currentNode: ContainerNode, currentModel: ContainerRoot, targetNode: ContainerNode, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
+        channels.forEach {
             channelPath ->
-            if (!updatedInstances.contains(channelPath)) {
+//            if (!updatedInstances.contains(channelPath)) {
                 val currentChannel = currentModel.findByPath(channelPath, javaClass<Channel>())
                 val targetChannel = targetModel.findByPath(channelPath, javaClass<Channel>())
 
+                var traces: TraceSequence? = null
+                if (currentChannel == null && targetChannel != null) {
+                    traces = modelCompare.inter(targetChannel, targetChannel)
+                }
+
+
                 if (currentChannel != null && targetChannel != null) {
-                    val traces = modelCompare.diff(currentChannel, targetChannel)
-                    traces.traces.forEach {
+                    traces = modelCompare.diff(currentChannel, targetChannel)
+                }
+
+                if (traces != null && traces!!.traces.size() > 0) {
+                    traces!!.traces.forEach {
                         trace ->
-                        //                        System.out.println(trace)
-                        /*if (trace is ModelAddTrace) {
+                        //                    System.out.println(trace);
+                        if (trace is ModelAddTrace) {
+                            // manage addFragmentBinding and addBinding
                             manageModelAddTrace(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
                         } else if (trace is ModelRemoveTrace) {
+                            // manage RemoveFragmentBinding and removeFragmentBinding
                             manageModelRemoveTrace(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
-                        } else */if (trace is ModelSetTrace) {
-                        manageModelSetTrace(trace, currentModel, targetModel, adaptationModel)
-                    }/* else if (trace is ModelAddAllTrace) {
+                        } else if (trace is ModelSetTrace) {
+                            manageModelSetTrace(trace, currentModel, targetModel, adaptationModel)
+                        } else if (trace is ModelAddAllTrace) {
                             //                    System.out.println(trace);
                         } else if (trace is ModelRemoveAllTrace) {
                             //                    System.out.println(trace);
-                        }*/
+                        }
                     }
                 }
             }
-        }
+//        }
     }
 
     protected open fun checkUpdateOfGroups(alwaysUsedGroups: HashSet<String>, currentNode: ContainerNode, currentModel: ContainerRoot, targetNode: ContainerNode, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
@@ -398,16 +470,18 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
             ccmd.ref = instance
             adaptationModel.addAdaptations(ccmd)
             updatedDictionaryInstances.add(instance.path()!!)
-            updatedInstances.add(instance.path()!!)
         }
     }
 
     protected open fun startInstance(instance: Instance, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        // Start instance
-        val ccmd = adaptationModelFactory.createAdaptationPrimitive()
-        ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.StartInstance)
-        ccmd.ref = instance
-        adaptationModel.addAdaptations(ccmd)
+        if (!startedInstances.contains(instance.path()!!)) {
+            // Start instance
+            val ccmd = adaptationModelFactory.createAdaptationPrimitive()
+            ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.StartInstance)
+            ccmd.ref = instance
+            adaptationModel.addAdaptations(ccmd)
+            startedInstances.add(instance.path()!!)
+        }
     }
 
     protected open fun stopInstance(instance: Instance, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
@@ -419,7 +493,6 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
     }
 
     protected open fun addBinding(element: MBinding, currentNode: ContainerNode, currentModel: ContainerRoot, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        // Add binding TODO must to check and maybe to complete according to FragmentBinding
         val ccmd = adaptationModelFactory.createAdaptationPrimitive()
         ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.AddBinding)
         ccmd.ref = element
@@ -427,17 +500,36 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
 
         if (registry.get(element.hub!!.path()) == null) {
             addInstance(element.hub!!, currentNode, currentModel, targetModel, adaptationModel)
+            val channel = targetModel.findByPath(element.hub!!.path()!!, javaClass<Instance>())
+            if (channel != null && channel.started!!) {
+                startInstance(channel, currentModel, adaptationModel)
+            }
         }
     }
 
+    protected open fun addFragmentBinding(binding: MBinding, remoteNodeName: String, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
+        val ccmd = adaptationModelFactory.createAdaptationPrimitive()
+        ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.AddFragmentBinding)
+        ccmd.ref = binding.hub
+        ccmd.targetNodeName = remoteNodeName
+        adaptationModel.addAdaptations(ccmd)
+    }
+
     protected open fun removeBinding(element: MBinding, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        // Remove binding TODO must to check and maybe to complete according to FragmentBinding
         val ccmd = adaptationModelFactory.createAdaptationPrimitive()
         ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.RemoveBinding)
         ccmd.ref = element
         adaptationModel.addAdaptations(ccmd)
 
         // channel connected to this binding will be removed if it doesn't appear anymore in the channels connected to one of the components available on the currentNode (see dropChannelAndTypeDefinitionAndDeployUnit)
+    }
+
+    protected open fun removeFragmentBinding(binding: MBinding, remoteNodeName: String, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
+        val ccmd = adaptationModelFactory.createAdaptationPrimitive()
+        ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.RemoveFragmentBinding)
+        ccmd.ref = binding.hub
+        ccmd.targetNodeName = remoteNodeName
+        adaptationModel.addAdaptations(ccmd)
     }
 
     protected open fun addInstance(instance: Instance, currentNode: ContainerNode, currentModel: ContainerRoot, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
@@ -462,6 +554,7 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
             removeInstance(instance, currentModel, adaptationModel)
             addInstance(instance, currentNode, currentModel, targetModel, adaptationModel)
             updateDictionary(instance, currentModel, adaptationModel)
+            updatedInstances.add(instance.path()!!)
         }
     }
 

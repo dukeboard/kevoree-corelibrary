@@ -11,12 +11,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kevoree.framework;
+package org.kevoree.library.defaultNodeTypes.wrapper;
 
-import java.lang.reflect.Modifier
 import org.kevoree.ComponentInstance
 import org.kevoree.ContainerRoot
-import org.kevoree.annotation.KevoreeInject
 import org.kevoree.api.service.core.handler.KevoreeModelHandlerService
 import org.kevoree.api.Bootstraper
 import org.kevoree.api.service.core.script.KevScriptEngineFactory
@@ -24,8 +22,12 @@ import org.kevoree.library.defaultNodeTypes.reflect.MethodAnnotationResolver
 import org.kevoree.library.defaultNodeTypes.reflect.FieldAnnotationResolver
 import org.kevoree.log.Log
 import java.lang.reflect.InvocationTargetException
-import org.kevoree.library.defaultNodeTypes.wrapper.KInject
 import org.kevoree.api.dataspace.DataSpaceService
+import org.kevoree.framework.AbstractComponentType
+import org.kevoree.framework.KInstance
+import org.kevoree.framework.ComponentType
+import org.kevoree.framework.KevoreePort
+import org.kevoree.framework.ModelHandlerServiceProxy
 
 public class KevoreeComponent(val ct: AbstractComponentType, val nodeName: String, val name: String, val modelService: KevoreeModelHandlerService, val bootService: Bootstraper, val kevsEngine: KevScriptEngineFactory, val dataSpace: DataSpaceService?, val tg : ThreadGroup) : KInstance {
 

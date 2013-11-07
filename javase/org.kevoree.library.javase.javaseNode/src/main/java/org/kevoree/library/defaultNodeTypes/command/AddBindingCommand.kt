@@ -3,12 +3,12 @@ package org.kevoree.library.defaultNodeTypes.command
 import org.kevoree.MBinding
 import org.kevoree.api.PrimitiveCommand
 import org.kevoree.ComponentInstance
-import org.kevoree.framework.AbstractComponentType
 import org.kevoree.framework.message.FragmentBindMessage
 import org.kevoree.framework.KevoreePort
 import org.kevoree.framework.KevoreeChannelFragment
 import org.kevoree.framework.message.PortBindMessage
 import org.kevoree.log.Log
+import org.kevoree.library.defaultNodeTypes.wrapper.KevoreeComponent
 
 /**
  * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 3, 29 June 2007;
@@ -34,15 +34,15 @@ class AddBindingCommand(val c: MBinding, val nodeName: String, val registry: Mut
     override fun execute(): Boolean {
         val kevoreeChannelFound = registry.get(c.hub!!.path()!!)
         val kevoreeComponentFound = registry.get((c.port!!.eContainer() as ComponentInstance).path()!!)
-        if(kevoreeChannelFound != null && kevoreeComponentFound != null && kevoreeComponentFound is AbstractComponentType && kevoreeChannelFound is KevoreeChannelFragment){
+        if(kevoreeChannelFound != null && kevoreeComponentFound != null && kevoreeComponentFound is KevoreeComponent && kevoreeChannelFound is KevoreeChannelFragment){
             val portName = c.port!!.portTypeRef!!.name!!
-            val foundNeedPort = kevoreeComponentFound.getNeededPorts()!!.get(portName)
-            val foundHostedPort = kevoreeComponentFound.getHostedPorts()!!.get(portName)
+            val foundNeedPort = kevoreeComponentFound.getKevoreeComponentType().getNeededPorts()!!.get(portName)
+            val foundHostedPort = kevoreeComponentFound.getKevoreeComponentType().getHostedPorts()!!.get(portName)
             if(foundNeedPort == null && foundHostedPort == null){
                 Log.info("Port instance not found in component")
                 Log.info("Look for " + portName);
-                Log.info("" + kevoreeComponentFound.getNeededPorts()!!.containsKey(portName));
-                Log.info("" + kevoreeComponentFound.getHostedPorts()!!.containsKey(portName));
+                Log.info("" + kevoreeComponentFound.getKevoreeComponentType().getNeededPorts()!!.containsKey(portName));
+                Log.info("" + kevoreeComponentFound.getKevoreeComponentType().getHostedPorts()!!.containsKey(portName));
                 return false
             }
 
@@ -58,7 +58,7 @@ class AddBindingCommand(val c: MBinding, val nodeName: String, val registry: Mut
             }
             return false
         } else {
-            Log.error("Error while apply binding , channelFound=" + kevoreeChannelFound + ",componentFound=" + kevoreeComponentFound)
+            Log.error("Error while apply binding , channelFound=" + kevoreeChannelFound + ", componentFound=" + kevoreeComponentFound)
             return false
         }
     }

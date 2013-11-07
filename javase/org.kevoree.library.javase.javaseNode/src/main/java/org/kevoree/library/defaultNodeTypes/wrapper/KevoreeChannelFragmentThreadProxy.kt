@@ -11,11 +11,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kevoree.framework
+package org.kevoree.library.defaultNodeTypes.wrapper
 
-import java.util.HashMap
 import org.kevoree.ContainerRoot
 import org.kevoree.framework.message.Message
+import org.kevoree.framework.KevoreeChannelFragment
+import org.kevoree.framework.ChannelFragmentSender
 
 class KevoreeChannelFragmentThreadProxy(val remoteNodeName: String, val remoteChannelName: String): KevoreeChannelFragment {
     override fun kInstanceStart(tmodel: ContainerRoot): Boolean {

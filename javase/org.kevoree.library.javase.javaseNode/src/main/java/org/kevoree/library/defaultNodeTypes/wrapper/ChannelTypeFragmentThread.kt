@@ -1,4 +1,4 @@
-package org.kevoree.framework;
+package org.kevoree.library.defaultNodeTypes.wrapper;
 
 import java.util.HashMap
 import java.util.concurrent.Callable
@@ -12,16 +12,21 @@ import org.kevoree.framework.message.Message
 import org.kevoree.framework.message.PortBindMessage
 import org.kevoree.framework.message.PortUnbindMessage
 import org.kevoree.framework.port.PausablePortThreadPoolExecutor
-import org.kevoree.annotation.KevoreeInject
-import java.lang.reflect.Modifier
 import org.kevoree.api.Bootstraper
 import org.kevoree.api.service.core.script.KevScriptEngineFactory
 import org.kevoree.library.defaultNodeTypes.reflect.MethodAnnotationResolver
 import org.kevoree.library.defaultNodeTypes.reflect.FieldAnnotationResolver
 import org.kevoree.log.Log
 import java.lang.reflect.InvocationTargetException
-import org.kevoree.library.defaultNodeTypes.wrapper.KInject
 import org.kevoree.api.dataspace.DataSpaceService
+import org.kevoree.framework.AbstractChannelFragment
+import org.kevoree.framework.KevoreeChannelFragment
+import org.kevoree.framework.KInstance
+import org.kevoree.framework.ChannelFragment
+import org.kevoree.framework.ChannelFragmentSender
+import org.kevoree.framework.KevoreePort
+import org.kevoree.framework.ModelHandlerServiceProxy
+import org.kevoree.framework.MethodCallMessage
 
 class ChannelTypeFragmentThread(val target: AbstractChannelFragment, val _nodeName: String, val _name: String, val modelService: KevoreeModelHandlerService, val bootService: Bootstraper, val kevsEngine: KevScriptEngineFactory, val dataSpace: DataSpaceService?, val tg: ThreadGroup): KevoreeChannelFragment, KInstance, ChannelFragment {
 
@@ -81,6 +86,7 @@ class ChannelTypeFragmentThread(val target: AbstractChannelFragment, val _nodeNa
                 return false
             }
         } else {
+            Log.error("Try to start the channel {} while it is already start", _name)
             return false
         }
     }
@@ -211,7 +217,6 @@ class ChannelTypeFragmentThread(val target: AbstractChannelFragment, val _nodeNa
         pool?.pause()
         val res = when(o) {
             is FragmentBindMessage -> {
-                Log.debug("FragmentBindMessage=>" + createPortKey(o))
                 val sender = this.createSender((o as FragmentBindMessage).fragmentNodeName, (o as FragmentBindMessage).channelName)
                 val proxy = KevoreeChannelFragmentThreadProxy((o as FragmentBindMessage).fragmentNodeName, (o as FragmentBindMessage).channelName)
                 proxy.channelSender = sender
@@ -224,7 +229,6 @@ class ChannelTypeFragmentThread(val target: AbstractChannelFragment, val _nodeNa
                 true
             }
             is FragmentUnbindMessage -> {
-                Log.debug("Try to unbind channel ")
                 val actorPort: KevoreeChannelFragment? = fragementBinded.get(createPortKey(o))
                 if (actorPort != null) {
                     //actorPort.stopC()

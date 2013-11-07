@@ -4,9 +4,9 @@ import org.kevoree.ContainerRoot
 import org.kevoree.Instance
 import org.kevoree.framework.KInstance
 import org.kevoree.log.Log
-import org.kevoree.framework.KevoreeComponent
-import org.kevoree.framework.ChannelTypeFragmentThread
-import org.kevoree.framework.KevoreeGroup
+import org.kevoree.library.defaultNodeTypes.wrapper.KevoreeComponent
+import org.kevoree.library.defaultNodeTypes.wrapper.ChannelTypeFragmentThread
+import org.kevoree.library.defaultNodeTypes.wrapper.KevoreeGroup
 
 /**
  * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 3, 29 June 2007;

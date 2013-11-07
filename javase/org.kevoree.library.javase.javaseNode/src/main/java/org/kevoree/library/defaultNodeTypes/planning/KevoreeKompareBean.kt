@@ -13,7 +13,7 @@ open class KevoreeKompareBean(registry: Map<String, Any>) : Kompare3(registry), 
 
         var adaptationModel = compareModels(actualModel, targetModel, nodeName)
 
-        AdaptationModelPrinter().printAdaptations(adaptationModel)
+//        AdaptationModelPrinter().printAdaptations(adaptationModel)
 
         //logger.debug("after Hara Kiri detect")
         val afterPlan = plan(adaptationModel, nodeName)

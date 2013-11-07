@@ -12,14 +12,14 @@ import org.kevoree.framework.AbstractComponentType
 import org.kevoree.framework.AbstractGroupType
 import org.kevoree.ComponentInstance
 import org.kevoree.framework.KInstance
-import org.kevoree.framework.KevoreeComponent
 import org.kevoree.Group
-import org.kevoree.framework.KevoreeGroup
 import org.kevoree.Channel
-import org.kevoree.framework.ChannelTypeFragmentThread
 import org.kevoree.DeployUnit
 import org.kevoree.log.Log
 import org.kevoree.framework.AbstractNodeType
+import org.kevoree.library.defaultNodeTypes.wrapper.KevoreeComponent
+import org.kevoree.library.defaultNodeTypes.wrapper.KevoreeGroup
+import org.kevoree.library.defaultNodeTypes.wrapper.ChannelTypeFragmentThread
 
 /**
  * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 3, 29 June 2007;
