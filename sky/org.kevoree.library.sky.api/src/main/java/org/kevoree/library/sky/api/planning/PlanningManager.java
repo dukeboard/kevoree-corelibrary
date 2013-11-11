@@ -1,7 +1,7 @@
 package org.kevoree.library.sky.api.planning;
 
 
-import org.kevoree.AdaptationPrimitiveType;
+import jet.runtime.typeinfo.JetValueParameter;
 import org.kevoree.ContainerNode;
 import org.kevoree.ContainerRoot;
 import org.kevoree.Instance;
@@ -13,9 +13,7 @@ import org.kevoree.library.sky.api.CloudNode;
 import org.kevoree.log.Log;
 import org.kevoreeadaptation.AdaptationModel;
 import org.kevoreeadaptation.AdaptationPrimitive;
-import org.kevoreeadaptation.KevoreeAdaptationFactory;
 import org.kevoreeadaptation.ParallelStep;
-import org.kevoreeadaptation.impl.DefaultKevoreeAdaptationFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,127 +36,60 @@ public class PlanningManager extends KevoreeKompareBean {
         this.skyNode = skyNode;
     }
 
-    public AdaptationModel compareModels(ContainerRoot current, ContainerRoot target, String nodeName) {
-        DefaultKevoreeAdaptationFactory factory = new DefaultKevoreeAdaptationFactory();
-        AdaptationModel adaptationModel = factory.createAdaptationModel();
-        AdaptationPrimitiveType removeNodeType = null;
-        AdaptationPrimitiveType addNodeType = null;
-        for (AdaptationPrimitiveType primitiveType : current.getAdaptationPrimitiveTypes()) {
-            if (primitiveType.getName().equals(CloudNode.REMOVE_NODE)) {
-                removeNodeType = primitiveType;
-            } else if (primitiveType.getName().equals(CloudNode.ADD_NODE)) {
-                addNodeType = primitiveType;
-            }
+    @Override
+    protected void addInstance(@JetValueParameter(name = "instance") Instance instance, @JetValueParameter(name = "currentNode") ContainerNode currentNode, @JetValueParameter(name = "currentModel") ContainerRoot currentModel, @JetValueParameter(name = "targetModel") ContainerRoot targetModel, @JetValueParameter(name = "adaptationModel") AdaptationModel adaptationModel) {
+        if (instance instanceof ContainerNode) {
+            addNodeInstance((ContainerNode) instance, currentModel, targetModel, adaptationModel);
+        } else {
+            super.addInstance(instance, currentNode, currentModel, targetModel, adaptationModel);
         }
-        if (removeNodeType == null || addNodeType == null) {
-            for (AdaptationPrimitiveType primitiveType : target.getAdaptationPrimitiveTypes()) {
-                if (primitiveType.getName().equals(CloudNode.REMOVE_NODE)) {
-                    removeNodeType = primitiveType;
-                } else if (primitiveType.getName().equals(CloudNode.ADD_NODE)) {
-                    addNodeType = primitiveType;
-                }
-            }
-        }
-        if (removeNodeType == null) {
-            Log.warn("there is no adaptation primitive for {}", CloudNode.REMOVE_NODE);
-        }
-        if (addNodeType == null) {
-            Log.warn("there is no adaptation primitive for {}", CloudNode.ADD_NODE);
-        }
-
-        ContainerNode currentNode = current.findNodesByID(skyNode.getName());
-        ContainerNode targetNode = target.findNodesByID(skyNode.getName());
-        if (currentNode != null) {
-
-            if (targetNode != null) {
-                for (ContainerNode subNode : currentNode.getHosts()) {
-                    ContainerNode subNode1 = targetNode.findHostsByID(subNode.getName());
-                    if (subNode1 == null) {
-                        Log.debug("add a {} adaptation primitive with {} as parameter", CloudNode.REMOVE_NODE, subNode.getName());
-                        AdaptationPrimitive command = factory.createAdaptationPrimitive();
-                        command.setPrimitiveType(removeNodeType);
-                        command.setRef(subNode);
-                        adaptationModel.addAdaptations(command);
-                        processStopInstance(subNode, adaptationModel, current, factory);
-                    }
-
-                }
-
-            } else {
-                // TODO IF HARAKIRI is refactoring, maybe this block must be refactoring too or even removed
-                Log.debug("Unable to find the current node on the target model, We remove all the hosted nodes from the current model");
-                for (ContainerNode subNode : currentNode.getHosts()) {
-                    Log.debug("add a {} adaptation primitive with {} as parameter", JavaSePrimitive.StopInstance, subNode.getName());
-                    AdaptationPrimitive command = factory.createAdaptationPrimitive();
-                    command.setPrimitiveType(current.findAdaptationPrimitiveTypesByID(JavaSePrimitive.StopInstance));
-                    command.setRef(subNode);
-                    adaptationModel.addAdaptations(command);
-                    processStopInstance(subNode, adaptationModel, current, factory);
-                }
-            }
-        }
-
-        if (targetNode != null) {
-            if (currentNode != null) {
-                for (ContainerNode subNode : targetNode.getHosts()) {
-                    ContainerNode subNode1 = currentNode.findHostsByID(subNode.getName());
-                    if (subNode1 == null) {
-                        Log.debug("add a {} adaptation primitive with {} as parameter", CloudNode.ADD_NODE, subNode.getName());
-                        AdaptationPrimitive command = factory.createAdaptationPrimitive();
-                        command.setPrimitiveType(addNodeType);
-                        command.setRef(subNode);
-                        adaptationModel.addAdaptations(command);
-                        processStartInstance(subNode, adaptationModel, target, factory);
-                    } else {
-                        if (subNode1.getStarted() != subNode.getStarted()) {
-                            if (subNode1.getStarted()) {
-                                processStopInstance(subNode, adaptationModel, current, factory);
-                            } else {
-                                processStartInstance(subNode, adaptationModel, target, factory);
-                            }
-                        }
-                    }
-                }
-            } else {
-                Log.debug("Unable to find the current node on the current model, We add all the hosted nodes from the target model");
-                for (ContainerNode subNode : targetNode.getHosts()) {
-                    Log.debug("add a {} adaptation primitive with {} as parameter", CloudNode.ADD_NODE, subNode.getName());
-                    AdaptationPrimitive command = factory.createAdaptationPrimitive();
-                    command.setPrimitiveType(addNodeType);
-                    command.setRef(subNode);
-                    adaptationModel.addAdaptations(command);
-                    processStartInstance(subNode, adaptationModel, target, factory);
-                }
-            }
-        }
-
-        Log.debug("Adaptation model contain {} Host node primitives", adaptationModel.getAdaptations().size());
-
-        AdaptationModel superModel = super.compareModels(current, target, nodeName);
-
-        adaptationModel.addAllAdaptations(superModel.getAdaptations());
-        Log.debug("Adaptation model contain {} primitives", adaptationModel.getAdaptations().size());
-        return adaptationModel;
     }
 
-    private void processStopInstance(Instance actualInstance, AdaptationModel adaptationModel, ContainerRoot actualRoot, KevoreeAdaptationFactory adaptationModelFactory) {
+    @Override
+    protected void removeInstance(@JetValueParameter(name = "instance") Instance instance, @JetValueParameter(name = "currentModel") ContainerRoot currentModel, @JetValueParameter(name = "adaptationModel") AdaptationModel adaptationModel) {
+        if (instance instanceof ContainerNode) {
+            removeNodeInstance((ContainerNode) instance, currentModel, adaptationModel);
+        } else {
+            super.removeInstance(instance, currentModel, adaptationModel);
+        }
+    }
+
+    private void addNodeInstance(ContainerNode subNode, ContainerRoot currentModel, ContainerRoot targetModel, AdaptationModel adaptationModel) {
+        Log.debug("add a {} adaptation primitive with {} as parameter", CloudNode.ADD_NODE, subNode.getName());
+        AdaptationPrimitive command = getAdaptationModelFactory().createAdaptationPrimitive();
+        command.setPrimitiveType(currentModel.findAdaptationPrimitiveTypesByID(CloudNode.ADD_NODE));
+        command.setRef(subNode);
+        adaptationModel.addAdaptations(command);
+        processStartInstance(subNode, adaptationModel, targetModel);
+    }
+
+    private void removeNodeInstance(ContainerNode subNode, ContainerRoot currentModel, AdaptationModel adaptationModel) {
+        Log.debug("add a {} adaptation primitive with {} as parameter", CloudNode.REMOVE_NODE, subNode.getName());
+        AdaptationPrimitive command = getAdaptationModelFactory().createAdaptationPrimitive();
+        command.setPrimitiveType(currentModel.findAdaptationPrimitiveTypesByID(CloudNode.REMOVE_NODE));
+        command.setRef(subNode);
+        adaptationModel.addAdaptations(command);
+        processStopInstance(subNode, adaptationModel, currentModel);
+    }
+
+    private void processStopInstance(Instance actualInstance, AdaptationModel adaptationModel, ContainerRoot actualRoot) {
         Log.debug("Process StopInstance on {}", actualInstance.getName());
-        AdaptationPrimitive ccmd2 = adaptationModelFactory.createAdaptationPrimitive();
+        AdaptationPrimitive ccmd2 = getAdaptationModelFactory().createAdaptationPrimitive();
         ccmd2.setPrimitiveType(actualRoot.findAdaptationPrimitiveTypesByID(JavaSePrimitive.StopInstance));
         ccmd2.setRef(actualInstance);
         adaptationModel.addAdaptations(ccmd2);
     }
 
-    private void processStartInstance(Instance updatedInstance, AdaptationModel adaptationModel, ContainerRoot updateRoot, KevoreeAdaptationFactory adaptationModelFactory) {
+    private void processStartInstance(Instance updatedInstance, AdaptationModel adaptationModel, ContainerRoot updateRoot) {
         Log.debug("Process StartInstance on {}", updatedInstance.getName());
-        AdaptationPrimitive ccmd2 = adaptationModelFactory.createAdaptationPrimitive();
+        AdaptationPrimitive ccmd2 = getAdaptationModelFactory().createAdaptationPrimitive();
         ccmd2.setPrimitiveType(updateRoot.findAdaptationPrimitiveTypesByID(JavaSePrimitive.StartInstance));
         ccmd2.setRef(updatedInstance);
         adaptationModel.addAdaptations(ccmd2);
     }
 
     @Override
-    public AdaptationModel plan(AdaptationModel adaptationModel, String nodeName) {
+    public AdaptationModel schedule(AdaptationModel adaptationModel, String nodeName) {
         if (!adaptationModel.getAdaptations().isEmpty()) {
 
             Log.debug("Planning adaptation and defining steps...");
