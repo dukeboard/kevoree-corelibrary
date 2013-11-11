@@ -9,31 +9,16 @@ open class KevoreeKompareBean(registry: Map<String, Any>) : Kompare3(registry), 
 
     override var adaptationModelFactory: KevoreeAdaptationFactory = org.kevoreeadaptation.impl.DefaultKevoreeAdaptationFactory()
 
-    fun kompare(actualModel: ContainerRoot, targetModel: ContainerRoot, nodeName: String): AdaptationModel {
+    fun plan(actualModel: ContainerRoot, targetModel: ContainerRoot, nodeName: String): AdaptationModel {
 
         var adaptationModel = compareModels(actualModel, targetModel, nodeName)
 
 //        AdaptationModelPrinter().printAdaptations(adaptationModel)
 
         //logger.debug("after Hara Kiri detect")
-        val afterPlan = plan(adaptationModel, nodeName)
+        val afterPlan = schedule(adaptationModel, nodeName)
         return afterPlan
     }
-
-    /*open fun compareModels(actualModel: ContainerRoot, targetModel: ContainerRoot, nodeName: String): AdaptationModel {
-
-        val adaptationModelFactory = org.kevoreeadaptation.impl.DefaultKevoreeAdaptationFactory()
-        var adaptationModel = adaptationModelFactory.createAdaptationModel()
-        //STEP 0 - FOUND LOCAL NODE
-        var actualLocalNode = actualModel.findByPath("nodes[" + nodeName + "]", javaClass<ContainerNode>())
-        var updateLocalNode = targetModel.findByPath("nodes[" + nodeName + "]", javaClass<ContainerNode>())
-        if(actualLocalNode == null && updateLocalNode == null){
-            Log.warn("Empty Kompare because {} not found in current nor in target model ", nodeName)
-            return adaptationModel
-        }
-        adaptationModel = getUpdateNodeAdaptationModel(actualLocalNode, updateLocalNode, actualModel, targetModel, nodeName)
-        return transformPrimitives(adaptationModel, actualModel)
-    }*/
 
     private fun transformPrimitives(adaptationModel: AdaptationModel, actualModel: ContainerRoot): AdaptationModel {
         //TRANSFORME UPDATE

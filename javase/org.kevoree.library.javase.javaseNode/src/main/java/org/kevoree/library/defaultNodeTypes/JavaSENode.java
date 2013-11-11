@@ -98,8 +98,8 @@ public class JavaSENode extends AbstractNodeType implements ModelListener {
     }
 
     @Override
-    public AdaptationModel kompare(ContainerRoot current, ContainerRoot target) {
-        return kompareBean.kompare(current, target, this.getName());
+    public AdaptationModel plan(ContainerRoot current, ContainerRoot target) {
+        return kompareBean.plan(current, target, this.getName());
     }
 
     @Override

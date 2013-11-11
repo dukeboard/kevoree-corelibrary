@@ -14,7 +14,7 @@ import org.kevoree.library.defaultNodeTypes.planning.scheduling.SchedulingWithTo
 
 trait KevoreeScheduler : StepBuilder {
 
-    open fun plan(adaptionModel: AdaptationModel, nodeName: String): AdaptationModel {
+    open fun schedule(adaptionModel: AdaptationModel, nodeName: String): AdaptationModel {
         if (!adaptionModel.adaptations.isEmpty()) {
 
             adaptationModelFactory = org.kevoreeadaptation.impl.DefaultKevoreeAdaptationFactory()
