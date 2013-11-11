@@ -13,7 +13,7 @@
     </parent>
 
     <properties>
-        <kevoree.include>org.kevoree:*,org.kevoree.tools:*</kevoree.include>
+        <!--<kevoree.include>org.kevoree:*,org.kevoree.tools:*</kevoree.include>-->
     </properties>
 
     <dependencies>
