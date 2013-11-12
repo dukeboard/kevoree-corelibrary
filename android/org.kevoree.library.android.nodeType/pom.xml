@@ -18,9 +18,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.jgrapht</groupId>
-            <artifactId>jgrapht-jdk1.5</artifactId>
-            <version>0.7.3</version>
+            <groupId>net.sf.jgrapht</groupId>
+            <artifactId>jgrapht</artifactId>
+            <version>0.8.3</version>
         </dependency>
     </dependencies>
 
@@ -35,7 +35,7 @@
                         <goals><goal>add-source</goal></goals>
                         <configuration>
                             <sources>
-                                <source>../../javase/org.kevoree.library.javase.javaseNode/src/main/java</source>
+                                <source>${project.basedir}/../../javase/org.kevoree.library.javase.javaseNode/src/main/java</source>
                             </sources>
                         </configuration>
                     </execution>

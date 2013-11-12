@@ -108,8 +108,8 @@ public class AndroidNode extends AbstractNodeType {
 	}
 
 	@Override
-	public AdaptationModel kompare (ContainerRoot current, ContainerRoot target) {
-		return kompareBean.kompare(current, target, this.getNodeName());
+	public AdaptationModel plan (ContainerRoot current, ContainerRoot target) {
+		return kompareBean.plan(current, target, this.getNodeName());
 	}
 
 	@Override

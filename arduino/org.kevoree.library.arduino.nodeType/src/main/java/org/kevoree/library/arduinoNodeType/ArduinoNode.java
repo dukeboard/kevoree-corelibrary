@@ -82,7 +82,7 @@ public class ArduinoNode extends AbstractNodeType {
     public void updateNode() {}
 
     @Override
-    public AdaptationModel kompare(ContainerRoot current, ContainerRoot target) {
+    public AdaptationModel plan(ContainerRoot current, ContainerRoot target) {
         return null; //NOT TO BE USED WITH KEVOREE CORE
     }
 
@@ -152,7 +152,7 @@ public class ArduinoNode extends AbstractNodeType {
             cloned.removeAllGroups();
 
 
-            AdaptationModel kompareModel = kompare.kompare(lastVersionModel, cloned, targetNodeName);
+            AdaptationModel kompareModel = kompare.plan(lastVersionModel, cloned, targetNodeName);
 
 
             if (kompareModel.getAdaptations().size() > 0) {
@@ -221,7 +221,7 @@ public class ArduinoNode extends AbstractNodeType {
         lastVersionModel.removeAllMBindings();
         lastVersionModel.removeAllGroups();
 
-        AdaptationModel model = kompare.kompare(lastVersionModel, rootModel, nodeName);
+        AdaptationModel model = kompare.plan(lastVersionModel, rootModel, nodeName);
 
         //Must compute a dif from scratch model
 
