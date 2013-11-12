@@ -34,7 +34,7 @@ public class PlanningManagerTester {
         PlanningManager planningManager = new PlanningManager(skyNode, new HashMap<String, Object>());
         AdaptationModel adaptationModel = planningManager.compareModels(model0, model1, "node0");
 
-        adaptationModel = planningManager.plan(adaptationModel, "node0");
+        adaptationModel = planningManager.schedule(adaptationModel, "node0");
 
 //    model0.findNodesByID("node0").getTypeDefinition()
 
