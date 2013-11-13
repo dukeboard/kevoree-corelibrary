@@ -47,9 +47,9 @@ $(function () {
         model = loader.loadModelFromString(text).get(0);
         var nodeListElement = $('#nodeList');
         nodeListElement.empty(); //clear nodeList
-        var nodes = model.findNodesByID(nodeName).getHosts();
+        var nodes = model.findNodesByID(nodeName).hosts;
         for (var i = 0; i < nodes.$size; i++) {
-            var childName = nodes.get(i).getName();
+            var childName = nodes.get(i).name;
 
             //TODO look for IP, thanks to maxime
 
@@ -58,7 +58,7 @@ $(function () {
             newStartNStopBt.addClass("btn");
             newStartNStopBt.addClass("btn-warning");
             newStartNStopBt.get(0).id = 'startnstop' + childName;
-            if (nodes.get(i).getStarted()) {
+            if (nodes.get(i).started) {
                 newStartNStopBt.append("Stop child");
             } else {
                 newStartNStopBt.append("Start child");
@@ -74,10 +74,10 @@ $(function () {
             newStartNStopBt.click(function () {
                 var currentNode = model.findNodesByID(nodeName);
                 var currentChildNode = currentNode.findHostsByID(this.id.substring("startnstop".length));
-                if (currentChildNode != null && currentChildNode != undefined && currentChildNode.getStarted()) {
-                    currentChildNode.setStarted(false);
+                if (currentChildNode != null && currentChildNode != undefined && currentChildNode.started) {
+                    currentChildNode.started = false;
                 } else {
-                    currentChildNode.setStarted(true);
+                    currentChildNode.started = true;
                 }
                 synchModel();
             });
@@ -94,10 +94,10 @@ $(function () {
 
                         // NodeNetwork must be removed
                         var nodeNetworkToRemove = [];
-                        var nodeNetworks = model.getNodeNetworks();
+                        var nodeNetworks = model.nodeNetworks;
                         for (var i = 0; i < nodeNetworks.$size; i++) {
                             var nodeNetwork = nodeNetworks.get(i);
-                            if (nodeNetwork.getTarget().getName() === childName || nodeNetwork.getInitBy().getName() === childName) {
+                            if (nodeNetwork.target.name === childName || nodeNetwork.initBy.name === childName) {
                                 nodeNetworkToRemove.push(nodeNetwork)
                             }
                         }
@@ -114,22 +114,22 @@ $(function () {
     }
 
     function lookingForIPs(nodeName) {
-        var nodeNetworks = model.getNodeNetworks();
+        var nodeNetworks = model.nodeNetworks;
         var ips = "";
         for (var i = 0; i < nodeNetworks.$size; i++) {
             var nodeNetwork = nodeNetworks.get(i);
-            if (nodeNetwork.getTarget().getName() === nodeName) {
-                var links = nodeNetwork.getLink();
+            if (nodeNetwork.target.name === nodeName) {
+                var links = nodeNetwork.link;
                 for (var j = 0; j < links.$size; j++) {
                     var link = links.get(j);
-                    var networkProperties = link.getNetworkProperties();
+                    var networkProperties = link.networkProperties;
                     for (var k = 0; k < networkProperties.$size; k++) {
                         var networkProperty = networkProperties.get(k);
-                        if (networkProperty.getName() === "KEVOREE.remote.node.ip") {
+                        if (networkProperty.name === "KEVOREE.remote.node.ip") {
                             if (ips === "") {
-                                ips = networkProperty.getValue();
+                                ips = networkProperty.value;
                             } else {
-                                ips = ", " + networkProperty.getValue();
+                                ips = ", " + networkProperty.value;
                             }
                         }
                     }
@@ -183,8 +183,8 @@ $(function () {
         }
         if (currentNode != undefined && paasType != undefined) {
             var newChildNode = factory.createContainerNode();
-            newChildNode.setName("node" + Math.floor((Math.random() * 1000) + 1));
-            newChildNode.setTypeDefinition(paasType);
+            newChildNode.name = "node" + Math.floor((Math.random() * 1000) + 1);
+            newChildNode.typeDefinition = paasType;
             currentNode.addHosts(newChildNode);
             model.addNodes(newChildNode);
             synchModel();
@@ -203,19 +203,19 @@ $(function () {
         }
         if (currentNode != undefined && paasType != undefined) {
             var newChildNode = factory.createContainerNode();
-            newChildNode.setTypeDefinition(paasType);
+            newChildNode.typeDefinition = paasType;
 
             var name = jQuery("#nameInput").get(0).value;
-            newChildNode.setName(name);
+            newChildNode.name = name;
 
             currentNode.addHosts(newChildNode);
             model.addNodes(newChildNode);
 
             var dictionary = factory.createDictionary();
-            var dictionaryType = paasType.getDictionaryType();
+            var dictionaryType = paasType.dictionaryType;
 
-            var dictionaryTypeAttributes = dictionaryType.getAttributes();
-            newChildNode.setDictionary(dictionary);
+            var dictionaryTypeAttributes = dictionaryType.attributes;
+            newChildNode.dictionary = dictionary;
 
 
             jQuery(".control-group").each(function (index, e) {
@@ -225,7 +225,7 @@ $(function () {
                     var dictionaryAttribute;
                     for (var i = 0; i < dictionaryTypeAttributes.size(); i++) {
                         dictionaryAttribute = dictionaryTypeAttributes.get(i);
-                        if (dictionaryAttribute.getName() === id) {
+                        if (dictionaryAttribute.name === id) {
                             break;
                         }
                     }
@@ -243,8 +243,8 @@ $(function () {
                             }
                             if (value != null && value != undefined) {
                                 var dictionaryValue = factory.createDictionaryValue();
-                                dictionaryValue.setValue(value);
-                                dictionaryValue.setAttribute(dictionaryAttribute);
+                                dictionaryValue.value = value;
+                                dictionaryValue.attribute = dictionaryAttribute;
                                 dictionary.addValues(dictionaryValue);
                             }
                         }

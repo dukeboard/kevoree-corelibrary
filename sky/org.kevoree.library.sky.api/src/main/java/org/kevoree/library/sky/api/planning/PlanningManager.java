@@ -11,6 +11,8 @@ import org.kevoree.library.defaultNodeTypes.planning.KevoreeKompareBean;
 import org.kevoree.library.defaultNodeTypes.planning.scheduling.SchedulingWithTopologicalOrderAlgo;
 import org.kevoree.library.sky.api.CloudNode;
 import org.kevoree.log.Log;
+import org.kevoree.modeling.api.trace.ModelAddTrace;
+import org.kevoree.modeling.api.trace.ModelRemoveTrace;
 import org.kevoreeadaptation.AdaptationModel;
 import org.kevoreeadaptation.AdaptationPrimitive;
 import org.kevoreeadaptation.ParallelStep;
@@ -37,20 +39,22 @@ public class PlanningManager extends KevoreeKompareBean {
     }
 
     @Override
-    protected void addInstance(@JetValueParameter(name = "instance") Instance instance, @JetValueParameter(name = "currentNode") ContainerNode currentNode, @JetValueParameter(name = "currentModel") ContainerRoot currentModel, @JetValueParameter(name = "targetModel") ContainerRoot targetModel, @JetValueParameter(name = "adaptationModel") AdaptationModel adaptationModel) {
-        if (instance instanceof ContainerNode) {
-            addNodeInstance((ContainerNode) instance, currentModel, targetModel, adaptationModel);
+    protected void manageModelAddTrace(@JetValueParameter(name = "trace") ModelAddTrace trace, @JetValueParameter(name = "currentNode") ContainerNode currentNode, @JetValueParameter(name = "currentModel") ContainerRoot currentModel, @JetValueParameter(name = "targetNode") ContainerNode targetNode, @JetValueParameter(name = "targetModel") ContainerRoot targetModel, @JetValueParameter(name = "adaptationModel") AdaptationModel adaptationModel) {
+        if (trace.getSrcPath().equals(currentNode.path()) && trace.getRefName().equals("hosts")) {
+            ContainerNode node = targetModel.findByPath(trace.getPreviousPath(), ContainerNode.class);
+            addNodeInstance(node, currentModel, targetModel, adaptationModel);
         } else {
-            super.addInstance(instance, currentNode, currentModel, targetModel, adaptationModel);
+            super.manageModelAddTrace(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel);
         }
     }
 
     @Override
-    protected void removeInstance(@JetValueParameter(name = "instance") Instance instance, @JetValueParameter(name = "currentModel") ContainerRoot currentModel, @JetValueParameter(name = "adaptationModel") AdaptationModel adaptationModel) {
-        if (instance instanceof ContainerNode) {
-            removeNodeInstance((ContainerNode) instance, currentModel, adaptationModel);
+    protected void manageModelRemoveTrace(@JetValueParameter(name = "trace") ModelRemoveTrace trace, @JetValueParameter(name = "currentNode") ContainerNode currentNode, @JetValueParameter(name = "currentModel") ContainerRoot currentModel, @JetValueParameter(name = "targetNode") ContainerNode targetNode, @JetValueParameter(name = "targetModel") ContainerRoot targetModel, @JetValueParameter(name = "adaptationModel") AdaptationModel adaptationModel) {
+        if (trace.getSrcPath().equals(currentNode.path()) &&  trace.getRefName().equals("hosts")) {
+            ContainerNode node = currentModel.findByPath(trace.getObjPath(), ContainerNode.class);
+            removeNodeInstance(node, currentModel, adaptationModel);
         } else {
-            super.removeInstance(instance, currentModel, adaptationModel);
+            super.manageModelRemoveTrace(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel);
         }
     }
 
@@ -126,12 +130,6 @@ public class PlanningManager extends KevoreeKompareBean {
             if (stepToInsert != null && !stepToInsert.getAdaptations().isEmpty()) {
                 insertStep(stepToInsert);
             }
-            /*primitives = scheduling.schedule(primitives, false);
-            for (AdaptationPrimitive primitive : primitives) {
-                List<AdaptationPrimitive> primitiveList = new ArrayList<AdaptationPrimitive>(1);
-                primitiveList.add(primitive);
-                createNextStep(JavaSePrimitive.instance$.getStopInstance(), primitiveList);
-            }*/
 
             // REMOVE BINDINGS
             primitives.clear();
@@ -254,7 +252,6 @@ public class PlanningManager extends KevoreeKompareBean {
             createNextStep(JavaSePrimitive.StartInstance, primitives);
 
             // START INSTANCEs (except child nodes)
-//            ParallelStep oldStep = getCurrentSteps();
             primitives.clear();
             for (AdaptationPrimitive primitive : adaptationModel.getAdaptations()) {
                 if (primitive.getPrimitiveType().getName().equals(JavaSePrimitive.StartInstance) && !(primitive.getRef() instanceof ContainerNode)) {
@@ -265,17 +262,6 @@ public class PlanningManager extends KevoreeKompareBean {
             if (stepToInsert != null && !stepToInsert.getAdaptations().isEmpty()) {
                 insertStep(stepToInsert);
             }
-            /*primitives = scheduling.schedule(primitives, true);
-            for (AdaptationPrimitive primitive : primitives) {
-                List<AdaptationPrimitive> primitiveList = new ArrayList<AdaptationPrimitive>(1);
-                primitiveList.add(primitive);
-                oldStep = getCurrentStep();
-                createNextStep(JavaSePrimitive.instance$.getStartInstance(), primitiveList);
-            }*/
-            // remove empty step at the end
-            /*if (getStep() != null && getStep().getAdaptations().isEmpty()) {
-                oldStep.setNextStep(null);
-            }*/
         } else {
             adaptationModel.setOrderedPrimitiveSet(null);
         }

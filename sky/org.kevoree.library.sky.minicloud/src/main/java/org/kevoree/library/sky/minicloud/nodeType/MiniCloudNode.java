@@ -43,7 +43,7 @@ public class MiniCloudNode extends JavaSENode implements CloudNode, PaaSNode {
 
     private KevoreeNodeManager nodeManager;
 
-    private ScheduledThreadPoolExecutor executor = null;
+    private ScheduledThreadPoolExecutor executor;
 
     @Start
     @Override
