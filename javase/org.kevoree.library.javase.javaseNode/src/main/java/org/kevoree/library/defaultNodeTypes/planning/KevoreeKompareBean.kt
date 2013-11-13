@@ -15,7 +15,6 @@ open class KevoreeKompareBean(registry: Map<String, Any>) : Kompare3(registry), 
 
 //        AdaptationModelPrinter().printAdaptations(adaptationModel)
 
-        //logger.debug("after Hara Kiri detect")
         val afterPlan = schedule(adaptationModel, nodeName)
         return afterPlan
     }
