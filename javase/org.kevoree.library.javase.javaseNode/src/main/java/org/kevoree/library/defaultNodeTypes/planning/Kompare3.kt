@@ -1,103 +1,83 @@
 package org.kevoree.library.defaultNodeTypes.planning
 
-import org.kevoree.ContainerRoot
+import org.kevoree.log.Log
 import org.kevoreeadaptation.AdaptationModel
-import org.kevoree.compare.DefaultModelCompare
+import org.kevoree.ContainerRoot
 import org.kevoreeadaptation.impl.DefaultKevoreeAdaptationFactory
-import org.kevoree.modeling.api.trace.ModelAddTrace
+import org.kevoree.compare.DefaultModelCompare
+import org.kevoree.modeling.api.trace.ModelAddAllTrace
 import org.kevoree.modeling.api.trace.ModelSetTrace
 import org.kevoree.modeling.api.trace.ModelRemoveTrace
-import org.kevoree.Group
-import org.kevoree.Channel
-import org.kevoree.ContainerNode
-import org.kevoree.ComponentInstance
-import org.kevoree.modeling.api.trace.ModelAddAllTrace
+import org.kevoree.modeling.api.trace.ModelAddTrace
 import org.kevoree.modeling.api.trace.ModelRemoveAllTrace
+import org.kevoree.ContainerNode
+import org.kevoree.Channel
+import org.kevoree.Group
 import org.kevoree.Instance
+import java.util.ArrayList
+import org.kevoree.ComponentInstance
+import org.kevoree.DeployUnit
 import org.kevoree.TypeDefinition
 import org.kevoree.MBinding
-import java.util.ArrayList
-import org.kevoree.DeployUnit
 import org.kevoree.modeling.api.util.ModelVisitor
 import org.kevoree.modeling.api.KMFContainer
-import java.util.HashSet
-import org.kevoree.GroupType
-import org.kevoree.ComponentType
 import org.kevoree.ChannelType
+import org.kevoree.ComponentType
+import org.kevoree.GroupType
 import org.kevoree.NodeType
-import org.kevoree.modeling.api.trace.TraceSequence
 
 /**
  * User: Erwan Daubert - erwan.daubert@gmail.com
- * Date: 16/10/13
- * Time: 17:03
+ * Date: 13/11/13
+ * Time: 12:58
  *
  * @author Erwan Daubert
  * @version 1.0
  */
-
 public abstract class Kompare3(val registry: Map<String, Any>) {
 
     private val modelCompare = DefaultModelCompare()
     private val adaptationModelFactory = DefaultKevoreeAdaptationFactory()
 
-    private val updatedInstances = ArrayList<String>()
     private val updatedDictionaryInstances = ArrayList<String>()
-    private val updatedTypeDefinitions = ArrayList<String>()
-    private val alreadyManagedDeployUnit = ArrayList<String>()
-    private val startedInstances = ArrayList<String>()
+    private val alreadyInstalledElement = ArrayList<String>()
+    private val alreadyRemovedElement = ArrayList<String>()
 
-
-    // TODO maybe we must compare the complete model and then filter traces instead of only compare node and doing extra stuff to manage deployUnits, TypeDefinitions, Channels and Groups
-    // TODO maybe we need to generate Update
     open public fun compareModels(currentModel: ContainerRoot, targetModel: ContainerRoot, nodeName: String): AdaptationModel {
-        updatedInstances.clear()
         updatedDictionaryInstances.clear()
-        updatedTypeDefinitions.clear()
-        alreadyManagedDeployUnit.clear()
-        startedInstances.clear()
+        alreadyInstalledElement.clear()
+        alreadyRemovedElement.clear()
 
         val currentNode = currentModel.findNodesByID(nodeName)
         val targetNode = targetModel.findNodesByID(nodeName)
 
         val adaptationModel = adaptationModelFactory.createAdaptationModel()
         if (currentNode != null && targetNode != null) {
-            val traces = modelCompare.diff(currentNode, targetNode)
+            val traces = modelCompare.diff(currentModel, targetModel)
             traces.traces.forEach {
                 trace ->
-                System.out.println(trace)
+                //                System.out.println(trace)
                 if (trace is ModelAddTrace) {
                     manageModelAddTrace(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
                 } else if (trace is ModelRemoveTrace) {
                     manageModelRemoveTrace(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
                 } else if (trace is ModelSetTrace) {
-                    manageModelSetTrace(trace, currentModel, targetModel, adaptationModel)
+                    manageModelSetTrace(trace, currentModel, targetNode, targetModel, adaptationModel)
                 } else if (trace is ModelAddAllTrace) {
-                    //                    System.out.println(trace);
+                    //                    System.out.println(trace)
                 } else if (trace is ModelRemoveAllTrace) {
-                    //                    System.out.println(trace);
+                    //                    System.out.println(trace)
                 }
             }
-            //            var alwaysUsedDeployUnit = HashSet<String>()
-            var alwaysUsedTypeDefinitions = HashSet<String>()
-            var foundDeployUnitsToRemove = HashSet<String>()
-            var foundTypeDefinitionsToRemove = HashSet<String>()
-            var foundChannelsToRemove = HashSet<String>()
-            var foundGroupsToRemove = HashSet<String>()
-            var alwaysUsedChannels = HashSet<String>()
-            var newAddedChannels = HashSet<String>()
-            var alwaysUsedGroups = HashSet<String>()
-            var newAddedGroups = HashSet<String>()
+
+            var foundDeployUnitsToRemove = ArrayList<String>()
+            var foundTypeDefinitionsToRemove = ArrayList<String>()
             currentNode.visit(object : ModelVisitor(){
                 override fun visit(elem: KMFContainer, refNameInParent: String, parent: KMFContainer) {
                     if(elem is DeployUnit){
                         foundDeployUnitsToRemove.add(elem.path()!!)
                     } else if (elem is TypeDefinition) {
                         foundTypeDefinitionsToRemove.add(elem.path()!!)
-                    } else if (elem is Channel) {
-                        foundChannelsToRemove.add(elem.path()!!)
-                    }else if (elem is Group) {
-                        foundGroupsToRemove.add(elem.path()!!)
                     }
                 }
 
@@ -105,112 +85,136 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
             targetNode.visit(object : ModelVisitor(){
                 override fun visit(elem: KMFContainer, refNameInParent: String, parent: KMFContainer) {
                     if(elem is DeployUnit){
-                        /*if (foundDeployUnitsToRemove.remove(elem.path()!!)) {
-                            alwaysUsedDeployUnit.add(elem.path()!!)
-                        }*/
                         foundDeployUnitsToRemove.remove(elem.path()!!)
                     } else if (elem is TypeDefinition) {
-                        if (foundTypeDefinitionsToRemove.remove(elem.path()!!)) {
-                            alwaysUsedTypeDefinitions.add(elem.path()!!)
-                        }
-                    } else if (elem is Channel) {
-                        if (foundChannelsToRemove.remove(elem.path()!!)) {
-                            alwaysUsedChannels.add(elem.path()!!)
-                        } else {
-                            if (elem.bindings.count { b -> (b.port!!.eContainer()!!.eContainer()!! as ContainerNode).name.equals(targetNode.name) } > 0) {
-                                newAddedChannels.add(elem.path()!!)
-                            }
-                        }
-                    } else if (elem is Group) {
-                        if (foundGroupsToRemove.remove(elem.path()!!)) {
-                            alwaysUsedGroups.add(elem.path()!!)
-                        } else {
-                            if (elem.subNodes.contains(targetNode)) {
-                                newAddedGroups.add(elem.path()!!)
-                            }
-                        }
+                        foundTypeDefinitionsToRemove.remove(elem.path()!!)
                     }
                 }
-
             }, true, true, true)
-            //            checkUpdateOfDeployUnit(alwaysUsedDeployUnit, currentNode, currentModel, targetNode, targetModel, adaptationModel)
-            checkUpdateOfTypeDefinitions(alwaysUsedTypeDefinitions, currentNode, currentModel, targetNode, targetModel, adaptationModel)
-            checkAddOrUpdateOfChannels(alwaysUsedChannels, currentNode, currentModel, targetNode, targetModel, adaptationModel)
-            checkAddOrUpdateOfGroups(alwaysUsedGroups, currentNode, currentModel, targetNode, targetModel, adaptationModel)
-            dropChannels(foundChannelsToRemove, currentNode, currentModel, adaptationModel)
-            dropGroups(foundGroupsToRemove, currentNode, currentModel, adaptationModel)
             dropTypeDefinitions(foundTypeDefinitionsToRemove, currentModel, adaptationModel)
             dropDeployUnits(foundDeployUnitsToRemove, currentModel, adaptationModel)
-            checkAddOrUpdateOfChannels(newAddedChannels, currentNode, currentModel, targetNode, targetModel, adaptationModel)
-            checkAddOrUpdateOfGroups(newAddedGroups, currentNode, currentModel, targetNode, targetModel, adaptationModel)
-
         } else {
-            // Because Kevoree core does not provide an updated model during bootstrap (or unboostrap but only an empty model as the current (or target) one
-            // should be better if the Kevoree core always give us a good current (or target) model !!
+            Log.warn("One of the model doesn't contain the local node: (currentNode = {}, tagretNode = {}", currentNode, targetNode)
         }
-
         return adaptationModel
     }
 
     protected open fun manageModelAddTrace(trace: ModelAddTrace, currentNode: ContainerNode, currentModel: ContainerRoot, targetNode: ContainerNode, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        //        System.out.println(trace);
-        if ((trace.typeName != null && (/*trace.typeName.equalsIgnoreCase(javaClass<Group>().getName())
-        || trace.typeName.equals(javaClass<Channel>().getName())
-        || */trace.typeName.equals(javaClass<ComponentInstance>().getName())
-        || trace.typeName.equals(javaClass<ContainerNode>().getName())))) {
-            // Add instance
-            addInstance(targetModel.findByPath(trace.previousPath!!, javaClass<Instance>())!!, currentNode, currentModel, targetModel, adaptationModel)
-        } else if (trace.refName.equalsIgnoreCase("bindings")) {
-            val binding = targetModel.findByPath(trace.previousPath!!, javaClass<MBinding>())!!
-            if ((binding.port!!.eContainer()!!.eContainer() as ContainerNode) == targetNode) {
-                // Add Binding
-                addBinding(binding, currentNode, currentModel, targetModel, adaptationModel)
-            } else if (binding.hub!!.bindings.find { mb -> mb.port!!.eContainer()!!.eContainer() == targetNode} != null) {
-                // Add FragmentBinding
-                addFragmentBinding(binding, (binding.port!!.eContainer()!!.eContainer() as ContainerNode).name!!, currentModel, adaptationModel)
+        if (trace.srcPath.equals(currentNode.path()!!)) {
+            manageModelAddTraceForNode(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
+        } else if (trace.srcPath.equals("")){
+            val element = targetModel.findByPath(trace.previousPath!!)
+            if (element is Channel) {
+                if (element.bindings.find { binding -> binding.port!!.eContainer()!!.eContainer() == targetNode } != null) {
+                    manageModelAddTraceForNode(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
+                }
+            } else if (element is MBinding) {
+                if (element.port!!.eContainer()!!.eContainer() == targetNode) {
+                    manageModelAddTraceForNode(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
+                }
             }
-        } else if (trace.srcPath.toLowerCase().startsWith("typedefinitions[") && trace.refName.equalsIgnoreCase("deployUnits")) {
-            val deployUnit = targetModel.findByPath(trace.previousPath!!, javaClass<DeployUnit>())!!
-            if (deployUnit.targetNodeType!!.path()!!.equals(targetNode.typeDefinition!!.path()!!)) {
-                updateTypeDefinition(targetModel.findByPath(trace.srcPath, javaClass<TypeDefinition>())!!, currentNode, currentModel, targetNode, targetModel, adaptationModel)
+        } else {
+            val srcElement = targetModel.findByPath(trace.srcPath)
+            val element = targetModel.findByPath(trace.previousPath!!)
+            if (element is ContainerNode && element == targetNode) {
+                manageModelAddTraceForNode(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
+            } else if (srcElement is TypeDefinition) {
+                updateTypeDefinition(srcElement, currentNode, currentModel, targetNode, targetModel, adaptationModel)
             }
-        } else if (/*trace.refName.equalsIgnoreCase("groups") ||*/ (trace.refName.equalsIgnoreCase("subNodes") && currentNode.path()!!.equals(trace.previousPath))) {
-            val instance = targetModel.findByPath(trace.srcPath, javaClass<Instance>())!!
-            // add the group instance
-            addInstance(instance, currentNode, currentModel, targetModel, adaptationModel)
-            if (instance.started!!) {
-                // start the group instance if needed
-                startInstance(instance, currentModel, adaptationModel)
+        }
+    }
+
+    protected open fun manageModelAddTraceForNode(trace: ModelAddTrace, currentNode: ContainerNode, currentModel: ContainerRoot, targetNode: ContainerNode, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
+        if (trace.typeName != null) {
+            if (/*trace.typeName.equalsIgnoreCase(javaClass<Group>().getName())
+            || */trace.typeName.equals(javaClass<Channel>().getName())
+            || trace.typeName.equals(javaClass<ComponentInstance>().getName())
+            || trace.typeName.equals(javaClass<ContainerNode>().getName())) {
+                // Add instance
+                addInstance(targetModel.findByPath(trace.previousPath!!, javaClass<Instance>())!!, currentNode, currentModel, targetModel, adaptationModel)
+            } else if (trace.typeName.equalsIgnoreCase(javaClass<MBinding>().getName())) {
+                // Add MBinding
+                addBinding(targetModel.findByPath(trace.previousPath!!, javaClass<MBinding>())!!, currentNode, currentModel, targetNode, targetModel, adaptationModel)
             }
-            // update the group instance to set the attributes
-            updateDictionary(instance, currentModel, adaptationModel)
+        } else {
+            val srcElement = targetModel.findByPath(trace.srcPath)
+            val srcGroup = targetModel.findByPath(trace.srcPath)
+            val subNode = targetModel.findByPath(trace.previousPath!!)
+            if (srcGroup != null && srcGroup is Group && subNode != null && subNode is ContainerNode && subNode == targetNode) {
+                // Add Group
+                addInstance(srcGroup, currentNode, currentModel, targetModel, adaptationModel)
+            } else if (srcElement is TypeDefinition) {
+                updateTypeDefinition(srcElement, currentNode, currentModel, targetNode, targetModel, adaptationModel)
+            }
         }
     }
 
     protected open fun manageModelRemoveTrace(trace: ModelRemoveTrace, currentNode: ContainerNode, currentModel: ContainerRoot, targetNode: ContainerNode, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        //                    System.out.println(trace);
-        val element = currentModel.findByPath(trace.objPath)
-        val newElement = targetModel.findByPath(trace.objPath)
-
-        if (element != null && (element is Group || element is Channel || element is ComponentInstance || element is ContainerNode)) {
-            removeInstance(element as Instance, currentModel, adaptationModel)
-        }  else if (trace.refName.equals("bindings")) {
-            val binding = element as MBinding
-            val targetChannel = targetNode.findByPath(binding.hub!!.path()!!, javaClass<Channel>())
-            if ((binding.port!!.eContainer()!!.eContainer() as ContainerNode) == currentNode) {
-                // Remove Binding
-                removeBinding(element as MBinding, currentModel, adaptationModel)
-            } else if ((targetChannel == null && binding.hub!!.bindings.find { mb -> mb.port!!.eContainer()!!.eContainer() == currentNode} != null)
-            || (targetChannel != null && targetChannel.bindings.find { mb -> mb.port!!.eContainer()!!.eContainer() == targetNode} != null)) {
-                // Remove FragmentBinding
-                removeFragmentBinding(binding, (binding.port!!.eContainer()!!.eContainer() as ContainerNode).name!!, currentModel, adaptationModel)
+        if (trace.srcPath.equals(currentNode.path()!!)) {
+            manageModelRemoveTraceForNode(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
+        } else if (trace.srcPath.equals("")){
+            val element = targetModel.findByPath(trace.objPath)
+            if (element is Channel) {
+                if (element.bindings.find { binding -> binding.port!!.eContainer()!!.eContainer() == targetNode } != null) {
+                    manageModelRemoveTraceForNode(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
+                }
+            } else if (element is MBinding) {
+                if (element.port!!.eContainer()!!.eContainer() == targetNode) {
+                    manageModelRemoveTraceForNode(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
+                }
             }
-
+        } else {
+            val element = targetModel.findByPath(trace.objPath)
+            if (element is ContainerNode && element == targetNode) {
+                manageModelRemoveTraceForNode(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
+            }
         }
     }
 
-    protected open fun manageModelSetTrace(trace: ModelSetTrace, currentModel: ContainerRoot, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        //                    System.out.println(trace);
+    protected open fun manageModelRemoveTraceForNode(trace: ModelRemoveTrace, currentNode: ContainerNode, currentModel: ContainerRoot, targetNode: ContainerNode, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
+        val element = currentModel.findByPath(trace.objPath)
+        if (/*element is Group || */element is Channel || element is ComponentInstance || element is ContainerNode) {
+            removeInstance(element as Instance, currentModel, adaptationModel)
+        }  else if (element is MBinding) {
+            if ((element.port!!.eContainer()!!.eContainer() as ContainerNode) == currentNode) {
+                // Remove Binding
+                removeBinding(element, currentNode, currentModel, targetNode, targetModel, adaptationModel)
+            }
+
+        }else {
+            val srcGroup = targetModel.findByPath(trace.srcPath)
+            val subNode = targetModel.findByPath(trace.objPath!!)
+            if (srcGroup != null && srcGroup is Group && subNode != null && subNode is ContainerNode && subNode == targetNode) {
+                // remove Group
+                removeInstance(srcGroup, currentModel, adaptationModel)
+            }
+        }
+    }
+
+    protected open fun manageModelSetTrace(trace: ModelSetTrace, currentModel: ContainerRoot, targetNode: ContainerNode, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
+        //        val currentElement = currentModel.findByPath(trace.srcPath)
+        val targetElement = targetModel.findByPath(trace.srcPath)
+
+        if (/*currentElement is Channel || */targetElement is Channel) {
+            if ((targetElement as Channel).bindings.find { binding -> binding.port!!.eContainer()!!.eContainer() == targetNode } != null) {
+                manageModelSetTraceForNode(trace, currentModel, targetModel, adaptationModel)
+            }
+        } else if (/*currentElement is Group || */targetElement is Group) {
+            if ((targetElement as Group).subNodes.contains(targetNode)) {
+                manageModelSetTraceForNode(trace, currentModel, targetModel, adaptationModel)
+            }
+        } else if (/*currentElement is ComponentInstance || */targetElement is ComponentInstance) {
+            if ((targetElement as ComponentInstance).eContainer() == targetNode) {
+                manageModelSetTraceForNode(trace, currentModel, targetModel, adaptationModel)
+            }
+        } else if (/*currentElement is ContainerNode || */targetElement is ContainerNode) {
+            if ((targetElement as ContainerNode).host == targetNode) {
+                manageModelSetTraceForNode(trace, currentModel, targetModel, adaptationModel)
+            }
+        }
+    }
+
+    protected open fun manageModelSetTraceForNode(trace: ModelSetTrace, currentModel: ContainerRoot, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
         if (trace.refName.equals("started")) {
             if (trace.content.equals("true")) {
                 startInstance(targetModel.findByPath(trace.srcPath, javaClass<Instance>())!!, currentModel, adaptationModel)
@@ -225,204 +229,22 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
             }
         } else if (trace.refName.equals("value")) {
             updateDictionary(targetModel.findByPath(trace.srcPath)!!.eContainer()!!.eContainer() as Instance, currentModel, adaptationModel)
-        } else {
-            //            System.out.println(trace)
         }
     }
 
-    /*fun checkUpdateOfDeployUnit(alwaysUsedTypeDefinition: HashSet<String>, currentNode : ContainerNode, currentModel: ContainerRoot, targetNode : ContainerNode, targetModel: ContainerRoot, adaptationModel : AdaptationModel) {
-        alwaysUsedDeployUnit.forEach {
-            deployUnitPath ->
-            val currentDeployUnit = currentModel.findByPath(deployUnitPath, javaClass<DeployUnit>())
-            val targetDeployUnit = targetModel.findByPath(deployUnitPath, javaClass<DeployUnit>())
-
-            if (currentDeployUnit != null && targetDeployUnit != null) {
-                val traces = modelCompare.diff(currentDeployUnit, targetDeployUnit)
-                traces.traces.forEach {
-                    trace ->
-                    //                    System.out.println(trace)
-                    // there is never update of deployUnit because at least the hashcode changes and so the id of the deployUnit is always new
-                }
-            }
-        }
-    }*/
-
-    protected open fun checkUpdateOfTypeDefinitions(alwaysUsedTypeDefinitions: HashSet<String>, currentNode: ContainerNode, currentModel: ContainerRoot, targetNode: ContainerNode, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        alwaysUsedTypeDefinitions.forEach {
-            typeDefinitionPath ->
-            if (!updatedTypeDefinitions.contains(typeDefinitionPath)) {
-                val currentTypeDefinition = currentModel.findByPath(typeDefinitionPath, javaClass<TypeDefinition>())
-                val targetTypeDefinition = targetModel.findByPath(typeDefinitionPath, javaClass<TypeDefinition>())
-
-                if (currentTypeDefinition != null && targetTypeDefinition != null) {
-                    val traces = modelCompare.diff(currentTypeDefinition, targetTypeDefinition)
-                    traces.traces.forEach {
-                        trace ->
-                        //                        System.out.println(trace)
-                        if (trace is ModelAddTrace) {
-                            manageModelAddTrace(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
-                        } else if (trace is ModelRemoveTrace) {
-                            manageModelRemoveTrace(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
-                        } else if (trace is ModelSetTrace) {
-                            manageModelSetTrace(trace, currentModel, targetModel, adaptationModel)
-                        } else if (trace is ModelAddAllTrace) {
-                            //                    System.out.println(trace);
-                        } else if (trace is ModelRemoveAllTrace) {
-                            //                    System.out.println(trace);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    protected open fun checkAddOrUpdateOfChannels(channels: HashSet<String>, currentNode: ContainerNode, currentModel: ContainerRoot, targetNode: ContainerNode, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        channels.forEach {
-            channelPath ->
-            //            if (!updatedInstances.contains(channelPath)) {
-            val currentChannel = currentModel.findByPath(channelPath, javaClass<Channel>())
-            val targetChannel = targetModel.findByPath(channelPath, javaClass<Channel>())
-
-            var traces: TraceSequence? = null
-            if (currentChannel == null && targetChannel != null) {
-                traces = modelCompare.inter(targetChannel, targetChannel)
-            }
-
-
-            if (currentChannel != null && targetChannel != null) {
-                traces = modelCompare.diff(currentChannel, targetChannel)
-            }
-
-            if (traces != null && traces!!.traces.size() > 0) {
-                traces!!.traces.forEach {
-                    trace ->
-                    //                    System.out.println(trace);
-                    if (trace is ModelAddTrace) {
-                        // manage addFragmentBinding and addBinding
-                        manageModelAddTrace(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
-                    } else if (trace is ModelRemoveTrace) {
-                        // manage RemoveFragmentBinding and removeFragmentBinding
-                        manageModelRemoveTrace(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
-                    } else if (trace is ModelSetTrace) {
-                        manageModelSetTrace(trace, currentModel, targetModel, adaptationModel)
-                    } else if (trace is ModelAddAllTrace) {
-                        //                    System.out.println(trace);
-                    } else if (trace is ModelRemoveAllTrace) {
-                        //                    System.out.println(trace);
-                    }
-                }
-            }
-        }
-        //        }
-    }
-
-    protected open fun checkAddOrUpdateOfGroups(alwaysUsedGroups: HashSet<String>, currentNode: ContainerNode, currentModel: ContainerRoot, targetNode: ContainerNode, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        alwaysUsedGroups.forEach {
-            groupPath ->
-            if (!updatedInstances.contains(groupPath)) {
-                val currentGroup = currentModel.findByPath(groupPath, javaClass<Group>())
-                val targetGroup = targetModel.findByPath(groupPath, javaClass<Group>())
-
-
-                var traces: TraceSequence? = null
-                if (currentGroup == null && targetGroup != null) {
-                    traces = modelCompare.inter(targetGroup, targetGroup)
-                    traces!!.traces.forEach {
-                        trace ->
-                        //                        System.out.println(trace);
-                        if (trace is ModelAddTrace) {
-                            // manage addFragmentBinding and addBinding
-                            manageModelAddTrace(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
-                        } else if (trace is ModelRemoveTrace) {
-                            // manage RemoveFragmentBinding and removeFragmentBinding
-                            manageModelRemoveTrace(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
-                        } else if (trace is ModelSetTrace) {
-                            //                            manageModelSetTrace(trace, currentModel, targetModel, adaptationModel)
-                        } else if (trace is ModelAddAllTrace) {
-                            //                    System.out.println(trace);
-                        } else if (trace is ModelRemoveAllTrace) {
-                            //                    System.out.println(trace);
-                        }
-                    }
-                }
-                if (currentGroup != null && targetGroup != null) {
-                    val traces = modelCompare.diff(currentGroup, targetGroup)
-                    traces.traces.forEach {
-                        trace ->
-                        //                        System.out.println(trace)
-                        /*if (trace is ModelAddTrace) {
-                            manageModelAddTrace(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
-                        } else if (trace is ModelRemoveTrace) {
-                            manageModelRemoveTrace(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
-                        } else */if (trace is ModelSetTrace) {
-                        manageModelSetTrace(trace, currentModel, targetModel, adaptationModel)
-                    }/* else if (trace is ModelAddAllTrace) {
-                            //                    System.out.println(trace);
-                        } else if (trace is ModelRemoveAllTrace) {
-                            //                    System.out.println(trace);
-                        }*/
-                    }
-                }
-            }
-        }
-    }
-
-    protected open fun dropChannels(foundChannelsToRemove: HashSet<String>, currentNode : ContainerNode, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        System.out.println("DROP CHANNELS");
-        // Remove channels that are not used anymore in the target model
-        foundChannelsToRemove.forEach {
-            channelPath ->
-            val channel = currentModel.findByPath(channelPath, javaClass<Channel>())
-            if (channel != null && channel.bindings.find { binding -> binding.port!!.eContainer()!!.eContainer() ==  currentNode} != null) {
-                removeInstance(channel, currentModel, adaptationModel)
-            }
-        }
-    }
-
-    protected open fun dropGroups(foundGroupsToRemove: HashSet<String>, currentNode : ContainerNode, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        // Remove groups that are not used anymore in the target model
-        foundGroupsToRemove.forEach {
-            groupPath ->
-            val group = currentModel.findByPath(groupPath, javaClass<Group>())
-            if (group != null && group.subNodes.contains(currentNode)) {
-                removeInstance(group, currentModel, adaptationModel)
-            }
-        }
-    }
-
-    protected open fun dropTypeDefinitions(foundTypeDefinitionsToRemove: HashSet<String>, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
+    protected open fun dropTypeDefinitions(foundTypeDefinitionsToRemove: ArrayList<String>, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
         // Remove TypeDefinitions that are not used anymore in the target model
         foundTypeDefinitionsToRemove.forEach {
             typeDefinitionPath ->
-            val typeDefinition = currentModel.findByPath(typeDefinitionPath, javaClass<TypeDefinition>())
-            if (typeDefinition != null) {
-                removeTypeDefinition(typeDefinition, currentModel, adaptationModel)
-            }
+            removeTypeDefinition(currentModel.findByPath(typeDefinitionPath, javaClass<TypeDefinition>())!!, currentModel, adaptationModel)
         }
     }
 
-    protected open fun dropDeployUnits(foundDeployUnitsToRemove: HashSet<String>, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
+    protected open fun dropDeployUnits(foundDeployUnitsToRemove: ArrayList<String>, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
         // Remove DeployUnits that are not used anymore in the target model
         foundDeployUnitsToRemove.forEach {
             deployUnitPath ->
-            val deployUnit = currentModel.findByPath(deployUnitPath, javaClass<DeployUnit>())
-            if (deployUnit != null) {
-                removeDeployUnit(deployUnit, currentModel, adaptationModel)
-            }
-        }
-    }
-
-    protected open fun addGroups(foundGroupsToAdd: HashSet<String>, currentNode: ContainerNode, currentModel: ContainerRoot, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        // Add groups that are new in the target model
-        foundGroupsToAdd.forEach {
-            groupPath ->
-            val group = targetModel.findByPath(groupPath, javaClass<Group>())
-            if (group != null) {
-                addInstance(group, currentNode, currentModel, targetModel, adaptationModel)
-                if (group.started!!) {
-                    startInstance(group, currentModel, adaptationModel)
-                }
-            }
+            removeDeployUnit(currentModel.findByPath(deployUnitPath, javaClass<DeployUnit>())!!, currentModel, adaptationModel)
         }
     }
 
@@ -435,17 +257,15 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
             adaptationModel.addAdaptations(ccmd)
             updatedDictionaryInstances.add(instance.path()!!)
         }
+
     }
 
     protected open fun startInstance(instance: Instance, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        if (!startedInstances.contains(instance.path()!!)) {
-            // Start instance
-            val ccmd = adaptationModelFactory.createAdaptationPrimitive()
-            ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.StartInstance)
-            ccmd.ref = instance
-            adaptationModel.addAdaptations(ccmd)
-            startedInstances.add(instance.path()!!)
-        }
+        // Start instance
+        val ccmd = adaptationModelFactory.createAdaptationPrimitive()
+        ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.StartInstance)
+        ccmd.ref = instance
+        adaptationModel.addAdaptations(ccmd)
     }
 
     protected open fun stopInstance(instance: Instance, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
@@ -453,46 +273,6 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
         val ccmd = adaptationModelFactory.createAdaptationPrimitive()
         ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.StopInstance)
         ccmd.ref = instance
-        adaptationModel.addAdaptations(ccmd)
-    }
-
-    protected open fun addBinding(element: MBinding, currentNode: ContainerNode, currentModel: ContainerRoot, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        val ccmd = adaptationModelFactory.createAdaptationPrimitive()
-        ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.AddBinding)
-        ccmd.ref = element
-        adaptationModel.addAdaptations(ccmd)
-
-        if (registry.get(element.hub!!.path()) == null) {
-            addInstance(element.hub!!, currentNode, currentModel, targetModel, adaptationModel)
-            val channel = targetModel.findByPath(element.hub!!.path()!!, javaClass<Instance>())
-            if (channel != null && channel.started!!) {
-                startInstance(channel, currentModel, adaptationModel)
-            }
-        }
-    }
-
-    protected open fun addFragmentBinding(binding: MBinding, remoteNodeName: String, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        val ccmd = adaptationModelFactory.createAdaptationPrimitive()
-        ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.AddFragmentBinding)
-        ccmd.ref = binding.hub
-        ccmd.targetNodeName = remoteNodeName
-        adaptationModel.addAdaptations(ccmd)
-    }
-
-    protected open fun removeBinding(element: MBinding, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        val ccmd = adaptationModelFactory.createAdaptationPrimitive()
-        ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.RemoveBinding)
-        ccmd.ref = element
-        adaptationModel.addAdaptations(ccmd)
-
-        // channel connected to this binding will be removed if it doesn't appear anymore in the channels connected to one of the components available on the currentNode (see dropChannelAndTypeDefinitionAndDeployUnit)
-    }
-
-    protected open fun removeFragmentBinding(binding: MBinding, remoteNodeName: String, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        val ccmd = adaptationModelFactory.createAdaptationPrimitive()
-        ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.RemoveFragmentBinding)
-        ccmd.ref = binding.hub
-        ccmd.targetNodeName = remoteNodeName
         adaptationModel.addAdaptations(ccmd)
     }
 
@@ -505,20 +285,74 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
 
         updateDictionary(instance, currentModel, adaptationModel)
 
-        if (!updatedTypeDefinitions.contains(instance.typeDefinition!!.path()!!) && registry.get(targetModel.findTypeDefinitionsByID(instance.typeDefinition!!.path()!!)) == null) {
+        if (registry.get(targetModel.findTypeDefinitionsByID(instance.typeDefinition!!.path()!!)) == null) {
             // Add TypeDefinition
             addTypeDefinition(instance.typeDefinition!!, currentNode, currentModel, targetModel, adaptationModel)
         }
     }
 
-    protected open fun updateInstance(instance: Instance, currentNode: ContainerNode, currentModel: ContainerRoot, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        if (!updatedInstances.contains(instance.path()!!)) {
-            stopInstance(instance, currentModel, adaptationModel)
-            startInstance(instance, currentModel, adaptationModel)
-            removeInstance(instance, currentModel, adaptationModel)
-            addInstance(instance, currentNode, currentModel, targetModel, adaptationModel)
-            updateDictionary(instance, currentModel, adaptationModel)
-            updatedInstances.add(instance.path()!!)
+    protected open fun addTypeDefinition(typeDefinition: TypeDefinition, currentNode: ContainerNode, currentModel: ContainerRoot, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
+        if (!alreadyInstalledElement.contains(typeDefinition.path()!!)) {
+            // Add TypeDefinition
+            val ccmd = adaptationModelFactory.createAdaptationPrimitive()
+            ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.AddType)
+            ccmd.ref = typeDefinition
+            adaptationModel.addAdaptations(ccmd)
+            alreadyInstalledElement.add(typeDefinition.path()!!)
+
+            // Add DeployUnit(s)
+            val deployUnits = typeDefinition.deployUnits.filter {
+                deployUnit ->
+                inheritedFrom(deployUnit.targetNodeType!!, currentNode.typeDefinition!!) && registry.get(deployUnit.path()!!) == null
+            }
+            deployUnits.forEach {
+                deployUnit ->
+                addDeployUnit(deployUnit, currentModel, targetModel, adaptationModel)
+            }
+        }
+    }
+
+    private fun inheritedFrom(targetNodeType: TypeDefinition, curentTargetNodeType: TypeDefinition): Boolean {
+        return targetNodeType.path()!!.equals(curentTargetNodeType.path()!!) || curentTargetNodeType.superTypes.find { superType -> inheritedFrom(targetNodeType, superType) } != null
+    }
+
+    protected open fun addDeployUnit(deployUnit: DeployUnit, currentModel: ContainerRoot, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
+        if (!alreadyInstalledElement.contains(deployUnit.path()!!)) {
+            val ccmd = adaptationModelFactory.createAdaptationPrimitive()
+            ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.AddDeployUnit)
+            ccmd.ref = deployUnit
+            adaptationModel.addAdaptations(ccmd)
+            alreadyInstalledElement.add(deployUnit.path()!!)
+
+            deployUnit.requiredLibs.forEach {
+                requiredLib ->
+                if (registry.get(requiredLib) == null) {
+                    addDeployUnit(requiredLib, currentModel, targetModel, adaptationModel)
+                }
+            }
+        }
+    }
+
+    protected open fun addBinding(binding: MBinding, currentNode: ContainerNode, currentModel: ContainerRoot, targetNode: ContainerNode, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
+        val ccmd = adaptationModelFactory.createAdaptationPrimitive()
+        ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.AddBinding)
+        ccmd.ref = binding
+        adaptationModel.addAdaptations(ccmd)
+
+        val remoteBindings = binding.hub!!.bindings.filter { remoteBinding -> remoteBinding.port!!.eContainer()!!.eContainer() != targetNode }
+        if (remoteBindings.size > 0) {
+            remoteBindings.forEach { remoteBinding -> addFragmentBinding(binding.hub!!, (remoteBinding.port!!.eContainer()!!.eContainer()!! as ContainerNode).name!!, currentModel, adaptationModel) }
+        }
+    }
+
+    protected open fun addFragmentBinding(channel: Channel, remoteNodeName: String, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
+        if (!alreadyInstalledElement.contains(channel.path()!! + "@" + remoteNodeName)) {
+            val ccmd = adaptationModelFactory.createAdaptationPrimitive()
+            ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.AddFragmentBinding)
+            ccmd.ref = channel
+            ccmd.targetNodeName = remoteNodeName
+            adaptationModel.addAdaptations(ccmd)
+            alreadyInstalledElement.add(channel.path()!! + "@" + remoteNodeName)
         }
     }
 
@@ -529,44 +363,72 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
         ccmd.ref = instance
         adaptationModel.addAdaptations(ccmd)
 
+        // stop instance if needed
         if (instance.started!!) {
-            // Stop instance
             stopInstance(instance, currentModel, adaptationModel)
         }
 
-        // typeDefinition connected to this instance will be removed if it doesn't appear anymore in the typeDefinitions used by one of the components available on the currentNode (see dropChannelAndTypeDefinitionAndDeployUnit)
     }
 
-    protected open fun addTypeDefinition(typeDefinition: TypeDefinition, currentNode: ContainerNode, currentModel: ContainerRoot, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        // Add TypeDefinition
+    protected open fun removeBinding(binding: MBinding, currentNode: ContainerNode, currentModel: ContainerRoot, targetNode: ContainerNode, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
         val ccmd = adaptationModelFactory.createAdaptationPrimitive()
-        ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.AddType)
+        ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.RemoveBinding)
+        ccmd.ref = binding
+        adaptationModel.addAdaptations(ccmd)
+
+        val currentRemoteBindings = binding.hub!!.bindings.filter { remoteBinding -> remoteBinding.port!!.eContainer()!!.eContainer() != currentNode }
+        val targetChannel = targetModel.findByPath(binding.hub!!.path()!!, javaClass<Channel>())
+        if (targetChannel == null) {
+            currentRemoteBindings.forEach { remoteBinding -> removeFragmentBinding(binding.hub!!, (remoteBinding.port!!.eContainer()!!.eContainer()!! as ContainerNode).name!!, currentModel, adaptationModel) }
+            removeInstance(binding.hub!!, currentModel, adaptationModel)
+        } else {
+            val localBinding = targetChannel.bindings.find { localBinding -> localBinding.port!!.eContainer()!!.eContainer() == targetNode }
+            if (localBinding == null) {
+                currentRemoteBindings.forEach { remoteBinding -> removeFragmentBinding(binding.hub!!, (remoteBinding.port!!.eContainer()!!.eContainer()!! as ContainerNode).name!!, currentModel, adaptationModel) }
+                removeInstance(binding.hub!!, currentModel, adaptationModel)
+            }
+        }
+    }
+
+    protected open fun removeFragmentBinding(channel: Channel, remoteNodeName: String, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
+        val ccmd = adaptationModelFactory.createAdaptationPrimitive()
+        ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.RemoveFragmentBinding)
+        ccmd.ref = channel
+        ccmd.targetNodeName = remoteNodeName
+        adaptationModel.addAdaptations(ccmd)
+    }
+
+    protected open fun removeTypeDefinition(typeDefinition: TypeDefinition, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
+        // remove TypeDefinition
+        val ccmd = adaptationModelFactory.createAdaptationPrimitive()
+        ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.RemoveType)
         ccmd.ref = typeDefinition
         adaptationModel.addAdaptations(ccmd)
 
-        // Add DeployUnit(s)
-        val deployUnits = typeDefinition.deployUnits.filter {
-            deployUnit ->
-            inheritedFrom(deployUnit.targetNodeType!!, currentNode.typeDefinition!!) && registry.get(deployUnit.path()!!) == null
-        }
-        deployUnits.forEach {
-            deployUnit ->
-            addDeployUnit(deployUnit, currentModel, targetModel, adaptationModel)
-        }
+        // deployUnits connected to this typeDefinition will be removed if they don't appear anymore in the deployUnits used by one of the typeDefinition available on the currentNode (see dropTypeDefinitions)
     }
 
+    protected open fun removeDeployUnit(deployUnit: DeployUnit, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
+        val ccmd = adaptationModelFactory.createAdaptationPrimitive()
+        ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.RemoveDeployUnit)
+        ccmd.ref = deployUnit
+        adaptationModel.addAdaptations(ccmd)
 
-    private open fun inheritedFrom(targetNodeType: TypeDefinition, curentTargetNodeType: TypeDefinition): Boolean {
-        return targetNodeType.path()!!.equals(curentTargetNodeType.path()!!) || curentTargetNodeType.superTypes.find { superType -> inheritedFrom(targetNodeType, superType) } != null
+        // deployUnits connected to this deployUnit will be removed if they don't appear anymore in the deployUnits used by one of the typeDefinition available on the currentNode (see dropDeployUnits)
     }
 
     protected open fun updateTypeDefinition(typeDefinition: TypeDefinition, currentNode: ContainerNode, currentModel: ContainerRoot, targetNode: ContainerNode, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        if (!updatedTypeDefinitions.contains(typeDefinition.path()!!)) {
+        if (!alreadyInstalledElement.contains(typeDefinition.path()!!) || !alreadyRemovedElement.contains(typeDefinition.path()!!)) {
             val typeDefinitionToRemove = currentModel.findByPath(typeDefinition.path()!!, javaClass<TypeDefinition>())!!
             val typeDefinitionToAdd = targetModel.findByPath(typeDefinition.path()!!, javaClass<TypeDefinition>())!!
-            removeTypeDefinition(typeDefinitionToRemove, currentModel, adaptationModel)
-            addTypeDefinition(typeDefinitionToAdd, currentNode, currentModel, targetModel, adaptationModel)
-            updatedTypeDefinitions.add(typeDefinition.path()!!)
+            if (!alreadyInstalledElement.contains(typeDefinition.path()!!)) {
+                addTypeDefinition(typeDefinitionToAdd, currentNode, currentModel, targetModel, adaptationModel)
+                alreadyInstalledElement.add(typeDefinition.path()!!)
+            }
+            if (!alreadyRemovedElement.contains(typeDefinition.path()!!)) {
+                removeTypeDefinition(typeDefinitionToRemove, currentModel, adaptationModel)
+                alreadyRemovedElement.add(typeDefinition.path()!!)
+            }
 
             // check all instances to update them
             if (typeDefinition is ChannelType) {
@@ -602,43 +464,14 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
                     }
                 }, false, false, true)
             }
-
         }
     }
 
-    protected open fun removeTypeDefinition(typeDefinition: TypeDefinition, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        // remove TypeDefinition
-        val ccmd = adaptationModelFactory.createAdaptationPrimitive()
-        ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.RemoveType)
-        ccmd.ref = typeDefinition
-        adaptationModel.addAdaptations(ccmd)
-
-        // deployUnits connected to this typeDefinition will be removed if they don't appear anymore in the deployUnits used by one of the typeDefinition available on the currentNode (see dropTypeDefinitions)
-    }
-
-    protected open fun addDeployUnit(deployUnit: DeployUnit, currentModel: ContainerRoot, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        if (!alreadyManagedDeployUnit.contains(deployUnit.path()!!)) {
-            val ccmd = adaptationModelFactory.createAdaptationPrimitive()
-            ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.AddDeployUnit)
-            ccmd.ref = deployUnit
-            adaptationModel.addAdaptations(ccmd)
-            alreadyManagedDeployUnit.add(deployUnit.path()!!)
-
-            deployUnit.requiredLibs.forEach {
-                requiredLib ->
-                if (registry.get(requiredLib) == null) {
-                    addDeployUnit(requiredLib, currentModel, targetModel, adaptationModel)
-                }
-            }
-        }
-    }
-
-    protected open fun removeDeployUnit(deployUnit: DeployUnit, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        val ccmd = adaptationModelFactory.createAdaptationPrimitive()
-        ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.RemoveDeployUnit)
-        ccmd.ref = deployUnit
-        adaptationModel.addAdaptations(ccmd)
-
-        // deployUnits connected to this deployUnit will be removed if they don't appear anymore in the deployUnits used by one of the typeDefinition available on the currentNode (see dropDeployUnits)
+    protected open fun updateInstance(instance: Instance, currentNode: ContainerNode, currentModel: ContainerRoot, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
+        stopInstance(instance, currentModel, adaptationModel)
+        startInstance(instance, currentModel, adaptationModel)
+        removeInstance(instance, currentModel, adaptationModel)
+        addInstance(instance, currentNode, currentModel, targetModel, adaptationModel)
+        updateDictionary(instance, currentModel, adaptationModel)
     }
 }

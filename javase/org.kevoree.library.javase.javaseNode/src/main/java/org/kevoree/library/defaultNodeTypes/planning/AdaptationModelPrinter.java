@@ -53,6 +53,10 @@ public class AdaptationModelPrinter {
             System.out.print(((DeployUnit) adaptation.getRef()).getGroupName() + ":" + ((DeployUnit) adaptation.getRef()).getName() + ":" + ((DeployUnit) adaptation.getRef()).getVersion() + "-" + ((DeployUnit) adaptation.getRef()).getHashcode());
         } else if (adaptation.getPrimitiveType().getName().equals(JavaSePrimitive.UpdateDictionaryInstance)) {
             System.out.print(((NamedElement) adaptation.getRef()).getName());
+        } else {
+            if (adaptation.getRef() instanceof NamedElement) {
+                System.out.print(((NamedElement) adaptation.getRef()).getName());
+            }
         }
         System.out.println();
     }

@@ -42,6 +42,9 @@ class AddDeployUnit(val du: DeployUnit, val bs: org.kevoree.api.Bootstraper, val
                     return false
                 }
             } else {
+                if (registry.get(du.path()!!) == null) {
+                    registry.put(du.path()!!, bs.getKevoreeClassLoaderHandler().getKevoreeClassLoader(du)!!)
+                }
                 return true
             }
         } catch(e: Exception) {
