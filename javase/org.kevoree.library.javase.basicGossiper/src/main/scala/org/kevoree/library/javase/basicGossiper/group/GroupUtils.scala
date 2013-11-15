@@ -19,7 +19,7 @@ object GroupUtils {
                 val node = newModel.getNodes.find(node=>node.getName==nodeName).get
                 
                 
-                typeDefinitionAspect.foundRelevantDeployUnit(newGroup.getTypeDefinition, node).getHashcode != typeDefinitionAspect.foundRelevantDeployUnit(currentGroup.getTypeDefinition, node).getHashcode
+                typeDefinitionAspect.foundRelevantDeployUnit(newGroup.getTypeDefinition).getHashcode != typeDefinitionAspect.foundRelevantDeployUnit(currentGroup.getTypeDefinition).getHashcode
             }
             case None => true//STRANGE ERROR wTf  - HaraKiri best effort
           }

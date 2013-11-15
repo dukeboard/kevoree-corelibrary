@@ -17,14 +17,10 @@
     <modules>
 		
         <module>../org.kevoree.library.javase.javaseNode</module>
-		
-		
         <module>../org.kevoree.library.javase.swingUI</module>
         <module>../org.kevoree.library.javase.jexxus</module>
         <module>../org.kevoree.library.javase.fileSystem</module>
         <module>../org.kevoree.library.javase.fileSystem.git</module>
-       <!-- <module>../org.kevoree.library.javase.fileSystem.svn</module>-->
-        <!--<module>../org.kevoree.library.javase.MonitoredJavaSENode</module>-->
         <module>../org.kevoree.library.javase.javaseNodeMapBD</module>
         <module>../org.kevoree.library.javase.p2pSock</module>
         <module>../org.kevoree.library.javase.nioChannels</module>
@@ -54,14 +50,8 @@
         <module>../org.kevoree.library.javase.basicGossiper</module>
         <module>../org.kevoree.library.javase.webSocketGrp</module>
         <module>../org.kevoree.library.javase.mavenCache</module>
-        <!--<module>../org.kevoree.library.javase.webserver.webbit</module>-->
         <module>../org.kevoree.library.javase.autoBasicGossiper</module>
         <module>../org.kevoree.library.javase.jmdns</module>
-
-        <!--
-        <module>../org.kevoree.library.javase.accesscontrolGroup</module>
-        -->
-
     </modules>
 
     <dependencies>
@@ -94,7 +84,6 @@
                     <execution>
                         <goals>
                             <goal>generate</goal>
-                            <goal>compile</goal>
                         </goals>
                     </execution>
                 </executions>

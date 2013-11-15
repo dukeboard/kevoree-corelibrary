@@ -45,7 +45,6 @@ import org.kevoree.library.defaultNodeTypes.wrapper.ChannelTypeFragmentThread
 
 class AddInstance(val c: Instance, val nodeName: String, val modelservice: KevoreeModelHandlerService, val kscript: KevScriptEngineFactory, val bs: org.kevoree.api.Bootstraper, val nt : AbstractNodeType, val registry:MutableMap<String, Any>): PrimitiveCommand, Runnable {
 
-    private val typeDefinitionAspect = TypeDefinitionAspect()
     var deployUnit : DeployUnit? = null
     var nodeTypeName : String? = null
     var tg : ThreadGroup? = null
@@ -54,10 +53,7 @@ class AddInstance(val c: Instance, val nodeName: String, val modelservice: Kevor
 
     override fun execute(): Boolean {
         val model = c.typeDefinition!!.eContainer() as ContainerRoot
-        val node = model.findNodesByID(nodeName)
-        deployUnit = typeDefinitionAspect.foundRelevantDeployUnit(c.typeDefinition!!, node!!)!!
-        val nodeType = node.typeDefinition
-        nodeTypeName = typeDefinitionAspect.foundRelevantHostNodeType(nodeType as NodeType, c.typeDefinition!!)!!.name!!
+        deployUnit = c.typeDefinition!!.deployUnit
         var subThread : Thread? = null
         try {
             tg = ThreadGroup("kev/"+c.path()!!)

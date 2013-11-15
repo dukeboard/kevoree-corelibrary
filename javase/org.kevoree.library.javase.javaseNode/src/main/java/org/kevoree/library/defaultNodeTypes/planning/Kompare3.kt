@@ -301,19 +301,9 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
             alreadyInstalledElement.add(typeDefinition.path()!!)
 
             // Add DeployUnit(s)
-            val deployUnits = typeDefinition.deployUnits.filter {
-                deployUnit ->
-                inheritedFrom(deployUnit.targetNodeType!!, currentNode.typeDefinition!!) && registry.get(deployUnit.path()!!) == null
-            }
-            deployUnits.forEach {
-                deployUnit ->
-                addDeployUnit(deployUnit, currentModel, targetModel, adaptationModel)
-            }
-        }
-    }
 
-    private fun inheritedFrom(targetNodeType: TypeDefinition, curentTargetNodeType: TypeDefinition): Boolean {
-        return targetNodeType.path()!!.equals(curentTargetNodeType.path()!!) || curentTargetNodeType.superTypes.find { superType -> inheritedFrom(targetNodeType, superType) } != null
+            addDeployUnit(typeDefinition.deployUnit!!, currentModel, targetModel, adaptationModel)
+        }
     }
 
     protected open fun addDeployUnit(deployUnit: DeployUnit, currentModel: ContainerRoot, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {

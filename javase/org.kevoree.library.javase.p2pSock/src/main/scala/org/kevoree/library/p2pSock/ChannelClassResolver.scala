@@ -16,7 +16,7 @@ class ChannelClassResolver(nioChannel: AbstractChannelFragment) {
         if (resolvedClass == null) {
           currentNode.getComponents.find(c => c.getName == bport.getComponentName) match {
             case Some(component) => {
-              val du = typeDefinitionAspect.foundRelevantDeployUnit(component.getTypeDefinition, currentNode)
+              val du = typeDefinitionAspect.foundRelevantDeployUnit(component.getTypeDefinition)
               if (du != null) {
                 val kcl = nioChannel.getBootStrapperService.getKevoreeClassLoaderHandler.getKevoreeClassLoader(du)
                 try {
