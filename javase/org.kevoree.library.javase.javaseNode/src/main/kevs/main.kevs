@@ -1,2 +1,6 @@
 merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.javaseNode/{project.version}'
 addNode node0:JavaSENode {logLevel = "INFO"}
+addComponent h@node0 : HelloWorld
+addGroup hg : HelloGroup
+addToGroup hg node0
+

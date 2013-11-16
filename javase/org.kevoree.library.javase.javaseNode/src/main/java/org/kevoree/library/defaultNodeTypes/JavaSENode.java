@@ -7,7 +7,6 @@ import org.kevoree.api.service.core.logging.KevoreeLogLevel;
 import org.kevoree.framework.AbstractNodeType;
 import org.kevoree.framework.KevoreeXmiHelper;
 import org.kevoree.kcl.KevoreeJarClassLoader;
-import org.kevoree.library.defaultNodeTypes.planning.JavaSePrimitive;
 import org.kevoree.library.defaultNodeTypes.planning.KevoreeKompareBean;
 import org.kevoree.log.Log;
 import org.kevoreeadaptation.AdaptationModel;
@@ -28,8 +27,24 @@ import java.util.Map;
         @DictionaryAttribute(name = "coreLogLevel", defaultValue = "WARN", optional = true, vals = {"INFO", "WARN", "DEBUG", "ERROR", "FINE"})
 })
 @PrimitiveCommands(
-        values = {JavaSePrimitive.AddBinding, JavaSePrimitive.UpdateType, JavaSePrimitive.UpdateDeployUnit, JavaSePrimitive.AddType, JavaSePrimitive.AddDeployUnit, JavaSePrimitive.AddThirdParty, JavaSePrimitive.RemoveThirdParty, JavaSePrimitive.RemoveType, JavaSePrimitive.RemoveDeployUnit, JavaSePrimitive.UpdateInstance, JavaSePrimitive.UpdateBinding, JavaSePrimitive.UpdateDictionaryInstance, JavaSePrimitive.AddInstance, JavaSePrimitive.RemoveInstance, JavaSePrimitive.AddBinding, JavaSePrimitive.RemoveBinding, JavaSePrimitive.AddFragmentBinding, JavaSePrimitive.RemoveFragmentBinding, JavaSePrimitive.UpdateFragmentBinding, JavaSePrimitive.StartInstance, JavaSePrimitive.StopInstance},
-        value = {@PrimitiveCommand(name="AddDeployUnit",maxTime = 120000),@PrimitiveCommand(name="UpdateDeployUnit",maxTime = 120000)})
+        values = {
+                "AddBinding",
+                "UpdateDeployUnit",
+                "AddDeployUnit",
+                "RemoveDeployUnit",
+                "UpdateInstance",
+                "UpdateBinding",
+                "UpdateDictionaryInstance",
+                "AddInstance",
+                "RemoveInstance",
+                "AddBinding",
+                "RemoveBinding",
+                "AddFragmentBinding",
+                "RemoveFragmentBinding",
+                "UpdateFragmentBinding",
+                "StartInstance",
+                "StopInstance"},
+        value = {@PrimitiveCommand(name = "AddDeployUnit", maxTime = 120000), @PrimitiveCommand(name = "UpdateDeployUnit", maxTime = 120000)})
 public class JavaSENode extends AbstractNodeType implements ModelListener {
 
     protected KevoreeKompareBean kompareBean = null;
@@ -67,7 +82,7 @@ public class JavaSENode extends AbstractNodeType implements ModelListener {
             KevoreeLogLevel logLevel = KevoreeLogLevel.WARN;
             KevoreeLogLevel corelogLevel = KevoreeLogLevel.WARN;
 
-            String logLevelVal = (String)getDictionary().get("logLevel");
+            String logLevelVal = (String) getDictionary().get("logLevel");
             if ("DEBUG".equals(logLevelVal)) {
                 logLevel = KevoreeLogLevel.DEBUG;
             } else if ("WARN".equals(logLevelVal)) {
@@ -80,7 +95,7 @@ public class JavaSENode extends AbstractNodeType implements ModelListener {
                 logLevel = KevoreeLogLevel.FINE;
             }
 
-            String coreLogLevelVal = (String)getDictionary().get("coreLogLevel");
+            String coreLogLevelVal = (String) getDictionary().get("coreLogLevel");
             if ("DEBUG".equals(coreLogLevelVal)) {
                 corelogLevel = KevoreeLogLevel.DEBUG;
             } else if ("WARN".equals(coreLogLevelVal)) {
@@ -124,7 +139,7 @@ public class JavaSENode extends AbstractNodeType implements ModelListener {
     @Override
     public boolean afterLocalUpdate(ContainerRoot currentModel, ContainerRoot proposedModel) {
         mapper.doEnd();
-        Log.info("JavaSENode V2 Update completed in {} ms",(System.currentTimeMillis() - preTime)+"");
+        Log.info("JavaSENode V2 Update completed in {} ms", (System.currentTimeMillis() - preTime) + "");
         return true;
     }
 
@@ -132,31 +147,31 @@ public class JavaSENode extends AbstractNodeType implements ModelListener {
     public void modelUpdated() {
     }
 
-	@Override
-	public void preRollback (ContainerRoot containerRoot, ContainerRoot containerRoot1) {
+    @Override
+    public void preRollback(ContainerRoot containerRoot, ContainerRoot containerRoot1) {
         Log.warn("JavaSENode is aborting last update...");
 
         if (Log.DEBUG && this.getClass().getClassLoader() instanceof KevoreeJarClassLoader) {
             Log.error("Dump before rollback:\n" + getBootStrapperService().getKevoreeClassLoaderHandler().getKCLDump());
         }
-	}
+    }
 
-	@Override
-	public void postRollback (ContainerRoot containerRoot, ContainerRoot containerRoot1) {
-        Log.warn("JavaSENode update aborted in {} ms",(System.currentTimeMillis() - preTime)+"");
+    @Override
+    public void postRollback(ContainerRoot containerRoot, ContainerRoot containerRoot1) {
+        Log.warn("JavaSENode update aborted in {} ms", (System.currentTimeMillis() - preTime) + "");
         try {
-            File preModel = File.createTempFile("pre"+System.currentTimeMillis(),"pre");
-            File afterModel = File.createTempFile("post"+System.currentTimeMillis(),"post");
-            KevoreeXmiHelper.instance$.save(preModel.getAbsolutePath(),containerRoot);
-            KevoreeXmiHelper.instance$.save(afterModel.getAbsolutePath(),containerRoot1);
-            Log.error("PreModel->"+preModel.getAbsolutePath());
-            Log.error("PostModel->"+afterModel.getAbsolutePath());
+            File preModel = File.createTempFile("pre" + System.currentTimeMillis(), "pre");
+            File afterModel = File.createTempFile("post" + System.currentTimeMillis(), "post");
+            KevoreeXmiHelper.instance$.save(preModel.getAbsolutePath(), containerRoot);
+            KevoreeXmiHelper.instance$.save(afterModel.getAbsolutePath(), containerRoot1);
+            Log.error("PreModel->" + preModel.getAbsolutePath());
+            Log.error("PostModel->" + afterModel.getAbsolutePath());
             if (Log.DEBUG && this.getClass().getClassLoader() instanceof KevoreeJarClassLoader) {
                 Log.error("Dump after rollback:\n" + getBootStrapperService().getKevoreeClassLoaderHandler().getKCLDump());
             }
-        } catch (Exception e){
-            Log.error("Error while saving debug model",e);
+        } catch (Exception e) {
+            Log.error("Error while saving debug model", e);
         }
 
-	}
+    }
 }

@@ -4,9 +4,6 @@ import org.kevoree.Instance
 import org.kevoree.api.service.core.handler.KevoreeModelHandlerService
 import org.kevoree.api.service.core.script.KevScriptEngineFactory
 import org.kevoree.api.PrimitiveCommand
-import org.kevoree.ContainerRoot
-import org.kevoree.framework.kaspects.TypeDefinitionAspect
-import org.kevoree.NodeType
 import org.kevoree.framework.AbstractChannelFragment
 import org.kevoree.framework.AbstractComponentType
 import org.kevoree.framework.AbstractGroupType
@@ -14,7 +11,6 @@ import org.kevoree.ComponentInstance
 import org.kevoree.framework.KInstance
 import org.kevoree.Group
 import org.kevoree.Channel
-import org.kevoree.DeployUnit
 import org.kevoree.log.Log
 import org.kevoree.framework.AbstractNodeType
 import org.kevoree.library.defaultNodeTypes.wrapper.KevoreeComponent
@@ -43,21 +39,18 @@ import org.kevoree.library.defaultNodeTypes.wrapper.ChannelTypeFragmentThread
  * Time: 17:53
  */
 
-class AddInstance(val c: Instance, val nodeName: String, val modelservice: KevoreeModelHandlerService, val kscript: KevScriptEngineFactory, val bs: org.kevoree.api.Bootstraper, val nt : AbstractNodeType, val registry:MutableMap<String, Any>): PrimitiveCommand, Runnable {
+class AddInstance(val c: Instance, val nodeName: String, val modelservice: KevoreeModelHandlerService, val kscript: KevScriptEngineFactory, val bs: org.kevoree.api.Bootstraper, val nt: AbstractNodeType, val registry: MutableMap<String, Any>) : PrimitiveCommand, Runnable {
 
-    var deployUnit : DeployUnit? = null
-    var nodeTypeName : String? = null
-    var tg : ThreadGroup? = null
+    var nodeTypeName: String? = null
+    var tg: ThreadGroup? = null
 
     var resultSub = false
 
     override fun execute(): Boolean {
-        val model = c.typeDefinition!!.eContainer() as ContainerRoot
-        deployUnit = c.typeDefinition!!.deployUnit
-        var subThread : Thread? = null
+        var subThread: Thread? = null
         try {
-            tg = ThreadGroup("kev/"+c.path()!!)
-            subThread = Thread(tg,this)
+            tg = ThreadGroup("kev/" + c.path()!!)
+            subThread = Thread(tg, this)
             subThread!!.start()
             subThread!!.join()
             return resultSub
@@ -65,7 +58,7 @@ class AddInstance(val c: Instance, val nodeName: String, val modelservice: Kevor
             if(subThread != null){
                 try {
                     subThread!!.stop() //kill sub thread
-                } catch(t : Throwable){
+                } catch(t: Throwable){
                     //ignore killing thread
                 }
             }
@@ -76,34 +69,37 @@ class AddInstance(val c: Instance, val nodeName: String, val modelservice: Kevor
     }
 
     override fun undo() {
-        RemoveInstance(c, nodeName, modelservice, kscript, bs,nt, registry).execute()
+        RemoveInstance(c, nodeName, modelservice, kscript, bs, nt, registry).execute()
     }
 
     public override fun run() {
         try {
+            val deployUnit = c.typeDefinition?.deployUnit
+            val currentDeployUnit = bs.getKevoreeClassLoaderHandler().getKevoreeClassLoader(deployUnit)
+            if(currentDeployUnit == null){
+                Log.error("DeployUnit not installed on system : ${deployUnit?.path()}")
+                return
+            }
             val beanClazz = bs.getKevoreeClassLoaderHandler().getKevoreeClassLoader(deployUnit)!!.loadClass(c.typeDefinition!!.bean)
             val newBeanInstance = beanClazz!!.newInstance()
-            var newBeanKInstanceWrapper :KInstance? = null
+            var newBeanKInstanceWrapper: KInstance? = null
             if(c is ComponentInstance){
-                newBeanKInstanceWrapper = KevoreeComponent(newBeanInstance as AbstractComponentType,nodeName,c.name!!,modelservice,bs,kscript,nt.getDataSpaceService(),tg!!)
-                (newBeanKInstanceWrapper as KevoreeComponent).initPorts(nodeTypeName!!,c)
+                newBeanKInstanceWrapper = KevoreeComponent(newBeanInstance as AbstractComponentType, nodeName, c.name!!, modelservice, bs, kscript, nt.getDataSpaceService(), tg!!)
+                (newBeanKInstanceWrapper as KevoreeComponent).initPorts(c)
             }
             if(c is Group){
-                newBeanKInstanceWrapper = KevoreeGroup(newBeanInstance as AbstractGroupType,nodeName,c.name!!,modelservice,bs,kscript,nt.getDataSpaceService(),tg!!)
+                newBeanKInstanceWrapper = KevoreeGroup(newBeanInstance as AbstractGroupType, nodeName, c.name!!, modelservice, bs, kscript, nt.getDataSpaceService(), tg!!)
             }
             if(c is Channel){
-                newBeanKInstanceWrapper = ChannelTypeFragmentThread(newBeanInstance as AbstractChannelFragment,nodeName,c.name!!,modelservice,bs,kscript,nt.getDataSpaceService(),tg!!)
+                newBeanKInstanceWrapper = ChannelTypeFragmentThread(newBeanInstance as AbstractChannelFragment, nodeName, c.name!!, modelservice, bs, kscript, nt.getDataSpaceService(), tg!!)
                 (newBeanKInstanceWrapper as ChannelTypeFragmentThread).initChannel()
             }
-
             registry.put(c.path()!!, newBeanKInstanceWrapper!!)
             resultSub = true
-        } catch(e : Throwable){
-            Log.error("Error while adding instance {}",e,c.name)
+        } catch(e: Throwable){
+            Log.error("Error while adding instance {}", e, c.name)
             resultSub = false
         }
-
-
     }
 
 

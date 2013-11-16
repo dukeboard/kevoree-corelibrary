@@ -5,79 +5,103 @@ import org.kevoreeadaptation.AdaptationModel
 import org.kevoree.ContainerRoot
 import org.kevoreeadaptation.impl.DefaultKevoreeAdaptationFactory
 import org.kevoree.compare.DefaultModelCompare
-import org.kevoree.modeling.api.trace.ModelAddAllTrace
 import org.kevoree.modeling.api.trace.ModelSetTrace
 import org.kevoree.modeling.api.trace.ModelRemoveTrace
 import org.kevoree.modeling.api.trace.ModelAddTrace
-import org.kevoree.modeling.api.trace.ModelRemoveAllTrace
-import org.kevoree.ContainerNode
-import org.kevoree.Channel
-import org.kevoree.Group
 import org.kevoree.Instance
 import java.util.ArrayList
-import org.kevoree.ComponentInstance
 import org.kevoree.DeployUnit
-import org.kevoree.TypeDefinition
-import org.kevoree.MBinding
 import org.kevoree.modeling.api.util.ModelVisitor
 import org.kevoree.modeling.api.KMFContainer
-import org.kevoree.ChannelType
-import org.kevoree.ComponentType
-import org.kevoree.GroupType
-import org.kevoree.NodeType
+import org.kevoreeadaptation.AdaptationPrimitive
+import java.util.HashSet
 
-/**
- * User: Erwan Daubert - erwan.daubert@gmail.com
- * Date: 13/11/13
- * Time: 12:58
- *
- * @author Erwan Daubert
- * @version 1.0
- */
-public abstract class Kompare3(val registry: Map<String, Any>) {
+public abstract class Kompare4(val registry: Map<String, Any>) {
 
     private val modelCompare = DefaultModelCompare()
     private val adaptationModelFactory = DefaultKevoreeAdaptationFactory()
 
-    private val updatedDictionaryInstances = ArrayList<String>()
-    private val alreadyInstalledElement = ArrayList<String>()
-    private val alreadyRemovedElement = ArrayList<String>()
+    /* Helper to create command */
+    private fun adapt(primitive: JavaPrimitive, elem: Any?, model: ContainerRoot): AdaptationPrimitive {
+        val ccmd = adaptationModelFactory.createAdaptationPrimitive()
+        ccmd.primitiveType = model.findAdaptationPrimitiveTypesByID(primitive.name())
+        ccmd.ref = elem
+        return ccmd
+    }
 
     open public fun compareModels(currentModel: ContainerRoot, targetModel: ContainerRoot, nodeName: String): AdaptationModel {
-        updatedDictionaryInstances.clear()
-        alreadyInstalledElement.clear()
-        alreadyRemovedElement.clear()
+
+        val dictionaryAlreadyUpdate = HashSet<Instance>()
 
         val currentNode = currentModel.findNodesByID(nodeName)
         val targetNode = targetModel.findNodesByID(nodeName)
-
         val adaptationModel = adaptationModelFactory.createAdaptationModel()
         if (currentNode != null && targetNode != null) {
             val traces = modelCompare.diff(currentModel, targetModel)
-            traces.traces.forEach {
-                trace ->
-                //                System.out.println(trace)
-                if (trace is ModelAddTrace) {
-                    manageModelAddTrace(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
-                } else if (trace is ModelRemoveTrace) {
-                    manageModelRemoveTrace(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
-                } else if (trace is ModelSetTrace) {
-                    manageModelSetTrace(trace, currentModel, targetNode, targetModel, adaptationModel)
-                } else if (trace is ModelAddAllTrace) {
-                    //                    System.out.println(trace)
-                } else if (trace is ModelRemoveAllTrace) {
-                    //                    System.out.println(trace)
+            for(trace in traces.traces) {
+                println(trace)
+                when(trace) {
+                    is ModelAddTrace -> {
+                        //only consider if Add has as target myself
+                        if(trace.srcPath == currentNode.path()){
+                            when(trace.refName) {
+                                "components" -> {
+                                    val elemToAdd = targetModel.findByPath(trace.previousPath!!)
+                                    adaptationModel.addAdaptations(adapt(JavaPrimitive.AddInstance, elemToAdd, targetModel))
+                                }
+                                else -> {}
+                            }
+                        } else {
+                            when(trace.refName) {
+                                "groups" -> {
+
+                                }
+                                else -> {}
+                            }
+                            //eventually ADD typeDefinition could appear
+                            //TODO
+                        }
+                    }
+                    is ModelRemoveTrace -> {
+
+                    }
+                    is ModelSetTrace -> {
+                        val modelElement = targetModel.findByPath(trace.srcPath)
+                        if(modelElement is Instance){
+                            when(trace.refName) {
+                                "started" -> {
+                                    if (trace.content?.toLowerCase() == "true") {
+                                        adaptationModel.addAdaptations(adapt(JavaPrimitive.StartInstance, modelElement, targetModel))
+                                    } else {
+                                        adaptationModel.addAdaptations(adapt(JavaPrimitive.StopInstance, modelElement, targetModel))
+                                    }
+                                }
+                                "typeDefinition" -> {
+                                    //TODO continuous design
+                                }
+                                "value" -> {
+                                    if(!dictionaryAlreadyUpdate.contains(modelElement)){
+                                        adaptationModel.addAdaptations(adapt(JavaPrimitive.UpdateDictionaryInstance, modelElement, targetModel))
+                                        dictionaryAlreadyUpdate.add(modelElement)
+                                    }
+
+                                }
+                                else -> {
+
+                                }
+                            }
+                        }
+                    }
+                    else -> {
+                        //noop
+                    }
                 }
             }
-
             var foundDeployUnitsToRemove = ArrayList<String>()
-            var foundTypeDefinitionsToRemove = ArrayList<String>()
             currentNode.visit(object : ModelVisitor(){
                 override fun visit(elem: KMFContainer, refNameInParent: String, parent: KMFContainer) {
                     if(elem is DeployUnit){
                         foundDeployUnitsToRemove.add(elem.path()!!)
-                    } else if (elem is TypeDefinition) {
-                        foundTypeDefinitionsToRemove.add(elem.path()!!)
                     }
                 }
 
@@ -86,19 +110,19 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
                 override fun visit(elem: KMFContainer, refNameInParent: String, parent: KMFContainer) {
                     if(elem is DeployUnit){
                         foundDeployUnitsToRemove.remove(elem.path()!!)
-                    } else if (elem is TypeDefinition) {
-                        foundTypeDefinitionsToRemove.remove(elem.path()!!)
                     }
                 }
             }, true, true, true)
-            dropTypeDefinitions(foundTypeDefinitionsToRemove, currentModel, adaptationModel)
-            dropDeployUnits(foundDeployUnitsToRemove, currentModel, adaptationModel)
+            for(pathDeployUnitToDrop in foundDeployUnitsToRemove){
+                adaptationModel.addAdaptations(adapt(JavaPrimitive.RemoveDeployUnit, currentModel.findByPath(pathDeployUnitToDrop), targetModel))
+            }
         } else {
             Log.warn("One of the model doesn't contain the local node: (currentNode = {}, tagretNode = {}", currentNode, targetNode)
         }
         return adaptationModel
     }
 
+    /*
     protected open fun manageModelAddTrace(trace: ModelAddTrace, currentNode: ContainerNode, currentModel: ContainerRoot, targetNode: ContainerNode, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
         if (trace.srcPath.equals(currentNode.path()!!)) {
             manageModelAddTraceForNode(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
@@ -118,8 +142,6 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
             val element = targetModel.findByPath(trace.previousPath!!)
             if (element is ContainerNode && element == targetNode) {
                 manageModelAddTraceForNode(trace, currentNode, currentModel, targetNode, targetModel, adaptationModel)
-            } else if (srcElement is TypeDefinition) {
-                updateTypeDefinition(srcElement, currentNode, currentModel, targetNode, targetModel, adaptationModel)
             }
         }
     }
@@ -143,8 +165,6 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
             if (srcGroup != null && srcGroup is Group && subNode != null && subNode is ContainerNode && subNode == targetNode) {
                 // Add Group
                 addInstance(srcGroup, currentNode, currentModel, targetModel, adaptationModel)
-            } else if (srcElement is TypeDefinition) {
-                updateTypeDefinition(srcElement, currentNode, currentModel, targetNode, targetModel, adaptationModel)
             }
         }
     }
@@ -191,62 +211,6 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
         }
     }
 
-    protected open fun manageModelSetTrace(trace: ModelSetTrace, currentModel: ContainerRoot, targetNode: ContainerNode, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        //        val currentElement = currentModel.findByPath(trace.srcPath)
-        val targetElement = targetModel.findByPath(trace.srcPath)
-
-        if (/*currentElement is Channel || */targetElement is Channel) {
-            if ((targetElement as Channel).bindings.find { binding -> binding.port!!.eContainer()!!.eContainer() == targetNode } != null) {
-                manageModelSetTraceForNode(trace, currentModel, targetModel, adaptationModel)
-            }
-        } else if (/*currentElement is Group || */targetElement is Group) {
-            if ((targetElement as Group).subNodes.contains(targetNode)) {
-                manageModelSetTraceForNode(trace, currentModel, targetModel, adaptationModel)
-            }
-        } else if (/*currentElement is ComponentInstance || */targetElement is ComponentInstance) {
-            if ((targetElement as ComponentInstance).eContainer() == targetNode) {
-                manageModelSetTraceForNode(trace, currentModel, targetModel, adaptationModel)
-            }
-        } else if (/*currentElement is ContainerNode || */targetElement is ContainerNode) {
-            if ((targetElement as ContainerNode).host == targetNode) {
-                manageModelSetTraceForNode(trace, currentModel, targetModel, adaptationModel)
-            }
-        }
-    }
-
-    protected open fun manageModelSetTraceForNode(trace: ModelSetTrace, currentModel: ContainerRoot, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        if (trace.refName.equals("started")) {
-            if (trace.content.equals("true")) {
-                startInstance(targetModel.findByPath(trace.srcPath, javaClass<Instance>())!!, currentModel, adaptationModel)
-            } else {
-                var instance: Instance?
-                if (currentModel.findByPath(trace.srcPath) != null) {
-                    instance = currentModel.findByPath(trace.srcPath, javaClass<Instance>())
-                } else {
-                    instance = targetModel.findByPath(trace.srcPath, javaClass<Instance>())
-                }
-                stopInstance(instance!!, currentModel, adaptationModel)
-            }
-        } else if (trace.refName.equals("value")) {
-            updateDictionary(targetModel.findByPath(trace.srcPath)!!.eContainer()!!.eContainer() as Instance, currentModel, adaptationModel)
-        }
-    }
-
-    protected open fun dropTypeDefinitions(foundTypeDefinitionsToRemove: ArrayList<String>, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        // Remove TypeDefinitions that are not used anymore in the target model
-        foundTypeDefinitionsToRemove.forEach {
-            typeDefinitionPath ->
-            removeTypeDefinition(currentModel.findByPath(typeDefinitionPath, javaClass<TypeDefinition>())!!, currentModel, adaptationModel)
-        }
-    }
-
-    protected open fun dropDeployUnits(foundDeployUnitsToRemove: ArrayList<String>, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        // Remove DeployUnits that are not used anymore in the target model
-        foundDeployUnitsToRemove.forEach {
-            deployUnitPath ->
-            removeDeployUnit(currentModel.findByPath(deployUnitPath, javaClass<DeployUnit>())!!, currentModel, adaptationModel)
-        }
-    }
 
     protected open fun updateDictionary(instance: Instance, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
         if (!updatedDictionaryInstances.contains(instance.path()!!)) {
@@ -260,50 +224,13 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
 
     }
 
-    protected open fun startInstance(instance: Instance, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        // Start instance
-        val ccmd = adaptationModelFactory.createAdaptationPrimitive()
-        ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.StartInstance)
-        ccmd.ref = instance
-        adaptationModel.addAdaptations(ccmd)
-    }
-
-    protected open fun stopInstance(instance: Instance, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        // Stop instance
-        val ccmd = adaptationModelFactory.createAdaptationPrimitive()
-        ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.StopInstance)
-        ccmd.ref = instance
-        adaptationModel.addAdaptations(ccmd)
-    }
-
     protected open fun addInstance(instance: Instance, currentNode: ContainerNode, currentModel: ContainerRoot, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
         // Add instance
         val ccmd = adaptationModelFactory.createAdaptationPrimitive()
         ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.AddInstance)
         ccmd.ref = instance
         adaptationModel.addAdaptations(ccmd)
-
         updateDictionary(instance, currentModel, adaptationModel)
-
-        if (registry.get(targetModel.findTypeDefinitionsByID(instance.typeDefinition!!.path()!!)) == null) {
-            // Add TypeDefinition
-            addTypeDefinition(instance.typeDefinition!!, currentNode, currentModel, targetModel, adaptationModel)
-        }
-    }
-
-    protected open fun addTypeDefinition(typeDefinition: TypeDefinition, currentNode: ContainerNode, currentModel: ContainerRoot, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        if (!alreadyInstalledElement.contains(typeDefinition.path()!!)) {
-            // Add TypeDefinition
-            val ccmd = adaptationModelFactory.createAdaptationPrimitive()
-            ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.AddType)
-            ccmd.ref = typeDefinition
-            adaptationModel.addAdaptations(ccmd)
-            alreadyInstalledElement.add(typeDefinition.path()!!)
-
-            // Add DeployUnit(s)
-
-            addDeployUnit(typeDefinition.deployUnit!!, currentModel, targetModel, adaptationModel)
-        }
     }
 
     protected open fun addDeployUnit(deployUnit: DeployUnit, currentModel: ContainerRoot, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
@@ -352,7 +279,6 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
         ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.RemoveInstance)
         ccmd.ref = instance
         adaptationModel.addAdaptations(ccmd)
-
         // stop instance if needed
         if (instance.started!!) {
             stopInstance(instance, currentModel, adaptationModel)
@@ -388,75 +314,6 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
         adaptationModel.addAdaptations(ccmd)
     }
 
-    protected open fun removeTypeDefinition(typeDefinition: TypeDefinition, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        // remove TypeDefinition
-        val ccmd = adaptationModelFactory.createAdaptationPrimitive()
-        ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.RemoveType)
-        ccmd.ref = typeDefinition
-        adaptationModel.addAdaptations(ccmd)
-
-        // deployUnits connected to this typeDefinition will be removed if they don't appear anymore in the deployUnits used by one of the typeDefinition available on the currentNode (see dropTypeDefinitions)
-    }
-
-    protected open fun removeDeployUnit(deployUnit: DeployUnit, currentModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        val ccmd = adaptationModelFactory.createAdaptationPrimitive()
-        ccmd.primitiveType = currentModel.findAdaptationPrimitiveTypesByID(JavaSePrimitive.RemoveDeployUnit)
-        ccmd.ref = deployUnit
-        adaptationModel.addAdaptations(ccmd)
-
-        // deployUnits connected to this deployUnit will be removed if they don't appear anymore in the deployUnits used by one of the typeDefinition available on the currentNode (see dropDeployUnits)
-    }
-
-    protected open fun updateTypeDefinition(typeDefinition: TypeDefinition, currentNode: ContainerNode, currentModel: ContainerRoot, targetNode: ContainerNode, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
-        if (!alreadyInstalledElement.contains(typeDefinition.path()!!) || !alreadyRemovedElement.contains(typeDefinition.path()!!)) {
-            val typeDefinitionToRemove = currentModel.findByPath(typeDefinition.path()!!, javaClass<TypeDefinition>())!!
-            val typeDefinitionToAdd = targetModel.findByPath(typeDefinition.path()!!, javaClass<TypeDefinition>())!!
-            if (!alreadyInstalledElement.contains(typeDefinition.path()!!)) {
-                addTypeDefinition(typeDefinitionToAdd, currentNode, currentModel, targetModel, adaptationModel)
-                alreadyInstalledElement.add(typeDefinition.path()!!)
-            }
-            if (!alreadyRemovedElement.contains(typeDefinition.path()!!)) {
-                removeTypeDefinition(typeDefinitionToRemove, currentModel, adaptationModel)
-                alreadyRemovedElement.add(typeDefinition.path()!!)
-            }
-
-            // check all instances to update them
-            if (typeDefinition is ChannelType) {
-                targetNode.visit(object : ModelVisitor() {
-                    override fun visit(elem: KMFContainer, refNameInParent: String, parent: KMFContainer) {
-                        if (elem is Channel) {
-                            updateInstance(elem, currentNode, currentModel, targetModel, adaptationModel)
-                        }
-                    }
-                }, true, false, true)
-            } else if (typeDefinition is ComponentType) {
-                targetNode.visit(object : ModelVisitor() {
-                    override fun visit(elem: KMFContainer, refNameInParent: String, parent: KMFContainer) {
-                        if (elem is ComponentInstance) {
-                            updateInstance(elem, currentNode, currentModel, targetModel, adaptationModel)
-                        }
-                    }
-                }, false, true, false)
-            } else if (typeDefinition is GroupType) {
-                targetNode.visit(object : ModelVisitor() {
-                    override fun visit(elem: KMFContainer, refNameInParent: String, parent: KMFContainer) {
-                        if (elem is Group) {
-                            updateInstance(elem, currentNode, currentModel, targetModel, adaptationModel)
-                        }
-                    }
-                }, true, false, true)
-            } else if (typeDefinition is NodeType) {
-                targetNode.visit(object : ModelVisitor() {
-                    override fun visit(elem: KMFContainer, refNameInParent: String, parent: KMFContainer) {
-                        if (elem is ContainerNode) {
-                            updateInstance(elem, currentNode, currentModel, targetModel, adaptationModel)
-                        }
-                    }
-                }, false, false, true)
-            }
-        }
-    }
-
     protected open fun updateInstance(instance: Instance, currentNode: ContainerNode, currentModel: ContainerRoot, targetModel: ContainerRoot, adaptationModel: AdaptationModel) {
         stopInstance(instance, currentModel, adaptationModel)
         startInstance(instance, currentModel, adaptationModel)
@@ -464,4 +321,7 @@ public abstract class Kompare3(val registry: Map<String, Any>) {
         addInstance(instance, currentNode, currentModel, targetModel, adaptationModel)
         updateDictionary(instance, currentModel, adaptationModel)
     }
+
+    */
+
 }

@@ -23,54 +23,46 @@ trait KevoreeScheduler : StepBuilder {
             nextStep()
             adaptionModel.orderedPrimitiveSet = currentSteps
             //STOP INSTANCEs
-            var stepToInsert = scheduling.schedule(adaptionModel.adaptations.filter { adapt -> adapt.primitiveType!!.name == JavaSePrimitive.StopInstance }, false)
+            var stepToInsert = scheduling.schedule(adaptionModel.adaptations.filter { adapt -> adapt.primitiveType!!.name == JavaPrimitive.StopInstance.name() }, false)
             if (stepToInsert != null && !stepToInsert!!.adaptations.isEmpty()) {
                 insertStep(stepToInsert!!)
             }
 
             // REMOVE BINDINGS
-            createNextStep(JavaSePrimitive.RemoveBinding, adaptionModel.adaptations.filter { adapt -> (adapt.primitiveType!!.name == JavaSePrimitive.RemoveBinding || adapt.primitiveType!!.name == JavaSePrimitive.RemoveFragmentBinding) })
+            createNextStep(JavaPrimitive.RemoveBinding, adaptionModel.adaptations.filter { adapt -> (adapt.primitiveType!!.name == JavaPrimitive.RemoveBinding.name() || adapt.primitiveType!!.name == JavaPrimitive.RemoveFragmentBinding.name() ) })
 
             // REMOVE INSTANCEs
-            createNextStep(JavaSePrimitive.RemoveInstance, adaptionModel.adaptations.filter { adapt -> adapt.primitiveType!!.name == JavaSePrimitive.RemoveInstance })
-
-            // REMOVE TYPEs
-            createNextStep(JavaSePrimitive.RemoveType, adaptionModel.adaptations.filter { adapt -> adapt.primitiveType!!.name == JavaSePrimitive.RemoveType })
+            createNextStep(JavaPrimitive.RemoveInstance, adaptionModel.adaptations.filter { adapt -> adapt.primitiveType!!.name == JavaPrimitive.RemoveInstance.name() })
 
             // REMOVE DEPLOYUNITs
-            createNextStep(JavaSePrimitive.RemoveDeployUnit, adaptionModel.adaptations.filter { adapt -> adapt.primitiveType!!.name == JavaSePrimitive.RemoveDeployUnit })
-
-            // ADD THIRD PARTIES
-            createNextStep(JavaSePrimitive.AddThirdParty, adaptionModel.adaptations.filter { adapt -> adapt.primitiveType!!.name == JavaSePrimitive.AddThirdParty })
+            createNextStep(JavaPrimitive.RemoveDeployUnit, adaptionModel.adaptations.filter { adapt -> adapt.primitiveType!!.name == JavaPrimitive.RemoveDeployUnit.name() })
 
             // UPDATE DEPLOYUNITs
-            createNextStep(JavaSePrimitive.UpdateDeployUnit, adaptionModel.adaptations.filter { adapt -> adapt.primitiveType!!.name == JavaSePrimitive.UpdateDeployUnit })
+            createNextStep(JavaPrimitive.UpdateDeployUnit, adaptionModel.adaptations.filter { adapt -> adapt.primitiveType!!.name == JavaPrimitive.UpdateDeployUnit.name() })
 
             // ADD DEPLOYUNITs
-            createNextStep(JavaSePrimitive.AddDeployUnit, adaptionModel.adaptations.filter { adapt -> adapt.primitiveType!!.name == JavaSePrimitive.AddDeployUnit })
-
-            // ADD TYPEs
-            createNextStep(JavaSePrimitive.AddType, adaptionModel.adaptations.filter { adapt -> adapt.primitiveType!!.name == JavaSePrimitive.AddType })
+            createNextStep(JavaPrimitive.AddDeployUnit, adaptionModel.adaptations.filter { adapt -> adapt.primitiveType!!.name == JavaPrimitive.AddDeployUnit.name() })
 
             // ADD INSTANCEs
-            //            createNextStep(JavaSePrimitive.AddInstance, adaptionModel.adaptations.filter{ adapt -> adapt.primitiveType!!.name == JavaSePrimitive.AddInstance })
-            adaptionModel.adaptations.filter { adapt -> adapt.primitiveType!!.name == JavaSePrimitive.AddInstance }.forEach {
+            // createNextStep(JavaPrimitive.AddInstance, adaptionModel.adaptations.filter{ adapt -> adapt.primitiveType!!.name == JavaSePrimitive.AddInstance })
+
+            adaptionModel.adaptations.filter { adapt -> adapt.primitiveType!!.name == JavaPrimitive.AddInstance.name() }.forEach {
                 addInstance ->
                 val list = ArrayList<AdaptationPrimitive>()
                 list.add(addInstance)
-                createNextStep(JavaSePrimitive.AddInstance, list)
+                createNextStep(JavaPrimitive.AddInstance, list)
             }
 
             // ADD BINDINGs
-            createNextStep(JavaSePrimitive.AddBinding, adaptionModel.adaptations.filter { adapt -> (adapt.primitiveType!!.name == JavaSePrimitive.AddBinding || adapt.primitiveType!!.name == JavaSePrimitive.AddFragmentBinding) })
+            createNextStep(JavaPrimitive.AddBinding, adaptionModel.adaptations.filter { adapt -> (adapt.primitiveType!!.name == JavaPrimitive.AddBinding.name() || adapt.primitiveType!!.name == JavaPrimitive.AddFragmentBinding.name()) })
 
             // UPDATE DICTIONARYs
-            createNextStep(JavaSePrimitive.UpdateDictionaryInstance, adaptionModel.adaptations.filter { adapt -> adapt.primitiveType!!.name == JavaSePrimitive.UpdateDictionaryInstance })
+            createNextStep(JavaPrimitive.UpdateDictionaryInstance, adaptionModel.adaptations.filter { adapt -> adapt.primitiveType!!.name == JavaPrimitive.UpdateDictionaryInstance.name() })
 
             // START INSTANCEs
             stepToInsert = scheduling.schedule(adaptionModel.adaptations.filter {
                 adapt ->
-                adapt.primitiveType!!.name == JavaSePrimitive.StartInstance
+                adapt.primitiveType!!.name == JavaPrimitive.StartInstance.name()
             }, true)
             if (stepToInsert != null && !stepToInsert!!.adaptations.isEmpty()) {
                 insertStep(stepToInsert!!)

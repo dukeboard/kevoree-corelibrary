@@ -33,7 +33,7 @@ public trait StepBuilder {
         previousStep = null
     }
 
-    public open fun createNextStep(primitiveType: String, commands: List<AdaptationPrimitive>) {
+    public open fun createNextStep(primitiveType: JavaPrimitive, commands: List<AdaptationPrimitive>) {
         if (!commands.isEmpty()) {
             if (currentSteps == null) {
                 nextStep()

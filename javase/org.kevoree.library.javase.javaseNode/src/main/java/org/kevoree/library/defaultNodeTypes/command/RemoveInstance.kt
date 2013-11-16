@@ -34,43 +34,16 @@ class RemoveInstance(val c: Instance, val nodeName: String, val modelservice: Ke
     }
 
     override fun execute(): Boolean {
-        Log.debug("CMD REMOVE INSTANCE EXECUTION  - " + c.name!! + " - type - " + c.typeDefinition!!.name!!)
         try {
-            /*
-            val instanceRef = KevoreeDeployManager.getRef(c.javaClass.getName(), c.getName())
-            val model = c.getTypeDefinition()!!.eContainer() as ContainerRoot
-            val node = model.findNodesByID(nodeName)
-            val deployUnit = typeDefinitionAspect.foundRelevantDeployUnit(c.getTypeDefinition(), node!!)
-            val nodeType = node!!.getTypeDefinition()
-            val nodeTypeName = typeDefinitionAspect.foundRelevantHostNodeType(nodeType as NodeType, c.getTypeDefinition())!!.getName()
-            val activatorPackage = KevoreeGeneratorHelper().getTypeDefinitionGeneratedPackage(c.getTypeDefinition(), nodeTypeName)
-            val factoryName = activatorPackage + "." + c.getTypeDefinition()!!.getName() + "Factory"
-            val clazz = bs.getKevoreeClassLoaderHandler().getKevoreeClassLoader(deployUnit)!!.loadClass(factoryName)
-            val clazzInstance = clazz!!.newInstance()
-            val kevoreeFactory = clazzInstance as KevoreeInstanceFactory
-            val activator = kevoreeFactory.remove(c.getName())
-            if(activator != null){
-                activator!!.stop()
-            }  else
-            {
-                logger.error(" TypeCache "+c.getName()+"does not exist.")
-                return false
-            } */
-
-
             registry.remove(c.path()!!)
-//            KevoreeDeployManager.clearRef(c.javaClass.getName() + "_tg", c.name!!)
-//            KevoreeDeployManager.clearRef(c.javaClass.getName() + "_wrapper", c.name!!)
-//            KevoreeDeployManager.clearRef(c.javaClass.getName(), c.name!!)
             return true
         } catch(e: Exception){
-            Log.error("RemoveInstance " + c.name!! + " - type - " + c.typeDefinition!!.name!! + " ", e)
             return false
         }
     }
 
     fun toString(): String {
-        return "RemoveInstance " + c.name!!
+        return "RemoveInstance ${c.name}"
     }
 
 }

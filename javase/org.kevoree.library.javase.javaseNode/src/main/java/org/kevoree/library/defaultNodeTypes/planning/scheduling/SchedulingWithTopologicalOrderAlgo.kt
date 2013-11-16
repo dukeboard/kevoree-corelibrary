@@ -10,7 +10,7 @@ import org.kevoreeadaptation.ParallelStep
 import org.kevoreeadaptation.KevoreeAdaptationFactory
 import org.kevoree.framework.kaspects.PortAspect
 import org.kevoree.library.defaultNodeTypes.planning.StepBuilder
-import org.kevoree.library.defaultNodeTypes.planning.JavaSePrimitive
+import org.kevoree.library.defaultNodeTypes.planning.JavaPrimitive
 
 class SchedulingWithTopologicalOrderAlgo : StepBuilder {
     override var previousStep: ParallelStep? = null
@@ -30,25 +30,24 @@ class SchedulingWithTopologicalOrderAlgo : StepBuilder {
                 val list = ArrayList<AdaptationPrimitive>()
                 list.add(element)
                 if (start) {
-                    createNextStep(JavaSePrimitive.StartInstance, list)
+                    createNextStep(JavaPrimitive.StartInstance, list)
                 } else {
-                    createNextStep(JavaSePrimitive.StopInstance, list)
+                    createNextStep(JavaPrimitive.StopInstance, list)
                 }
                 nextStep()
             }
         } else if (!commands.isEmpty()) {
             if (start) {
-                createNextStep(JavaSePrimitive.StartInstance, commands)
+                createNextStep(JavaPrimitive.StartInstance, commands)
             } else {
-                createNextStep(JavaSePrimitive.StopInstance, commands)
+                createNextStep(JavaPrimitive.StopInstance, commands)
             }
         }
         return firstStep;
     }
 
 
-    private class Assoc2<E, G>(_1: E, _2: G){
-    }
+    private class Assoc2<E, G>(_1: E, _2: G){}
 
 
     /**

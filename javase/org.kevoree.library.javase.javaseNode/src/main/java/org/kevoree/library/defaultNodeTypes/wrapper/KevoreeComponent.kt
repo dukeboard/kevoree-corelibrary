@@ -41,18 +41,18 @@ public class KevoreeComponent(val ct: AbstractComponentType, val nodeName: Strin
         return ct_started
     }
 
-    public fun initPorts(nodeTypeName: String, modelElement: ComponentInstance/*, tg: ThreadGroup*/) {
+    public fun initPorts(modelElement: ComponentInstance) {
         /* Init Required and Provided Port */
         val bean = modelElement.typeDefinition!!.bean!!
         for(providedPort in modelElement.provided){
-            val newPortClazz = ct.javaClass.getClassLoader()!!.loadClass(buildPortBean(bean, nodeTypeName, providedPort.portTypeRef!!.name!!))
+            val newPortClazz = ct.javaClass.getClassLoader()!!.loadClass(buildPortBean(bean, providedPort.portTypeRef!!.name!!))
             //TODO inject pure reflexif port, if class not found exception
             val newPort = newPortClazz!!.getConstructor(ct.getClass()).newInstance(ct) as KevoreePort
             newPort.startPort(tg)
             ct.getHostedPorts()!!.put(newPort.getName()!!, newPort)
         }
         for(requiredPort in modelElement.required){
-            val newPortClazz = ct.javaClass.getClassLoader()!!.loadClass(buildPortBean(bean, nodeTypeName, requiredPort.portTypeRef!!.name!!))
+            val newPortClazz = ct.javaClass.getClassLoader()!!.loadClass(buildPortBean(bean, requiredPort.portTypeRef!!.name!!))
             //TODO inject pure reflexif port, if class not found exception
             val newPort = newPortClazz!!.getConstructor(ct.getClass()).newInstance(ct) as KevoreePort
             newPort.startPort(tg)
@@ -66,10 +66,10 @@ public class KevoreeComponent(val ct: AbstractComponentType, val nodeName: Strin
 
     private val fieldResolver = FieldAnnotationResolver(ct.javaClass);
 
-    private fun buildPortBean(bean: String, nodeTypeName: String, portName: String): String {
+    private fun buildPortBean(bean: String, portName: String): String {
         val packName = bean.subSequence(0, bean.lastIndexOf("."))
         val clazzName = bean.subSequence(bean.lastIndexOf(".") + 1, bean.length())
-        return packName.toString() + ".kevgen." + nodeTypeName + "." + clazzName + "PORT" + portName
+        return packName.toString() + ".kevgen." + clazzName + "PORT" + portName
     }
 
     override fun kInstanceStart(tmodel: ContainerRoot): Boolean {
