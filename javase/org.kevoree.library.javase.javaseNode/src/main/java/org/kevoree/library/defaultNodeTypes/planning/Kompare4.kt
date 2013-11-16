@@ -15,6 +15,7 @@ import org.kevoree.modeling.api.util.ModelVisitor
 import org.kevoree.modeling.api.KMFContainer
 import org.kevoreeadaptation.AdaptationPrimitive
 import java.util.HashSet
+import org.kevoree.modeling.api.trace.TraceSequence
 
 public abstract class Kompare4(val registry: Map<String, Any>) {
 
@@ -30,50 +31,82 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
     }
 
     open public fun compareModels(currentModel: ContainerRoot, targetModel: ContainerRoot, nodeName: String): AdaptationModel {
-
+        val adaptationModel = adaptationModelFactory.createAdaptationModel()
         val dictionaryAlreadyUpdate = HashSet<Instance>()
-
         val currentNode = currentModel.findNodesByID(nodeName)
         val targetNode = targetModel.findNodesByID(nodeName)
-        val adaptationModel = adaptationModelFactory.createAdaptationModel()
+        var traces: TraceSequence? = null
         if (currentNode != null && targetNode != null) {
-            val traces = modelCompare.diff(currentModel, targetModel)
-            for(trace in traces.traces) {
-                println(trace)
+            traces = modelCompare.diff(currentModel, targetModel)
+            for(g in targetNode.groups){
+                val previousGroup = currentModel.findByPath(g.path()!!)
+                if(previousGroup != null){
+                    traces!!.append(modelCompare.diff(previousGroup, g))
+                }
+            }
+        } else {
+            if(targetNode != null){
+                traces = modelCompare.inter(targetNode, targetNode)
+                //append traces from groupes, only attributes are interesting
+                for(g in targetNode.groups){
+                    traces!!.populate(g.toTraces(true, false))
+                }
+            }
+        }
+        if (traces != null) {
+            for(trace in traces!!.traces) {
+                //println(trace)
                 when(trace) {
                     is ModelAddTrace -> {
                         //only consider if Add has as target myself
-                        if(trace.srcPath == currentNode.path()){
+                        if(trace.srcPath == targetNode!!.path()){
                             when(trace.refName) {
                                 "components" -> {
                                     val elemToAdd = targetModel.findByPath(trace.previousPath!!)
                                     adaptationModel.addAdaptations(adapt(JavaPrimitive.AddInstance, elemToAdd, targetModel))
                                 }
-                                else -> {}
+                                "groups" -> {
+                                    val elemToAdd = targetModel.findByPath(trace.previousPath!!)
+                                    adaptationModel.addAdaptations(adapt(JavaPrimitive.AddInstance, elemToAdd, targetModel))
+                                }
+                                else -> {
+                                }
                             }
                         } else {
-                            when(trace.refName) {
-                                "groups" -> {
-
-                                }
-                                else -> {}
-                            }
-                            //eventually ADD typeDefinition could appear
+                            //eventually ADD typeDefinition could appear for continuous design
                             //TODO
                         }
                     }
                     is ModelRemoveTrace -> {
-
+                        //Still need test for this part !
+                        if(trace.srcPath == targetNode!!.path()){
+                            when(trace.refName) {
+                                "components" -> {
+                                    val elemToAdd = targetModel.findByPath(trace.objPath)
+                                    adaptationModel.addAdaptations(adapt(JavaPrimitive.RemoveInstance, elemToAdd, targetModel))
+                                }
+                                "groups" -> {
+                                    val elemToAdd = targetModel.findByPath(trace.objPath)
+                                    adaptationModel.addAdaptations(adapt(JavaPrimitive.RemoveInstance, elemToAdd, targetModel))
+                                }
+                                else -> {
+                                }
+                            }
+                        }
                     }
                     is ModelSetTrace -> {
                         val modelElement = targetModel.findByPath(trace.srcPath)
                         if(modelElement is Instance){
                             when(trace.refName) {
                                 "started" -> {
-                                    if (trace.content?.toLowerCase() == "true") {
-                                        adaptationModel.addAdaptations(adapt(JavaPrimitive.StartInstance, modelElement, targetModel))
+                                    if(trace.srcPath == targetNode!!.path()){
+                                        //HaraKiri case
                                     } else {
-                                        adaptationModel.addAdaptations(adapt(JavaPrimitive.StopInstance, modelElement, targetModel))
+                                        if (trace.content?.toLowerCase() == "true") {
+                                            adaptationModel.addAdaptations(adapt(JavaPrimitive.StartInstance, modelElement, targetModel))
+                                        } else {
+                                            adaptationModel.addAdaptations(adapt(JavaPrimitive.StopInstance, modelElement, targetModel))
+                                        }
                                     }
                                 }
                                 "typeDefinition" -> {
@@ -98,7 +131,7 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
                 }
             }
             var foundDeployUnitsToRemove = ArrayList<String>()
-            currentNode.visit(object : ModelVisitor(){
+            currentNode?.visit(object : ModelVisitor(){
                 override fun visit(elem: KMFContainer, refNameInParent: String, parent: KMFContainer) {
                     if(elem is DeployUnit){
                         foundDeployUnitsToRemove.add(elem.path()!!)
@@ -106,7 +139,7 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
                 }
 
             }, true, true, true)
-            targetNode.visit(object : ModelVisitor(){
+            targetNode?.visit(object : ModelVisitor(){
                 override fun visit(elem: KMFContainer, refNameInParent: String, parent: KMFContainer) {
                     if(elem is DeployUnit){
                         foundDeployUnitsToRemove.remove(elem.path()!!)
