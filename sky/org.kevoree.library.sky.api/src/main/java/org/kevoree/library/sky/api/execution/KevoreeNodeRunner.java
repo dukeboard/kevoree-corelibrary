@@ -97,15 +97,6 @@ public abstract class KevoreeNodeRunner {
         }
     }
 
-    private boolean isASubType(TypeDefinition nodeType, String typeName) {
-        for (TypeDefinition superType : nodeType.getSuperTypes()) {
-            if (superType.getName().equals(typeName) || isASubType(superType, typeName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     //  @throws(classOf[Exception])
     private void copyStringToFile(String data, String outputFile) throws Exception {
         if (data != null && !data.equals("")) {
@@ -188,16 +179,16 @@ public abstract class KevoreeNodeRunner {
         ContainerNode node = model.findNodesByID(nodeName);
         if (node != null) {
             Log.debug("looking for deploy unit");
-            for (DeployUnit dp : node.getTypeDefinition().getDeployUnits()) {
-                if (dp.getTargetNodeType().getName().equals(iaasNode.getTypeDefinition().getName()) || isASubType(iaasNode.getTypeDefinition(), dp.getTargetNodeType().getName())) {
+            DeployUnit dp = node.getTypeDefinition().getDeployUnit();
+                //if (isASubType(iaasNode.getTypeDefinition())) {
                     Log.debug("looking for version of kevoree framework for the found deploy unit");
                     for (DeployUnit dep : dp.getRequiredLibs()) {
                         if (dp.getName().equals("org.kevoree") && dep.getGroupName().equals("org.kevoree.framework")) {
                             dep.getVersion();
                         }
                     }
-                }
-            }
+               // }
+
         }
         return factory.getVersion();
     }

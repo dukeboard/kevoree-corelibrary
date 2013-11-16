@@ -72,14 +72,10 @@
                 <artifactId>org.kevoree.tools.annotation.mavenplugin</artifactId>
                 <version>${kevoree.version}</version>
                 <extensions>true</extensions>
-                <configuration>
-                    <nodeTypeNames>JavaSENode</nodeTypeNames>
-                </configuration>
                 <executions>
                     <execution>
                         <goals>
                             <goal>generate</goal>
-                            <goal>compile</goal>
                         </goals>
                     </execution>
                 </executions>

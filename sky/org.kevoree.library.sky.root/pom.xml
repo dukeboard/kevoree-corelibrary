@@ -23,10 +23,6 @@
         <module>../org.kevoree.library.sky.minicloud</module>
         <module>../org.kevoree.library.sky.lxc</module>
 		<module>../org.kevoree.library.sky.jails</module>
-        <!--<module>../org.kevoree.library.sky.provider.api</module>
-        <module>../org.kevoree.library.sky.provider</module>
-        <module>../org.kevoree.library.sky.provider.web</module>-->
-
         <module>../org.kevoree.library.sky.system</module>
         <module>../org.kevoree.library.sky.web</module>
         <module>../org.kevoree.library.sky.test</module>
@@ -54,7 +50,6 @@
 				<version>${kevoree.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-					<nodeTypeNames>CloudNode</nodeTypeNames>
                     <libraries>
                         <library>SKY</library>
                     </libraries>
@@ -63,7 +58,6 @@
 					<execution>
 						<goals>
 							<goal>generate</goal>
-							<goal>compile</goal>
 						</goals>
 					</execution>
 				</executions>
