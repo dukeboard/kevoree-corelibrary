@@ -16,10 +16,6 @@ import org.kevoree.framework.message.Message;
 @ChannelType
 public class HelloChannel extends AbstractChannelFragment {
 
-    public HelloChannel(){
-        System.err.println("Create Channel");
-    }
-
     @Start
     public void start() {
         System.out.println("Hello from channel");
@@ -32,6 +28,9 @@ public class HelloChannel extends AbstractChannelFragment {
 
     @Override
     public Object dispatch(Message message) {
+
+        System.out.println("Dispatch :-) "+message.get_content());
+
         return null;
     }
 

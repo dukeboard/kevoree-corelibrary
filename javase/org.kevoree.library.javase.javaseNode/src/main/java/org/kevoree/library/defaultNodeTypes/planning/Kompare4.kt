@@ -81,7 +81,7 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
 
         if (traces != null) {
             for(trace in traces!!.traces) {
-                println(trace)
+                //println(trace)
                 val modelElement = targetModel.findByPath(trace.srcPath)
                 when(trace.refName) {
                     "components" -> {
