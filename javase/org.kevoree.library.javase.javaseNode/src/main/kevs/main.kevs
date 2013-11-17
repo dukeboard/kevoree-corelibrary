@@ -4,3 +4,7 @@ addComponent h@node0 : HelloWorld
 addGroup hg : HelloGroup
 addToGroup hg node0
 
+addChannel ch : HelloChannel
+bind h.out@node0 => ch
+
+

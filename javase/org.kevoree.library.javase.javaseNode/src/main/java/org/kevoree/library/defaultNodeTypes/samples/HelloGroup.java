@@ -15,7 +15,7 @@ import org.kevoree.framework.AbstractGroupType;
 
 
 @GroupType
-public class HelloGroup  extends AbstractGroupType {
+public class HelloGroup extends AbstractGroupType {
 
     @Start
     public void start() {
@@ -29,16 +29,14 @@ public class HelloGroup  extends AbstractGroupType {
 
     @Override
     public void push(ContainerRoot model, String targetNodeName) throws Exception {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
     public ContainerRoot pull(String targetNodeName) throws Exception {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;
     }
 
     @Override
     public void modelUpdated() {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 }
