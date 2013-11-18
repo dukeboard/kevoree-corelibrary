@@ -16,6 +16,8 @@ import org.kevoree.framework.AbstractNodeType
 import org.kevoree.library.defaultNodeTypes.wrapper.KevoreeComponent
 import org.kevoree.library.defaultNodeTypes.wrapper.KevoreeGroup
 import org.kevoree.library.defaultNodeTypes.wrapper.ChannelTypeFragmentThread
+import org.kevoree.ContainerNode
+import org.kevoree.library.defaultNodeTypes.wrapper.KevoreeNodeWrapper
 
 /**
  * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 3, 29 June 2007;
@@ -94,6 +96,10 @@ class AddInstance(val c: Instance, val nodeName: String, val modelservice: Kevor
                 newBeanKInstanceWrapper = ChannelTypeFragmentThread(newBeanInstance as AbstractChannelFragment, nodeName, c.name!!, modelservice, bs, kscript, nt.getDataSpaceService(), tg!!)
                 (newBeanKInstanceWrapper as ChannelTypeFragmentThread).initChannel()
             }
+            if(c is ContainerNode){
+                newBeanKInstanceWrapper = KevoreeNodeWrapper(c.path()!!)
+            }
+
             registry.put(c.path()!!, newBeanKInstanceWrapper!!)
             resultSub = true
         } catch(e: Throwable){

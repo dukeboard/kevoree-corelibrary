@@ -41,7 +41,15 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
         var traces: TraceSequence? = null
 
         fun fillAdditional() {
-            for(g in targetNode!!.groups){
+            for(n in targetNode!!.hosts){
+                val previousNode = currentModel.findByPath(n.path()!!)
+                if(previousNode != null){
+                    traces!!.append(modelCompare.diff(previousNode, n))
+                } else {
+                    traces!!.populate(n.toTraces(true, true))
+                }
+            }
+            for(g in targetNode.groups){
                 val previousGroup = currentModel.findByPath(g.path()!!)
                 if(previousGroup != null){
                     traces!!.append(modelCompare.diff(previousGroup, g))
@@ -82,7 +90,7 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
 
         if (traces != null) {
             for(trace in traces!!.traces) {
-                //println(trace)
+                println(trace)
                 val modelElement = targetModel.findByPath(trace.srcPath)
                 when(trace.refName) {
                     "components" -> {
@@ -93,7 +101,21 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
                                     adaptationModel.addAdaptations(adapt(JavaPrimitive.AddInstance, elemToAdd, targetModel))
                                 }
                                 is ModelRemoveTrace -> {
-                                    val elemToAdd = targetModel.findByPath(trace.objPath)
+                                    val elemToAdd = currentModel.findByPath(trace.objPath)
+                                    adaptationModel.addAdaptations(adapt(JavaPrimitive.RemoveInstance, elemToAdd, targetModel))
+                                }
+                            }
+                        }
+                    }
+                    "hosts" -> {
+                        if(trace.srcPath == targetNode!!.path()){
+                            when(trace) {
+                                is ModelAddTrace -> {
+                                    val elemToAdd = targetModel.findByPath(trace.previousPath!!)
+                                    adaptationModel.addAdaptations(adapt(JavaPrimitive.AddInstance, elemToAdd, targetModel))
+                                }
+                                is ModelRemoveTrace -> {
+                                    val elemToAdd = currentModel.findByPath(trace.objPath)
                                     adaptationModel.addAdaptations(adapt(JavaPrimitive.RemoveInstance, elemToAdd, targetModel))
                                 }
                             }
@@ -107,7 +129,7 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
                                     adaptationModel.addAdaptations(adapt(JavaPrimitive.AddInstance, elemToAdd, targetModel))
                                 }
                                 is ModelRemoveTrace -> {
-                                    val elemToAdd = targetModel.findByPath(trace.objPath)
+                                    val elemToAdd = currentModel.findByPath(trace.objPath)
                                     adaptationModel.addAdaptations(adapt(JavaPrimitive.RemoveInstance, elemToAdd, targetModel))
                                 }
                             }
@@ -129,7 +151,7 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
                             }
                             is ModelRemoveTrace -> {
                                 val binding = targetModel.findByPath(trace.objPath) as? org.kevoree.MBinding
-                                val previousBinding = targetModel.findByPath(trace.objPath) as? org.kevoree.MBinding
+                                val previousBinding = currentModel.findByPath(trace.objPath) as? org.kevoree.MBinding
                                 val channel = binding?.hub
                                 var oldChannel = previousBinding?.hub
                                 //check if not no current usage of this channel
@@ -180,7 +202,7 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
                     else -> {
                     }
                 }
-                processTrace(trace,adaptationModel)
+                processTrace(trace, adaptationModel)
             }
         }
         var foundDeployUnitsToRemove = HashSet<String>()
@@ -218,7 +240,7 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
         return adaptationModel
     }
 
-    open fun processTrace(trace : ModelTrace, adaptationModel : AdaptationModel){
+    open fun processTrace(trace: ModelTrace, adaptationModel: AdaptationModel) {
 
     }
 

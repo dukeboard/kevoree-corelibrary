@@ -10,13 +10,17 @@ import org.kevoree.ContainerRoot
  * Time: 20:03
  */
 
-public class KevoreeNodeWrapper() : KInstance {
+public class KevoreeNodeWrapper(nodePath: String) : KInstance {
 
     override fun kInstanceStart(tmodel: ContainerRoot): Boolean {
-        throw UnsupportedOperationException()
+        System.out.println("Node Should start here")
+        System.out.println("Default implementation should be bootstrap")
+        return true
     }
     override fun kInstanceStop(tmodel: ContainerRoot): Boolean {
-        throw UnsupportedOperationException()
+        System.out.println("Node Should start here")
+        System.out.println("Default implementation should be bootstrap")
+        return true
     }
     override fun kUpdateDictionary(d: Map<String, Any>, cmodel: ContainerRoot): Map<String, Any>? {
         throw UnsupportedOperationException()
