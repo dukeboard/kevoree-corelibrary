@@ -21,14 +21,13 @@ import java.lang.reflect.InvocationTargetException
 import org.kevoree.api.dataspace.DataSpaceService
 import org.kevoree.framework.AbstractChannelFragment
 import org.kevoree.framework.KevoreeChannelFragment
-import org.kevoree.framework.KInstance
 import org.kevoree.framework.ChannelFragment
 import org.kevoree.framework.ChannelFragmentSender
 import org.kevoree.framework.KevoreePort
 import org.kevoree.framework.ModelHandlerServiceProxy
 import org.kevoree.framework.MethodCallMessage
 
-class ChannelTypeFragmentThread(val target: AbstractChannelFragment, val _nodeName: String, val _name: String, val modelService: KevoreeModelHandlerService, val bootService: Bootstraper, val kevsEngine: KevScriptEngineFactory, val dataSpace: DataSpaceService?, val tg: ThreadGroup): KevoreeChannelFragment, KInstance, ChannelFragment {
+class ChannelTypeFragmentThread(val target: AbstractChannelFragment, val _nodeName: String, val _name: String, val modelService: KevoreeModelHandlerService, val bootService: Bootstraper, val kevsEngine: KevScriptEngineFactory, val dataSpace: DataSpaceService?, override var tg: ThreadGroup) : KevoreeChannelFragment, KInstanceWrapper, ChannelFragment {
 
     public fun initChannel() {
         target.delegate = this
@@ -147,7 +146,7 @@ class ChannelTypeFragmentThread(val target: AbstractChannelFragment, val _nodeNa
         return pool!!.submit(SyncCall(o)).get()
     }
 
-    inner class AsyncCall(val o: Any?): Runnable {
+    inner class AsyncCall(val o: Any?) : Runnable {
         override fun run() {
             when(o) {
                 is Message -> {
@@ -163,7 +162,7 @@ class ChannelTypeFragmentThread(val target: AbstractChannelFragment, val _nodeNa
         }
     }
 
-    inner class SyncCall(val o: Any?): Callable<Any> {
+    inner class SyncCall(val o: Any?) : Callable<Any> {
         override fun call(): Any? {
             when(o) {
                 is Message -> {

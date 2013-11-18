@@ -10,7 +10,7 @@ import org.kevoree.ContainerRoot
  * Time: 20:03
  */
 
-public class KevoreeNodeWrapper(nodePath: String) : KInstance {
+public class KevoreeNodeWrapper(nodePath: String, override var tg : ThreadGroup) : KInstanceWrapper {
 
     override fun kInstanceStart(tmodel: ContainerRoot): Boolean {
         System.out.println("Node Should start here")
@@ -23,7 +23,7 @@ public class KevoreeNodeWrapper(nodePath: String) : KInstance {
         return true
     }
     override fun kUpdateDictionary(d: Map<String, Any>, cmodel: ContainerRoot): Map<String, Any>? {
-        throw UnsupportedOperationException()
+        return d
     }
 
 }

@@ -29,7 +29,7 @@ import org.kevoree.framework.ComponentType
 import org.kevoree.framework.KevoreePort
 import org.kevoree.framework.ModelHandlerServiceProxy
 
-public class KevoreeComponent(val ct: AbstractComponentType, val nodeName: String, val name: String, val modelService: KevoreeModelHandlerService, val bootService: Bootstraper, val kevsEngine: KevScriptEngineFactory, val dataSpace: DataSpaceService?, val tg : ThreadGroup) : KInstance {
+public class KevoreeComponent(val ct: AbstractComponentType, val nodeName: String, val name: String, val modelService: KevoreeModelHandlerService, val bootService: Bootstraper, val kevsEngine: KevScriptEngineFactory, val dataSpace: DataSpaceService?, override var tg : ThreadGroup) : KInstanceWrapper {
 
     fun getKevoreeComponentType(): ComponentType {
         return ct

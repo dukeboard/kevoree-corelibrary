@@ -27,7 +27,7 @@ import org.kevoree.framework.AbstractGroupType
 import org.kevoree.framework.KInstance
 import org.kevoree.framework.ModelHandlerServiceProxy
 
-public class KevoreeGroup(val target: AbstractGroupType, val nodeName: String, val name: String, val modelService: KevoreeModelHandlerService, val bootService: Bootstraper, val kevsEngine: KevScriptEngineFactory, val dataSpace : DataSpaceService?, val tg : ThreadGroup): KInstance {
+public class KevoreeGroup(val target: AbstractGroupType, val nodeName: String, val name: String, val modelService: KevoreeModelHandlerService, val bootService: Bootstraper, val kevsEngine: KevScriptEngineFactory, val dataSpace : DataSpaceService?, override var tg : ThreadGroup): KInstanceWrapper {
 
     var isStarted: Boolean = false
     private val resolver = MethodAnnotationResolver(target.javaClass);

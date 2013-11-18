@@ -97,11 +97,13 @@ class AddInstance(val c: Instance, val nodeName: String, val modelservice: Kevor
                 (newBeanKInstanceWrapper as ChannelTypeFragmentThread).initChannel()
             }
             if(c is ContainerNode){
-                newBeanKInstanceWrapper = KevoreeNodeWrapper(c.path()!!)
+                newBeanKInstanceWrapper = KevoreeNodeWrapper(c.path()!!,tg!!)
             }
 
             registry.put(c.path()!!, newBeanKInstanceWrapper!!)
-            resultSub = true
+
+            val sub = UpdateDictionary(c,nodeName,registry)
+            resultSub = sub.execute()
         } catch(e: Throwable){
             Log.error("Error while adding instance {}", e, c.name)
             resultSub = false

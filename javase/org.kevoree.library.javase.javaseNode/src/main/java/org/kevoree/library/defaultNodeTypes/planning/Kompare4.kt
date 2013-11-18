@@ -12,8 +12,6 @@ import org.kevoree.Port
 import org.kevoree.modeling.api.trace.ModelSetTrace
 import org.kevoree.modeling.api.trace.ModelRemoveTrace
 import org.kevoree.modeling.api.trace.ModelAddTrace
-import org.kevoree.Channel
-import org.kevoree.Group
 import org.kevoree.modeling.api.KMFContainer
 import org.kevoree.modeling.api.util.ModelVisitor
 import org.kevoree.DeployUnit
@@ -35,6 +33,7 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
 
     open public fun compareModels(currentModel: ContainerRoot, targetModel: ContainerRoot, nodeName: String): AdaptationModel {
         val adaptationModel = adaptationModelFactory.createAdaptationModel()
+
         val elementAlreadyProcessed = HashSet<KMFContainer>()
         val currentNode = currentModel.findNodesByID(nodeName)
         val targetNode = targetModel.findNodesByID(nodeName)
@@ -79,7 +78,7 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
         }
 
         if (currentNode != null && targetNode != null) {
-            traces = modelCompare.diff(currentModel, targetModel)
+            traces = modelCompare.diff(currentNode, targetNode)
             fillAdditional()
         } else {
             if(targetNode != null){
@@ -91,6 +90,7 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
         if (traces != null) {
             for(trace in traces!!.traces) {
                 println(trace)
+
                 val modelElement = targetModel.findByPath(trace.srcPath)
                 when(trace.refName) {
                     "components" -> {
@@ -212,7 +212,7 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
                     foundDeployUnitsToRemove.add(elem.path()!!)
                 }
                 //optimization purpose
-                if( (elem is ContainerNode && elem != currentNode) || elem is Group || elem is Channel ){
+                if( (elem is ContainerNode && elem != currentNode)){
                     noChildrenVisit()
                     noReferencesVisit()
                 }
@@ -228,7 +228,7 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
                     foundDeployUnitsToRemove.remove(elem.path()!!)
                 }
                 //optimization purpose
-                if( (elem is ContainerNode && elem != currentNode) || elem is Group || elem is Channel ){
+                if( (elem is ContainerNode && elem != currentNode) ){
                     noChildrenVisit()
                     noReferencesVisit()
                 }

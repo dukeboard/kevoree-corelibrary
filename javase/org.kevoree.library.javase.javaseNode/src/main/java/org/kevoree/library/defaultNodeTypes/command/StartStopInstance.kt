@@ -7,6 +7,7 @@ import org.kevoree.log.Log
 import org.kevoree.library.defaultNodeTypes.wrapper.KevoreeComponent
 import org.kevoree.library.defaultNodeTypes.wrapper.ChannelTypeFragmentThread
 import org.kevoree.library.defaultNodeTypes.wrapper.KevoreeGroup
+import org.kevoree.library.defaultNodeTypes.wrapper.KInstanceWrapper
 
 /**
  * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 3, 29 June 2007;
@@ -27,8 +28,7 @@ class StartStopInstance(c: Instance, nodeName: String, val start: Boolean, val r
     var t: Thread? = null
     var resultAsync = false
     var root: ContainerRoot? = null
-    var iact: KInstance? = null
-    var tg: ThreadGroup? = null
+    var iact: KInstanceWrapper? = null
 
     public override fun run() {
 
@@ -53,24 +53,16 @@ class StartStopInstance(c: Instance, nodeName: String, val start: Boolean, val r
         //Look thread group
         root = c.typeDefinition!!.eContainer() as ContainerRoot
         val ref = registry.get(c.path()!!)
-        if(ref != null && ref is KInstance){
-            if (ref is KevoreeComponent) {
-                tg = ref.tg
-            } else if (ref is ChannelTypeFragmentThread) {
-                tg = ref.tg
-            } else if (ref is KevoreeGroup) {
-                tg = ref.tg
-            }
+        if(ref != null && ref is KInstanceWrapper){
+            iact = ref as KInstanceWrapper
 
-            iact = ref as KInstance
-
-            t = Thread(tg, this)
+            t = Thread(iact!!.tg, this)
             t!!.start()
             t!!.join()
             if(!start){
                 //kill subthread
-                val subThread: Array<Thread> = Array<Thread>(tg!!.activeCount(), { i -> Thread.currentThread() })
-                tg!!.enumerate(subThread)
+                val subThread: Array<Thread> = Array<Thread>(iact!!.tg.activeCount(), { i -> Thread.currentThread() })
+                iact!!.tg.enumerate(subThread)
                 for(subT in subThread){
                     try {
                         subT.stop()
@@ -89,7 +81,7 @@ class StartStopInstance(c: Instance, nodeName: String, val start: Boolean, val r
     }
 
     override fun toString(): String {
-        var s = "StartStopInstance " + c.name
+        var s = "StartStopInstance ${c.name}"
         if (start) {
             s += " start"
         } else {
