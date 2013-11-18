@@ -31,10 +31,12 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
         return ccmd
     }
 
+    data class TupleObjPrim(val obj: KMFContainer, val p: JavaPrimitive)
+
     open public fun compareModels(currentModel: ContainerRoot, targetModel: ContainerRoot, nodeName: String): AdaptationModel {
         val adaptationModel = adaptationModelFactory.createAdaptationModel()
 
-        val elementAlreadyProcessed = HashSet<KMFContainer>()
+        val elementAlreadyProcessed = HashSet<TupleObjPrim>()
         val currentNode = currentModel.findNodesByID(nodeName)
         val targetNode = targetModel.findNodesByID(nodeName)
         var traces: TraceSequence? = null
@@ -89,7 +91,7 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
 
         if (traces != null) {
             for(trace in traces!!.traces) {
-                println(trace)
+                //println(trace)
 
                 val modelElement = targetModel.findByPath(trace.srcPath)
                 when(trace.refName) {
@@ -143,9 +145,9 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
                                 adaptationModel.addAdaptations(adapt(JavaPrimitive.AddBinding, binding, targetModel))
                                 val channel = binding?.hub
                                 if(channel != null && !registry.containsKey(channel.path())){
-                                    if(!elementAlreadyProcessed.contains(channel)){
+                                    if(!elementAlreadyProcessed.contains(TupleObjPrim(channel, JavaPrimitive.AddInstance))){
                                         adaptationModel.addAdaptations(adapt(JavaPrimitive.AddInstance, channel, targetModel))
-                                        elementAlreadyProcessed.add(channel)
+                                        elementAlreadyProcessed.add(TupleObjPrim(channel, JavaPrimitive.AddInstance))
                                     }
                                 }
                             }
@@ -164,9 +166,9 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
                                     }
                                 }
                                 if(!stillUsed && !registry.containsKey(oldChannel!!)){
-                                    if(!elementAlreadyProcessed.contains(channel)){
+                                    if(!elementAlreadyProcessed.contains(TupleObjPrim(channel!!, JavaPrimitive.RemoveInstance))){
                                         adaptationModel.addAdaptations(adapt(JavaPrimitive.RemoveInstance, channel, targetModel))
-                                        elementAlreadyProcessed.add(oldChannel!!)
+                                        elementAlreadyProcessed.add(TupleObjPrim(channel!!, JavaPrimitive.RemoveInstance))
                                     }
                                 }
                                 adaptationModel.addAdaptations(adapt(JavaPrimitive.RemoveBinding, binding, targetModel))
@@ -179,9 +181,15 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
                                 //HaraKiri case
                             } else {
                                 if (trace.content?.toLowerCase() == "true") {
-                                    adaptationModel.addAdaptations(adapt(JavaPrimitive.StartInstance, modelElement, targetModel))
+                                    if(!elementAlreadyProcessed.contains(TupleObjPrim(modelElement, JavaPrimitive.StartInstance))){
+                                        adaptationModel.addAdaptations(adapt(JavaPrimitive.StartInstance, modelElement, targetModel))
+                                        elementAlreadyProcessed.add(TupleObjPrim(modelElement, JavaPrimitive.StartInstance))
+                                    }
                                 } else {
-                                    adaptationModel.addAdaptations(adapt(JavaPrimitive.StopInstance, modelElement, targetModel))
+                                    if(!elementAlreadyProcessed.contains(TupleObjPrim(modelElement, JavaPrimitive.StopInstance))){
+                                        adaptationModel.addAdaptations(adapt(JavaPrimitive.StartInstance, modelElement, targetModel))
+                                        elementAlreadyProcessed.add(TupleObjPrim(modelElement, JavaPrimitive.StopInstance))
+                                    }
                                 }
                             }
                         }
@@ -193,9 +201,9 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
                     }
                     "value" -> {
                         if(modelElement is org.kevoree.Dictionary){
-                            if(!elementAlreadyProcessed.contains(modelElement)){
+                            if(!elementAlreadyProcessed.contains(TupleObjPrim(modelElement, JavaPrimitive.UpdateDictionaryInstance))){
                                 adaptationModel.addAdaptations(adapt(JavaPrimitive.UpdateDictionaryInstance, modelElement, targetModel))
-                                elementAlreadyProcessed.add(modelElement)
+                                elementAlreadyProcessed.add(TupleObjPrim(modelElement, JavaPrimitive.UpdateDictionaryInstance))
                             }
                         }
                     }

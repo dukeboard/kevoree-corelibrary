@@ -10,22 +10,6 @@ import org.kevoree.framework.message.PortBindMessage
 import org.kevoree.log.Log
 import org.kevoree.library.defaultNodeTypes.wrapper.KevoreeComponent
 
-/**
- * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 3, 29 June 2007;
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * 	http://www.gnu.org/licenses/lgpl-3.0.txt
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-
-
 class AddBindingCommand(val c: MBinding, val nodeName: String, val registry: MutableMap<String, Any>) : PrimitiveCommand {
 
     override fun undo() {
@@ -39,13 +23,9 @@ class AddBindingCommand(val c: MBinding, val nodeName: String, val registry: Mut
             val foundNeedPort = kevoreeComponentFound.getKevoreeComponentType().getNeededPorts()!!.get(portName)
             val foundHostedPort = kevoreeComponentFound.getKevoreeComponentType().getHostedPorts()!!.get(portName)
             if(foundNeedPort == null && foundHostedPort == null){
-                Log.info("Port instance not found in component")
-                Log.info("Look for " + portName);
-                Log.info("" + kevoreeComponentFound.getKevoreeComponentType().getNeededPorts()!!.containsKey(portName));
-                Log.info("" + kevoreeComponentFound.getKevoreeComponentType().getHostedPorts()!!.containsKey(portName));
+                Log.info("Port instance {} not found in component", portName)
                 return false
             }
-
             if (foundNeedPort != null) {
                 /* Bind port to Channel */
                 val newbindmsg = FragmentBindMessage(kevoreeChannelFound, c.hub!!.name!!, nodeName)
@@ -58,12 +38,12 @@ class AddBindingCommand(val c: MBinding, val nodeName: String, val registry: Mut
             }
             return false
         } else {
-            Log.error("Error while apply binding , channelFound=" + kevoreeChannelFound + ", componentFound=" + kevoreeComponentFound)
+            Log.error("Error while apply binding , channelFound=${kevoreeChannelFound}, componentFound=${kevoreeComponentFound}")
             return false
         }
     }
 
     fun toString(): String {
-        return "AddBindingCommand " + c.hub!!.name + "<->" + (c.port!!.eContainer() as ComponentInstance).name;
+        return "AddBindingCommand ${c.hub?.name} <-> ${(c.port?.eContainer() as? ComponentInstance)?.name}"
     }
 }

@@ -5,7 +5,6 @@ import org.kevoree.api.service.core.handler.KevoreeModelHandlerService
 import org.kevoree.api.service.core.script.KevScriptEngineFactory
 import org.kevoree.api.PrimitiveCommand
 import org.kevoree.framework.kaspects.TypeDefinitionAspect
-import org.kevoree.log.Log
 import org.kevoree.framework.AbstractNodeType
 
 /**
@@ -30,6 +29,7 @@ class RemoveInstance(val c: Instance, val nodeName: String, val modelservice: Ke
             AddInstance(c, nodeName, modelservice, kscript, bs, nt, registry).execute()
             UpdateDictionary(c, nodeName, registry).execute()
         } catch(e: Exception) {
+            //
         }
     }
 
