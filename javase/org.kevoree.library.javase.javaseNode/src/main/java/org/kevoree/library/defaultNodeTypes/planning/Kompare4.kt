@@ -18,6 +18,7 @@ import org.kevoree.modeling.api.KMFContainer
 import org.kevoree.modeling.api.util.ModelVisitor
 import org.kevoree.DeployUnit
 import org.kevoree.ContainerNode
+import org.kevoree.modeling.api.trace.ModelTrace
 
 public abstract class Kompare4(val registry: Map<String, Any>) {
 
@@ -179,7 +180,7 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
                     else -> {
                     }
                 }
-
+                processTrace(trace,adaptationModel)
             }
         }
         var foundDeployUnitsToRemove = HashSet<String>()
@@ -215,6 +216,10 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
             adaptationModel.addAdaptations(adapt(JavaPrimitive.RemoveDeployUnit, currentModel.findByPath(pathDeployUnitToDrop), targetModel))
         }
         return adaptationModel
+    }
+
+    open fun processTrace(trace : ModelTrace, adaptationModel : AdaptationModel){
+
     }
 
 }

@@ -54,13 +54,6 @@ public class CommandMapper {
 
         }
 
-        if (pTypeName.equals(JavaPrimitive.AddFragmentBinding.name())) {
-            return new AddFragmentBindingCommand((Channel) p.getRef(), p.getTargetNodeName(), nodeName, registry);
-        }
-        if (pTypeName.equals(JavaPrimitive.RemoveFragmentBinding.name())) {
-            return new RemoveFragmentBindingCommand((Channel) p.getRef(), p.getTargetNodeName(), nodeName, registry);
-        }
-
         if (pTypeName.equals(JavaPrimitive.StartInstance.name())) {
             return new StartStopInstance((Instance) p.getRef(), nodeName, true, registry);
         }

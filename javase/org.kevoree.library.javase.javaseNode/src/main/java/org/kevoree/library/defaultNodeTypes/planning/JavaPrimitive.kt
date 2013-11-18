@@ -18,9 +18,6 @@ enum class JavaPrimitive {
     RemoveInstance
     AddBinding
     RemoveBinding
-    AddFragmentBinding
-    RemoveFragmentBinding
-    UpdateFragmentBinding
     StartInstance
     StopInstance
 }

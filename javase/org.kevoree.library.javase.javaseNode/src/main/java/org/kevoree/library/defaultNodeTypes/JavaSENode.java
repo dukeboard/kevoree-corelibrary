@@ -43,7 +43,8 @@ import java.util.Map;
                 "RemoveFragmentBinding",
                 "UpdateFragmentBinding",
                 "StartInstance",
-                "StopInstance"},
+                "StopInstance"
+        },
         value = {@PrimitiveCommand(name = "AddDeployUnit", maxTime = 120000), @PrimitiveCommand(name = "UpdateDeployUnit", maxTime = 120000)})
 public class JavaSENode extends AbstractNodeType implements ModelListener {
 

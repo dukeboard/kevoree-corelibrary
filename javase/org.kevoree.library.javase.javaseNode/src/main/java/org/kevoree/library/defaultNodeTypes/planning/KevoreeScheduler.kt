@@ -29,7 +29,7 @@ trait KevoreeScheduler : StepBuilder {
             }
 
             // REMOVE BINDINGS
-            createNextStep(JavaPrimitive.RemoveBinding, adaptionModel.adaptations.filter { adapt -> (adapt.primitiveType!!.name == JavaPrimitive.RemoveBinding.name() || adapt.primitiveType!!.name == JavaPrimitive.RemoveFragmentBinding.name() ) })
+            createNextStep(JavaPrimitive.RemoveBinding, adaptionModel.adaptations.filter { adapt -> (adapt.primitiveType!!.name == JavaPrimitive.RemoveBinding.name() ) })
 
             // REMOVE INSTANCEs
             createNextStep(JavaPrimitive.RemoveInstance, adaptionModel.adaptations.filter { adapt -> adapt.primitiveType!!.name == JavaPrimitive.RemoveInstance.name() })
@@ -54,7 +54,7 @@ trait KevoreeScheduler : StepBuilder {
             }
 
             // ADD BINDINGs
-            createNextStep(JavaPrimitive.AddBinding, adaptionModel.adaptations.filter { adapt -> (adapt.primitiveType!!.name == JavaPrimitive.AddBinding.name() || adapt.primitiveType!!.name == JavaPrimitive.AddFragmentBinding.name()) })
+            createNextStep(JavaPrimitive.AddBinding, adaptionModel.adaptations.filter { adapt -> (adapt.primitiveType!!.name == JavaPrimitive.AddBinding.name() ) })
 
             // UPDATE DICTIONARYs
             createNextStep(JavaPrimitive.UpdateDictionaryInstance, adaptionModel.adaptations.filter { adapt -> adapt.primitiveType!!.name == JavaPrimitive.UpdateDictionaryInstance.name() })

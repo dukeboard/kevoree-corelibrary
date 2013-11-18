@@ -35,17 +35,11 @@ class RemoveBindingCommand(val c: MBinding, val nodeName: String, val registry: 
         if(c == null){
             return false
         }else{
-
             val kevoreeChannelFound = registry.get(c.hub!!.path()!!)
             val kevoreeComponentFound = registry.get((c.port!!.eContainer() as ComponentInstance).path()!!)
-            //            val kevoreeChannelFound = KevoreeDeployManager.getRef(c.hub.javaClass.getName()+"_wrapper", c.hub!!.name!!)
-            //            val kevoreeComponentFound = KevoreeDeployManager.getRef((c.port!!.eContainer()as ComponentInstance).javaClass.getName(), (c.port!!.eContainer()as ComponentInstance).name!!)
             if(kevoreeChannelFound != null && kevoreeComponentFound != null && kevoreeComponentFound is AbstractComponentType && kevoreeChannelFound is KevoreeChannelFragment){
-                //                val casted = kevoreeComponentFound as AbstractComponentType
-                //                val channelCasted = kevoreeChannelFound as KevoreeChannelFragment
                 val foundNeedPort = kevoreeComponentFound.getNeededPorts()!!.get(c.port!!.portTypeRef!!.name)
                 val foundHostedPort = kevoreeComponentFound.getHostedPorts()!!.get(c.port!!.portTypeRef!!.name)
-
                 if(foundNeedPort == null && foundHostedPort == null){
                     Log.info("Port instance not found in component")
                     Log.info("Look for " + c.port!!.portTypeRef!!.name);

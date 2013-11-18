@@ -2,7 +2,6 @@ package org.kevoree.library.defaultNodeTypes.planning
 
 import org.kevoree.*
 import org.kevoreeadaptation.*
-import org.kevoree.modeling.api.KMFContainer
 
 open class KevoreeKompareBean(registry: Map<String, Any>) : Kompare4(registry), KevoreeScheduler {
     override var previousStep: ParallelStep? = null
@@ -32,21 +31,6 @@ open class KevoreeKompareBean(registry: Map<String, Any>) : Kompare4(registry), 
                     acmd.ref = adaptation.ref!!
                     adaptationModel.addAdaptations(acmd)
                 }
-                JavaPrimitive.UpdateFragmentBinding.name() -> {
-                    val rcmd = adaptationModelFactory.createAdaptationPrimitive()
-                    rcmd.primitiveType = actualModel.findAdaptationPrimitiveTypesByID(JavaPrimitive.RemoveFragmentBinding.name())
-                    rcmd.ref = adaptation.ref!!
-                    rcmd.targetNodeName = adaptation.targetNodeName
-                    adaptationModel.removeAdaptations(adaptation)
-                    adaptationModel.addAdaptations(rcmd)
-
-                    val acmd = adaptationModelFactory.createAdaptationPrimitive()
-                    acmd.primitiveType = actualModel.findAdaptationPrimitiveTypesByID(JavaPrimitive.AddFragmentBinding.name())
-                    acmd.ref = adaptation.ref!!
-                    acmd.targetNodeName = adaptation.targetNodeName
-                    adaptationModel.addAdaptations(acmd)
-                }
-
                 JavaPrimitive.UpdateInstance.name() -> {
                     val stopcmd = adaptationModelFactory.createAdaptationPrimitive()
                     stopcmd.primitiveType = actualModel.findAdaptationPrimitiveTypesByID(JavaPrimitive.StopInstance.name())

@@ -7,4 +7,6 @@ addToGroup hg node0
 addChannel ch : HelloChannel
 bind h.out@node0 => ch
 
+addNode child:JavaSENode
+addChild child@node0
 
