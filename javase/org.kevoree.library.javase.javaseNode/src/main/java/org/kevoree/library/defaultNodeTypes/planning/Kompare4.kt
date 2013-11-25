@@ -187,7 +187,7 @@ public abstract class Kompare4(val registry: Map<String, Any>) {
                                     }
                                 } else {
                                     if(!elementAlreadyProcessed.contains(TupleObjPrim(modelElement, JavaPrimitive.StopInstance))){
-                                        adaptationModel.addAdaptations(adapt(JavaPrimitive.StartInstance, modelElement, targetModel))
+                                        adaptationModel.addAdaptations(adapt(JavaPrimitive.StopInstance, modelElement, targetModel))
                                         elementAlreadyProcessed.add(TupleObjPrim(modelElement, JavaPrimitive.StopInstance))
                                     }
                                 }
