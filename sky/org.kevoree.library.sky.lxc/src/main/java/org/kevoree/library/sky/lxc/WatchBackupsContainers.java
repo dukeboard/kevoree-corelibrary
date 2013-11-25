@@ -37,6 +37,7 @@ public class WatchBackupsContainers implements Runnable {
         for(String node : lxNodes){
 
             File lxcnode = new File(backuppath+File.separatorChar+node);
+            lxcnode.mkdirs();
 
             // days old
             long diff = (today.getTime() -  lxcnode.lastModified()) / (1000*60*60*24);
